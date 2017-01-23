@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="HardcodedText">
+
+	<item
+		android:id="@+id/detail_body_defaultMenu_playNext"
+		android:title="Play next"
+		/>
+
+	<item
+		android:id="@+id/detail_body_defaultMenu_addToQueue"
+		android:title="Add to queue"/>
+
+	<item
+		android:id="@+id/detail_body_defaultMenu_remove"
+		android:title="Remove from playlist"/>
+</menu>
