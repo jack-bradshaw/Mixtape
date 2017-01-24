@@ -31,9 +31,9 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 	private V view;
 
 	@Override
-	public void present(final boolean forceRefresh) {
+	public void present() {
 		if (dataSource != null) {
-			dataSource.loadData(forceRefresh, this); // Register this class for callbacks
+			dataSource.loadData(true, this); // Register this class for callbacks
 		}
 	}
 
