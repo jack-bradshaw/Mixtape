@@ -146,7 +146,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	protected void unsubscribeFromDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
 			dataSource.unregisterItemAddedListener(this);
-			dataSource.unregisterDataRemovedListener(this);
+			dataSource.unregisterItemRemovedListener(this);
 			dataSource.unregisterDataReplacedListener(this);
 			dataSource.unregisterDataMovedListener(this);
 			dataSource.unregisterDataModifiedListener(this);
@@ -164,7 +164,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	protected void subscribeToDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
 			dataSource.registerItemAddedListener(this);
-			dataSource.registerDataRemovedListener(this);
+			dataSource.registerItemRemovedListener(this);
 			dataSource.registerDataReplacedListener(this);
 			dataSource.registerDataMovedListener(this);
 			dataSource.registerDataModifiedListener(this);

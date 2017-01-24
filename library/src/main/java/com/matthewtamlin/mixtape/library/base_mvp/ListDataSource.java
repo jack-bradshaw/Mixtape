@@ -25,7 +25,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerItemAddedListener(ItemAddedListener<T> listener);
 
 	/**
-	 * Unregisters the supplied listener for data added callbacks. If the supplied listener is null
+	 * Unregisters the supplied listener for item added callbacks. If the supplied listener is null
 	 * or is not registered, this method exits normally.
 	 *
 	 * @param listener
@@ -34,22 +34,22 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterItemAddedListener(ItemAddedListener<T> listener);
 
 	/**
-	 * Registers the supplied listener for data removed callbacks. If the supplied listener is null
+	 * Registers the supplied listener for item removed callbacks. If the supplied listener is null
 	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerDataRemovedListener(DataRemovedListener<T> listener);
+	void registerItemRemovedListener(ItemRemovedListener<T> listener);
 
 	/**
-	 * Unregisters the supplied listener for data removed callbacks. If the supplied listener is
+	 * Unregisters the supplied listener for item removed callbacks. If the supplied listener is
 	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataRemovedListener(DataRemovedListener<T> listener);
+	void unregisterItemRemovedListener(ItemRemovedListener<T> listener);
 
 	/**
 	 * Registers the supplied listener for list-item modified callbacks. If the supplied listener is
@@ -113,7 +113,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface DataRemovedListener<I> {
+	interface ItemRemovedListener<I> {
 		/**
 		 * Invoked when an item is removed from a list.
 		 *
@@ -179,6 +179,6 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * 		the type of objects contained within the list
 	 */
 	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, ItemAddedListener<I>,
-			DataRemovedListener<I>, ListItemModifiedListener<I>,
+			ItemRemovedListener<I>, ListItemModifiedListener<I>,
 			DataMovedListener<I> {}
 }

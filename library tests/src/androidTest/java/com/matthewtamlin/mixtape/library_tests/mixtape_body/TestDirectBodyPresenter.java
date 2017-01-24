@@ -168,7 +168,7 @@ public abstract class TestDirectBodyPresenter<S extends ListDataSource<LibraryIt
 		verify(newDataSource).registerItemAddedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataModifiedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataMovedListener(presenterWithViewOnly);
-		verify(newDataSource).registerDataRemovedListener(presenterWithViewOnly);
+		verify(newDataSource).registerItemRemovedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataReplacedListener(presenterWithViewOnly);
 		verify(newDataSource).registerListItemModifiedListener(presenterWithViewOnly);
 		verify(newDataSource).registerLongOperationListener(presenterWithViewOnly);
@@ -189,7 +189,7 @@ public abstract class TestDirectBodyPresenter<S extends ListDataSource<LibraryIt
 		verify(dataSource).unregisterItemAddedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterDataModifiedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterDataMovedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterDataRemovedListener(presenterWithDataSourceOnly);
+		verify(dataSource).unregisterItemRemovedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterDataReplacedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterListItemModifiedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterLongOperationListener(presenterWithDataSourceOnly);
@@ -197,7 +197,7 @@ public abstract class TestDirectBodyPresenter<S extends ListDataSource<LibraryIt
 		verify(newDataSource).registerItemAddedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataModifiedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataMovedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerDataRemovedListener(presenterWithDataSourceOnly);
+		verify(newDataSource).registerItemRemovedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataReplacedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerListItemModifiedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerLongOperationListener(presenterWithDataSourceOnly);
