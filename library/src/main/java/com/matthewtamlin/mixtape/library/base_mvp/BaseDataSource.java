@@ -106,8 +106,8 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when the data object of a DataSource has been invalidated and replaced
-	 * with an entirely new data object.
+	 * Callback to be invoked when the data object of a BaseDataSource has been invalidated and
+	 * replaced with an entirely new data object.
 	 *
 	 * @param <I>
 	 * 		the type of data supplied by the source
@@ -127,7 +127,8 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when the data object of a DataSource has changed internally in a way
+	 * Callback to be invoked when the data object of a BaseDataSource has changed internally in a
+	 * way
 	 * which affects the external representation of the data.
 	 *
 	 * @param <I>
@@ -147,7 +148,7 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when a DataSource starts of finishes a potentially long running
+	 * Callback to be invoked when a BaseDataSource starts of finishes a potentially long running
 	 * operation which may result in data being changed.
 	 */
 	interface LongOperationListener {
