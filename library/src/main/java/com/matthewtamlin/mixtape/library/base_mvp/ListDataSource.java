@@ -52,7 +52,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterItemRemovedListener(ItemRemovedListener<T> listener);
 
 	/**
-	 * Registers the supplied listener for list-item modified callbacks. If the supplied listener is
+	 * Registers the supplied listener for item modified callbacks. If the supplied listener is
 	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
@@ -61,7 +61,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Unregisters the supplied listener for list-item modified callbacks. If the supplied listener
+	 * Unregisters the supplied listener for item modified callbacks. If the supplied listener
 	 * is null or is not registered, this method exits normally.
 	 *
 	 * @param listener
@@ -70,22 +70,22 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Registers the supplied listener for list data moved callbacks. If the supplied listener is
+	 * Registers the supplied listener for item moved callbacks. If the supplied listener is
 	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerDataMovedListener(DataMovedListener<T> listener);
+	void registerItemMovedListener(ItemMovedListener<T> listener);
 
 	/**
-	 * Unregisters the supplied listener for data moved callbacks. If the supplied listener is null
+	 * Unregisters the supplied listener for item moved callbacks. If the supplied listener is null
 	 * or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataMovedListener(DataMovedListener<T> listener);
+	void unregisterItemMovedListener(ItemMovedListener<T> listener);
 
 	/**
 	 * Callback to be invoked when a ListDataSource adds an item to its current list.
@@ -156,7 +156,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface DataMovedListener<I> {
+	interface ItemMovedListener<I> {
 		/**
 		 * Invoked when an item in the list is moved to another location in the list.
 		 *
@@ -180,5 +180,5 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 */
 	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, ItemAddedListener<I>,
 			ItemRemovedListener<I>, ListItemModifiedListener<I>,
-			DataMovedListener<I> {}
+			ItemMovedListener<I> {}
 }

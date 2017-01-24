@@ -148,7 +148,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 			dataSource.unregisterItemAddedListener(this);
 			dataSource.unregisterItemRemovedListener(this);
 			dataSource.unregisterDataReplacedListener(this);
-			dataSource.unregisterDataMovedListener(this);
+			dataSource.unregisterItemMovedListener(this);
 			dataSource.unregisterDataModifiedListener(this);
 			dataSource.unregisterListItemModifiedListener(this);
 			dataSource.unregisterLongOperationListener(this);
@@ -166,7 +166,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 			dataSource.registerItemAddedListener(this);
 			dataSource.registerItemRemovedListener(this);
 			dataSource.registerDataReplacedListener(this);
-			dataSource.registerDataMovedListener(this);
+			dataSource.registerItemMovedListener(this);
 			dataSource.registerDataModifiedListener(this);
 			dataSource.registerListItemModifiedListener(this);
 			dataSource.registerLongOperationListener(this);
