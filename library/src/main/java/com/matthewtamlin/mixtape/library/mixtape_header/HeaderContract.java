@@ -9,7 +9,7 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
- * Defines a contract between the model, view and presenter
+ * Defines the contract between the model, view and presenter for the header.
  */
 public interface HeaderContract {
 	/**
