@@ -31,7 +31,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataAddedListener(ItemAddedListener<T> listener);
+	void unregisterItemAddedListener(ItemAddedListener<T> listener);
 
 	/**
 	 * Registers the supplied listener for data removed callbacks. If the supplied listener is null
