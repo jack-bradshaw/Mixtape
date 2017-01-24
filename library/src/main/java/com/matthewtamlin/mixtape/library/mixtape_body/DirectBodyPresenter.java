@@ -31,9 +31,9 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	private V view;
 
 	@Override
-	public void present(final boolean forceRefresh) {
+	public void present() {
 		if (dataSource != null) {
-			dataSource.loadData(forceRefresh, null); // Already listening so don't pass a callback
+			dataSource.loadData(true, null); // Already listening so don't pass a callback
 		}
 	}
 
