@@ -10,8 +10,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import java.util.List;
 
 /**
- * Defines the contract between the model, view and presenter for the body using the standard MVP
- * pattern.
+ * Defines the contract between the model, view and presenter for the body.
  */
 public interface BodyContract {
 	/**
