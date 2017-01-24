@@ -171,7 +171,7 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Composition of all data source listeners.
+	 * Composition of all BaseDataSource listeners.
 	 *
 	 * @param <I>
 	 * 		the type of data supplied by the data source
