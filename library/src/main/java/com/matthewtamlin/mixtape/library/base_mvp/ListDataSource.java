@@ -181,7 +181,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface Listener<I> extends BaseDataSource.Listener<List<I>>, DataAddedListener<I>,
+	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, DataAddedListener<I>,
 			DataRemovedListener<I>, ListItemModifiedListener<I>,
 			DataMovedListener<I> {}
 }

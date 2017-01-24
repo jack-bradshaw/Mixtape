@@ -176,6 +176,6 @@ public interface BaseDataSource<D> {
 	 * @param <I>
 	 * 		the type of data supplied by the data source
 	 */
-	interface Listener<I> extends DataLoadedListener<I>, DataReplacedListener<I>,
+	interface FullListener<I> extends DataLoadedListener<I>, DataReplacedListener<I>,
 			DataModifiedListener<I>, LongOperationListener {}
 }

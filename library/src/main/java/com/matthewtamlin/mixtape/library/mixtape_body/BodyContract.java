@@ -168,5 +168,5 @@ public interface BodyContract {
 	 * 		the type of view
 	 */
 	public interface Presenter<S extends ListDataSource<LibraryItem>, V extends View> extends
-			BasePresenter<S, V>, ListDataSource.Listener<LibraryItem>, View.Listener {}
+			BasePresenter<S, V>, ListDataSource.FullListener<LibraryItem>, View.Listener {}
 }
