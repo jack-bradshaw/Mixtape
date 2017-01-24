@@ -5,3 +5,4 @@
 /captures
 .externalNativeBuild
 /.idea
+*.iml
