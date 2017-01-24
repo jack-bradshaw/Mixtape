@@ -165,7 +165,7 @@ public abstract class TestDirectBodyPresenter<S extends ListDataSource<LibraryIt
 
 		presenterWithViewOnly.setDataSource(newDataSource);
 
-		verify(newDataSource).registerDataAddedListener(presenterWithViewOnly);
+		verify(newDataSource).registerItemAddedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataModifiedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataMovedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataRemovedListener(presenterWithViewOnly);
@@ -194,7 +194,7 @@ public abstract class TestDirectBodyPresenter<S extends ListDataSource<LibraryIt
 		verify(dataSource).unregisterListItemModifiedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterLongOperationListener(presenterWithDataSourceOnly);
 
-		verify(newDataSource).registerDataAddedListener(presenterWithDataSourceOnly);
+		verify(newDataSource).registerItemAddedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataModifiedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataMovedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataRemovedListener(presenterWithDataSourceOnly);

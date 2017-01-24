@@ -16,13 +16,13 @@ import java.util.List;
  */
 public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	/**
-	 * Registers the supplied listener for data added callbacks. If the supplied listener is null or
+	 * Registers the supplied listener for item added callbacks. If the supplied listener is null or
 	 * is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerDataAddedListener(DataAddedListener<T> listener);
+	void registerItemAddedListener(ItemAddedListener<T> listener);
 
 	/**
 	 * Unregisters the supplied listener for data added callbacks. If the supplied listener is null
@@ -31,7 +31,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataAddedListener(DataAddedListener<T> listener);
+	void unregisterDataAddedListener(ItemAddedListener<T> listener);
 
 	/**
 	 * Registers the supplied listener for data removed callbacks. If the supplied listener is null
@@ -93,7 +93,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface DataAddedListener<I> {
+	interface ItemAddedListener<I> {
 		/**
 		 * Invoked when an item is added to a list.
 		 *
@@ -178,7 +178,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, DataAddedListener<I>,
+	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, ItemAddedListener<I>,
 			DataRemovedListener<I>, ListItemModifiedListener<I>,
 			DataMovedListener<I> {}
 }
