@@ -3,7 +3,7 @@ package com.matthewtamlin.mixtape.library.base_mvp;
 import java.util.List;
 
 /**
- * A DataSource where the data is structured as a List. In addition to the inherited callbacks,
+ * A DataSource which provides access to a list of items. In addition to the inherited callbacks,
  * callbacks are delivered when: <ul><li>An item is added to the list.</li> <li>An item is removed
  * from the list.</li> <li>An item in the list is modified in a way which affects the external
  * representation of the data.</li> <li>An item is moved to a different position within the
@@ -52,7 +52,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterDataRemovedListener(DataRemovedListener<T> listener);
 
 	/**
-	 * Registers the supplied listener for list item modified callbacks. If the supplied listener is
+	 * Registers the supplied listener for list-item modified callbacks. If the supplied listener is
 	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
@@ -61,7 +61,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Unregisters the supplied listener for list item modified callbacks. If the supplied listener
+	 * Unregisters the supplied listener for list-item modified callbacks. If the supplied listener
 	 * is null or is not registered, this method exits normally.
 	 *
 	 * @param listener
@@ -95,10 +95,10 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 */
 	interface DataAddedListener<I> {
 		/**
-		 * Invoked when an item is added to the list.
+		 * Invoked when an item is added to a list.
 		 *
 		 * @param source
-		 * 		the source of the list the item was added to, not null
+		 * 		the source of the list, not null
 		 * @param item
 		 * 		the item which was added, may be null
 		 * @param index
@@ -115,10 +115,10 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 */
 	interface DataRemovedListener<I> {
 		/**
-		 * Invoked when an item is removed to the list.
+		 * Invoked when an item is removed from a list.
 		 *
 		 * @param source
-		 * 		the source of the list the item was added to, not null
+		 * 		the source of the list, not null
 		 * @param item
 		 * 		the item which was removed, may be null
 		 * @param index
@@ -128,8 +128,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Callback to be invoked when an item in the list of a ListDataSource is modified in a way
-	 * which affects the item's external representation.
+	 * Callback to be invoked when an item in a ListDataSource is modified in a way which affects
+	 * the item's external representation.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
