@@ -9,7 +9,7 @@ public interface BasePresenter<S extends BaseDataSource, V extends BaseView> {
 	 * Starts/restarts presentation by loading data from source and the updating the view.
 	 * Calling this method is safe at all times, however there may not always an effect.
 	 */
-	void present(boolean forceRefresh);
+	void present();
 
 	/**
 	 * @param dataSource
