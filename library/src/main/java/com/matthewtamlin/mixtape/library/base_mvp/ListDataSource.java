@@ -99,12 +99,12 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 *
 		 * @param source
 		 * 		the source of the list the item was added to, not null
-		 * @param object
+		 * @param item
 		 * 		the item which was added, may be null
 		 * @param index
 		 * 		the index at which the object was added
 		 */
-		void onDataAdded(ListDataSource<I> source, I object, int index);
+		void onDataAdded(ListDataSource<I> source, I item, int index);
 	}
 
 	/**
@@ -119,12 +119,12 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 *
 		 * @param source
 		 * 		the source of the list the item was added to, not null
-		 * @param object
+		 * @param item
 		 * 		the item which was removed, may be null
 		 * @param index
 		 * 		the index at which the object was removed from
 		 */
-		void onDataRemoved(ListDataSource<I> source, I object, int index);
+		void onDataRemoved(ListDataSource<I> source, I item, int index);
 	}
 
 	/**
@@ -141,12 +141,12 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 *
 		 * @param source
 		 * 		the source of the list containing the modified item, not null
-		 * @param object
+		 * @param item
 		 * 		the object which was modified, not null
 		 * @param index
 		 * 		the index of the modified object
 		 */
-		void onListItemModified(ListDataSource<I> source, I object, int index);
+		void onListItemModified(ListDataSource<I> source, I item, int index);
 	}
 
 	/**

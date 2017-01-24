@@ -94,13 +94,13 @@ public class RecyclerViewBodyPresenter<S extends ListDataSource<LibraryItem>> ex
 
 	@Override
 	public void onListItemModified(ListDataSource<LibraryItem> source,
-			LibraryItem object, int index) {
+			LibraryItem item, int index) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
-		titleDataBinder.getCache().removeTitle(object);
-		subtitleDataBinder.getCache().removeSubtitle(object);
-		artworkDataBinder.getCache().removeArtwork(object);
+		titleDataBinder.getCache().removeTitle(item);
+		subtitleDataBinder.getCache().removeSubtitle(item);
+		artworkDataBinder.getCache().removeArtwork(item);
 
-		super.onListItemModified(source, object, index);
+		super.onListItemModified(source, item, index);
 	}
 
 	@Override

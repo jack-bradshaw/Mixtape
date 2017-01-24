@@ -92,7 +92,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	}
 
 	@Override
-	public void onDataAdded(final ListDataSource<LibraryItem> source, final LibraryItem object,
+	public void onDataAdded(final ListDataSource<LibraryItem> source, final LibraryItem item,
 			final int index) {
 		if (view != null) {
 			view.notifyItemAdded(index);
@@ -100,7 +100,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	}
 
 	@Override
-	public void onDataRemoved(final ListDataSource<LibraryItem> source, final LibraryItem object,
+	public void onDataRemoved(final ListDataSource<LibraryItem> source, final LibraryItem item,
 			final int index) {
 		if (view != null) {
 			view.notifyItemRemoved(index);
@@ -117,7 +117,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 
 	@Override
 	public void onListItemModified(final ListDataSource<LibraryItem> source, final LibraryItem
-			object, final int index) {
+			item, final int index) {
 		if (view != null) {
 			view.notifyItemModified(index);
 		}
