@@ -23,11 +23,11 @@ import java.util.concurrent.Executors;
 
 
 /**
- * Binds artwork to ImageViews. A caching mechanism is implemented to allow for faster and more
- * efficient data binding. To optimise load times and minimise memory usage, artwork size is matched
- * to the ImageView size when being loaded. In some cases the ImageView dimensions are inaccessible,
- * so default dimensions are used. If the artwork of an item is inaccessible, then a default is
- * used. A fade-in effect is applied when binding artwork.
+ * Binds artwork from LibraryItems to ImageViews. A caching mechanism is implemented to allow for
+ * faster and more efficient data binding. To optimise load times and minimise memory usage, artwork
+ * size is matched to the ImageView when being loaded. In some cases the ImageView dimensions are
+ * inaccessible, so default dimensions are used. If the artwork of an item is inaccessible, then the
+ * default artwork is used. A fade-in effect is applied when binding artwork.
  */
 @Tested(testMethod = "unit")
 public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
