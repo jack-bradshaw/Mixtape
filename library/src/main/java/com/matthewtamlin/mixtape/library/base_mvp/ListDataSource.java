@@ -3,16 +3,21 @@ package com.matthewtamlin.mixtape.library.base_mvp;
 import java.util.List;
 
 /**
- * A data source where the data is structured as a List.
+ * A DataSource where the data is structured as a List. In addition to the inherited callbacks,
+ * callbacks are delivered when: <ul><li>An item is added to the list.</li> <li>An item is removed
+ * from the list.</li> <li>An item in the list is modified in a way which affects the external
+ * representation of the data.</li> <li>An item is moved to a different position within the
+ * list.</li></ul>
+ * <p>
+ * All callbacks are delivered on the UI thread.
  *
  * @param <T>
- * 		the type of objects contained within the list
+ * 		the type of objects contained within the data list
  */
 public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	/**
-	 * Registers a DataAddedListener. The supplied listener will be notified on the UI thread each
-	 * time an object is added to the list. If the supplied listener is null or is already
-	 * registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for data added callbacks. If the supplied listener is null or
+	 * is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -20,9 +25,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerDataAddedListener(DataAddedListener<T> listener);
 
 	/**
-	 * Unregisters a DataAddedListener. The supplied listener will no longer be notified when an
-	 * objects are added to the list. If the supplied listener is null or is not registered, this
-	 * method does nothing and exits normally.
+	 * Unregisters the supplied listener for data added callbacks. If the supplied listener is null
+	 * or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -30,9 +34,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterDataAddedListener(DataAddedListener<T> listener);
 
 	/**
-	 * Registers a DataRemovedListener. The supplied listener will be notified on the UI thread each
-	 * time an object is removed from the list. If the supplied listener is null or is already
-	 * registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for data removed callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -40,9 +43,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerDataRemovedListener(DataRemovedListener<T> listener);
 
 	/**
-	 * Unregisters a DataRemovedListener. The supplied listener will no longer be notified when
-	 * object are removed from the list. If the supplied listener is null or is not registered, this
-	 * method does nothing and exits normally.
+	 * Unregisters the supplied listener for data removed callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -50,9 +52,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterDataRemovedListener(DataRemovedListener<T> listener);
 
 	/**
-	 * Registers a ListItemModifiedListener. The supplied listener will be notified on the UI thread
-	 * each time an object in the list is modified in a way which affects the data. If the supplied
-	 * listener is null or is already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for list item modified callbacks. If the supplied listener is
+	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -60,9 +61,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Unregisters a ListItemModifiedListener. The supplied listener will no longer be notified when
-	 * object in the list is modified in a way which affects the data. If the supplied listener is
-	 * null or is not registered, this method does nothing and exits normally.
+	 * Unregisters the supplied listener for list item modified callbacks. If the supplied listener
+	 * is null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -70,9 +70,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Registers a DataMovedListener. The supplied listener will be notified on the UI thread each
-	 * time an object in the list is moved to a different position. If the supplied listener is null
-	 * or is already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for list data moved callbacks. If the supplied listener is
+	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -80,9 +79,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerDataMovedListener(DataMovedListener<T> listener);
 
 	/**
-	 * Unregisters a DataMovedListener. The supplied listener will no longer be notified when an
-	 * object in the list is moved to a different position. If the supplied listener is null or is
-	 * not registered, this method does nothing and exits normally.
+	 * Unregisters the supplied listener for data moved callbacks. If the supplied listener is null
+	 * or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister

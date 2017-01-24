@@ -26,8 +26,8 @@ public interface BaseDataSource<D> {
 	void loadData(boolean forceRefresh, DataLoadedListener<D> callback);
 
 	/**
-	 * Registers the supplied DataReplacedListener for future callbacks. If the supplied listener is
-	 * null or is already registered, this method exits normally.
+	 * Registers the supplied listener for data replaced callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -35,8 +35,8 @@ public interface BaseDataSource<D> {
 	void registerDataReplacedListener(DataReplacedListener<D> listener);
 
 	/**
-	 * Unregisters a DataReplacedListener to prevent future callbacks being delivered. If the
-	 * supplied listener is null or is not registered, this method exits normally.
+	 * Unregisters the supplied listener for data replaced callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -44,8 +44,8 @@ public interface BaseDataSource<D> {
 	void unregisterDataReplacedListener(DataReplacedListener<D> listener);
 
 	/**
-	 * Registers the supplied DataModifiedListener for future callbacks. If the supplied listener is
-	 * null or is already registered, this method exits normally.
+	 * Registers the supplied listener for data modified callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -53,8 +53,8 @@ public interface BaseDataSource<D> {
 	void registerDataModifiedListener(DataModifiedListener<D> listener);
 
 	/**
-	 * Unregisters a DataModifiedListener to prevent future callbacks being delivered. If the
-	 * supplied listener is null or is not registered, this method exits normally.
+	 * Unregisters the supplied listener for data modified callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -62,8 +62,8 @@ public interface BaseDataSource<D> {
 	void unregisterDataModifiedListener(DataModifiedListener<D> listener);
 
 	/**
-	 * Registers the supplied LongOperationListener for future callbacks. If the supplied listener
-	 * is null or is already registered, this method exits normally.
+	 * Registers the supplied listener for long operation callbacks. If the supplied listener is
+	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -71,8 +71,8 @@ public interface BaseDataSource<D> {
 	void registerLongOperationListener(LongOperationListener listener);
 
 	/**
-	 * Unregisters a LongOperationListener to prevent future callbacks being delivered. If the
-	 * supplied listener is null or is not registered, this method exits normally.
+	 * Unregisters the supplied listener for long operation callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -128,8 +128,7 @@ public interface BaseDataSource<D> {
 
 	/**
 	 * Callback to be invoked when the data object of a BaseDataSource has changed internally in a
-	 * way
-	 * which affects the external representation of the data.
+	 * way which affects the external representation of the data.
 	 *
 	 * @param <I>
 	 * 		the type of data supplied by the source
