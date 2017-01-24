@@ -12,7 +12,7 @@ import java.util.List;
  * All callbacks are delivered on the UI thread.
  *
  * @param <T>
- * 		the type of objects contained within the data list
+ * 		the type of objects contained within the list
  */
 public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	/**
@@ -88,19 +88,19 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterDataMovedListener(DataMovedListener<T> listener);
 
 	/**
-	 * Callback to be invoked when an object is added to the dataset of a ListDataSource.
+	 * Callback to be invoked when a ListDataSource adds an item to its current list.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface DataAddedListener<I> {
 		/**
-		 * Invoked to indicate that an object was added to the dataset of a ListDataSource.
+		 * Invoked when an item is added to the list.
 		 *
 		 * @param source
-		 * 		the source the object was added to, not null
+		 * 		the source of the list the item was added to, not null
 		 * @param object
-		 * 		the object which was added, null accepted
+		 * 		the item which was added, may be null
 		 * @param index
 		 * 		the index at which the object was added
 		 */
@@ -108,39 +108,39 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Callback to be invoked when an object is removed from the dataset of a ListDataSource.
+	 * Callback to be invoked when a ListDataSource removes an item from its current list.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface DataRemovedListener<I> {
 		/**
-		 * Invoked to indicate that an object was removed from the dataset of a ListDataSource.
+		 * Invoked when an item is removed to the list.
 		 *
 		 * @param source
-		 * 		the source the object was removed from, not null
+		 * 		the source of the list the item was added to, not null
 		 * @param object
-		 * 		the object which was removed, null accepted
+		 * 		the item which was removed, may be null
 		 * @param index
-		 * 		the index of the object before it was removed
+		 * 		the index at which the object was removed from
 		 */
 		void onDataRemoved(ListDataSource<I> source, I object, int index);
 	}
 
 	/**
-	 * Callback to be invoked when an object in the dataset of a ListDataSource is modified in a way
-	 * which affects the data.
+	 * Callback to be invoked when an item in the list of a ListDataSource is modified in a way
+	 * which affects the item's external representation.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface ListItemModifiedListener<I> {
 		/**
-		 * Invoked to indicate that an object in the dataset of a ListDataSource was modified in a
-		 * way which affects the data.
+		 * Invoked when an item in the list is modified in a way which affects the item's external
+		 * representation.
 		 *
 		 * @param source
-		 * 		the source containing the modified object, not null
+		 * 		the source of the list containing the modified item, not null
 		 * @param object
 		 * 		the object which was modified, not null
 		 * @param index
@@ -150,16 +150,15 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Callback to be invoked when an object in the dataset of a ListDataSource is moved to a
-	 * different position.
+	 * Callback to be invoked when an item in the list of a ListDataSource is moved to another
+	 * location in the list.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface DataMovedListener<I> {
 		/**
-		 * Invoked to indicate that an object in the dataset of a ListDataSource was moved to a
-		 * different position.
+		 * Invoked when an item in the list is moved to another location in the list.
 		 *
 		 * @param source
 		 * 		the source containing the moved object, not null
@@ -174,7 +173,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Can listen to all callbacks a BaseDataSource can deliver.
+	 * Can listen to all callbacks a ListDataSource can deliver.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
