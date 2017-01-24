@@ -87,7 +87,7 @@ public interface BaseDataSource<D> {
 	 */
 	interface DataLoadedListener<I> {
 		/**
-		 * Invoked when data is loaded successfully.
+		 * Invoked when data is successfully loaded.
 		 *
 		 * @param source
 		 * 		the source of the data, not null
