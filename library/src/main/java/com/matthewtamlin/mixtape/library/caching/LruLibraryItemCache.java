@@ -12,8 +12,8 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 /**
  * An in-memory LibraryItemCache which operates using the least-recently-used (LRU) principle. When
  * the cache is filled to capacity, subsequent caching requests result in objects being evicted
- * until there is sufficient room. This allows a finite cache to recycle space to fit new objects
- * and avoid running out of memory. Titles, subtitles and artwork are stored independently, so that
+ * until there is sufficient room. This allows a finite cache to accept new data indefinitely
+ * without running out of memory. Titles, subtitles and artwork are stored independently, so that
  * eviction of one data type does not affect the others.
  */
 @Tested(testMethod = "unit")

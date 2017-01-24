@@ -1,30 +1,33 @@
 package com.matthewtamlin.mixtape.library.base_mvp;
 
 /**
- * An abstract data source. The source may provide direct access to the data, or it may provide
- * access to further abstractions (such as data access objects).
+ * A data source provides access to data objects and delivers callbacks when events occur. Callbacks
+ * are delivered when: <ul> <li>The current data object has been invalidated and replaced with an
+ * entirely new data object.</li> <li>The data object has changed internally in a way which affects
+ * the external representation of the data.</li> <li>The data source begins/ends an operation which
+ * could be potentially long running and may result in data being changed.</li></ul>
+ * <p>
+ * All callbacks are delivered on the UI thread.
  *
  * @param <D>
- * 		the type of data supplied
+ * 		the type of data supplied by the source
  */
 public interface BaseDataSource<D> {
 	/**
-	 * Loads all data in the datasource and notifies the supplied callback when finished. Load
-	 * operations which are pending or in progress when this method is called are cancelled. If true
-	 * is passed for the {@code forceRefresh} parameter, any cached data must be invalidated before
-	 * the load operation.
+	 * Asynchronously loads data from the source and notifies the supplied callback when finished.
+	 * If true is passed for the {@code forceRefresh} parameter, any relevant cached data is
+	 * discarded at the start of the load operation.
 	 *
 	 * @param forceRefresh
-	 * 		true to request invalidation of any cached data, false to use the default behaviour
+	 * 		true to request invalidation of cached data, false to use the default behaviour
 	 * @param callback
-	 * 		the callback to be invoked when loading is finished, null to ignore
+	 * 		the callback to be invoked when the operation finishes, null to ignore
 	 */
 	void loadData(boolean forceRefresh, DataLoadedListener<D> callback);
 
 	/**
-	 * Registers a DataReplacedListener. The supplied listener will be notified on the UI thread
-	 * each time the existing data object is replaced with a new one. If the supplied listener is
-	 * null or is already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for data replaced callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -32,9 +35,8 @@ public interface BaseDataSource<D> {
 	void registerDataReplacedListener(DataReplacedListener<D> listener);
 
 	/**
-	 * Unregisters a DataReplacedListener. The supplied listener will no longer be notified when the
-	 * existing data object is replaced with a new one. If the supplied listener is null or is not
-	 * registered, this method does nothing and exits normally.
+	 * Unregisters the supplied listener for data replaced callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -42,11 +44,8 @@ public interface BaseDataSource<D> {
 	void unregisterDataReplacedListener(DataReplacedListener<D> listener);
 
 	/**
-	 * Registers a DataModifiedListener. The supplied listener will be notified on the UI thread
-	 * each time the existing data object is modified in some way which affects the data. The
-	 * callback will not be delivered when the data object is replaced; to receive these callbacks
-	 * instead use {@link #registerDataReplacedListener(DataReplacedListener)}. If the supplied
-	 * listener is null or is already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for data modified callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -54,9 +53,8 @@ public interface BaseDataSource<D> {
 	void registerDataModifiedListener(DataModifiedListener<D> listener);
 
 	/**
-	 * Unregisters a DataModifiedListener. The supplied listener will no longer be notified when the
-	 * data object is modified. If the supplied listener is null or is not registered, this method
-	 * does nothing and exits normally.
+	 * Unregisters the supplied listener for data modified callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -64,10 +62,8 @@ public interface BaseDataSource<D> {
 	void unregisterDataModifiedListener(DataModifiedListener<D> listener);
 
 	/**
-	 * Registers a LongOperationListener. The supplied listener will be notified on the UI thread
-	 * each time a data source starts or ends an operation which is potentially long running and
-	 * could result in data being changed in some way. If the supplied listener is null or is
-	 * already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for long operation callbacks. If the supplied listener is
+	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -75,9 +71,8 @@ public interface BaseDataSource<D> {
 	void registerLongOperationListener(LongOperationListener listener);
 
 	/**
-	 * Unregisters a LongOperationListener. The supplied listener will no longer be notified when
-	 * the data source starts or ends potentially long running operations. If the supplied listener
-	 * is null or is not registered, this method does nothing and exits normally.
+	 * Unregisters the supplied listener for long operation callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -85,24 +80,24 @@ public interface BaseDataSource<D> {
 	void unregisterLongOperationListener(LongOperationListener listener);
 
 	/**
-	 * Callbacks to be invoked when data is loaded, either successfully or unsuccessfully.
+	 * Callback to be invoked when data is loaded, either successfully or unsuccessfully.
 	 *
 	 * @param <I>
-	 * 		the type of data being loaded
+	 * 		the type of data supplied by the source
 	 */
 	interface DataLoadedListener<I> {
 		/**
-		 * Invoked to indicate that data loaded successfully.
+		 * Invoked when data is successfully loaded.
 		 *
 		 * @param source
 		 * 		the source of the data, not null
 		 * @param data
-		 * 		the data which was loaded, null allowed
+		 * 		the data which was loaded, may be null
 		 */
 		void onDataLoaded(BaseDataSource<I> source, I data);
 
 		/**
-		 * Invoked to indicate that data failed to load.
+		 * Invoked when data fails to load.
 		 *
 		 * @param source
 		 * 		the source of the data, not null
@@ -111,39 +106,37 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when the data object of a BaseDataSource has been replaced with a new
-	 * data object.
+	 * Callback to be invoked when the data object of a BaseDataSource has been invalidated and
+	 * replaced with an entirely new data object.
 	 *
 	 * @param <I>
-	 * 		the type of data being replaced
+	 * 		the type of data supplied by the source
 	 */
 	interface DataReplacedListener<I> {
 		/**
-		 * Invoked to indicate that the existing data object of a data source has been replaced with
-		 * a new one.
+		 * Invoked when data is invalidated and replaced.
 		 *
 		 * @param source
 		 * 		the source of the data, not null
 		 * @param oldData
-		 * 		the old data, null allowed
+		 * 		the invalidated data, may be null
 		 * @param newData
-		 * 		the new data, null allowed
+		 * 		the data which replaces the invalidated data, may be null
 		 */
 		void onDataReplaced(BaseDataSource<I> source, I oldData, I newData);
 	}
 
 	/**
-	 * Callback to be invoked when the data object of a BaseDataSource is modified in a way which
-	 * affects the data. This is different from the DataReplacedListener, which indicates that the
-	 * data object has been entirely invalidated and replaced with a new object.
+	 * Callback to be invoked when the data object of a BaseDataSource has changed internally in a
+	 * way which affects the external representation of the data.
 	 *
 	 * @param <I>
-	 * 		the type of data which was modified
+	 * 		the type of data supplied by the source
 	 */
 	interface DataModifiedListener<I> {
 		/**
-		 * Invoked to indicate that a data object has been modified in a way which affects the
-		 * data.
+		 * Invoked when data is modified internally in a way which affects the external
+		 * representation of the data.
 		 *
 		 * @param source
 		 * 		the source of the data, not null
@@ -154,36 +147,35 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when long running operations present and stop.
+	 * Callback to be invoked when a BaseDataSource starts of finishes a potentially long running
+	 * operation which may result in data being changed.
 	 */
 	interface LongOperationListener {
 		/**
-		 * Invoked to indicate that a data source is starting an operation which is potentially long
-		 * running and could result in data being changed in some way. There is no guarantee that
-		 * data will be changed, therefore there is no guarantee that any callback other than {@link
-		 * #onLongOperationFinished(BaseDataSource)} will be called when the operation completes.
+		 * Invoked when a potentially long running operation is started. Unless the process is
+		 * terminated abruptly, this call is guaranteed to be followed by a call to {@link
+		 * #onLongOperationFinished(BaseDataSource)} at some point in the future.
 		 *
 		 * @param source
-		 * 		the source performing the operation
+		 * 		the source performing the operation, not null
 		 */
 		void onLongOperationStarted(BaseDataSource source);
 
 		/**
-		 * Invoked to indicate that a data source has finished an operation which was declared as
-		 * potentially long running.
+		 * Invoked when a potentially long running operation has finished.
 		 *
 		 * @param source
-		 * 		the source performing the operation
+		 * 		the source performing the operation, not null
 		 */
 		void onLongOperationFinished(BaseDataSource source);
 	}
 
 	/**
-	 * Listener for all BaseDataSource callbacks.
+	 * Composition of all BaseDataSource listeners.
 	 *
 	 * @param <I>
 	 * 		the type of data supplied by the data source
 	 */
-	interface Listener<I> extends DataLoadedListener<I>, DataReplacedListener<I>,
+	interface FullListener<I> extends DataLoadedListener<I>, DataReplacedListener<I>,
 			DataModifiedListener<I>, LongOperationListener {}
 }

@@ -9,7 +9,7 @@ import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
 
 /**
- * A ViewHolder for displaying a LibraryItems in a BodyContract.View with a RecyclerView. The view
+ * A ViewHolder for displaying a LibraryItems in a BodyContract.View using a RecyclerView. The view
  * holder contains: <ul> <li>The root view of the RecyclerView item.</li> <li>A TextView for
  * displaying the title.</li> <li>A TextView for displaying the subtitle.</li> <li>An ImageView for
  * displaying the artwork.</li> <li>A Button for displaying a contextual menu.</li></ul> </br> This

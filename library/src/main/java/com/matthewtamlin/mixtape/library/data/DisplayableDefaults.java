@@ -3,8 +3,7 @@ package com.matthewtamlin.mixtape.library.data;
 import android.graphics.Bitmap;
 
 /**
- * Supplies titles, subtitles and artwork which can be displayed when a LibraryItem does not provide
- * such data.
+ * Supplies default titles, subtitles and artwork.
  */
 public interface DisplayableDefaults {
 	/**

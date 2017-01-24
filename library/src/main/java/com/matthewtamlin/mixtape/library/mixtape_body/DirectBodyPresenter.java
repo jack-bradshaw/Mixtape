@@ -92,7 +92,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	}
 
 	@Override
-	public void onDataAdded(final ListDataSource<LibraryItem> source, final LibraryItem object,
+	public void onDataAdded(final ListDataSource<LibraryItem> source, final LibraryItem item,
 			final int index) {
 		if (view != null) {
 			view.notifyItemAdded(index);
@@ -100,7 +100,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	}
 
 	@Override
-	public void onDataRemoved(final ListDataSource<LibraryItem> source, final LibraryItem object,
+	public void onDataRemoved(final ListDataSource<LibraryItem> source, final LibraryItem item,
 			final int index) {
 		if (view != null) {
 			view.notifyItemRemoved(index);
@@ -117,7 +117,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 
 	@Override
 	public void onListItemModified(final ListDataSource<LibraryItem> source, final LibraryItem
-			object, final int index) {
+			item, final int index) {
 		if (view != null) {
 			view.notifyItemModified(index);
 		}
@@ -145,10 +145,10 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	 */
 	protected void unsubscribeFromDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
-			dataSource.unregisterDataAddedListener(this);
-			dataSource.unregisterDataRemovedListener(this);
+			dataSource.unregisterItemAddedListener(this);
+			dataSource.unregisterItemRemovedListener(this);
 			dataSource.unregisterDataReplacedListener(this);
-			dataSource.unregisterDataMovedListener(this);
+			dataSource.unregisterItemMovedListener(this);
 			dataSource.unregisterDataModifiedListener(this);
 			dataSource.unregisterListItemModifiedListener(this);
 			dataSource.unregisterLongOperationListener(this);
@@ -163,10 +163,10 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	 */
 	protected void subscribeToDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
-			dataSource.registerDataAddedListener(this);
-			dataSource.registerDataRemovedListener(this);
+			dataSource.registerItemAddedListener(this);
+			dataSource.registerItemRemovedListener(this);
 			dataSource.registerDataReplacedListener(this);
-			dataSource.registerDataMovedListener(this);
+			dataSource.registerItemMovedListener(this);
 			dataSource.registerDataModifiedListener(this);
 			dataSource.registerListItemModifiedListener(this);
 			dataSource.registerLongOperationListener(this);

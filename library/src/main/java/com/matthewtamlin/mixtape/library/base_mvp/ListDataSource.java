@@ -3,56 +3,57 @@ package com.matthewtamlin.mixtape.library.base_mvp;
 import java.util.List;
 
 /**
- * A data source where the data is structured as a List.
+ * A DataSource which provides access to a list of items. In addition to the inherited callbacks,
+ * callbacks are delivered when: <ul><li>An item is added to the list.</li> <li>An item is removed
+ * from the list.</li> <li>An item in the list is modified in a way which affects the external
+ * representation of the data.</li> <li>An item is moved to a different position within the
+ * list.</li></ul>
+ * <p>
+ * All callbacks are delivered on the UI thread.
  *
  * @param <T>
  * 		the type of objects contained within the list
  */
 public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	/**
-	 * Registers a DataAddedListener. The supplied listener will be notified on the UI thread each
-	 * time an object is added to the list. If the supplied listener is null or is already
-	 * registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for item added callbacks. If the supplied listener is null or
+	 * is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerDataAddedListener(DataAddedListener<T> listener);
+	void registerItemAddedListener(ItemAddedListener<T> listener);
 
 	/**
-	 * Unregisters a DataAddedListener. The supplied listener will no longer be notified when an
-	 * objects are added to the list. If the supplied listener is null or is not registered, this
-	 * method does nothing and exits normally.
+	 * Unregisters the supplied listener for item added callbacks. If the supplied listener is null
+	 * or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataAddedListener(DataAddedListener<T> listener);
+	void unregisterItemAddedListener(ItemAddedListener<T> listener);
 
 	/**
-	 * Registers a DataRemovedListener. The supplied listener will be notified on the UI thread each
-	 * time an object is removed from the list. If the supplied listener is null or is already
-	 * registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for item removed callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerDataRemovedListener(DataRemovedListener<T> listener);
+	void registerItemRemovedListener(ItemRemovedListener<T> listener);
 
 	/**
-	 * Unregisters a DataRemovedListener. The supplied listener will no longer be notified when
-	 * object are removed from the list. If the supplied listener is null or is not registered, this
-	 * method does nothing and exits normally.
+	 * Unregisters the supplied listener for item removed callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataRemovedListener(DataRemovedListener<T> listener);
+	void unregisterItemRemovedListener(ItemRemovedListener<T> listener);
 
 	/**
-	 * Registers a ListItemModifiedListener. The supplied listener will be notified on the UI thread
-	 * each time an object in the list is modified in a way which affects the data. If the supplied
-	 * listener is null or is already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for item modified callbacks. If the supplied listener is
+	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -60,9 +61,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Unregisters a ListItemModifiedListener. The supplied listener will no longer be notified when
-	 * object in the list is modified in a way which affects the data. If the supplied listener is
-	 * null or is not registered, this method does nothing and exits normally.
+	 * Unregisters the supplied listener for item modified callbacks. If the supplied listener
+	 * is null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -70,98 +70,95 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Registers a DataMovedListener. The supplied listener will be notified on the UI thread each
-	 * time an object in the list is moved to a different position. If the supplied listener is null
-	 * or is already registered, this method does nothing and exits normally.
+	 * Registers the supplied listener for item moved callbacks. If the supplied listener is
+	 * null or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerDataMovedListener(DataMovedListener<T> listener);
+	void registerItemMovedListener(ItemMovedListener<T> listener);
 
 	/**
-	 * Unregisters a DataMovedListener. The supplied listener will no longer be notified when an
-	 * object in the list is moved to a different position. If the supplied listener is null or is
-	 * not registered, this method does nothing and exits normally.
+	 * Unregisters the supplied listener for item moved callbacks. If the supplied listener is null
+	 * or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterDataMovedListener(DataMovedListener<T> listener);
+	void unregisterItemMovedListener(ItemMovedListener<T> listener);
 
 	/**
-	 * Callback to be invoked when an object is added to the dataset of a ListDataSource.
+	 * Callback to be invoked when a ListDataSource adds an item to its current list.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface DataAddedListener<I> {
+	interface ItemAddedListener<I> {
 		/**
-		 * Invoked to indicate that an object was added to the dataset of a ListDataSource.
+		 * Invoked when an item is added to a list.
 		 *
 		 * @param source
-		 * 		the source the object was added to, not null
-		 * @param object
-		 * 		the object which was added, null accepted
+		 * 		the source of the list, not null
+		 * @param item
+		 * 		the item which was added, may be null
 		 * @param index
 		 * 		the index at which the object was added
 		 */
-		void onDataAdded(ListDataSource<I> source, I object, int index);
+		void onDataAdded(ListDataSource<I> source, I item, int index);
 	}
 
 	/**
-	 * Callback to be invoked when an object is removed from the dataset of a ListDataSource.
+	 * Callback to be invoked when a ListDataSource removes an item from its current list.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface DataRemovedListener<I> {
+	interface ItemRemovedListener<I> {
 		/**
-		 * Invoked to indicate that an object was removed from the dataset of a ListDataSource.
+		 * Invoked when an item is removed from a list.
 		 *
 		 * @param source
-		 * 		the source the object was removed from, not null
-		 * @param object
-		 * 		the object which was removed, null accepted
+		 * 		the source of the list, not null
+		 * @param item
+		 * 		the item which was removed, may be null
 		 * @param index
-		 * 		the index of the object before it was removed
+		 * 		the index at which the object was removed from
 		 */
-		void onDataRemoved(ListDataSource<I> source, I object, int index);
+		void onDataRemoved(ListDataSource<I> source, I item, int index);
 	}
 
 	/**
-	 * Callback to be invoked when an object in the dataset of a ListDataSource is modified in a way
-	 * which affects the data.
+	 * Callback to be invoked when an item in a ListDataSource is modified in a way which affects
+	 * the item's external representation.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface ListItemModifiedListener<I> {
 		/**
-		 * Invoked to indicate that an object in the dataset of a ListDataSource was modified in a
-		 * way which affects the data.
+		 * Invoked when an item in the list is modified in a way which affects the item's external
+		 * representation.
 		 *
 		 * @param source
-		 * 		the source containing the modified object, not null
-		 * @param object
+		 * 		the source of the list containing the modified item, not null
+		 * @param item
 		 * 		the object which was modified, not null
 		 * @param index
 		 * 		the index of the modified object
 		 */
-		void onListItemModified(ListDataSource<I> source, I object, int index);
+		void onListItemModified(ListDataSource<I> source, I item, int index);
 	}
 
 	/**
-	 * Callback to be invoked when an object in the dataset of a ListDataSource is moved to a
-	 * different position.
+	 * Callback to be invoked when an item in the list of a ListDataSource is moved to another
+	 * location in the list.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface DataMovedListener<I> {
+	interface ItemMovedListener<I> {
 		/**
-		 * Invoked to indicate that an object in the dataset of a ListDataSource was moved to a
-		 * different position.
+		 * Invoked when an item in the list is moved to another location in the list.
 		 *
 		 * @param source
 		 * 		the source containing the moved object, not null
@@ -176,12 +173,12 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Can listen to all callbacks a BaseDataSource can deliver.
+	 * Can listen to all callbacks a ListDataSource can deliver.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface Listener<I> extends BaseDataSource.Listener<List<I>>, DataAddedListener<I>,
-			DataRemovedListener<I>, ListItemModifiedListener<I>,
-			DataMovedListener<I> {}
+	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, ItemAddedListener<I>,
+			ItemRemovedListener<I>, ListItemModifiedListener<I>,
+			ItemMovedListener<I> {}
 }

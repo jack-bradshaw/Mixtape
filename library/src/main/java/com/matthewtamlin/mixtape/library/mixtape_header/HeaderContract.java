@@ -9,7 +9,7 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
- * Defines a contract between the model, view and presenter
+ * Defines the contract between the model, view and presenter for the header.
  */
 public interface HeaderContract {
 	/**
@@ -125,5 +125,5 @@ public interface HeaderContract {
 	 * callback events from the data source and the view (if possible).
 	 */
 	public interface Presenter<S extends BaseDataSource<LibraryItem>, V extends View> extends
-			BasePresenter<S, V>, BaseDataSource.Listener<LibraryItem>, View.Listener {}
+			BasePresenter<S, V>, BaseDataSource.FullListener<LibraryItem>, View.Listener {}
 }

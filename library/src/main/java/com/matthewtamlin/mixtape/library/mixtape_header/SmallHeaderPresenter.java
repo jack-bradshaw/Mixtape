@@ -105,12 +105,13 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	}
 
 	@Override
-	public void onExtraButtonClicked(final HeaderContract.View hostView, int index) {
+	public void onExtraButtonClicked(final HeaderContract.View hostView, final int index) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onOverflowMenuItemClicked(final HeaderContract.View hostView, MenuItem menuItem) {
+	public void onOverflowMenuItemClicked(final HeaderContract.View hostView,
+			final MenuItem menuItem) {
 		// Default implementation does nothing
 	}
 
