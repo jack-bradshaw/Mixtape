@@ -17,9 +17,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Binds subtitles to TextViews. A caching mechanism is implemented to allow for faster
- * and more efficient data binding, and asynchronous processing is only used when if data is not
- * already cached. If the subtitle of an item is inaccessible, then a default is used.
+ * Binds subtitles from LibraryItems to TextViews. A caching mechanism is implemented to allow for
+ * faster and more efficient data binding, and asynchronous processing is only used when if data is
+ * not already cached. If the subtitle of an item is inaccessible, then a default is used.
  */
 @Tested(testMethod = "unit")
 public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
