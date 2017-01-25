@@ -8,6 +8,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -27,13 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 		return container;
 	}
 
-	public List<LibraryItem> createBodyItems() {
-
-	}
-
-	public LibraryItem getHeaderItem() {
-		
-	}
+	
 
 	public abstract SmallHeader getHeader();
 
