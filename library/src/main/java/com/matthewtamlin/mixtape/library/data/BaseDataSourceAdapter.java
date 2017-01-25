@@ -1,4 +1,6 @@
-package com.matthewtamlin.mixtape.library.base_mvp;
+package com.matthewtamlin.mixtape.library.data;
+
+import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 
 import java.util.HashSet;
 import java.util.Set;
