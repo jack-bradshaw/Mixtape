@@ -58,19 +58,19 @@ public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 	@Override
 	public void setTitle(final CharSequence title)
 			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.")
+		throw new LibraryWriteException("Item is read only.");
 	}
 
 	@Override
 	public void setSubtitle(final CharSequence subtitle)
 			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.")
+		throw new LibraryWriteException("Item is read only.");
 	}
 
 	@Override
 	public void setArtwork(final Bitmap artwork)
 			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.")
+		throw new LibraryWriteException("Item is read only.");
 	}
 
 	@Override
