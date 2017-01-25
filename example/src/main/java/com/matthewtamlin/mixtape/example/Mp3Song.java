@@ -72,7 +72,7 @@ public class Mp3Song implements LibraryItem {
 		throw new LibraryWriteException("Item is read only.");
 	}
 
-	private String readId3Field(FieldKey fieldKey) throws LibraryReadException {
+	private String readId3Field(final FieldKey fieldKey) throws LibraryReadException {
 		try {
 			final Tag tag = AudioFileIO.read(mp3File).getTag();
 			return tag == null ? null : tag.getFirst(fieldKey);
