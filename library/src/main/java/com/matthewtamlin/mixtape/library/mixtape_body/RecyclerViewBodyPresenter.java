@@ -23,8 +23,11 @@ import java.util.List;
  * 		the type of data source
  */
 @Tested(testMethod = "unit")
-public class RecyclerViewBodyPresenter<S extends ListDataSource<LibraryItem>> extends
-		DirectBodyPresenter<S, RecyclerViewBody> {
+public class RecyclerViewBodyPresenter<
+		D extends LibraryItem,
+		S extends ListDataSource<D>>
+		extends
+		DirectBodyPresenter<D, S, RecyclerViewBody> {
 	/**
 	 * Binds title data to the view.
 	 */
