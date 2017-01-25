@@ -14,6 +14,7 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 
 import java.io.File;
+import java.io.IOException;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
@@ -30,21 +31,27 @@ public class Mp3Song implements LibraryItem {
 
 	@Override
 	public CharSequence getTitle() throws LibraryReadException {
-		return readId3Field(FieldKey.TITLE);
+		try {
+			return Id3Util.getMetadataFromId3Tag(mp3File, Id3Util.MetadataField.TITLE);
+		} catch (final IOException e) {
+			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
+		}
 	}
 
 	@Override
 	public CharSequence getSubtitle() throws LibraryReadException {
-		return readId3Field(FieldKey.ARTIST);
+		try {
+			return Id3Util.getMetadataFromId3Tag(mp3File, Id3Util.MetadataField.ARTIST);
+		} catch (final IOException e) {
+			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
+		}
 	}
 
 	@Override
 	public Bitmap getArtwork(final int width, final int height) throws LibraryReadException {
 		try {
-			final Tag tag = AudioFileIO.read(mp3File).getTag();
-			final Artwork artwork = tag == null ? null : tag.getFirstArtwork();
-			return artworkToBitmap(artwork, width, height);
-		} catch (Exception e) {
+			return Id3Util.getCoverArtFromId3Tag(mp3File, width, height);
+		} catch (final IOException e) {
 			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
 		}
 	}
@@ -70,26 +77,5 @@ public class Mp3Song implements LibraryItem {
 	public void setTitle(final CharSequence title)
 			throws LibraryReadException, LibraryWriteException {
 		throw new LibraryWriteException("Item is read only.");
-	}
-
-	private String readId3Field(final FieldKey fieldKey) throws LibraryReadException {
-		try {
-			final Tag tag = AudioFileIO.read(mp3File).getTag();
-			return tag == null ? null : tag.getFirst(fieldKey);
-		} catch (final Exception e) {
-			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
-		}
-	}
-
-	private Bitmap artworkToBitmap(final Artwork artwork, final int width, final int height) {
-		final byte[] rawBitmapArray = (artwork == null) ? null : artwork.getBinaryData();
-
-		if (rawBitmapArray == null) {
-			return null;
-		} else if (width == 0 || height == 0) {
-			return BitmapFactory.decodeByteArray(rawBitmapArray, 0, rawBitmapArray.length);
-		} else {
-			return BitmapEfficiencyHelper.decodeByteArray(rawBitmapArray, width, height);
-		}
 	}
 }
