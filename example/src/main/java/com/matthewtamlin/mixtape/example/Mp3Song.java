@@ -26,7 +26,7 @@ public class Mp3Song implements LibraryItem {
 
 	@Override
 	public CharSequence getTitle() throws LibraryReadException {
-		return readId3Field(FieldKey.TITLE)
+		return readId3Field(FieldKey.TITLE);
 	}
 
 	@Override
