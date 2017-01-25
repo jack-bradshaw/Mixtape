@@ -2,7 +2,7 @@ package com.matthewtamlin.mixtape.example.data;
 
 import android.graphics.Bitmap;
 
-import com.matthewtamlin.mixtape.example.Id3Util;
+import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
@@ -10,8 +10,8 @@ import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.matthewtamlin.mixtape.example.Id3Util.MetadataField.ALBUM;
-import static com.matthewtamlin.mixtape.example.Id3Util.MetadataField.ALBUM_ARTIST;
+import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM;
+import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM_ARTIST;
 
 public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 	@Override

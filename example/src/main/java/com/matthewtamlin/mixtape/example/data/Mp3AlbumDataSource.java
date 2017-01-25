@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.matthewtamlin.java_utilities.file.FileFinder;
-import com.matthewtamlin.mixtape.example.Id3Util;
+import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
-import static com.matthewtamlin.mixtape.example.Id3Util.MetadataField.ALBUM;
+import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM;
 
 public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 	private List<Mp3Album> albums = null;

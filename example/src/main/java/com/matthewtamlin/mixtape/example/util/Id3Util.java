@@ -1,4 +1,4 @@
-package com.matthewtamlin.mixtape.example;
+package com.matthewtamlin.mixtape.example.util;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

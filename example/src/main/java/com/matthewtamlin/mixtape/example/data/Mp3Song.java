@@ -2,7 +2,7 @@ package com.matthewtamlin.mixtape.example.data;
 
 import android.graphics.Bitmap;
 
-import com.matthewtamlin.mixtape.example.Id3Util;
+import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
