@@ -18,10 +18,10 @@ import java.io.File;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 public class Mp3Song implements LibraryItem {
-	private File file;
+	private File mp3File;
 
 	public Mp3Song(final File mp3File) {
-		file = checkNotNull(mp3File, "mp3File cannot be null.");
+		this.mp3File = checkNotNull(mp3File, "mp3File cannot be null.");
 	}
 
 	@Override
@@ -37,20 +37,20 @@ public class Mp3Song implements LibraryItem {
 	@Override
 	public Bitmap getArtwork(final int width, final int height) throws LibraryReadException {
 		try {
-			final Tag tag = AudioFileIO.read(file).getTag();
+			final Tag tag = AudioFileIO.read(mp3File).getTag();
 			final Artwork artwork = tag == null ? null : tag.getFirstArtwork();
 			return artworkToBitmap(artwork, width, height);
 		} catch (Exception e) {
-			throw new LibraryReadException("Cannot read ID3 tag from file " + file, e);
+			throw new LibraryReadException("Cannot read ID3 tag from mp3File " + mp3File, e);
 		}
 	}
 
 	private String readId3Field(FieldKey fieldKey) throws LibraryReadException {
 		try {
-			final Tag tag = AudioFileIO.read(file).getTag();
+			final Tag tag = AudioFileIO.read(mp3File).getTag();
 			return tag == null ? null : tag.getFirst(fieldKey);
 		} catch (final Exception e) {
-			throw new LibraryReadException("Cannot read ID3 tag from file " + file, e);
+			throw new LibraryReadException("Cannot read ID3 tag from mp3File " + mp3File, e);
 		}
 	}
 
