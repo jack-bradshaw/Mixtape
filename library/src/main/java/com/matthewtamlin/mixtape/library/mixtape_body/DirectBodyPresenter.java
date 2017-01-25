@@ -18,8 +18,11 @@ import java.util.List;
  * 		the type of view
  */
 @Tested(testMethod = "unit")
-public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>, V extends
-		BodyContract.View> implements BodyContract.Presenter<S, V> {
+public abstract class DirectBodyPresenter<
+		D extends LibraryItem,
+		S extends ListDataSource<D>,
+		V extends BodyContract.View>
+		implements BodyContract.Presenter<D, S, V> {
 	/**
 	 * The data source supplying the LibraryItems.
 	 */
@@ -62,7 +65,7 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	}
 
 	@Override
-	public void onDataLoaded(BaseDataSource<List<LibraryItem>> source, List<LibraryItem> data) {
+	public void onDataLoaded(BaseDataSource<List<D>> source, List<D> data) {
 		if (view != null) {
 			view.setItems(data);
 		}
@@ -76,48 +79,44 @@ public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>,
 	}
 
 	@Override
-	public void onDataModified(final BaseDataSource<List<LibraryItem>> source,
-			final List<LibraryItem> data) {
+	public void onDataModified(final BaseDataSource<List<D>> source, final List<D> data) {
 		if (view != null) {
 			view.notifyItemsChanged();
 		}
 	}
 
 	@Override
-	public void onDataMoved(final ListDataSource<LibraryItem> source, final LibraryItem object,
-			final int initialIndex, final int finalIndex) {
+	public void onDataMoved(final ListDataSource<D> source, final D object, final int initialIndex,
+			final int finalIndex) {
 		if (view != null) {
 			view.notifyItemMoved(initialIndex, finalIndex);
 		}
 	}
 
 	@Override
-	public void onDataAdded(final ListDataSource<LibraryItem> source, final LibraryItem item,
-			final int index) {
+	public void onDataAdded(final ListDataSource<D> source, final D item, final int index) {
 		if (view != null) {
 			view.notifyItemAdded(index);
 		}
 	}
 
 	@Override
-	public void onDataRemoved(final ListDataSource<LibraryItem> source, final LibraryItem item,
-			final int index) {
+	public void onDataRemoved(final ListDataSource<D> source, final D item, final int index) {
 		if (view != null) {
 			view.notifyItemRemoved(index);
 		}
 	}
 
 	@Override
-	public void onDataReplaced(final BaseDataSource<List<LibraryItem>> source,
-			final List<LibraryItem> oldData, final List<LibraryItem> newData) {
+	public void onDataReplaced(final BaseDataSource<List<D>> source, final List<D> oldData,
+			final List<D> newData) {
 		if (view != null) {
 			view.setItems(newData);
 		}
 	}
 
 	@Override
-	public void onListItemModified(final ListDataSource<LibraryItem> source, final LibraryItem
-			item, final int index) {
+	public void onListItemModified(final ListDataSource<D> source, final D item, final int index) {
 		if (view != null) {
 			view.notifyItemModified(index);
 		}
