@@ -1,29 +1,35 @@
-package com.matthewtamlin.mixtape.example;
+package com.matthewtamlin.mixtape.example.data;
 
 import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.matthewtamlin.java_utilities.file.FileFinder;
+import com.matthewtamlin.mixtape.example.Id3Util;
 import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
+import static com.matthewtamlin.mixtape.example.Id3Util.MetadataField.ALBUM;
 
-public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
-	private List<Mp3Song> songs = null;
+public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
+	private List<Mp3Album> albums = null;
 
 	@Override
 	public void loadData(final boolean forceRefresh,
-			final DataLoadedListener<List<Mp3Song>> callback) {
+			final DataLoadedListener<List<Mp3Album>> callback) {
 		final AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(final Void... params) {
-				if (songs == null || forceRefresh) {
-					songs = loadMp3SongsFromMusicDirectory();
+				if (albums == null || forceRefresh) {
+					final List<Mp3Song> songs = loadMp3SongsFromMusicDirectory();
+					albums = sortSongsByAlbum(songs);
 				}
 
 				return null;
@@ -31,7 +37,7 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 
 			@Override
 			protected void onPostExecute(final Void aVoid) {
-				callback.onDataLoaded(Mp3SongDataSource.this, songs);
+				callback.onDataLoaded(Mp3AlbumDataSource.this, albums);
 			}
 		};
 
@@ -53,5 +59,25 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 		}
 
 		return mp3Songs;
+	}
+
+	private List<Mp3Album> sortSongsByAlbum(final List<Mp3Song> songs) {
+		final Map<String, Mp3Album> albumMap = new HashMap<>();
+
+		for (final Mp3Song song : songs) {
+			try {
+				final String key = Id3Util.getMetadataFromId3Tag(song.getMp3File(), ALBUM);
+
+				if (!albumMap.containsKey(key)) {
+					albumMap.put(key, new Mp3Album());
+				}
+
+				albumMap.get(key).add(song);
+			} catch (final IOException e) {
+				// In production, this should be logged as a warning/error
+			}
+		}
+
+		return new ArrayList<>(albumMap.values());
 	}
 }
