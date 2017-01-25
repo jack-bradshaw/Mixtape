@@ -1,17 +1,11 @@
-package com.matthewtamlin.mixtape.example;
+package com.matthewtamlin.mixtape.example.data;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import com.matthewtamlin.android_utilities.library.helpers.BitmapEfficiencyHelper;
+import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
-
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.images.Artwork;
 
 import java.io.File;
 import java.io.IOException;
