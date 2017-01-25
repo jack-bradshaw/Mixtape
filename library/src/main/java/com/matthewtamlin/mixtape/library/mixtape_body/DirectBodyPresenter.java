@@ -18,8 +18,11 @@ import java.util.List;
  * 		the type of view
  */
 @Tested(testMethod = "unit")
-public abstract class DirectBodyPresenter<S extends ListDataSource<LibraryItem>, V extends
-		BodyContract.View> implements BodyContract.Presenter<S, V> {
+public abstract class DirectBodyPresenter<
+		D extends LibraryItem,
+		S extends ListDataSource<D>,
+		V extends BodyContract.View>
+		implements BodyContract.Presenter<D, S, V> {
 	/**
 	 * The data source supplying the LibraryItems.
 	 */
