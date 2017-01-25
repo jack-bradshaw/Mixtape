@@ -15,19 +15,19 @@ public abstract class BaseDataSourceAdapter<D> implements BaseDataSource<D> {
 	 * The data replaced listeners which are currently registered. This set must never contain
 	 * null.
 	 */
-	private Set<DataReplacedListener<D>> dataReplacedListeners = new HashSet<>();
+	private final Set<DataReplacedListener<D>> dataReplacedListeners = new HashSet<>();
 
 	/**
 	 * The data modified listeners which are currently registered. This set must never contain
 	 * null.
 	 */
-	private Set<DataModifiedListener<D>> dataModifiedListeners = new HashSet<>();
+	private final Set<DataModifiedListener<D>> dataModifiedListeners = new HashSet<>();
 
 	/**
 	 * The long operation listeners which are currently registered. This set must never contain
 	 * null.
 	 */
-	private Set<LongOperationListener> longOperationListeners = new HashSet<>();
+	private final 	Set<LongOperationListener> longOperationListeners = new HashSet<>();
 
 	@Override
 	public void registerDataReplacedListener(final DataReplacedListener<D> listener) {
