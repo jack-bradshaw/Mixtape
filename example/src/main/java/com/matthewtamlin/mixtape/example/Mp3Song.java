@@ -45,7 +45,7 @@ public class Mp3Song implements LibraryItem {
 			final Artwork artwork = tag == null ? null : tag.getFirstArtwork();
 			return artworkToBitmap(artwork, width, height);
 		} catch (Exception e) {
-			throw new LibraryReadException("Cannot read ID3 tag from mp3File " + mp3File, e);
+			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
 		}
 	}
 
@@ -77,7 +77,7 @@ public class Mp3Song implements LibraryItem {
 			final Tag tag = AudioFileIO.read(mp3File).getTag();
 			return tag == null ? null : tag.getFirst(fieldKey);
 		} catch (final Exception e) {
-			throw new LibraryReadException("Cannot read ID3 tag from mp3File " + mp3File, e);
+			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
 		}
 	}
 
