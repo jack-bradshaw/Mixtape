@@ -24,6 +24,10 @@ public class Mp3Song implements LibraryItem {
 		this.mp3File = checkNotNull(mp3File, "mp3File cannot be null.");
 	}
 
+	public File getMp3File() {
+		return mp3File;
+	}
+
 	@Override
 	public CharSequence getTitle() throws LibraryReadException {
 		return readId3Field(FieldKey.TITLE);
@@ -45,6 +49,29 @@ public class Mp3Song implements LibraryItem {
 		}
 	}
 
+	@Override
+	public void setSubtitle(final CharSequence subtitle)
+			throws LibraryReadException, LibraryWriteException {
+		throw new LibraryWriteException("Item is read only.");
+	}
+
+	@Override
+	public void setArtwork(final Bitmap artwork)
+			throws LibraryReadException, LibraryWriteException {
+		throw new LibraryWriteException("Item is read only.");
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return true;
+	}
+
+	@Override
+	public void setTitle(final CharSequence title)
+			throws LibraryReadException, LibraryWriteException {
+		throw new LibraryWriteException("Item is read only.");
+	}
+
 	private String readId3Field(FieldKey fieldKey) throws LibraryReadException {
 		try {
 			final Tag tag = AudioFileIO.read(mp3File).getTag();
@@ -64,28 +91,5 @@ public class Mp3Song implements LibraryItem {
 		} else {
 			return BitmapEfficiencyHelper.decodeByteArray(rawBitmapArray, width, height);
 		}
-	}
-
-	@Override
-	public void setTitle(final CharSequence title)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setSubtitle(final CharSequence subtitle)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setArtwork(final Bitmap artwork)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public boolean isReadOnly() {
-		return true;
 	}
 }
