@@ -27,7 +27,13 @@ public class GridActivity extends AppCompatActivity {
 	}
 
 	private void setupView() {
-		
+		setContentView(R.layout.example_layout);
+
+		container = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
+
+		body = new GridBody(this);
+
+		container.setBody(body);
 	}
 
 	private void setupBodyDataSource() {
