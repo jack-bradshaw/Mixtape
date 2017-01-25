@@ -10,7 +10,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
-import com.matthewtamlin.mixtape.library_tests.R;
+import com.matthewtamlin.mixtape.library_tests.test.R;
 
 import org.junit.Before;
 import org.junit.Test;
