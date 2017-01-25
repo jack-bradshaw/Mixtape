@@ -3,9 +3,12 @@ package com.matthewtamlin.mixtape.example;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
+
+import java.util.List;
 
 public abstract class BaseActivity extends AppCompatActivity {
 	private CoordinatedMixtapeContainer container;
@@ -22,6 +25,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 	public CoordinatedMixtapeContainer getContainer() {
 		return container;
+	}
+
+	public List<LibraryItem> createBodyItems() {
+
+	}
+
+	public LibraryItem getHeaderItem() {
+		
 	}
 
 	public abstract SmallHeader getHeader();
