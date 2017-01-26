@@ -44,9 +44,8 @@ public class GridActivity extends AppCompatActivity {
 		setupDataSource();
 		setupPresenter();
 
-		final RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource> presenter = new
-				RecyclerViewBodyPresenter<>(null, null, null); //TODO
-
+		presenter.setView(body);
+		presenter.setDataSource(dataSource);
 	}
 
 	private void setupView() {
@@ -108,9 +107,5 @@ public class GridActivity extends AppCompatActivity {
 		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults, 300);
 
 		presenter = new RecyclerViewBodyPresenter<>(titleBinder, subtitleBinder, artworkBinder);
-	}
-
-	private void integrateMVP() {
-
 	}
 }
