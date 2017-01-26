@@ -456,7 +456,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 			@Override
 			public int getItemCount() {
-				return data.size();
+				return data == null ? 0 : data.size();
 			}
 		};
 	}
