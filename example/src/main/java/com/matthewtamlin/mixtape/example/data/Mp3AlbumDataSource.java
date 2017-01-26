@@ -10,6 +10,7 @@ import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,9 @@ public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 
 			@Override
 			protected void onPostExecute(final Void aVoid) {
-				callback.onDataLoaded(Mp3AlbumDataSource.this, albums);
+				if (callback != null) {
+					callback.onDataLoaded(Mp3AlbumDataSource.this, albums);
+				}
 			}
 		};
 
@@ -48,10 +51,11 @@ public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 		final List<Mp3Song> mp3Songs = new ArrayList<>();
 
 		final File musicDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+
 		final Set<File> filesInMusicDir = FileFinder.searchDownTreeFrom(musicDir);
 
 		for (final File file : filesInMusicDir) {
-			final String[] splitName = file.getName().split(".");
+			final String[] splitName = file.getName().split("\\.");
 
 			if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
 				mp3Songs.add(new Mp3Song(file));
