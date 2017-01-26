@@ -31,7 +31,9 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 
 			@Override
 			protected void onPostExecute(final Void aVoid) {
-				callback.onDataLoaded(Mp3SongDataSource.this, songs);
+				if (callback != null) {
+					callback.onDataLoaded(Mp3SongDataSource.this, songs);
+				}
 			}
 		};
 
