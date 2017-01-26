@@ -27,8 +27,6 @@ import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeC
 import java.util.List;
 
 public class GridActivity extends AppCompatActivity {
-	private CoordinatedMixtapeContainer container;
-
 	private GridBody body;
 
 	private LibraryItemCache cache;
@@ -40,18 +38,21 @@ public class GridActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setupView();
 		setupDataSource();
 		setupPresenter();
 
 		presenter.setView(body);
 		presenter.setDataSource(dataSource);
+		presenter.present(true);
 	}
 
 	private void setupView() {
 		setContentView(R.layout.example_layout);
 
-		container = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
+		final CoordinatedMixtapeContainer container = (CoordinatedMixtapeContainer) findViewById
+				(R.id.example_layout_coordinator);
 
 		body = new GridBody(this);
 
@@ -60,37 +61,6 @@ public class GridActivity extends AppCompatActivity {
 
 	private void setupDataSource() {
 		dataSource = new Mp3AlbumDataSource();
-
-		dataSource.registerDataModifiedListener(new DataModifiedListener<List<Mp3Album>>() {
-			@Override
-			public void onDataModified(final BaseDataSource<List<Mp3Album>> source,
-					final List<Mp3Album> data) {
-				cache.clearTitles();
-				cache.clearSubtitles();
-				cache.clearArtwork();
-			}
-		});
-
-		dataSource.registerDataReplacedListener(new DataReplacedListener<List<Mp3Album>>() {
-			@Override
-			public void onDataReplaced(final BaseDataSource<List<Mp3Album>> source,
-					final List<Mp3Album> oldData,
-					final List<Mp3Album> newData) {
-				cache.clearTitles();
-				cache.clearSubtitles();
-				cache.clearArtwork();
-			}
-		});
-
-		dataSource.registerListItemModifiedListener(new ListItemModifiedListener<Mp3Album>() {
-			@Override
-			public void onListItemModified(final ListDataSource<Mp3Album> source,
-					final Mp3Album item, final int index) {
-				cache.removeTitle(item);
-				cache.removeSubtitle(item);
-				cache.removeArtwork(item);
-			}
-		});
 	}
 
 	private void setupPresenter() {
