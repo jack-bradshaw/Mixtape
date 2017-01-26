@@ -36,7 +36,7 @@ public abstract class DirectBodyPresenter<
 	@Override
 	public void present(final boolean forceRefresh) {
 		if (dataSource != null) {
-			dataSource.loadData(forceRefresh, null); // Already listening so don't pass a callback
+			dataSource.loadData(forceRefresh, this);
 		}
 	}
 
@@ -45,6 +45,10 @@ public abstract class DirectBodyPresenter<
 		unsubscribeFromDataSourceCallbacks(this.dataSource);
 		this.dataSource = dataSource;
 		subscribeToDataSourceCallbacks(this.dataSource);
+
+		if (dataSource != null) {
+			dataSource.loadData(false, this);
+		}
 	}
 
 	@Override
@@ -57,6 +61,10 @@ public abstract class DirectBodyPresenter<
 		removeViewPresenter(this.view);
 		this.view = view;
 		setSelfAsViewPresenter(this.view);
+
+		if (dataSource != null) {
+			dataSource.loadData(false, this);
+		}
 	}
 
 	@Override

@@ -29,7 +29,7 @@ limitations under the License.
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<com.matthewtamlin.android_utilities_library.views.SquareImageView
+		<com.matthewtamlin.android_utilities.library.views.SquareImageView
 			android:id="@+id/gridBodyItem_artwork"
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
