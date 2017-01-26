@@ -10,6 +10,7 @@ import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,9 @@ public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 
 			@Override
 			protected void onPostExecute(final Void aVoid) {
-				callback.onDataLoaded(Mp3AlbumDataSource.this, albums);
+				if (callback != null) {
+					callback.onDataLoaded(Mp3AlbumDataSource.this, albums);
+				}
 			}
 		};
 
