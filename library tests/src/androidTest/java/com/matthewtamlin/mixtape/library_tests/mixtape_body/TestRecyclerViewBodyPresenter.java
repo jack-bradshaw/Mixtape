@@ -73,7 +73,8 @@ public class TestRecyclerViewBodyPresenter extends TestDirectBodyPresenter {
 	}
 
 	@Override
-	protected RecyclerViewBodyPresenter<ListDataSource<LibraryItem>> createPresenter() {
+	protected RecyclerViewBodyPresenter<LibraryItem, ListDataSource<LibraryItem>> createPresenter
+			() {
 		return new RecyclerViewBodyPresenter<>(titleBinder, subtitleBinder, artworkBinder);
 	}
 }
