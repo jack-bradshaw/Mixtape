@@ -48,10 +48,11 @@ public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 		final List<Mp3Song> mp3Songs = new ArrayList<>();
 
 		final File musicDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
+
 		final Set<File> filesInMusicDir = FileFinder.searchDownTreeFrom(musicDir);
 
 		for (final File file : filesInMusicDir) {
-			final String[] splitName = file.getName().split(".");
+			final String[] splitName = file.getName().split("\\.");
 
 			if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
 				mp3Songs.add(new Mp3Song(file));
