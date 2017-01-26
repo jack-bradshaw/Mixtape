@@ -31,6 +31,8 @@ public class GridActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setTitle("Albums");
+
 		setupView();
 		setupDataSource();
 		setupPresenter();
