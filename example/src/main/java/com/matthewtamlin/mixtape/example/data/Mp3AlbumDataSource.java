@@ -10,7 +10,6 @@ import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +44,18 @@ public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 		};
 
 		task.execute();
+	}
+
+	public void deletedItem(final Mp3Album item) {
+		if (albums.contains(item)) {
+			final int index = albums.indexOf(item);
+
+			albums.remove(item);
+
+			for (final ItemRemovedListener<Mp3Album> listener : getItemRemovedListeners()) {
+				listener.onDataRemoved(this, item, index);
+			}
+		}
 	}
 
 	private List<Mp3Song> loadMp3SongsFromMusicDirectory() {
