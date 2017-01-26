@@ -8,11 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.Mp3Album;
 import com.matthewtamlin.mixtape.example.data.Mp3AlbumDataSource;
-import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
-import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource.DataModifiedListener;
-import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource.DataReplacedListener;
-import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
-import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource.ListItemModifiedListener;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
@@ -23,8 +18,6 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
-
-import java.util.List;
 
 public class GridActivity extends AppCompatActivity {
 	private GridBody body;
@@ -38,7 +31,6 @@ public class GridActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setupView();
 		setupDataSource();
 		setupPresenter();
