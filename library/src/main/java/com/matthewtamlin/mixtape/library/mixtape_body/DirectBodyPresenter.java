@@ -36,7 +36,7 @@ public abstract class DirectBodyPresenter<
 	@Override
 	public void present(final boolean forceRefresh) {
 		if (dataSource != null) {
-			dataSource.loadData(forceRefresh, null); // Already listening so don't pass a callback
+			dataSource.loadData(forceRefresh, this);
 		}
 	}
 
