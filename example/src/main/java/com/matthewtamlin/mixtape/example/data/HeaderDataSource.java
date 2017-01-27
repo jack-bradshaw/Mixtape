@@ -3,7 +3,7 @@ package com.matthewtamlin.mixtape.example.data;
 import com.matthewtamlin.mixtape.library.data.BaseDataSourceAdapter;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
-public class SimpleDataSource extends BaseDataSourceAdapter<LibraryItem> {
+public class HeaderDataSource extends BaseDataSourceAdapter<LibraryItem> {
 	private LibraryItem item;
 
 	public void setData(final LibraryItem item) {
