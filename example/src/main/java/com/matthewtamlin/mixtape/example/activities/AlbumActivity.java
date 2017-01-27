@@ -88,10 +88,10 @@ public class AlbumActivity extends AppCompatActivity {
 			@Override
 			public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
 				try {
-					Snackbar.make(rootView, "Playing " + item.getTitle(),
+					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\"",
 							Snackbar.LENGTH_LONG).show();
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Playing untitled...", Snackbar.LENGTH_LONG)
+					Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG)
 							.show();
 				}
 			}
@@ -102,7 +102,7 @@ public class AlbumActivity extends AppCompatActivity {
 		switch (menuItem.getItemId()) {
 			case R.id.album_menu_playNext: {
 				try {
-					Snackbar.make(rootView, "Playing " + item.getTitle() + " next",
+					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\" next",
 							Snackbar.LENGTH_LONG).show();
 				} catch (LibraryReadException e) {
 					Snackbar.make(rootView, "Playing untitled next", Snackbar.LENGTH_LONG)
@@ -114,10 +114,10 @@ public class AlbumActivity extends AppCompatActivity {
 
 			case R.id.album_menu_addToQueue: {
 				try {
-					Snackbar.make(rootView, "Adding " + item.getTitle() + " to queue",
+					Snackbar.make(rootView, "Adding \"" + item.getTitle() + "\" to queue",
 							Snackbar.LENGTH_LONG).show();
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Adding untitled to queue", Snackbar.LENGTH_LONG)
+					Snackbar.make(rootView, "Adding \"untitled\" to queue", Snackbar.LENGTH_LONG)
 							.show();
 				}
 
