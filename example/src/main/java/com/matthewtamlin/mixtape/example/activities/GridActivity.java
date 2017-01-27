@@ -57,7 +57,7 @@ public class GridActivity extends AppCompatActivity {
 
 		body.setContextualMenuResource(R.menu.album_menu);
 
-		container.setBody(body);
+		rootView.setBody(body);
 	}
 
 	private void setupDataSource() {
