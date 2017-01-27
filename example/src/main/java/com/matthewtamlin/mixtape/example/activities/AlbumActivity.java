@@ -91,8 +91,7 @@ public class AlbumActivity extends AppCompatActivity {
 					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\"",
 							Snackbar.LENGTH_LONG).show();
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG)
-							.show();
+					Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG).show();
 				}
 			}
 		};
@@ -105,8 +104,7 @@ public class AlbumActivity extends AppCompatActivity {
 					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\" next",
 							Snackbar.LENGTH_LONG).show();
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Playing untitled next", Snackbar.LENGTH_LONG)
-							.show();
+					Snackbar.make(rootView, "Playing untitled next", Snackbar.LENGTH_LONG).show();
 				}
 
 				break;
