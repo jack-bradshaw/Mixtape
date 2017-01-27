@@ -26,7 +26,7 @@ import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeC
 
 import static android.R.string.untitled;
 
-public class AlbumActivity extends AppCompatActivity {
+public class AlbumsActivity extends AppCompatActivity {
 	private GridBody body;
 
 	private CoordinatedMixtapeContainer rootView;
