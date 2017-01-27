@@ -3,8 +3,8 @@ package com.matthewtamlin.mixtape.example.activities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
@@ -25,6 +25,8 @@ import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeC
 
 public class GridActivity extends AppCompatActivity {
 	private GridBody body;
+
+	private CoordinatedMixtapeContainer rootView
 
 	private LibraryItemCache cache;
 
@@ -49,8 +51,7 @@ public class GridActivity extends AppCompatActivity {
 	private void setupView() {
 		setContentView(R.layout.example_layout);
 
-		final CoordinatedMixtapeContainer container = (CoordinatedMixtapeContainer) findViewById
-				(R.id.example_layout_coordinator);
+		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
 
 		body = new GridBody(this);
 
@@ -81,10 +82,24 @@ public class GridActivity extends AppCompatActivity {
 			@Override
 			public void onContextualMenuItemClicked(final BodyContract.View hostView,
 					final LibraryItem libraryItem, final MenuItem menuItem) {
-				if (menuItem.getItemId() == R.id.album_menu_remove) {
-					dataSource.deletedItem((Mp3Album) libraryItem);
-				}
+				handleContextualMenuClick(libraryItem, menuItem);
 			}
 		};
+	}
+
+	private void handleContextualMenuClick(final LibraryItem libraryItem, final MenuItem menuItem) {
+		switch (menuItem.getItemId()) {
+			case R.id.album_menu_playNext: {
+				Snackbar.make(rootView, "Playing next...", Snackbar.LENGTH_LONG);
+			}
+
+			case R.id.album_menu_addToQueue: {
+				Snackbar.make(rootView, "Adding to queue...", Snackbar.LENGTH_LONG);
+			}
+
+			case R.id.album_menu_remove: {
+				dataSource.deletedItem((Mp3Album) libraryItem);
+			}
+		}
 	}
 }
