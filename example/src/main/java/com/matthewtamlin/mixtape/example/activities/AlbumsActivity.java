@@ -49,12 +49,10 @@ public class AlbumsActivity extends AppCompatActivity {
 	private void setupView() {
 		setContentView(R.layout.example_layout);
 
-		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
-
 		body = new GridBody(this);
-
 		body.setContextualMenuResource(R.menu.album_menu);
 
+		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
 		rootView.setBody(body);
 	}
 
