@@ -1,4 +1,4 @@
 package com.matthewtamlin.mixtape.example.activities;
 
-public class SongsActivity {
+public class PlaylistActivity {
 }
