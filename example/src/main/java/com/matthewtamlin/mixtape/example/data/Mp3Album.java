@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM;
 import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM_ARTIST;
-import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ARTIST;
 
 public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 	@Override
