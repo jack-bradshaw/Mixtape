@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.Mp3Album;
@@ -12,9 +14,11 @@ import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
@@ -50,6 +54,8 @@ public class GridActivity extends AppCompatActivity {
 
 		body = new GridBody(this);
 
+		body.setContextualMenuResource(R.menu.album_menu);
+
 		container.setBody(body);
 	}
 
@@ -70,6 +76,15 @@ public class GridActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults, 300);
 
-		presenter = new RecyclerViewBodyPresenter<>(titleBinder, subtitleBinder, artworkBinder);
+		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
+				(titleBinder, subtitleBinder, artworkBinder) {
+			@Override
+			public void onContextualMenuItemClicked(final BodyContract.View hostView,
+					final LibraryItem libraryItem, final MenuItem menuItem) {
+				if (menuItem.getItemId() == R.id.album_menu_remove) {
+					dataSource.deletedItem((Mp3Album) libraryItem);
+				}
+			}
+		};
 	}
 }
