@@ -15,6 +15,7 @@ import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
+import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
@@ -22,6 +23,8 @@ import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+
+import static android.R.string.untitled;
 
 public class AlbumActivity extends AppCompatActivity {
 	private GridBody body;
@@ -81,6 +84,17 @@ public class AlbumActivity extends AppCompatActivity {
 			public void onContextualMenuItemClicked(final BodyContract.View hostView,
 					final LibraryItem libraryItem, final MenuItem menuItem) {
 				handleContextualMenuClick(libraryItem, menuItem);
+			}
+
+			@Override
+			public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
+				try {
+					Snackbar.make(rootView, "Playing " + item.getTitle(),
+							Snackbar.LENGTH_LONG).show();
+				} catch (LibraryReadException e) {
+					Snackbar.make(rootView, "Playing untitled...", Snackbar.LENGTH_LONG)
+							.show();
+				}
 			}
 		};
 	}
