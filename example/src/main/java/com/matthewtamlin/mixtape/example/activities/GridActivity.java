@@ -89,10 +89,12 @@ public class GridActivity extends AppCompatActivity {
 		switch (menuItem.getItemId()) {
 			case R.id.album_menu_playNext: {
 				Snackbar.make(rootView, "Playing next...", Snackbar.LENGTH_LONG);
+				break;
 			}
 
 			case R.id.album_menu_addToQueue: {
 				Snackbar.make(rootView, "Adding to queue...", Snackbar.LENGTH_LONG);
+				break;
 			}
 
 			case R.id.album_menu_remove: {
