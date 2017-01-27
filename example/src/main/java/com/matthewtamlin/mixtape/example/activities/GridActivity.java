@@ -28,8 +28,6 @@ public class GridActivity extends AppCompatActivity {
 
 	private CoordinatedMixtapeContainer rootView;
 
-	private LibraryItemCache cache;
-
 	private Mp3AlbumDataSource dataSource;
 
 	private RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource> presenter;
@@ -71,7 +69,7 @@ public class GridActivity extends AppCompatActivity {
 		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
 				"Unknown title", "Unknown subtitle", defaultArtwork);
 
-		cache = new LruLibraryItemCache(10000, 10000, 10000000);
+		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 10000000);
 
 		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
