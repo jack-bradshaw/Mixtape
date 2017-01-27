@@ -23,7 +23,7 @@ public class LauncherActivity extends AppCompatActivity {
 
 	private Button createLaunchGridActivityButton() {
 		final Button b = new Button(this);
-		b.setText("Launch grid activity button.");
+		b.setText("Launch grid activity button");
 
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
