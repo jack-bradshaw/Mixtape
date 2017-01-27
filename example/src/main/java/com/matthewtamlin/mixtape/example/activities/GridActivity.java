@@ -88,12 +88,12 @@ public class GridActivity extends AppCompatActivity {
 	private void handleContextualMenuClick(final LibraryItem libraryItem, final MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
 			case R.id.album_menu_playNext: {
-				Snackbar.make(rootView, "Playing next...", Snackbar.LENGTH_LONG);
+				Snackbar.make(rootView, "Playing next...", Snackbar.LENGTH_LONG).show();
 				break;
 			}
 
 			case R.id.album_menu_addToQueue: {
-				Snackbar.make(rootView, "Adding to queue...", Snackbar.LENGTH_LONG);
+				Snackbar.make(rootView, "Adding to queue...", Snackbar.LENGTH_LONG).show();
 				break;
 			}
 
