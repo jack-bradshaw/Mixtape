@@ -23,7 +23,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 
-public class GridActivity extends AppCompatActivity {
+public class AlbumActivity extends AppCompatActivity {
 	private GridBody body;
 
 	private CoordinatedMixtapeContainer rootView;

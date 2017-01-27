@@ -18,6 +18,6 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".activities.GridActivity"/>
+		<activity android:name=".activities.AlbumActivity"/>
 	</application>
 </manifest>

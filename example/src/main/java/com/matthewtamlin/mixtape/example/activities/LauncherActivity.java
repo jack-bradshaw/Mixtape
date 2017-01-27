@@ -28,7 +28,7 @@ public class LauncherActivity extends AppCompatActivity {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				startActivity(new Intent(LauncherActivity.this, GridActivity.class));
+				startActivity(new Intent(LauncherActivity.this, AlbumActivity.class));
 			}
 		});
 
