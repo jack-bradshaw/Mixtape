@@ -24,8 +24,6 @@ import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 
-import static android.R.string.untitled;
-
 public class AlbumsActivity extends AppCompatActivity {
 	private GridBody body;
 
