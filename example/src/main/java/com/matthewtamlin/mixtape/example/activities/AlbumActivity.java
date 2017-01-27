@@ -125,6 +125,13 @@ public class AlbumActivity extends AppCompatActivity {
 			}
 
 			case R.id.album_menu_remove: {
+				try {
+					Snackbar.make(rootView, "Deleted \"" + item.getTitle() + "\"",
+							Snackbar.LENGTH_LONG).show();
+				} catch (LibraryReadException e) {
+					Snackbar.make(rootView, "Deleted \"untitled\"", Snackbar.LENGTH_LONG).show();
+				}
+
 				dataSource.deletedItem((Mp3Album) item);
 			}
 		}
