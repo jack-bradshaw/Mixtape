@@ -26,7 +26,7 @@ import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeC
 public class GridActivity extends AppCompatActivity {
 	private GridBody body;
 
-	private CoordinatedMixtapeContainer rootView
+	private CoordinatedMixtapeContainer rootView;
 
 	private LibraryItemCache cache;
 
