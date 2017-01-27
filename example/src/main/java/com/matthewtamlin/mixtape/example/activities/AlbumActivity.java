@@ -46,7 +46,6 @@ public class AlbumActivity extends AppCompatActivity {
 
 		presenter.setView(body);
 		presenter.setDataSource(dataSource);
-		presenter.present(true);
 	}
 
 	private void setupView() {
@@ -99,20 +98,34 @@ public class AlbumActivity extends AppCompatActivity {
 		};
 	}
 
-	private void handleContextualMenuClick(final LibraryItem libraryItem, final MenuItem menuItem) {
+	private void handleContextualMenuClick(final LibraryItem item, final MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
 			case R.id.album_menu_playNext: {
-				Snackbar.make(rootView, "Playing next...", Snackbar.LENGTH_LONG).show();
+				try {
+					Snackbar.make(rootView, "Playing " + item.getTitle() + " next",
+							Snackbar.LENGTH_LONG).show();
+				} catch (LibraryReadException e) {
+					Snackbar.make(rootView, "Playing untitled next", Snackbar.LENGTH_LONG)
+							.show();
+				}
+
 				break;
 			}
 
 			case R.id.album_menu_addToQueue: {
-				Snackbar.make(rootView, "Adding to queue...", Snackbar.LENGTH_LONG).show();
+				try {
+					Snackbar.make(rootView, "Adding " + item.getTitle() + " to queue",
+							Snackbar.LENGTH_LONG).show();
+				} catch (LibraryReadException e) {
+					Snackbar.make(rootView, "Adding untitled to queue", Snackbar.LENGTH_LONG)
+							.show();
+				}
+
 				break;
 			}
 
 			case R.id.album_menu_remove: {
-				dataSource.deletedItem((Mp3Album) libraryItem);
+				dataSource.deletedItem((Mp3Album) item);
 			}
 		}
 	}
