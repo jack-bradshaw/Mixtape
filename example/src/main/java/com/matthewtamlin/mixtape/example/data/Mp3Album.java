@@ -1,6 +1,7 @@
 package com.matthewtamlin.mixtape.example.data;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 
 import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM;
 import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM_ARTIST;
+import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ARTIST;
 
 public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 	@Override
@@ -34,7 +36,14 @@ public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 			return null;
 		} else {
 			try {
-				return Id3Util.getMetadataFromId3Tag(get(0).getMp3File(), ALBUM_ARTIST);
+				final String albumArtist = Id3Util.getMetadataFromId3Tag(get(0).getMp3File(),
+						ALBUM_ARTIST);
+
+				if (TextUtils.isEmpty(albumArtist)) {
+					return "Various artists";
+				} else {
+					return albumArtist;
+				}
 			} catch (final IOException e) {
 				throw new LibraryReadException("Cannot read ID3 tag from file " +
 						get(0).getMp3File(), e);
