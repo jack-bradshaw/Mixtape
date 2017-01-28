@@ -18,13 +18,13 @@ public class LauncherActivity extends AppCompatActivity {
 		setContentView(R.layout.launcher_activity);
 
 		final LinearLayout root = (LinearLayout) findViewById(R.id.launcher_activity_root);
-		root.addView(createLaunchGridActivityButton());
+		root.addView(createLaunchAlbumActivityButton());
 		root.addView(createLaunchPlaylistActivityButton());
 	}
 
-	private Button createLaunchGridActivityButton() {
+	private Button createLaunchAlbumActivityButton() {
 		final Button b = new Button(this);
-		b.setText("Launch grid activity button");
+		b.setText("Launch album activity");
 
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
