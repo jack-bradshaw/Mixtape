@@ -46,7 +46,7 @@ public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
 		task.execute();
 	}
 
-	public void deletedItem(final Mp3Album item) {
+	public void deleteItem(final Mp3Album item) {
 		if (albums.contains(item)) {
 			final int index = albums.indexOf(item);
 

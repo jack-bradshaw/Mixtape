@@ -126,7 +126,7 @@ public class AlbumsActivity extends AppCompatActivity {
 					Snackbar.make(rootView, "Deleted \"untitled\"", Snackbar.LENGTH_LONG).show();
 				}
 
-				dataSource.deletedItem((Mp3Album) item);
+				dataSource.deleteItem((Mp3Album) item);
 			}
 		}
 	}
