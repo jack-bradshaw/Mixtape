@@ -22,7 +22,7 @@ import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
-import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
+import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
@@ -34,7 +34,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private SmallHeader header;
 
-	private GridBody body;
+	private ListBody body;
 
 	private HeaderDataSource headerDataSource;
 
@@ -71,7 +71,7 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupBodyView() {
-		body = new GridBody(this);
+		body = new ListBody(this);
 		body.setContextualMenuResource(R.menu.song_menu);
 	}
 
