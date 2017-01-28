@@ -61,8 +61,10 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 		for (final File file : filesInMusicDir) {
 			final String[] splitName = file.getName().split("\\.");
 
-			if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
-				mp3Songs.add(new Mp3Song(file));
+			if (splitName.length > 1) {
+				if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
+					mp3Songs.add(new Mp3Song(file));
+				}
 			}
 		}
 
