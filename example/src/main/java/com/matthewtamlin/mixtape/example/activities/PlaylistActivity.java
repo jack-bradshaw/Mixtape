@@ -77,8 +77,10 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private void setupContainerView() {
 		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
+
 		rootView.setBody(body);
 		rootView.setHeader(header);
+		rootView.showHeaderAtTopOnly();
 	}
 
 	private void setupDataSources() {
