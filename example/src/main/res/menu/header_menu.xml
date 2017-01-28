@@ -5,10 +5,10 @@
 	tools:ignore="HardcodedText">
 
 	<item
-		android:id="@+id/album_menu_playNext"
-		android:title="Download all songs"/>
+		android:id="@+id/header_menu_download_all"
+		android:title="Download all"/>
 
 	<item
-		android:id="@+id/album_menu_addToQueue"
+		android:id="@+id/header_menu_show_downloaded_only"
 		android:title="Show downloaded only"/>
 </menu>
