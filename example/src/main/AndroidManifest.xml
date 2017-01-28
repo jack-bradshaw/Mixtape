@@ -19,6 +19,9 @@
 		</activity>
 
 		<activity android:name=".activities.AlbumsActivity"/>
-		<activity android:name=".activities.PlaylistActivity"/>
+
+		<activity
+			android:name=".activities.PlaylistActivity"
+			android:theme="@style/Theme.AppCompat.NoActionBar"/>
 	</application>
 </manifest>
