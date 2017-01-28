@@ -5,14 +5,14 @@
 	tools:ignore="HardcodedText">
 
 	<item
-		android:id="@+id/album_menu_playNext"
+		android:id="@+id/song_menu_playNext"
 		android:title="Play next"/>
 
 	<item
-		android:id="@+id/album_menu_addToQueue"
+		android:id="@+id/song_menu_addToQueue"
 		android:title="Add to queue"/>
 
 	<item
-		android:id="@+id/album_menu_remove"
+		android:id="@+id/song_menu_remove"
 		android:title="Delete song"/>
 </menu>
