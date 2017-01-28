@@ -40,6 +40,18 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 		task.execute();
 	}
 
+	public void deleteItem(final Mp3Song item) {
+		if (songs.contains(item)) {
+			final int index = songs.indexOf(item);
+
+			songs.remove(item);
+
+			for (final ItemRemovedListener<Mp3Song> listener : getItemRemovedListeners()) {
+				listener.onDataRemoved(this, item, index);
+			}
+		}
+	}
+
 	private List<Mp3Song> loadMp3SongsFromMusicDirectory() {
 		final List<Mp3Song> mp3Songs = new ArrayList<>();
 
