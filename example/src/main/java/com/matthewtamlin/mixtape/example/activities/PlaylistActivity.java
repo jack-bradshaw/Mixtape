@@ -174,13 +174,13 @@ public class PlaylistActivity extends AppCompatActivity {
 	private void handleHeaderOverflowMenuItemClicked(final MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.header_menu_download_all_immediately: {
-				displayMessage("Downloading all songs now...");
+				displayMessage("Downloading all songs...");
 
 				break;
 			}
 
 			case R.id.header_menu_download_all_later: {
-				displayMessage("All songs will be downloaded later...");
+				displayMessage("Downloads removed");
 			}
 		}
 	}
