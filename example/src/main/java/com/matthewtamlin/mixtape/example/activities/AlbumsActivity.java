@@ -83,7 +83,7 @@ public class AlbumsActivity extends AppCompatActivity {
 				handleItemClick(item);
 			}
 		};
-		
+
 		presenter.setView(body);
 		presenter.setDataSource(dataSource);
 	}
@@ -94,7 +94,7 @@ public class AlbumsActivity extends AppCompatActivity {
 				try {
 					displayMessage("Playing \"" + item.getTitle() + "\" next");
 				} catch (LibraryReadException e) {
-					displayMessage("Playing untitled next");
+					displayMessage("Playing \"untitled\" next");
 				}
 
 				break;
@@ -102,9 +102,9 @@ public class AlbumsActivity extends AppCompatActivity {
 
 			case R.id.album_menu_addToQueue: {
 				try {
-					displayMessage("Adding \"" + item.getTitle() + "\" to queue");
+					displayMessage("Added \"" + item.getTitle() + "\" to queue");
 				} catch (LibraryReadException e) {
-					displayMessage("Adding \"untitled\" to queue");
+					displayMessage("Added \"untitled\" to queue");
 				}
 
 				break;
@@ -124,9 +124,9 @@ public class AlbumsActivity extends AppCompatActivity {
 
 	private void handleItemClick(final LibraryItem item) {
 		try {
-			displayMessage("Playing \"" + item.getTitle() + "\"");
+			displayMessage("Playing \"" + item.getTitle() + "\"...");
 		} catch (LibraryReadException e) {
-			displayMessage("Playing \"untitled\"");
+			displayMessage("Playing \"untitled\"...");
 		}
 	}
 
