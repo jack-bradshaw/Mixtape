@@ -40,6 +40,18 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 		task.execute();
 	}
 
+	public void deleteItem(final Mp3Song item) {
+		if (songs.contains(item)) {
+			final int index = songs.indexOf(item);
+
+			songs.remove(item);
+
+			for (final ItemRemovedListener<Mp3Song> listener : getItemRemovedListeners()) {
+				listener.onDataRemoved(this, item, index);
+			}
+		}
+	}
+
 	private List<Mp3Song> loadMp3SongsFromMusicDirectory() {
 		final List<Mp3Song> mp3Songs = new ArrayList<>();
 
@@ -47,10 +59,12 @@ public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
 		final Set<File> filesInMusicDir = FileFinder.searchDownTreeFrom(musicDir);
 
 		for (final File file : filesInMusicDir) {
-			final String[] splitName = file.getName().split(".");
+			final String[] splitName = file.getName().split("\\.");
 
-			if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
-				mp3Songs.add(new Mp3Song(file));
+			if (splitName.length > 1) {
+				if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
+					mp3Songs.add(new Mp3Song(file));
+				}
 			}
 		}
 

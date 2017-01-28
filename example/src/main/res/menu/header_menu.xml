@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:ignore="HardcodedText">
+
+	<item
+		android:id="@+id/header_menu_download_all_songs"
+		android:title="Download all songs"/>
+
+	<item
+		android:id="@+id/header_menu_remove_downloads"
+		android:title="Remove downloads"/>
+</menu>

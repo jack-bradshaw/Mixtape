@@ -10,6 +10,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
 import java.io.File;
 import java.io.IOException;
 
+import static android.R.id.input;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 public class Mp3Song implements LibraryItem {
@@ -71,5 +72,29 @@ public class Mp3Song implements LibraryItem {
 	public void setTitle(final CharSequence title)
 			throws LibraryReadException, LibraryWriteException {
 		throw new LibraryWriteException("Item is read only.");
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (obj == this) {
+			return true;
+		}
+
+		if (obj.getClass().equals(Mp3Song.class)) {
+			final Mp3Song objCast = (Mp3Song) obj;
+
+			return this.mp3File.equals(objCast.mp3File);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return mp3File == null ? -1 : mp3File.hashCode();
 	}
 }
