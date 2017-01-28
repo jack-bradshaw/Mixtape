@@ -22,6 +22,6 @@
 
 		<activity
 			android:name=".activities.PlaylistActivity"
-			android:theme="@style/Theme.AppCompat.NoActionBar"/>
+			android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 	</application>
 </manifest>
