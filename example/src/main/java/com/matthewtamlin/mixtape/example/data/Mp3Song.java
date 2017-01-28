@@ -84,7 +84,7 @@ public class Mp3Song implements LibraryItem {
 			return true;
 		}
 
-		if (obj.getClass() == Mp3Song.class) {
+		if (obj.getClass().equals(Mp3Song.class)) {
 			final Mp3Song objCast = (Mp3Song) obj;
 
 			return this.mp3File.equals(objCast.mp3File);
