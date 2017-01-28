@@ -19,6 +19,7 @@ public class LauncherActivity extends AppCompatActivity {
 
 		final LinearLayout root = (LinearLayout) findViewById(R.id.launcher_activity_root);
 		root.addView(createLaunchGridActivityButton());
+		root.addView(createLaunchPlaylistActivityButton());
 	}
 
 	private Button createLaunchGridActivityButton() {
@@ -29,6 +30,20 @@ public class LauncherActivity extends AppCompatActivity {
 			@Override
 			public void onClick(final View v) {
 				startActivity(new Intent(LauncherActivity.this, AlbumsActivity.class));
+			}
+		});
+
+		return b;
+	}
+
+	private Button createLaunchPlaylistActivityButton() {
+		final Button b = new Button(this);
+		b.setText("Launch playlist activity");
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				startActivity(new Intent(LauncherActivity.this, PlaylistActivity.class));
 			}
 		});
 
