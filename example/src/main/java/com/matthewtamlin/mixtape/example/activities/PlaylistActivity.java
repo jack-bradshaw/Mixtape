@@ -114,6 +114,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		headerPresenter.setView(header);
 		headerPresenter.setDataSource(headerDataSource);
+		headerPresenter.present(true);
 	}
 
 	private void setupBodyPresenter() {
