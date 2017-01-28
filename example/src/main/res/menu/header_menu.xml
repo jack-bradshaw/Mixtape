@@ -5,10 +5,10 @@
 	tools:ignore="HardcodedText">
 
 	<item
-		android:id="@+id/header_menu_download_all_immediately"
+		android:id="@+id/header_menu_download_all_songs"
 		android:title="Download all songs"/>
 
 	<item
-		android:id="@+id/header_menu_download_all_later"
+		android:id="@+id/header_menu_remove_downloads"
 		android:title="Remove downloads"/>
 </menu>
