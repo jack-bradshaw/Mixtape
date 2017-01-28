@@ -41,9 +41,6 @@ public class AlbumsActivity extends AppCompatActivity {
 		setupView();
 		setupDataSource();
 		setupPresenter();
-
-		presenter.setView(body);
-		presenter.setDataSource(dataSource);
 	}
 
 	private void setupView() {
@@ -86,6 +83,9 @@ public class AlbumsActivity extends AppCompatActivity {
 				handleItemClick(item);
 			}
 		};
+		
+		presenter.setView(body);
+		presenter.setDataSource(dataSource);
 	}
 
 	private void handleContextualMenuClick(final LibraryItem item, final MenuItem menuItem) {
