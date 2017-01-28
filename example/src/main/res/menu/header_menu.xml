@@ -6,9 +6,9 @@
 
 	<item
 		android:id="@+id/header_menu_download_all_immediately"
-		android:title="Download song now"/>
+		android:title="Download all songs"/>
 
 	<item
 		android:id="@+id/header_menu_download_all_later"
-		android:title="Download songs later"/>
+		android:title="Remove downloads"/>
 </menu>
