@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.HeaderDataSource;
-import com.matthewtamlin.mixtape.example.data.Mp3Album;
 import com.matthewtamlin.mixtape.example.data.Mp3Song;
 import com.matthewtamlin.mixtape.example.data.Mp3SongDataSource;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
@@ -31,10 +30,6 @@ import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeaderPresenter;
 
 public class PlaylistActivity extends AppCompatActivity {
 	private CoordinatedMixtapeContainer rootView;
-
-	private LibraryItemCache cache;
-
-	private DisplayableDefaults defaults;
 
 	private SmallHeader header;
 
@@ -59,9 +54,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		setupDataSources();
 		setupHeaderPresenter();
-
-		bodyPresenter.setView(body);
-		bodyPresenter.setDataSource(bodyDataSource);
+		setupBodyPresenter();
 	}
 
 	private void setupHeaderView() {
@@ -92,7 +85,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
 				R.raw.header_artwork);
-		headerDataSource = new HeaderDataSource("All songs", "Various artists", headerArtwork);
+		headerDataSource = new HeaderDataSource("All Songs", "Various artists", headerArtwork);
 	}
 
 	private void setupHeaderPresenter() {
@@ -118,11 +111,14 @@ public class PlaylistActivity extends AppCompatActivity {
 				handleHeaderOverflowMenuItemClicked(menuItem);
 			}
 		};
+
+		headerPresenter.setView(header);
+		headerPresenter.setDataSource(headerDataSource);
 	}
 
 	private void setupBodyPresenter() {
 		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
-				"Unknown title", "Unknown subtitle", BitmapFactory.decodeResource(getResources(),
+				"Unknown title", "Unknown artist", BitmapFactory.decodeResource(getResources(),
 				R.raw.default_artwork));
 
 		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 1000000);
@@ -143,60 +139,86 @@ public class PlaylistActivity extends AppCompatActivity {
 				handleBodyItemClicked(item);
 			}
 		};
+
+		bodyPresenter.setView(body);
+		bodyPresenter.setDataSource(bodyDataSource);
 	}
 
 	private void handleHeaderExtraButtonClicked(final int index) {
+		switch (index) {
+			case 0: {
+				displayMessage("Playing all songs...");
+				break;
+			}
 
+			case 1: {
+				//TODO show share UI
+				break;
+			}
+
+			case 2: {
+				displayMessage("Shuffling all songs...");
+			}
+		}
 	}
 
 	private void handleHeaderOverflowMenuItemClicked(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.header_menu_download_all_immediately: {
+				displayMessage("Downloading all songs now...");
 
+				break;
+			}
+
+			case R.id.header_menu_download_all_later: {
+				displayMessage("All songs will be downloaded later...");
+			}
+		}
 	}
 
-	private void handleContextualMenuClick(final LibraryItem item, final MenuItem menuItem) {
+	private void handleBodyItemMenuItemClicked(final LibraryItem item, final MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
-			case R.id.album_menu_playNext: {
+			case R.id.song_menu_playNext: {
 				try {
-					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\" next",
-							Snackbar.LENGTH_LONG).show();
+					displayMessage("Playing \"" + item.getTitle() + "\" next");
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Playing untitled next", Snackbar.LENGTH_LONG).show();
+					displayMessage("Playing \"untitled\" next");
 				}
 
 				break;
 			}
 
-			case R.id.album_menu_addToQueue: {
+			case R.id.song_menu_addToQueue: {
 				try {
-					Snackbar.make(rootView, "Adding \"" + item.getTitle() + "\" to queue",
-							Snackbar.LENGTH_LONG).show();
+					displayMessage("Added \"" + item.getTitle() + "\" to queue");
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Adding \"untitled\" to queue", Snackbar.LENGTH_LONG)
-							.show();
+					displayMessage("Added \"untitled\" to queue");
 				}
 
 				break;
 			}
 
-			case R.id.album_menu_remove: {
+			case R.id.song_menu_remove: {
 				try {
-					Snackbar.make(rootView, "Deleted \"" + item.getTitle() + "\"",
-							Snackbar.LENGTH_LONG).show();
+					displayMessage("Deleted \"" + item.getTitle() + "\"");
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Deleted \"untitled\"", Snackbar.LENGTH_LONG).show();
+					displayMessage("Deleted \"untitled\"");
 				}
 
-				bodyDataSource.deleteItem((Mp3Album) item);
+				bodyDataSource.deleteItem((Mp3Song) item);
 			}
 		}
 	}
 
 	private void handleBodyItemClicked(final LibraryItem item) {
 		try {
-			Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\"",
-					Snackbar.LENGTH_LONG).show();
+			displayMessage("Playing \"" + item.getTitle() + "\"...");
 		} catch (LibraryReadException e) {
-			Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG).show();
+			displayMessage("Playing \"untitled\"...");
 		}
+	}
+
+	private void displayMessage(final String message) {
+		Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show();
 	}
 }
