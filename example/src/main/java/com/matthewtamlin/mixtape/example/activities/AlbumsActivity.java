@@ -92,10 +92,9 @@ public class AlbumsActivity extends AppCompatActivity {
 		switch (menuItem.getItemId()) {
 			case R.id.album_menu_playNext: {
 				try {
-					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\" next",
-							Snackbar.LENGTH_LONG).show();
+					displayMessage("Playing \"" + item.getTitle() + "\" next");
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Playing untitled next", Snackbar.LENGTH_LONG).show();
+					displayMessage("Playing untitled next");
 				}
 
 				break;
@@ -103,11 +102,9 @@ public class AlbumsActivity extends AppCompatActivity {
 
 			case R.id.album_menu_addToQueue: {
 				try {
-					Snackbar.make(rootView, "Adding \"" + item.getTitle() + "\" to queue",
-							Snackbar.LENGTH_LONG).show();
+					displayMessage("Adding \"" + item.getTitle() + "\" to queue");
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Adding \"untitled\" to queue", Snackbar.LENGTH_LONG)
-							.show();
+					displayMessage("Adding \"untitled\" to queue");
 				}
 
 				break;
@@ -115,10 +112,9 @@ public class AlbumsActivity extends AppCompatActivity {
 
 			case R.id.album_menu_remove: {
 				try {
-					Snackbar.make(rootView, "Deleted \"" + item.getTitle() + "\"",
-							Snackbar.LENGTH_LONG).show();
+					displayMessage("Deleted \"" + item.getTitle() + "\"");
 				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Deleted \"untitled\"", Snackbar.LENGTH_LONG).show();
+					displayMessage("Deleted \"untitled\"");
 				}
 
 				dataSource.deleteItem((Mp3Album) item);
@@ -128,10 +124,13 @@ public class AlbumsActivity extends AppCompatActivity {
 
 	private void handleItemClick(final LibraryItem item) {
 		try {
-			Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\"",
-					Snackbar.LENGTH_LONG).show();
+			displayMessage("Playing \"" + item.getTitle() + "\"");
 		} catch (LibraryReadException e) {
-			Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG).show();
+			displayMessage("Playing \"untitled\"");
 		}
+	}
+
+	private void displayMessage(final String message) {
+		Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show();
 	}
 }
