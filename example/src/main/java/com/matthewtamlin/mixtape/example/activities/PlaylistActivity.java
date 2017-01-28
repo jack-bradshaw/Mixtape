@@ -1,5 +1,6 @@
 package com.matthewtamlin.mixtape.example.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -153,7 +154,12 @@ public class PlaylistActivity extends AppCompatActivity {
 			}
 
 			case 1: {
-				//TODO show share UI
+				final Intent sendIntent = new Intent();
+				sendIntent.setAction(Intent.ACTION_SEND);
+				sendIntent.putExtra(Intent.EXTRA_TEXT, "https://github.com/MatthewTamlin/Mixtape");
+				sendIntent.setType("text/plain");
+				startActivity(Intent.createChooser(sendIntent, "Download Mixtape to listen!"));
+
 				break;
 			}
 
