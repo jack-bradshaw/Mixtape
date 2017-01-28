@@ -83,12 +83,7 @@ public class AlbumsActivity extends AppCompatActivity {
 
 			@Override
 			public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
-				try {
-					Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\"",
-							Snackbar.LENGTH_LONG).show();
-				} catch (LibraryReadException e) {
-					Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG).show();
-				}
+				handleItemClick(item);
 			}
 		};
 	}
@@ -128,6 +123,15 @@ public class AlbumsActivity extends AppCompatActivity {
 
 				dataSource.deleteItem((Mp3Album) item);
 			}
+		}
+	}
+
+	private void handleItemClick(final LibraryItem item) {
+		try {
+			Snackbar.make(rootView, "Playing \"" + item.getTitle() + "\"",
+					Snackbar.LENGTH_LONG).show();
+		} catch (LibraryReadException e) {
+			Snackbar.make(rootView, "Playing \"untitled\"", Snackbar.LENGTH_LONG).show();
 		}
 	}
 }
