@@ -2,6 +2,7 @@ package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
@@ -93,12 +94,15 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 
 	@Override
 	public final void cancelAll() {
-		// Use an iterator to avoid concurrent modification exceptions
-		final Iterator<TextView> i = tasks.keySet().iterator();
+		final Iterator<TextView> textViewIterator = tasks.keySet().iterator();
 
-		while (i.hasNext()) {
-			cancel(i.next());
-			i.remove();
+		while (textViewIterator.hasNext()) {
+			final AsyncTask existingTask = tasks.get(textViewIterator.next());
+
+			if (existingTask != null) {
+				existingTask.cancel(false);
+				textViewIterator.remove();
+			}
 		}
 	}
 
