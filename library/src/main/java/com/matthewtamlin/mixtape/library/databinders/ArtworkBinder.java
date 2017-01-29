@@ -265,12 +265,6 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 						// The UI part of the task has now completed, so remove it from the record
 						tasks.remove(imageView);
 					}
-
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						// The task has now completed, so it must remove itself from the record
-						tasks.remove(imageView);
-					}
 				});
 
 				// As the animation progresses, fade-in the artwork by changing the transparency
