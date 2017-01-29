@@ -163,14 +163,11 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 		public final CharSequence doInBackground(final Void... params) {
 			if (isCancelled() || data == null) {
 				return null;
-			} else {
-				try {
-					return data.getTitle();
-				} catch (final LibraryReadException e) {
-					Log.e(TAG, "Title for item \"" + data + "\" could not be accessed.", e);
-					return defaults.getTitle();
-				}
 			}
+
+			cache.cacheTitle(data, true);
+
+			return cache.getTitle(data) == null ? defaults.getTitle() : cache.getTitle(data);
 		}
 
 		@Override
@@ -179,19 +176,7 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(title);
-
-				// The UI part of the task has now completed, so remove it from the record
-				tasks.remove(textView);
 			}
-
-			// Cache the data in the background to optimise future performance
-			final ExecutorService es = Executors.newSingleThreadExecutor();
-			es.execute(new Runnable() {
-				@Override
-				public void run() {
-					cache.cacheTitle(data, true);
-				}
-			});
 		}
 	}
 }
