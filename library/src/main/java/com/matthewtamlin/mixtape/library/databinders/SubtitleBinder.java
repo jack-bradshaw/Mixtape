@@ -1,7 +1,6 @@
 package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
@@ -9,12 +8,9 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
-import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Binds subtitles from LibraryItems to TextViews. A caching mechanism is implemented to allow for
@@ -67,7 +63,6 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		// There should never be more than one task operating on the same TextView concurrently
 		cancel(view);
-		tasks.remove(view);
 
 		// Create the task but don't execute it immediately
 		final BinderTask task = new BinderTask(view, data);
@@ -88,17 +83,21 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		if (task != null) {
 			task.cancel(false);
+			tasks.remove(view);
 		}
 	}
 
 	@Override
 	public final void cancelAll() {
-		// Use an iterator to avoid concurrent modification exceptions
-		final Iterator<TextView> i = tasks.keySet().iterator();
+		final Iterator<TextView> textViewIterator = tasks.keySet().iterator();
 
-		while (i.hasNext()) {
-			cancel(i.next());
-			i.remove();
+		while (textViewIterator.hasNext()) {
+			final AsyncTask existingTask = tasks.get(textViewIterator.next());
+
+			if (existingTask != null) {
+				existingTask.cancel(false);
+				textViewIterator.remove();
+			}
 		}
 	}
 
@@ -110,7 +109,7 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	/**
-	 * @return the source of the default titles, not null
+	 * @return the source of the default subtitles, not null
 	 */
 	public final DisplayableDefaults getDefaults() {
 		return defaults;
@@ -159,14 +158,12 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 		public final CharSequence doInBackground(final Void... params) {
 			if (isCancelled() || data == null) {
 				return null;
-			} else {
-				try {
-					return data.getSubtitle();
-				} catch (final LibraryReadException e) {
-					Log.e(TAG, "Subtitle for item \"" + data + "\" could not be accessed.", e);
-					return defaults.getSubtitle();
-				}
 			}
+
+			cache.cacheSubtitle(data, true);
+
+			return cache.getSubtitle(data) == null ? defaults.getSubtitle() :
+					cache.getSubtitle(data);
 		}
 
 		@Override
@@ -175,19 +172,9 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(subtitle);
-
-				// The UI part of the task has now completed, so remove it from the record
-				tasks.remove(textView);
+			} else {
+				textView.setText(null);
 			}
-
-			// Cache the data in the background to optimise future performance
-			final ExecutorService es = Executors.newSingleThreadExecutor();
-			es.execute(new Runnable() {
-				@Override
-				public void run() {
-					cache.cacheSubtitle(data, true);
-				}
-			});
 		}
 	}
 }

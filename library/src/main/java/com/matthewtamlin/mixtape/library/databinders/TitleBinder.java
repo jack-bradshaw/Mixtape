@@ -2,6 +2,7 @@ package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
@@ -67,7 +68,6 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		// There should never be more than one task operating on the same TextView concurrently
 		cancel(view);
-		tasks.remove(view);
 
 		// Create the task but don't execute it immediately
 		final BinderTask task = new BinderTask(view, data);
@@ -88,17 +88,21 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		if (task != null) {
 			task.cancel(false);
+			tasks.remove(view);
 		}
 	}
 
 	@Override
 	public final void cancelAll() {
-		// Use an iterator to avoid concurrent modification exceptions
-		final Iterator<TextView> i = tasks.keySet().iterator();
+		final Iterator<TextView> textViewIterator = tasks.keySet().iterator();
 
-		while (i.hasNext()) {
-			cancel(i.next());
-			i.remove();
+		while (textViewIterator.hasNext()) {
+			final AsyncTask existingTask = tasks.get(textViewIterator.next());
+
+			if (existingTask != null) {
+				existingTask.cancel(false);
+				textViewIterator.remove();
+			}
 		}
 	}
 
@@ -159,14 +163,11 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 		public final CharSequence doInBackground(final Void... params) {
 			if (isCancelled() || data == null) {
 				return null;
-			} else {
-				try {
-					return data.getTitle();
-				} catch (final LibraryReadException e) {
-					Log.e(TAG, "Title for item \"" + data + "\" could not be accessed.", e);
-					return defaults.getTitle();
-				}
 			}
+
+			cache.cacheTitle(data, true);
+
+			return cache.getTitle(data) == null ? defaults.getTitle() : cache.getTitle(data);
 		}
 
 		@Override
@@ -175,19 +176,9 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(title);
-
-				// The UI part of the task has now completed, so remove it from the record
-				tasks.remove(textView);
+			} else {
+				textView.setText(null);
 			}
-
-			// Cache the data in the background to optimise future performance
-			final ExecutorService es = Executors.newSingleThreadExecutor();
-			es.execute(new Runnable() {
-				@Override
-				public void run() {
-					cache.cacheTitle(data, true);
-				}
-			});
 		}
 	}
 }
