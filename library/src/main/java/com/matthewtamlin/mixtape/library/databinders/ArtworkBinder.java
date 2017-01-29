@@ -275,9 +275,6 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 						if (isCancelled()) {
 							fadeInAnimation.cancel();
 						}
-
-						final Float value = (Float) animation.getAnimatedValue();
-						imageView.setAlpha(value);
 					}
 				});
 
