@@ -224,11 +224,9 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			} else if (cache.containsArtwork(data)) {
 				final Bitmap cachedArtwork = cache.getArtwork(data);
 
-				// The cached artwork cannot not be used if the desired width or height are larger
-				// then the cache artwork dimensions without looking blurry
-				if (cachedArtwork.getWidth() < width || cachedArtwork.getHeight() <
-						height) {
-					cache.clearArtwork(); // Don't keep the data if it's not useful anymore
+				// Only use the cached artwork if it is an adequate size
+				if (cachedArtwork.getWidth() < width || cachedArtwork.getHeight() < height) {
+					cache.removeArtwork(data); // Don't keep the data if it's not useful anymore
 					return getArtworkDirectly(width, height);
 				} else {
 					return cachedArtwork;
