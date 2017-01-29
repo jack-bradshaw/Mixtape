@@ -67,7 +67,6 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		// There should never be more than one task operating on the same TextView concurrently
 		cancel(view);
-		tasks.remove(view);
 
 		// Create the task but don't execute it immediately
 		final BinderTask task = new BinderTask(view, data);
@@ -88,6 +87,7 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		if (task != null) {
 			task.cancel(false);
+			tasks.remove(view);
 		}
 	}
 
