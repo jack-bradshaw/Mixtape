@@ -98,7 +98,6 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 
 		// There should never be more than one task operating on the same ImageView concurrently
 		cancel(imageView);
-		tasks.remove(imageView);
 
 		// Create the task but don't execute it immediately
 		final BinderTask task = new BinderTask(imageView, data);
@@ -112,17 +111,21 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 
 		if (existingTask != null) {
 			existingTask.cancel(false);
+			tasks.remove(imageView);
 		}
 	}
 
 	@Override
 	public void cancelAll() {
-		// Use an iterator to avoid concurrent modification exceptions
-		final Iterator<ImageView> i = tasks.keySet().iterator();
+		final Iterator<ImageView> imageViewIterator = tasks.keySet().iterator();
 
-		while (i.hasNext()) {
-			cancel(i.next());
-			i.remove();
+		while (imageViewIterator.hasNext()) {
+			final AsyncTask existingTask = tasks.get(imageViewIterator.next());
+
+			if (existingTask != null) {
+				existingTask.cancel(false);
+				imageViewIterator.remove();
+			}
 		}
 	}
 
