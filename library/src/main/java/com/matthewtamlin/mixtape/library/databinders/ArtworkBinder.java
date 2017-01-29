@@ -274,6 +274,9 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 						// If the task has been cancelled, the animation must also be cancelled
 						if (isCancelled()) {
 							fadeInAnimation.cancel();
+						} else {
+							final Float value = (Float) animation.getAnimatedValue();
+							imageView.setAlpha(value);
 						}
 					}
 				});
