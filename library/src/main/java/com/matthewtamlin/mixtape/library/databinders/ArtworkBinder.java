@@ -254,7 +254,7 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 					public void onAnimationStart(final Animator animation) {
 						// If the task has been cancelled, it must not modify the UI
 						if (!isCancelled()) {
-							imageView.setAlpha((float) 0);
+							imageView.setAlpha(0f);
 							imageView.setImageBitmap(null); // Resets ensures image changes
 							imageView.setImageBitmap(artwork);
 						}
