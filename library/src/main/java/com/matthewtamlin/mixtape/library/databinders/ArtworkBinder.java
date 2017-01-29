@@ -240,8 +240,10 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		public void onPostExecute(final Bitmap artwork) {
 			// Skip the animation if it isn't necessary
 			if (fadeInDurationMs <= 0 || artwork == null) {
-				imageView.setImageBitmap(null); // Resets the view to ensure the image changes
-				imageView.setImageBitmap(artwork);
+				if (!isCancelled()) {
+					imageView.setImageBitmap(null); // Resets view
+					imageView.setImageBitmap(artwork);
+				}
 			} else {
 				// Animation to fade in from fully invisible to fully visible
 				final ValueAnimator fadeInAnimation = ValueAnimator.ofFloat(0, 1);
