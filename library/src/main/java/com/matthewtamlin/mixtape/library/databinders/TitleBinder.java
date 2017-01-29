@@ -176,6 +176,8 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(title);
+			} else {
+				textView.setText(null);
 			}
 		}
 	}
