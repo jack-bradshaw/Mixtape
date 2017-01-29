@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.Mp3Album;
 import com.matthewtamlin.mixtape.example.data.Mp3AlbumDataSource;
+import com.matthewtamlin.mixtape.example.data.Mp3Song;
+import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
@@ -23,6 +25,10 @@ import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class AlbumsActivity extends AppCompatActivity {
 	private GridBody body;
@@ -41,6 +47,8 @@ public class AlbumsActivity extends AppCompatActivity {
 		setupView();
 		setupDataSource();
 		setupPresenter();
+
+		precacheText();
 	}
 
 	private void setupView() {
@@ -86,6 +94,39 @@ public class AlbumsActivity extends AppCompatActivity {
 
 		presenter.setView(body);
 		presenter.setDataSource(dataSource);
+	}
+
+	private void precacheText() {
+		final LibraryItemCache bodyTitleCache = presenter.getTitleDataBinder().getCache();
+		final LibraryItemCache bodySubtitleCache = presenter.getSubtitleDataBinder().getCache();
+
+		dataSource.loadData(true, new BaseDataSource.DataLoadedListener<List<Mp3Album>>() {
+			@Override
+			public void onDataLoaded(final BaseDataSource<List<Mp3Album>> source,
+					final List<Mp3Album> data) {
+				Executors.newSingleThreadExecutor().execute(new Runnable() {
+					@Override
+					public void run() {
+						final Executor cacheExecutor = Executors.newCachedThreadPool();
+
+						for (final Mp3Album album : data) {
+							cacheExecutor.execute(new Runnable() {
+								@Override
+								public void run() {
+									bodyTitleCache.cacheTitle(album, true);
+									bodySubtitleCache.cacheSubtitle(album, true);
+								}
+							});
+						}
+					}
+				});
+			}
+
+			@Override
+			public void onLoadDataFailed(final BaseDataSource<List<Mp3Album>> source) {
+				// Do nothing
+			}
+		});
 	}
 
 	private void handleContextualMenuClick(final LibraryItem item, final MenuItem menuItem) {
