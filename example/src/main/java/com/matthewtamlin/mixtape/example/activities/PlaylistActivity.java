@@ -12,6 +12,7 @@ import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.HeaderDataSource;
 import com.matthewtamlin.mixtape.example.data.Mp3Song;
 import com.matthewtamlin.mixtape.example.data.Mp3SongDataSource;
+import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
@@ -28,6 +29,10 @@ import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeC
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeaderPresenter;
+
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class PlaylistActivity extends AppCompatActivity {
 	private CoordinatedMixtapeContainer rootView;
@@ -54,8 +59,11 @@ public class PlaylistActivity extends AppCompatActivity {
 		setupContainerView();
 
 		setupDataSources();
+
 		setupHeaderPresenter();
 		setupBodyPresenter();
+
+		precacheText();
 	}
 
 	private void setupHeaderView() {
@@ -146,6 +154,39 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		bodyPresenter.setView(body);
 		bodyPresenter.setDataSource(bodyDataSource);
+	}
+
+	private void precacheText() {
+		final LibraryItemCache bodyTitleCache = bodyPresenter.getTitleDataBinder().getCache();
+		final LibraryItemCache bodySubtitleCache = bodyPresenter.getSubtitleDataBinder().getCache();
+
+		bodyDataSource.loadData(true, new BaseDataSource.DataLoadedListener<List<Mp3Song>>() {
+			@Override
+			public void onDataLoaded(final BaseDataSource<List<Mp3Song>> source,
+					final List<Mp3Song> data) {
+				Executors.newSingleThreadExecutor().execute(new Runnable() {
+					@Override
+					public void run() {
+						final Executor cacheExecutor = Executors.newCachedThreadPool();
+
+						for (final Mp3Song song : data) {
+							cacheExecutor.execute(new Runnable() {
+								@Override
+								public void run() {
+									bodyTitleCache.cacheTitle(song, true);
+									bodySubtitleCache.cacheSubtitle(song, true);
+								}
+							});
+						}
+					}
+				});
+			}
+
+			@Override
+			public void onLoadDataFailed(final BaseDataSource<List<Mp3Song>> source) {
+				// Do nothing
+			}
+		});
 	}
 
 	private void handleHeaderExtraButtonClicked(final int index) {
