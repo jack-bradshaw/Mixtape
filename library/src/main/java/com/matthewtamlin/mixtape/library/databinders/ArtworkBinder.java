@@ -261,9 +261,9 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 					}
 
 					@Override
-					public void onAnimationCancel(Animator animation) {
-						// The UI part of the task has now completed, so remove it from the record
-						tasks.remove(imageView);
+					public void onAnimationCancel(final Animator animation) {
+						imageView.setAlpha(1f);
+						imageView.setImageBitmap(null);
 					}
 				});
 
