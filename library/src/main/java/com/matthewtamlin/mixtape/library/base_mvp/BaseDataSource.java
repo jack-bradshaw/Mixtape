@@ -17,11 +17,12 @@
 package com.matthewtamlin.mixtape.library.base_mvp;
 
 /**
- * A data source provides access to data objects and delivers callbacks when events occur. Callbacks
- * are delivered when: <ul> <li>The current data object has been invalidated and replaced with an
- * entirely new data object.</li> <li>The data object has changed internally in a way which affects
- * the external representation of the data.</li> <li>The data source begins/ends an operation which
- * could be potentially long running and may result in data being changed.</li></ul>
+ * A data source provides access to data objects and delivers callbacks when the data is modified.
+ * Callbacks are delivered when: <ul> <li>The current data object is invalidated and replaced with
+ * an entirely new data object.</li> <li>The data object has changed internally in a way which
+ * affects the external representation of the data.</li> <li>The data source begins/ends an
+ * operation which could be potentially long running and may result in data being changed.</li>
+ * </ul>
  * <p>
  * All callbacks are delivered on the UI thread.
  *
@@ -31,8 +32,8 @@ package com.matthewtamlin.mixtape.library.base_mvp;
 public interface BaseDataSource<D> {
 	/**
 	 * Asynchronously loads data from the source and notifies the supplied callback when finished.
-	 * If true is passed for the {@code forceRefresh} parameter, any relevant cached data is
-	 * discarded at the start of the load operation.
+	 * If true is passed for the {@code forceRefresh} parameter, all cached data is discarded at the
+	 * start of the load operation.
 	 *
 	 * @param forceRefresh
 	 * 		true to request invalidation of cached data, false to use the default behaviour
@@ -163,14 +164,14 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when a BaseDataSource starts of finishes a potentially long running
+	 * Callbacks to be invoked when a BaseDataSource starts/finishes a potentially long running
 	 * operation which may result in data being changed.
 	 */
 	interface LongOperationListener {
 		/**
 		 * Invoked when a potentially long running operation is started. Unless the process is
-		 * terminated abruptly, this call is guaranteed to be followed by a call to {@link
-		 * #onLongOperationFinished(BaseDataSource)} at some point in the future.
+		 * terminated abruptly, this callback should eventually be followed by a call to {@link
+		 * #onLongOperationFinished(BaseDataSource)}.
 		 *
 		 * @param source
 		 * 		the source performing the operation, not null
@@ -178,7 +179,7 @@ public interface BaseDataSource<D> {
 		void onLongOperationStarted(BaseDataSource source);
 
 		/**
-		 * Invoked when a potentially long running operation has finished.
+		 * Invoked when a potentially long running operation finishes.
 		 *
 		 * @param source
 		 * 		the source performing the operation, not null

@@ -68,8 +68,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterItemRemovedListener(ItemRemovedListener<T> listener);
 
 	/**
-	 * Registers the supplied listener for item modified callbacks. If the supplied listener is
-	 * null or is already registered, this method exits normally.
+	 * Registers the supplied listener for item modified callbacks. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -77,8 +77,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void registerListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Unregisters the supplied listener for item modified callbacks. If the supplied listener
-	 * is null or is not registered, this method exits normally.
+	 * Unregisters the supplied listener for item modified callbacks. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -86,8 +86,8 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterListItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
-	 * Registers the supplied listener for item moved callbacks. If the supplied listener is
-	 * null or is already registered, this method exits normally.
+	 * Registers the supplied listener for item moved callbacks. If the supplied listener is null or
+	 * is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -104,41 +104,41 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	void unregisterItemMovedListener(ItemMovedListener<T> listener);
 
 	/**
-	 * Callback to be invoked when a ListDataSource adds an item to its current list.
+	 * Callback to be invoked when an item is added to a ListDataSource.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface ItemAddedListener<I> {
 		/**
-		 * Invoked when an item is added to a list.
+		 * Invoked when an item is added to a ListDataSource.
 		 *
 		 * @param source
-		 * 		the source of the list, not null
+		 * 		the data source the item was added to, not null
 		 * @param item
 		 * 		the item which was added, may be null
 		 * @param index
-		 * 		the index at which the object was added
+		 * 		the index of the added item
 		 */
 		void onDataAdded(ListDataSource<I> source, I item, int index);
 	}
 
 	/**
-	 * Callback to be invoked when a ListDataSource removes an item from its current list.
+	 * Callback to be invoked when an item is removed from a ListDatSource.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface ItemRemovedListener<I> {
 		/**
-		 * Invoked when an item is removed from a list.
+		 * Invoked when an item is removed from a ListDataSource.
 		 *
 		 * @param source
-		 * 		the source of the list, not null
+		 * 		the data source the item used to be contained in, not null
 		 * @param item
 		 * 		the item which was removed, may be null
 		 * @param index
-		 * 		the index at which the object was removed from
+		 * 		the index of the item before removal
 		 */
 		void onDataRemoved(ListDataSource<I> source, I item, int index);
 	}
@@ -152,11 +152,11 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 */
 	interface ListItemModifiedListener<I> {
 		/**
-		 * Invoked when an item in the list is modified in a way which affects the item's external
-		 * representation.
+		 * Invoked when an item in a ListDataSource is modified in a way which affects the item's
+		 * external representation.
 		 *
 		 * @param source
-		 * 		the source of the list containing the modified item, not null
+		 * 		the data source containing the changed item, not null
 		 * @param item
 		 * 		the object which was modified, not null
 		 * @param index
@@ -166,20 +166,19 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Callback to be invoked when an item in the list of a ListDataSource is moved to another
-	 * location in the list.
+	 * Callback to be invoked when the index of an item in a ListDataSource is changed.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
 	interface ItemMovedListener<I> {
 		/**
-		 * Invoked when an item in the list is moved to another location in the list.
+		 * Invoked when the index of an item in a ListDataSource is changed.
 		 *
 		 * @param source
-		 * 		the source containing the moved object, not null
+		 * 		the data source containing the item, not null
 		 * @param object
-		 * 		the object which was moved, may be null
+		 * 		the item which was moved, may be null
 		 * @param initialIndex
 		 * 		the index of the object before being moved
 		 * @param finalIndex
@@ -189,12 +188,16 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	}
 
 	/**
-	 * Can listen to all callbacks a ListDataSource can deliver.
+	 * Composition of all BaseDataSource listeners and all ListDataSource listeners.
 	 *
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface FullListener<I> extends BaseDataSource.FullListener<List<I>>, ItemAddedListener<I>,
-			ItemRemovedListener<I>, ListItemModifiedListener<I>,
+	interface FullListener<I>
+			extends
+			BaseDataSource.FullListener<List<I>>,
+			ItemAddedListener<I>,
+			ItemRemovedListener<I>,
+			ListItemModifiedListener<I>,
 			ItemMovedListener<I> {}
 }
