@@ -32,8 +32,8 @@ package com.matthewtamlin.mixtape.library.base_mvp;
 public interface BaseDataSource<D> {
 	/**
 	 * Asynchronously loads data from the source and notifies the supplied callback when finished.
-	 * If true is passed for the {@code forceRefresh} parameter, any relevant cached data is
-	 * discarded at the start of the load operation.
+	 * If true is passed for the {@code forceRefresh} parameter, all cached data is discarded at the
+	 * start of the load operation.
 	 *
 	 * @param forceRefresh
 	 * 		true to request invalidation of cached data, false to use the default behaviour
