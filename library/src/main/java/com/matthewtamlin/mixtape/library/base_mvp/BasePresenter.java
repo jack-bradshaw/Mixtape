@@ -33,28 +33,30 @@ public interface BasePresenter<S extends BaseDataSource, V extends BaseView> {
 	void present(boolean forceRefresh);
 
 	/**
-	 * Sets the data source to present from and registers the presenter for callbacks.
+	 * Sets the data source and registers this presenter for callbacks. Passing null removes any
+	 * existing data source without setting a new one.
 	 *
 	 * @param dataSource
-	 * 		the data source to use, null accepted
+	 * 		the data source to use
 	 */
 	void setDataSource(S dataSource);
 
 	/**
-	 * @return the data source currently in use, may be null
+	 * @return the current data source, null if there is none
 	 */
 	S getDataSource();
 
 	/**
-	 * Sets the view to present to and registers the presenter with the view.
+	 * Sets the view and registers this presenter. Passing null removes any existing view without
+	 * setting a new one.
 	 *
 	 * @param view
-	 * 		the view to use, null accepted
+	 * 		the view to use
 	 */
 	void setView(V view);
 
 	/**
-	 * @return the view currently in use, may be null
+	 * @return the current view, may be null
 	 */
 	V getView();
 }
