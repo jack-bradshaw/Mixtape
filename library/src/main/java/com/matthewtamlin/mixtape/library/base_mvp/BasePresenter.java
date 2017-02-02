@@ -17,8 +17,9 @@
 package com.matthewtamlin.mixtape.library.base_mvp;
 
 /**
- * The intermediary between a data source and a view, containing the business logic needed to update
- * the data and drive the view.
+ * The intermediary between a data source and a view. Presenters contain the business logic for
+ * updating the data source, processing data modified events, driving the view, and processing user
+ * input events.
  */
 public interface BasePresenter<S extends BaseDataSource, V extends BaseView> {
 	/**
