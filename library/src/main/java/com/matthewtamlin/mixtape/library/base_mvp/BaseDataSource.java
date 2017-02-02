@@ -164,14 +164,14 @@ public interface BaseDataSource<D> {
 	}
 
 	/**
-	 * Callback to be invoked when a BaseDataSource starts of finishes a potentially long running
+	 * Callbacks to be invoked when a BaseDataSource starts/finishes a potentially long running
 	 * operation which may result in data being changed.
 	 */
 	interface LongOperationListener {
 		/**
 		 * Invoked when a potentially long running operation is started. Unless the process is
-		 * terminated abruptly, this call is guaranteed to be followed by a call to {@link
-		 * #onLongOperationFinished(BaseDataSource)} at some point in the future.
+		 * terminated abruptly, this callback should eventually be followed by a call to {@link
+		 * #onLongOperationFinished(BaseDataSource)}.
 		 *
 		 * @param source
 		 * 		the source performing the operation, not null
@@ -179,7 +179,7 @@ public interface BaseDataSource<D> {
 		void onLongOperationStarted(BaseDataSource source);
 
 		/**
-		 * Invoked when a potentially long running operation has finished.
+		 * Invoked when a potentially long running operation finishes.
 		 *
 		 * @param source
 		 * 		the source performing the operation, not null
