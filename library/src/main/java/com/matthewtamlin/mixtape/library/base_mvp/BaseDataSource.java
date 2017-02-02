@@ -17,11 +17,12 @@
 package com.matthewtamlin.mixtape.library.base_mvp;
 
 /**
- * A data source provides access to data objects and delivers callbacks when events occur. Callbacks
- * are delivered when: <ul> <li>The current data object has been invalidated and replaced with an
- * entirely new data object.</li> <li>The data object has changed internally in a way which affects
- * the external representation of the data.</li> <li>The data source begins/ends an operation which
- * could be potentially long running and may result in data being changed.</li></ul>
+ * A data source provides access to data objects and delivers callbacks when the data is modified.
+ * Callbacks are delivered when: <ul> <li>The current data object is invalidated and replaced with
+ * an entirely new data object.</li> <li>The data object has changed internally in a way which
+ * affects the external representation of the data.</li> <li>The data source begins/ends an
+ * operation which could be potentially long running and may result in data being changed.</li>
+ * </ul>
  * <p>
  * All callbacks are delivered on the UI thread.
  *
