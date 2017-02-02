@@ -17,8 +17,7 @@
 package com.matthewtamlin.mixtape.library.base_mvp;
 
 /**
- * An element of the user interface. Views contain minimal business logic and delegate handling of
- * user input to a presenter.
+ * A user interface element which is controlled by a presenter.
  *
  * @param <P>
  * 		the type of presenter to be used with the view
