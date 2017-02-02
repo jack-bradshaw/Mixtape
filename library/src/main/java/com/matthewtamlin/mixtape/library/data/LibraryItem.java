@@ -34,7 +34,7 @@ public interface LibraryItem {
 	 *
 	 * @return the title of this item, null if none exists
 	 * @throws LibraryReadException
-	 * 		if the title cannot be read
+	 * 		if the title cannot be accessed
 	 */
 	CharSequence getTitle() throws LibraryReadException;
 
@@ -43,7 +43,7 @@ public interface LibraryItem {
 	 *
 	 * @return the subtitle of this item, null if none exists
 	 * @throws LibraryReadException
-	 * 		if the subtitle cannot be read
+	 * 		if the subtitle cannot be accessed
 	 */
 	CharSequence getSubtitle() throws LibraryReadException;
 
@@ -53,12 +53,12 @@ public interface LibraryItem {
 	 * or equal to zero, then the unoptimised artwork is returned.
 	 *
 	 * @param width
-	 * 		the desired width of the returned artwork, measured in pixels, greater than zero
+	 * 		the desired width of the artwork, measured in pixels, greater than zero
 	 * @param height
-	 * 		the desired height of the returned artwork, measured in pixels, greater than zero
+	 * 		the desired height of the artwork, measured in pixels, greater than zero
 	 * @return the artwork of this item, null if none exists
 	 * @throws LibraryReadException
-	 * 		if the artwork cannot be read
+	 * 		if the artwork cannot be accessed
 	 */
 	Bitmap getArtwork(int width, int height) throws LibraryReadException;
 
