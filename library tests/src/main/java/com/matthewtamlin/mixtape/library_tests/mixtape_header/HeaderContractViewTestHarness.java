@@ -28,7 +28,7 @@ import com.matthewtamlin.android_testing_tools.library.ControlsBelowViewTestHarn
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.ReadOnlyLibraryItem;
+import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 
 
 /**
@@ -70,7 +70,7 @@ public abstract class HeaderContractViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				testView.setItem(new ReadOnlyLibraryItem(getResources(),
+				testView.setItem(new NormalLibraryItem(getResources(),
 						"Title",
 						"Subtitle",
 						R.raw.real_artwork));

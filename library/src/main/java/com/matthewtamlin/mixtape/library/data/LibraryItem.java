@@ -21,12 +21,10 @@ import android.graphics.Bitmap;
 /**
  * A piece of content in a media library which can be displayed by showing a title, subtitle and
  * artwork. An item can be a single unit of media (such as a song), or it can be a collection of
- * other media items (such as an album).
- * <p>
- * A LibraryItem does not need to store its title, subtitle and artwork in memory, it only needs to
- * provide access to the values when queried. As such, it is perfectly acceptable for the getters to
- * start long running operations to retrieve data when called. The exception is the {@link
- * #isReadOnly()} method which must return immediately.
+ * other media items (such as an album). A LibraryItem does not need to store its title, subtitle
+ * and artwork in memory, it only needs to provide access to the values when queried. As such, it is
+ * perfectly acceptable for the getters to start long running operations to retrieve data when
+ * called.
  */
 public interface LibraryItem {
 	/**
@@ -34,7 +32,7 @@ public interface LibraryItem {
 	 *
 	 * @return the title of this item, null if none exists
 	 * @throws LibraryReadException
-	 * 		if the title cannot be read
+	 * 		if the title cannot be accessed
 	 */
 	CharSequence getTitle() throws LibraryReadException;
 
@@ -43,7 +41,7 @@ public interface LibraryItem {
 	 *
 	 * @return the subtitle of this item, null if none exists
 	 * @throws LibraryReadException
-	 * 		if the subtitle cannot be read
+	 * 		if the subtitle cannot be accessed
 	 */
 	CharSequence getSubtitle() throws LibraryReadException;
 
@@ -53,58 +51,12 @@ public interface LibraryItem {
 	 * or equal to zero, then the unoptimised artwork is returned.
 	 *
 	 * @param width
-	 * 		the desired width of the returned artwork, measured in pixels, greater than zero
+	 * 		the desired width of the artwork, measured in pixels, greater than zero
 	 * @param height
-	 * 		the desired height of the returned artwork, measured in pixels, greater than zero
+	 * 		the desired height of the artwork, measured in pixels, greater than zero
 	 * @return the artwork of this item, null if none exists
 	 * @throws LibraryReadException
-	 * 		if the artwork cannot be read
+	 * 		if the artwork cannot be accessed
 	 */
 	Bitmap getArtwork(int width, int height) throws LibraryReadException;
-
-	/**
-	 * Sets the title of this item.
-	 *
-	 * @param title
-	 * 		the value to set as the title, null accepted
-	 * @throws LibraryReadException
-	 * 		if the title cannot be read
-	 * @throws LibraryWriteException
-	 * 		if the title cannot be modified
-	 */
-	void setTitle(final CharSequence title) throws LibraryReadException, LibraryWriteException;
-
-	/**
-	 * Sets the subtitle of this item.
-	 *
-	 * @param subtitle
-	 * 		the value to set as the subtitle, null accepted
-	 * @throws LibraryReadException
-	 * 		if the subtitle cannot be read
-	 * @throws LibraryWriteException
-	 * 		if the subtitle cannot be modified
-	 */
-	void setSubtitle(final CharSequence subtitle) throws LibraryReadException,
-			LibraryWriteException;
-
-	/**
-	 * Sets the artwork of this item.
-	 *
-	 * @param artwork
-	 * 		the value to set as the artwork, null accepted
-	 * @throws LibraryReadException
-	 * 		if the artwork cannot be read
-	 * @throws LibraryWriteException
-	 * 		if the artwork cannot be modified
-	 */
-	void setArtwork(final Bitmap artwork) throws LibraryReadException, LibraryWriteException;
-
-	/**
-	 * Indicates whether or not this LibraryItem can be modified. If this item is read only, then
-	 * every call to {@link #setTitle(CharSequence)}, {@link #setSubtitle(CharSequence)} or {@link
-	 * #setArtwork(Bitmap)} will cause a LibraryWriteException to be thrown.
-	 *
-	 * @return true if this item is read only, false otherwise
-	 */
-	boolean isReadOnly();
 }

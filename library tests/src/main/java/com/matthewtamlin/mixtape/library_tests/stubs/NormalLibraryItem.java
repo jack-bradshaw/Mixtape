@@ -22,14 +22,13 @@ import android.graphics.BitmapFactory;
 
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
-import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
 
 
 /**
  * An implementation of the LibraryItem interface for use in testing. Metadata is stored locally,
  * such that read and write exceptions never occur. Metadata can be modified at any time.
  */
-public final class ReadOnlyLibraryItem implements LibraryItem {
+public final class NormalLibraryItem implements LibraryItem {
 	private Resources resources;
 
 	/**
@@ -48,7 +47,7 @@ public final class ReadOnlyLibraryItem implements LibraryItem {
 	private int artworkId;
 
 	/**
-	 * Constructs a new ReadOnlyLibraryItem.
+	 * Constructs a new NormalLibraryItem.
 	 *
 	 * @param title
 	 * 		the title of this item
@@ -57,7 +56,7 @@ public final class ReadOnlyLibraryItem implements LibraryItem {
 	 * @param artworkId
 	 * 		a resource ID which specifies the artwork of this item
 	 */
-	public ReadOnlyLibraryItem(final Resources resources, final CharSequence title,
+	public NormalLibraryItem(final Resources resources, final CharSequence title,
 			final CharSequence subtitle, final int artworkId) {
 		this.resources = resources;
 		this.title = title;
@@ -80,28 +79,6 @@ public final class ReadOnlyLibraryItem implements LibraryItem {
 		return BitmapFactory.decodeResource(resources, artworkId);
 	}
 
-	@Override
-	public void setTitle(final CharSequence title)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setSubtitle(final CharSequence subtitle)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setArtwork(final Bitmap artwork)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public boolean isReadOnly() {
-		return true;
-	}
 
 	@Override
 	public boolean equals(final Object obj) {
@@ -110,7 +87,7 @@ public final class ReadOnlyLibraryItem implements LibraryItem {
 		} else if (obj == this) {
 			return true;
 		} else {
-			return obj.getClass().equals(ReadOnlyLibraryItem.class);
+			return obj.getClass().equals(NormalLibraryItem.class);
 		}
 	}
 

@@ -21,7 +21,7 @@ import android.content.res.Resources;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.ReadOnlyLibraryItem;
+import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class LibraryGenerator {
 
 		for (int i = 0; i < numberOfitems; i++) {
 			if (new Random().nextBoolean()) {
-				items.add(new ReadOnlyLibraryItem(resources,
+				items.add(new NormalLibraryItem(resources,
 						"Title " + i,
 						"Subtitle " + i,
 						R.raw.real_artwork));

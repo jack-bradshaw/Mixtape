@@ -21,12 +21,10 @@ import android.graphics.Bitmap;
 import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
-import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
 
 import java.io.File;
 import java.io.IOException;
 
-import static android.R.id.input;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 public class Mp3Song implements LibraryItem {
@@ -65,29 +63,6 @@ public class Mp3Song implements LibraryItem {
 		} catch (final IOException e) {
 			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
 		}
-	}
-
-	@Override
-	public void setSubtitle(final CharSequence subtitle)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setArtwork(final Bitmap artwork)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public boolean isReadOnly() {
-		return true;
-	}
-
-	@Override
-	public void setTitle(final CharSequence title)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
 	}
 
 	@Override
