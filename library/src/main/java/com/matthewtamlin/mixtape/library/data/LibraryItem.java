@@ -21,12 +21,10 @@ import android.graphics.Bitmap;
 /**
  * A piece of content in a media library which can be displayed by showing a title, subtitle and
  * artwork. An item can be a single unit of media (such as a song), or it can be a collection of
- * other media items (such as an album).
- * <p>
- * A LibraryItem does not need to store its title, subtitle and artwork in memory, it only needs to
- * provide access to the values when queried. As such, it is perfectly acceptable for the getters to
- * start long running operations to retrieve data when called. The exception is the {@link
- * #isReadOnly()} method which must return immediately.
+ * other media items (such as an album). A LibraryItem does not need to store its title, subtitle
+ * and artwork in memory, it only needs to provide access to the values when queried. As such, it is
+ * perfectly acceptable for the getters to start long running operations to retrieve data when
+ * called.
  */
 public interface LibraryItem {
 	/**
