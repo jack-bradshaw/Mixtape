@@ -22,7 +22,6 @@ import android.text.TextUtils;
 import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
-import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,28 +77,5 @@ public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 						get(0).getMp3File(), e);
 			}
 		}
-	}
-
-	@Override
-	public void setTitle(final CharSequence title)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setSubtitle(final CharSequence subtitle)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public void setArtwork(final Bitmap artwork)
-			throws LibraryReadException, LibraryWriteException {
-		throw new LibraryWriteException("Item is read only.");
-	}
-
-	@Override
-	public boolean isReadOnly() {
-		return true;
 	}
 }
