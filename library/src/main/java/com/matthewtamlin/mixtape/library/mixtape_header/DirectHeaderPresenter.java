@@ -22,7 +22,6 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
-import com.matthewtamlin.mixtape.library.data.LibraryWriteException;
 
 /**
  * A simple implementation of the HeaderContract.Presenter interface where the LibraryItem returned
@@ -185,29 +184,6 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 		@Override
 		public Bitmap getArtwork(final int width, final int height) throws LibraryReadException {
 			return null;
-		}
-
-		@Override
-		public void setTitle(final CharSequence title)
-				throws LibraryReadException, LibraryWriteException {
-			throw new LibraryWriteException("Item is read-only.");
-		}
-
-		@Override
-		public void setSubtitle(final CharSequence subtitle)
-				throws LibraryReadException, LibraryWriteException {
-			throw new LibraryWriteException("Item is read-only.");
-		}
-
-		@Override
-		public void setArtwork(final Bitmap artwork)
-				throws LibraryReadException, LibraryWriteException {
-			throw new LibraryWriteException("Item is read-only.");
-		}
-
-		@Override
-		public boolean isReadOnly() {
-			return true;
 		}
 	}
 }
