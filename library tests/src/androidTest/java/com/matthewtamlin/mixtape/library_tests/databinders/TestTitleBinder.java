@@ -31,7 +31,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.ReadOnlyLibraryItem;
+import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 import com.matthewtamlin.mixtape.library_tests.test.R;
 
 import org.junit.Before;
@@ -101,7 +101,7 @@ public class TestTitleBinder {
 		assertThat("Precondition failed, default artwork is null.", defaultArtwork,
 				is(notNullValue()));
 
-		libraryItem = new ReadOnlyLibraryItem(res, TITLE, null, -1);
+		libraryItem = new NormalLibraryItem(res, TITLE, null, -1);
 		cache = new LruLibraryItemCache(1000000, 1, 1); // Should be more than enough for the test
 		displayableDefaults = new ImmutableDisplayableDefaults(DEFAULT_TITLE, null, null);
 		textView = mock(TextView.class);

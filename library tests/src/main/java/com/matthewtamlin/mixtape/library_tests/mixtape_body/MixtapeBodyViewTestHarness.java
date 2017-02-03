@@ -27,7 +27,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.ReadOnlyLibraryItem;
+import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,7 @@ public abstract class MixtapeBodyViewTestHarness extends
 
 				for (int i = 0; i < NUMBER_OF_ITEMS; i++) {
 					if (new Random().nextBoolean()) {
-						items.add(new ReadOnlyLibraryItem(getResources(),
+						items.add(new NormalLibraryItem(getResources(),
 								"Title " + i,
 								"Subtitle " + i,
 								ARTWORK_RES_ID));
@@ -149,7 +149,7 @@ public abstract class MixtapeBodyViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				items.add(0, new ReadOnlyLibraryItem(getResources(),
+				items.add(0, new NormalLibraryItem(getResources(),
 						"Title " + items.size(),
 						"Subtitle " + items.size(),
 						ARTWORK_RES_ID));

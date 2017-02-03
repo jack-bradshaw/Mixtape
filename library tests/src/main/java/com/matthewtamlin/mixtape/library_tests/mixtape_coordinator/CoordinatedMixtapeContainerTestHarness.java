@@ -39,7 +39,7 @@ import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeC
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.ReadOnlyLibraryItem;
+import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 
 		cache = new LruLibraryItemCache(10000, 10000, 10000);
 
-		headerItem = new ReadOnlyLibraryItem(getResources(), "Header title", "Header subtitle",
+		headerItem = new NormalLibraryItem(getResources(), "Header title", "Header subtitle",
 				R.raw.real_artwork);
 		bodyItems = generateBodyItems();
 
@@ -114,7 +114,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 
 		for (int i = 0; i < NUMBER_OF_ITEMS; i++) {
 			if (new Random().nextBoolean()) {
-				items.add(new ReadOnlyLibraryItem(getResources(),
+				items.add(new NormalLibraryItem(getResources(),
 						"Title " + i,
 						"Subtitle " + i,
 						R.raw.real_artwork));
