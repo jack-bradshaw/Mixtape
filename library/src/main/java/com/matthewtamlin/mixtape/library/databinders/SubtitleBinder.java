@@ -29,9 +29,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Binds subtitles from LibraryItems to TextViews. A caching mechanism is implemented to allow for
- * faster and more efficient data binding, and asynchronous processing is only used when if data is
- * not already cached. If the subtitle of an item is inaccessible, then a default is used.
+ * Binds title data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
+ * performance, and asynchronous processing is only used if data is not already cached.
  */
 @Tested(testMethod = "unit")
 public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
