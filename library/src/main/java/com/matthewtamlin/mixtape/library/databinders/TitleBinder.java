@@ -17,8 +17,6 @@
 package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
@@ -26,17 +24,14 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
-import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
- * Binds titles from LibraryItems to TextViews. A caching mechanism is implemented to allow for
- * faster and more efficient data binding, and asynchronous processing is only used when if data is
- * not already cached. If the title of an item is inaccessible, then a default is used.
+ * Binds title data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
+ * performance, and asynchronous processing is only used if data is not already cached. Defaults
+ * are used if all attempts to load data fail.
  */
 @Tested(testMethod = "unit")
 public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
