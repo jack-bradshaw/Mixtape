@@ -29,8 +29,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Binds subtitle data from LibraryItems to TextViews. Data is cached as it is loaded to improve
- * future performance, and asynchronous processing is only used if data is not already cached.
+ * Binds subtitle data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
+ * performance, and asynchronous processing is only used if data is not already cached. In case
+ * an item fails to return a subtitle, a default must be supplied.
  */
 @Tested(testMethod = "unit")
 public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
@@ -50,8 +51,7 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	private final DisplayableDefaults defaults;
 
 	/**
-	 * A record of all bind tasks currently in progress, where each task is mapped to the TextView
-	 * it is updating.
+	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
 	 */
 	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
 
@@ -124,16 +124,14 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	/**
-	 * @return the source of the default subtitles, not null
+	 * @return the displayable defaults used to supply the default subtitle, not null
 	 */
 	public final DisplayableDefaults getDefaults() {
 		return defaults;
 	}
 
 	/**
-	 * Loads LibraryItem subtitles in the background and binds the data to the UI when available. If
-	 * data cannot be loaded for any reason, then the default subtitle is used instead. Caching is
-	 * used to increase performance.
+	 * Task for asynchronously loading data and binding it to the UI when available.
 	 */
 	private final class BinderTask extends AsyncTask<Void, Void, CharSequence> {
 		/**
@@ -152,7 +150,7 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 		 * @param textView
 		 * 		the TextView to bind data to, not null
 		 * @param data
-		 * 		the LibraryItem to source the subtitle from, not null
+		 * 		the LibraryItem to source the subtitle from, may be null
 		 * @throws IllegalArgumentException
 		 * 		if {@code textView} is null
 		 */
@@ -163,7 +161,6 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 
 		@Override
 		public final void onPreExecute() {
-			// If the task has been cancelled, it must not modify the UI
 			if (!isCancelled()) {
 				textView.setText(null);
 			}
@@ -177,13 +174,11 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 
 			cache.cacheSubtitle(data, true);
 
-			return cache.getSubtitle(data) == null ? defaults.getSubtitle() :
-					cache.getSubtitle(data);
+			return cache.getSubtitle(data) == null ? defaults.getSubtitle() : cache.getSubtitle(data);
 		}
 
 		@Override
 		protected final void onPostExecute(final CharSequence subtitle) {
-			// If the task has been cancelled, it must not modify the UI
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(subtitle);
