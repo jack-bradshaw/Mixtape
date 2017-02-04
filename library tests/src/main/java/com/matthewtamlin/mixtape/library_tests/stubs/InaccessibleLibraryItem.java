@@ -22,22 +22,22 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 /**
- * An implementation of the LibraryItem interface for use in testing. All attempts to read or write
- * metadata result in exceptions being thrown.
+ * An implementation of the LibraryItem interface for use in testing. Every attempt to access the
+ * metadata results in a LibraryReadException being thrown.
  */
 public final class InaccessibleLibraryItem implements LibraryItem {
 	@Override
 	public final CharSequence getTitle() throws LibraryReadException {
-		throw new LibraryReadException();
+		throw new LibraryReadException("Title is never accessible.");
 	}
 
 	@Override
 	public final CharSequence getSubtitle() throws LibraryReadException {
-		throw new LibraryReadException();
+		throw new LibraryReadException("Subtitle is never accessible.");
 	}
 
 	@Override
 	public final Bitmap getArtwork(int width, int height) throws LibraryReadException {
-		throw new LibraryReadException();
+		throw new LibraryReadException("Artwork is never accessible.");
 	}
 }

@@ -25,10 +25,14 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 
 /**
- * An implementation of the LibraryItem interface for use in testing. Metadata is stored locally,
- * such that read and write exceptions never occur. Metadata can be modified at any time.
+ * An implementation of the LibraryItem interface for use in testing. So long as the resource ID
+ * supplied to the constructor corresponds to a Bitmap resource, library read exceptions will
+ * never occur.
  */
 public final class NormalLibraryItem implements LibraryItem {
+	/**
+	 * Provides access to the app resources.
+	 */
 	private Resources resources;
 
 	/**
