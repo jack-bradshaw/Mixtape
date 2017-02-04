@@ -41,15 +41,14 @@ public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	private final Bitmap artwork;
 
 	/**
-	 * Constructs a new ImmutableDisplayableDefaults instance. The supplied values are used for the
-	 * defaults and cannot be changed after instantiation.
+	 * Constructs a new ImmutableDisplayableDefaults using the supplied values.
 	 *
 	 * @param title
-	 * 		the default title
+	 * 		the default title, null allowed
 	 * @param subtitle
-	 * 		the default subtitle
+	 * 		the default subtitle, null allowed
 	 * @param artwork
-	 * 		the default artwork
+	 * 		the default artwork, null allowed
 	 */
 	public ImmutableDisplayableDefaults(final CharSequence title, final CharSequence subtitle,
 			final Bitmap artwork) {
