@@ -30,8 +30,8 @@ public class LibraryReadException extends IOException {
 	}
 
 	/**
-	 * Constructs a new LibraryReadException with the current stack trace and the specified
-	 * detail message.
+	 * Constructs a new LibraryReadException with the current stack trace and the provided detail
+	 * message.
 	 *
 	 * @param detailMessage
 	 * 		the detail message for this exception
@@ -41,8 +41,8 @@ public class LibraryReadException extends IOException {
 	}
 
 	/**
-	 * Constructs a new LibraryReadException with the current stack trace, the specified detail
-	 * message and the specified cause.
+	 * Constructs a new LibraryReadException with the current stack trace, the provided detail
+	 * message and the provided cause.
 	 *
 	 * @param detailMessage
 	 * 		the detail message for this exception
@@ -54,8 +54,7 @@ public class LibraryReadException extends IOException {
 	}
 
 	/**
-	 * Constructs a new LibraryReadException with the current stack trace and the specified
-	 * cause.
+	 * Constructs a new LibraryReadException with the current stack trace and the provided cause.
 	 *
 	 * @param throwable
 	 * 		the cause of this exception
