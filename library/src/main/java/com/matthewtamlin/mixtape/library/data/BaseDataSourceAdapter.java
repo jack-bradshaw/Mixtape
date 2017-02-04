@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Abstract implementation of the BaseDataSource interface which handles listener registration.
+ * Partial implementation of the BaseDataSource interface which handles listener registration.
  * Getters are provided for accessing the registered listeners.
  *
  * @param <D>
@@ -85,9 +85,10 @@ public abstract class BaseDataSourceAdapter<D> implements BaseDataSource<D> {
 
 	/**
 	 * Returns all data replaced listeners which are currently registered for callbacks. This method
-	 * may return an empty set, but it will never return null.
+	 * may return an empty set, but it will never return null. Furthermore, the returned set will
+	 * never contain null.
 	 *
-	 * @return the listeners
+	 * @return the data replaced listeners
 	 */
 	public Set<DataReplacedListener<D>> getDataReplacedListeners() {
 		return dataReplacedListeners;
@@ -95,9 +96,10 @@ public abstract class BaseDataSourceAdapter<D> implements BaseDataSource<D> {
 
 	/**
 	 * Returns all data modified listeners which are currently registered for callbacks. This method
-	 * may return an empty set, but it will never return null.
+	 * may return an empty set, but it will never return null. Furthermore, the returned set will
+	 * never contain null.
 	 *
-	 * @return the listeners
+	 * @return the data modified listeners
 	 */
 	public Set<DataModifiedListener<D>> getDataModifiedListeners() {
 		return dataModifiedListeners;
@@ -105,9 +107,10 @@ public abstract class BaseDataSourceAdapter<D> implements BaseDataSource<D> {
 
 	/**
 	 * Returns all long operation listeners which are currently registered for callbacks. This
-	 * method may return an empty set, but it will never return null.
+	 * method may return an empty set, but it will never return null. Furthermore, the returned set
+	 * will never contain null.
 	 *
-	 * @return the listeners
+	 * @return the long operation listeners
 	 */
 	public Set<LongOperationListener> getLongOperationListeners() {
 		return longOperationListeners;

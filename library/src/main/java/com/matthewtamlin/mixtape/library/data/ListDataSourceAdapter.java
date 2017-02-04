@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Abstract implementation of the ListDataSource interface which handles listener registration.
+ * Partial implementation of the ListDataSource interface which handles listener registration.
  * Getters are provided for accessing the registered listeners.
  *
  * @param <D>
@@ -102,7 +102,8 @@ public abstract class ListDataSourceAdapter<D> extends BaseDataSourceAdapter<Lis
 
 	/**
 	 * Returns all item added listeners which are currently registered for callbacks. This method
-	 * may return an empty set, but it will never return null.
+	 * may return an empty set, but it will never return null. Furthermore, the returned set will
+	 * never contain null.
 	 *
 	 * @return the listeners
 	 */
@@ -122,7 +123,8 @@ public abstract class ListDataSourceAdapter<D> extends BaseDataSourceAdapter<Lis
 
 	/**
 	 * Returns all item modified listeners which are currently registered for callbacks. This method
-	 * may return an empty set, but it will never return null.
+	 * may return an empty set, but it will never return null. Furthermore, the returned set will
+	 * never contain null.
 	 *
 	 * @return the listeners
 	 */
@@ -132,7 +134,8 @@ public abstract class ListDataSourceAdapter<D> extends BaseDataSourceAdapter<Lis
 
 	/**
 	 * Returns all item moved listeners which are currently registered for callbacks. This method
-	 * may return an empty set, but it will never return null.
+	 * may return an empty set, but it will never return null. Furthermore, the returned set will
+	 * never contain null.
 	 *
 	 * @return the listeners
 	 */
