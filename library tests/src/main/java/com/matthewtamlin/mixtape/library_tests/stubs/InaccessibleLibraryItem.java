@@ -28,16 +28,16 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 public final class InaccessibleLibraryItem implements LibraryItem {
 	@Override
 	public final CharSequence getTitle() throws LibraryReadException {
-		throw new LibraryReadException();
+		throw new LibraryReadException("Title is never accessible.");
 	}
 
 	@Override
 	public final CharSequence getSubtitle() throws LibraryReadException {
-		throw new LibraryReadException();
+		throw new LibraryReadException("Subtitle is never accessible.");
 	}
 
 	@Override
 	public final Bitmap getArtwork(int width, int height) throws LibraryReadException {
-		throw new LibraryReadException();
+		throw new LibraryReadException("Artwork is never accessible.");
 	}
 }
