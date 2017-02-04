@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Binds title data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
- * performance, and asynchronous processing is only used if data is not already cached.
+ * Binds subtitle data from LibraryItems to TextViews. Data is cached as it is loaded to improve
+ * future performance, and asynchronous processing is only used if data is not already cached.
  */
 @Tested(testMethod = "unit")
 public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
