@@ -24,22 +24,22 @@ import android.view.View;
  * @param <D>
  * 		the type of data to bind
  * @param <V>
- * 		the type of View to bind data to
+ * 		the type of view to bind data to
  */
 public interface DataBinder<D, V extends View> {
 	/**
-	 * Binds data to the supplied view. This method may use asynchronous processing and must always
-	 * be called on the UI thread. Passing null data clears the view.
+	 * Binds data to the supplied view. Asynchronous processing is used if necessary.
 	 *
 	 * @param view
 	 * 		the View to bind data to, not null
 	 * @param data
-	 * 		the data to bind, or an object which provides access to the data
+	 * 		the data to bind, null to clear the view
 	 */
 	void bind(final V view, final D data);
 
 	/**
-	 * Cancels the current bind operation for the supplied view if one exists.
+	 * Cancels the current bind operation for the supplied view. If no bind operation exists, the
+	 * method exits normally.
 	 *
 	 * @param view
 	 * 		the view to cancel the bind operation for, not null
@@ -47,7 +47,7 @@ public interface DataBinder<D, V extends View> {
 	void cancel(V view);
 
 	/**
-	 * Cancels all current bind operations.
+	 * Cancels all existing bind operations.
 	 */
 	void cancelAll();
 }
