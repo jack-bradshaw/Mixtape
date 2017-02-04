@@ -30,8 +30,7 @@ import java.util.Iterator;
 
 /**
  * Binds title data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
- * performance, and asynchronous processing is only used if data is not already cached. Defaults
- * are used if all attempts to load data fail.
+ * performance, and asynchronous processing is only used if data is not already cached.
  */
 @Tested(testMethod = "unit")
 public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
