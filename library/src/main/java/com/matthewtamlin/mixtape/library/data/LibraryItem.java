@@ -22,8 +22,8 @@ import android.graphics.Bitmap;
  * A item of content in a media library which can be displayed by showing a title, subtitle and
  * artwork. An item can be a single unit of media (such as a song), or it can be a collection of
  * other media items (such as an album). A LibraryItem does not need to store its title, subtitle
- * and artwork in memory, it only needs to provide access to the metadata when requested. As
- * such, calls to the getters may be long running.
+ * and artwork in memory, it only needs to provide access to the metadata when requested. As such,
+ * calls to the getters may be long running.
  */
 public interface LibraryItem {
 	/**
@@ -50,9 +50,9 @@ public interface LibraryItem {
 	 * or equal to zero, then the unoptimised artwork is returned.
 	 *
 	 * @param width
-	 * 		the desired width of the artwork, measured in pixels, greater than zero
+	 * 		the desired width of the artwork, measured in pixels
 	 * @param height
-	 * 		the desired height of the artwork, measured in pixels, greater than zero
+	 * 		the desired height of the artwork, measured in pixels
 	 * @return the artwork of this item, null if none exists
 	 * @throws LibraryReadException
 	 * 		if the artwork cannot be accessed
