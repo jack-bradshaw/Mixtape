@@ -117,14 +117,14 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	/**
-	 * @return the cache used to store titles, not null
+	 * @return the cache used to store titles
 	 */
 	public final LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the displayable defaults used to supply the default title, not null
+	 * @return the defaults used when titles cannot be accessed
 	 */
 	public final DisplayableDefaults getDefaults() {
 		return defaults;
