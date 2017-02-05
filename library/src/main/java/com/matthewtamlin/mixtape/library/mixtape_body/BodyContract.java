@@ -26,20 +26,15 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import java.util.List;
 
 /**
- * Defines the contract between the model, view and presenter for the body.
+ * The MVP contract for a view which presents a list of LibraryItems to the user.
  */
 public interface BodyContract {
 	/**
-	 * Displays a series of LibraryItems to the user. Each item is displayed in a distinct UI
-	 * element, so that the user can interact with each item individually. Each UI element can show
-	 * the title, subtitle and artwork of a LibraryItem, however there is no guarantee that all
-	 * three will be shown. Additionally, each UI element must have a button which displays a
-	 * contextual menu when clicked. Scrolling behaviour is used if there are too many elements to
-	 * fit on the screen simultaneously.
+	 * A View which displays a list of LibraryItems to the user. The view must show an overflow
+	 * button for each item so that the user can perform item specific actions.
 	 * <p>
-	 * If the list of items is modified externally, then the view must be notified using one of the
-	 * notify methods. Failure to do so may result in incorrect data bring displayed, or even
-	 * complete failure of the view.
+	 * If the list of items is modified externally, then the view must be notified of the change.
+	 * Failure to do so may result in display errors, or even a complete failure of the view.
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
@@ -52,31 +47,31 @@ public interface BodyContract {
 
 		/**
 		 * Returns the items currently displayed in this view. The view must be notified of any
-		 * external changes to the returned list.
+		 * external changes to the list.
 		 *
-		 * @return the items displayed in the view, not null
+		 * @return the items currently displayed in the view, not null
 		 */
 		List<? extends LibraryItem> getItems();
 
 		/**
-		 * Sets the menu resource to use for the contextual menu on each UI element. This method
-		 * will not update any menus which are currently being displayed.
+		 * Sets the menu to use for the item specific menus. If a menu is being displayed while this
+		 * method is called, there is no guarantee that it will be updated.
 		 *
 		 * @param contextualMenuResourceId
-		 * 		the resource ID to use for the contextual menus
+		 * 		the resource ID to use for the item specific menus
 		 */
 		void setContextualMenuResource(int contextualMenuResourceId);
 
 		/**
-		 * Returns the resource ID of the current contextual menu. If no resource has been set, then
-		 * -1 is returned.
+		 * Returns the current resource ID of the item specific contextual menus. If the resource
+		 * has not yet been set, then -1 is returned.
 		 *
-		 * @return the resource ID of the contextual menu resource
+		 * @return the resource ID of the contextual menu resource, -1 if absent
 		 */
 		int getContextualMenuResource();
 
 		/**
-		 * Scrolls the view to show a particular item.
+		 * Changes the view so that the item in the list at the specified index is shown.
 		 *
 		 * @param itemIndex
 		 * 		the index of the item to show
@@ -85,9 +80,8 @@ public interface BodyContract {
 
 		/**
 		 * Notifies the view of some undefined change to the current item list. This notification
-		 * doesn't provide specific information about the nature of the change, therefore {@link
-		 * #notifyItemAdded(int)}, {@link #notifyItemRemoved(int)}, {@link #notifyItemModified(int)}
-		 * and/or {@link #notifyItemMoved(int, int)} should be used if possible.
+		 * doesn't provide specific information about the nature of the change and should only be
+		 * used if the other notifications methods are not sufficient.
 		 */
 		void notifyItemsChanged();
 

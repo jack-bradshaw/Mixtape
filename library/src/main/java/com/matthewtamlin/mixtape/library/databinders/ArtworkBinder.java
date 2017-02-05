@@ -39,8 +39,8 @@ import java.util.concurrent.Executors;
 
 /**
  * Binds artwork data from LibraryItems to ImageViews. Data is cached as it is loaded to improve
- * future performance, and asynchronous processing is only used if data is not already cached. A
- * fade-in effect is used when artwork is bound.
+ * future performance, and asynchronous processing is only used if data is not already cached. By
+ * default a fade-in effect is used when artwork is bound, but this can be disable if desired.
  */
 @Tested(testMethod = "unit")
 public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
@@ -60,30 +60,30 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	private final DisplayableDefaults defaults;
 
 	/**
-	 * The duration to use when fading-in artwork, measured in milliseconds.
+	 * The duration to use when transitioning artwork, measured in milliseconds.
 	 */
 	private final int fadeInDurationMs;
 
 	/**
-	 * A record of all bind tasks currently in progress, where each task is mapped to the ImageView
-	 * it is updating.
+	 * A record of all bind tasks currently in progress. Each task is mapped to the target
+	 * ImageView.
 	 */
 	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
 
 	/**
-	 * The width to use when loading artwork if the width of the receiving dimension is
-	 * unavailable.
+	 * The default width to use when loading artwork. This value is used if the ImageView is not
+	 * ready to return its dimensions.
 	 */
-	private int defaultWidth = 300; // Default to 300 - Looks ok for small images
+	private int defaultWidth = 300;
 
 	/**
-	 * The height to use when loading artwork if the height of the receiving dimension is
-	 * unavailable.
+	 * The default height to use when loading artwork. This value is used if the ImageView is not
+	 * ready to return its dimensions.
 	 */
-	private int defaultHeight = 300; // Default to 300 - Looks ok for small images
+	private int defaultHeight = 300;
 
 	/**
-	 * Constructs a new TitleBinder.
+	 * Constructs a new ArtworkBinder.
 	 *
 	 * @param cache
 	 * 		a cache for storing artwork, may already contain data, not null
@@ -143,37 +143,37 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	}
 
 	/**
-	 * @return the cache used to store artwork, not null
+	 * @return the cache used to store artwork
 	 */
 	public final LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the source of the default artwork, not null
+	 * @return the defaults used when artwork cannot be accessed
 	 */
 	public final DisplayableDefaults getDefaults() {
 		return defaults;
 	}
 
 	/**
-	 * Sets the width to use if an ImageView doesn't return its width.
+	 * Sets the width to use when decoding artwork if the target ImageView cannot return its
+	 * dimensions.
 	 */
 	public final void setDefaultWidth(final int defaultWidth) {
 		this.defaultWidth = defaultWidth;
 	}
 
 	/**
-	 * Sets the height to use if an ImageView doesn't return its height.
+	 * Sets the height to use when decoding artwork if the target ImageView cannot return its
+	 * dimensions.
 	 */
 	public final void setDefaultHeight(final int defaultHeight) {
 		this.defaultHeight = defaultHeight;
 	}
 
 	/**
-	 * Loads LibraryItem artwork in the background and binds the data to the UI when available. If
-	 * data cannot be loaded for any reason, then the default artwork is used instead. Caching is
-	 * used to increase performance.
+	 * Task for asynchronously loading data and binding it to the UI when available.
 	 */
 	private class BinderTask extends AsyncTask<Void, Void, Bitmap> {
 		/**
@@ -187,16 +187,14 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		private final LibraryItem data;
 
 		/**
-		 * The width of the ImageView, measured in pixels. This value must be saved as an instance
-		 * variable in {@code onPreExecute()} because the UI cannot be queried from the background
-		 * task.
+		 * The width of the ImageView, measured in pixels. This value must be saved in {@code
+		 * onPreExecute()} since the UI cannot be queried from the background task.
 		 */
 		private int viewWidth;
 
 		/**
-		 * The height of the ImageView, measured in pixels. This value must be saved as an instance
-		 * variable in {@code onPreExecute()} because the UI cannot be queried from the background
-		 * task.
+		 * The height of the ImageView, measured in pixels. This value must be saved in {@code
+		 * onPreExecute()} since the UI cannot be queried from the background task.
 		 */
 		private int viewHeight;
 
@@ -206,7 +204,7 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		 * @param imageView
 		 * 		the ImageView to bind data to, not null
 		 * @param data
-		 * 		the LibraryItem to source the artwork from, not null
+		 * 		the LibraryItem to source the artwork from
 		 * @throws IllegalArgumentException
 		 * 		if {@code imageView} is null
 		 */
@@ -217,7 +215,6 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 
 		@Override
 		public void onPreExecute() {
-			// If the task has been cancelled, it must not modify the UI
 			if (!isCancelled()) {
 				imageView.setImageBitmap(null);
 
@@ -312,14 +309,15 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		}
 
 		/**
-		 * Queries the data directly to access the artwork. If a LibraryReadException occurs when
-		 * reading the data then the default artwork is returned.
+		 * Gets the artwork directly from the data. If a LibraryReadException occurs when reading
+		 * the data, then the default artwork is returned. This method does not interact with the
+		 * cache in anyway.
 		 *
 		 * @param width
 		 * 		the desired width of the artwork, measured in pixels
 		 * @param height
 		 * 		the desired height of the artwork, measured in pixels
-		 * @return the artwork directly from the source or the default
+		 * @return the artwork
 		 */
 		private Bitmap getArtworkDirectly(final int width, final int height) {
 			try {
