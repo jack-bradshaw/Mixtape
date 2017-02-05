@@ -60,30 +60,30 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	private final DisplayableDefaults defaults;
 
 	/**
-	 * The duration to use when fading-in artwork, measured in milliseconds.
+	 * The duration to use when transitioning artwork, measured in milliseconds.
 	 */
 	private final int fadeInDurationMs;
 
 	/**
-	 * A record of all bind tasks currently in progress, where each task is mapped to the ImageView
-	 * it is updating.
+	 * A record of all bind tasks currently in progress. Each task is mapped to the target
+	 * ImageView.
 	 */
 	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
 
 	/**
-	 * The width to use when loading artwork if the width of the receiving dimension is
-	 * unavailable.
+	 * The default width to use when loading artwork. This value is used if the ImageView is not
+	 * ready to return its dimensions.
 	 */
-	private int defaultWidth = 300; // Default to 300 - Looks ok for small images
+	private int defaultWidth = 300;
 
 	/**
-	 * The height to use when loading artwork if the height of the receiving dimension is
-	 * unavailable.
+	 * The default height to use when loading artwork. This value is used if the ImageView is not
+	 * ready to return its dimensions.
 	 */
-	private int defaultHeight = 300; // Default to 300 - Looks ok for small images
+	private int defaultHeight = 300;
 
 	/**
-	 * Constructs a new TitleBinder.
+	 * Constructs a new ArtworkBinder.
 	 *
 	 * @param cache
 	 * 		a cache for storing artwork, may already contain data, not null
@@ -143,14 +143,14 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	}
 
 	/**
-	 * @return the cache used to store artwork, not null
+	 * @return the cache used to store artwork
 	 */
 	public final LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the source of the default artwork, not null
+	 * @return the defaults used when artwork cannot be accessed
 	 */
 	public final DisplayableDefaults getDefaults() {
 		return defaults;
