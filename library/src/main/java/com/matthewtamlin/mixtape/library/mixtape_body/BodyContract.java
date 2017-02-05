@@ -30,7 +30,7 @@ import java.util.List;
  */
 public interface BodyContract {
 	/**
-	 * A View which displays a list of LibraryItems to the user. The view must show an overflow
+	 * A View which displays a list of LibraryItems to the user. The view shows a contextual menu
 	 * button for each item so that the user can perform item specific actions.
 	 * <p>
 	 * If the list of items is modified externally, then the view must be notified of the change.
@@ -38,7 +38,7 @@ public interface BodyContract {
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
-		 * Sets the items to display and updates the UI. To display nothing, pass an empty list.
+		 * Sets the items to display and updates the UI.
 		 *
 		 * @param items
 		 * 		the items to display, not null
@@ -46,7 +46,7 @@ public interface BodyContract {
 		void setItems(List<? extends LibraryItem> items);
 
 		/**
-		 * Returns the items currently displayed in this view. The view must be notified of any
+		 * Gets the items currently being displayed in this view. The view must be notified of any
 		 * external changes to the list.
 		 *
 		 * @return the items currently displayed in the view, not null
@@ -54,8 +54,8 @@ public interface BodyContract {
 		List<? extends LibraryItem> getItems();
 
 		/**
-		 * Sets the menu to use for the item specific menus. If a menu is being displayed while this
-		 * method is called, there is no guarantee that it will be updated.
+		 * Sets the resource which defines the contextual menu options. There is no guarantee
+		 * that the UI will be updated if the resource is changed while a menu is being displayed.
 		 *
 		 * @param contextualMenuResourceId
 		 * 		the resource ID to use for the item specific menus
