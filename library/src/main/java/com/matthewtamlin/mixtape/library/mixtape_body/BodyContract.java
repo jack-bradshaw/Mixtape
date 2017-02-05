@@ -30,7 +30,7 @@ import java.util.List;
  */
 public interface BodyContract {
 	/**
-	 * A View which displays a list of LibraryItems to the user. The view shows a contextual menu
+	 * A view which displays a list of LibraryItems to the user. The view shows a contextual menu
 	 * button for each item so that the user can perform item specific actions.
 	 * <p>
 	 * If the list of items is modified externally, then the view must be notified of the change.
@@ -38,43 +38,45 @@ public interface BodyContract {
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
-		 * Sets the items to display and updates the UI.
+		 * Sets the items to display and updates the UI. The view must be notified of any external
+		 * changes to the supplied list. Supplying null is equivalent to supplying an empty list.
 		 *
 		 * @param items
-		 * 		the items to display, not null
+		 * 		the items to display
 		 */
 		void setItems(List<? extends LibraryItem> items);
 
 		/**
 		 * Gets the items currently being displayed in this view. The view must be notified of any
-		 * external changes to the list.
+		 * external changes to the returned list.
 		 *
 		 * @return the items currently displayed in the view, not null
 		 */
 		List<? extends LibraryItem> getItems();
 
 		/**
-		 * Sets the resource which defines the contextual menu options. There is no guarantee
-		 * that the UI will be updated if the resource is changed while a menu is being displayed.
+		 * Sets the menu resource to use for the item specific contextual menus. There is no
+		 * guarantee that the UI will be updated if the resource is changed while a menu is being
+		 * displayed.
 		 *
 		 * @param contextualMenuResourceId
-		 * 		the resource ID to use for the item specific menus
+		 * 		the resource ID of the menu resource to use
 		 */
 		void setContextualMenuResource(int contextualMenuResourceId);
 
 		/**
-		 * Returns the current resource ID of the item specific contextual menus. If the resource
-		 * has not yet been set, then -1 is returned.
+		 * Gets the resource ID currently used when creating the item specific contextual menus. If
+		 * the resource has not yet been set, then -1 is returned.
 		 *
-		 * @return the resource ID of the contextual menu resource, -1 if absent
+		 * @return the resource ID used for the contextual menus, -1 if absent
 		 */
 		int getContextualMenuResource();
 
 		/**
-		 * Changes the view so that the item in the list at the specified index is shown.
+		 * Forces the view to display the item at the specified index.
 		 *
 		 * @param itemIndex
-		 * 		the index of the item to show
+		 * 		the index of the item to show, with respect to the current list
 		 */
 		void showItem(int itemIndex);
 
@@ -86,7 +88,7 @@ public interface BodyContract {
 		void notifyItemsChanged();
 
 		/**
-		 * Notifies the view of an addition to the current item list.
+		 * Notifies the view of an addition to the current list.
 		 *
 		 * @param index
 		 * 		the index of the added item
@@ -94,7 +96,7 @@ public interface BodyContract {
 		void notifyItemAdded(int index);
 
 		/**
-		 * Notifies the view of a removal from the current item list.
+		 * Notifies the view of a removal from the current list.
 		 *
 		 * @param index
 		 * 		the index of the removed item
@@ -102,9 +104,10 @@ public interface BodyContract {
 		void notifyItemRemoved(int index);
 
 		/**
-		 * Notifies the view of a change to one of the items in the item list. Unlike the other
-		 * notifications, this notification does not signify a change in the structure of the list,
-		 * but rather a change in the data represented by the contents.
+		 * Notifies the view of a change to one of the items in the current list. This method only
+		 * needs to be invoked if the change affected the title, subtitle or artwork of the item.
+		 * Unlike the other notifications, this notification does not signify a change in the
+		 * structure of the list, but rather a change in the data represented by the contents.
 		 *
 		 * @param index
 		 * 		the index of the changed item
