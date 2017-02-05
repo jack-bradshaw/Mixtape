@@ -26,7 +26,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import java.util.List;
 
 /**
- * Defines the contract between the model, view and presenter for the body.
+ * The contract between the model, view and presenter for the body.
  */
 public interface BodyContract {
 	/**
