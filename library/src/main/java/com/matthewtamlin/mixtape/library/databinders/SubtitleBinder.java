@@ -29,9 +29,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Binds subtitle data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
- * performance, and asynchronous processing is only used if data is not already cached. In case
- * an item fails to return a subtitle, a default must be supplied.
+ * Binds subtitle data from LibraryItems to TextViews. Data is cached as it is loaded to improve
+ * future performance, and asynchronous processing is only used if data is not already cached. In
+ * case an item fails to return a subtitle, a default must be supplied.
  */
 @Tested(testMethod = "unit")
 public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
@@ -174,7 +174,8 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 
 			cache.cacheSubtitle(data, true);
 
-			return cache.getSubtitle(data) == null ? defaults.getSubtitle() : cache.getSubtitle(data);
+			return cache.getSubtitle(data) == null ? defaults.getSubtitle() :
+					cache.getSubtitle(data);
 		}
 
 		@Override
