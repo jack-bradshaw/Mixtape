@@ -117,14 +117,14 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	/**
-	 * @return the cache used to store subtitles, not null
+	 * @return the cache used to store subtitles
 	 */
 	public final LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the displayable defaults used to supply the default subtitle, not null
+	 * @return the defaults used when subtitles cannot be accessed
 	 */
 	public final DisplayableDefaults getDefaults() {
 		return defaults;
