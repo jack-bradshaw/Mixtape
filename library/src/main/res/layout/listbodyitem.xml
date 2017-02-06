@@ -61,7 +61,7 @@
 	</RelativeLayout>
 
 	<ImageButton
-		android:id="@+id/listIBodytem_overflowMenuButton"
+		android:id="@+id/listIBodytem_menu"
 		style="?android:borderlessButtonStyle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
