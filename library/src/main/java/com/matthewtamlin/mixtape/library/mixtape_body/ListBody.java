@@ -85,7 +85,7 @@ public final class ListBody extends RecyclerViewBody {
 	/**
 	 * The RecyclerView.ItemDecoration to show below each list item.
 	 */
-	private HorizontalDividerDecoration decoration;
+	private HorizontalDividerDecoration horizontalDividerDecoration;
 
 	/**
 	 * Constructs a new ListBody.
@@ -95,8 +95,6 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context) {
 		super(context);
-
-		decoration = createDecoration();
 		init(null, 0, 0);
 	}
 
@@ -110,8 +108,6 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-
-		decoration = createDecoration();
 		init(attrs, 0, 0);
 	}
 
@@ -127,8 +123,6 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-
-		decoration = createDecoration();
 		init(attrs, defStyleAttr, 0);
 	}
 
@@ -141,10 +135,10 @@ public final class ListBody extends RecyclerViewBody {
 	public final void showDividers(final boolean show) {
 		showDividers = show;
 
-		getRecyclerView().removeItemDecoration(decoration);
+		getRecyclerView().removeItemDecoration(horizontalDividerDecoration);
 
 		if (showDividers) {
-			getRecyclerView().addItemDecoration(decoration);
+			getRecyclerView().addItemDecoration(horizontalDividerDecoration);
 		}
 
 		getRecyclerView().invalidateItemDecorations();
@@ -226,15 +220,6 @@ public final class ListBody extends RecyclerViewBody {
 	}
 
 	/**
-	 * Creates and configures the item decorator for showing dividers between the list items.
-	 */
-	private HorizontalDividerDecoration createDecoration() {
-		final int decorationPaddingPx = dpToPx(getContext(), DECORATION_PADDING_DP);
-		return new HorizontalDividerDecoration(getContext(), decorationPaddingPx,
-				decorationPaddingPx);
-	}
-
-	/**
 	 * Processes the attributes supplied at construction.
 	 *
 	 * @param attrs
@@ -247,10 +232,14 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	private void init(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
+		final int decorationInsets = dpToPx(getContext(), DECORATION_PADDING_DP);
+		horizontalDividerDecoration =  new HorizontalDividerDecoration(getContext(),
+				decorationInsets, decorationInsets);
+
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
 
-		// The methods handle setting member variables and updating the UI
+		// The methods handle both setting member variables and updating the UI
 		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers,
 				DEFAULT_SHOW_DIVIDERS));
 		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork,
