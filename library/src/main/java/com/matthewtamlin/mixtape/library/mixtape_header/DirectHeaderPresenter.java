@@ -57,6 +57,10 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 		unsubscribeFromDataSourceCallbacks(this.dataSource);
 		this.dataSource = dataSource;
 		subscribeToDataSourceCallbacks(this.dataSource);
+
+		if (dataSource != null) {
+			dataSource.loadData(true, this); // Register this class for callbacks
+		}
 	}
 
 	@Override
