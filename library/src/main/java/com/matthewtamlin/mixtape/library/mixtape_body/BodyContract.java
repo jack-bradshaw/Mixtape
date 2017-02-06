@@ -146,10 +146,9 @@ public interface BodyContract {
 			 * Invoked when the user selects a LibraryItem in a BodyContract.View.
 			 *
 			 * @param hostView
-			 * 		the BodyContract.View hosting the clicked element, not the actual view which was
-			 * 		clicked, not null
+			 * 		the BodyContract.View hosting the selected LibraryItem item, not null
 			 * @param item
-			 * 		the data item associated with the clicked view, not null
+			 * 		the selected LibraryItem, not null
 			 */
 			void onItemClicked(BodyContract.View hostView, LibraryItem item);
 
@@ -158,12 +157,11 @@ public interface BodyContract {
 			 * BodyContract.View.
 			 *
 			 * @param hostView
-			 * 		the BodyContract.View hosting the menu, not the actual view which was clicked, not
-			 * 		null
+			 * 		the BodyContract.View hosting the menu, not null
 			 * @param libraryItem
-			 * 		the data item associated with the contextual menu, not null
+			 * 		the LibraryItem targeted by the contextual menu, not null
 			 * @param menuItem
-			 * 		the menu item which was clicked, not null
+			 * 		the selected menu option, not null
 			 */
 			void onContextualMenuItemClicked(BodyContract.View hostView, LibraryItem libraryItem,
 					MenuItem menuItem);
