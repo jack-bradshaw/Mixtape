@@ -29,10 +29,10 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import java.util.List;
 
 /**
- * A presenter for use with {@link RecyclerViewBody} views. The default implementation does not
- * handle user interaction. To handle user interaction, override the following methods: <ul>
- * <li>{@link #onItemSelected(BodyContract.View, LibraryItem)}</li> <li>{@link
- * #onContextualMenuItemSelected(BodyContract.View, LibraryItem, MenuItem)} </li> </ul>
+ * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
+ * abstract, the user interaction handling methods do nothing. To handle user interactions, override
+ * {@link #onItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
+ * (BodyContract.View, LibraryItem, MenuItem)}.
  *
  * @param <S>
  * 		the type of data source
