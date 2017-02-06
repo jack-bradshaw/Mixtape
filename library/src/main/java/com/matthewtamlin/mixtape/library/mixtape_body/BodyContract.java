@@ -169,14 +169,16 @@ public interface BodyContract {
 	}
 
 	/**
-	 * Acts as the intermediary between a ListDataSource and a BodyContract.View, and contains the
-	 * business logic needed to update the data and drive the view. Must always be subscribed to
-	 * callback events from the data source and the view (if available).
+	 * The intermediary between a ListDataSource and a BodyContract.View. The presenter contains the
+	 * business logic for updating the data source, processing data source callbacks, driving the
+	 * view, and processing view callbacks.
 	 *
+	 * @param <D>
+	 * 		the type of data to presented
 	 * @param <S>
-	 * 		the type of data returned by the data source
+	 * 		the type of data source to presented from
 	 * @param <V>
-	 * 		the type of view
+	 * 		the type of view to present to
 	 */
 	public interface Presenter<
 			D extends LibraryItem,
