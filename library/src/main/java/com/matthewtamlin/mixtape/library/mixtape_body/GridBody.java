@@ -34,6 +34,8 @@ import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 
+import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+
 /**
  * A RecyclerViewBody which displays the items in a grid of cards. Each card shows the title,
  * subtitle and artwork of an item, as well as a three-dot overflow button for the contextual menu.
@@ -137,14 +139,16 @@ public final class GridBody extends RecyclerViewBody {
 	@Override
 	protected final void onRecyclerViewCreated(final RecyclerView recyclerView) {
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns,
-				LinearLayoutManager.VERTICAL, false));
+				VERTICAL, false));
 	}
 
 	@Override
 	protected Parcelable onSaveInstanceState() {
 		final Bundle savedState = new Bundle();
+
 		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
 		savedState.putInt(STATE_KEY_NUMBER_OF_COLUMNS, numberOfColumns);
+
 		return savedState;
 	}
 
