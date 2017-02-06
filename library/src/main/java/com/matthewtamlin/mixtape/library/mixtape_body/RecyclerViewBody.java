@@ -386,8 +386,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Generates a new adapter but does not assign it to the recycler view. The adapter uses the
-	 * current data binders to bind data to the view holders.
+	 * Creates a new reycler view adapter but does not assign it to the recycler view.
 	 */
 	private void createAdapter() {
 		adapter = new Adapter<BodyViewHolder>() {
@@ -451,12 +450,12 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 	/**
 	 * Shows a contextual popup menu anchored to the supplied view. Item selections are passed to
-	 * the presenter
+	 * the presenter.
 	 *
 	 * @param anchor
 	 * 		the view to anchor the menu to, not null
 	 * @param item
-	 * 		the target of the contextual menu, not null
+	 * 		the LibraryItem associated with the contextual menu, not null
 	 */
 	private void showMenu(final View anchor, final LibraryItem item) {
 		checkNotNull(item, "item cannot be null.");
