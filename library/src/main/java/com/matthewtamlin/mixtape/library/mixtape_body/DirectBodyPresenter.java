@@ -135,7 +135,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onListItemModified(final ListDataSource<D> source, final D item, final int index) {
+	public void onListItemModified(final ListDataSource<D> source, final D modified, final int index) {
 		if (view != null) {
 			view.notifyItemModified(index);
 		}

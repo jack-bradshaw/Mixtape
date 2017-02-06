@@ -111,13 +111,13 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onListItemModified(ListDataSource<D> source, D item, int index) {
+	public void onListItemModified(ListDataSource<D> source, D modified, int index) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
-		titleDataBinder.getCache().removeTitle(item);
-		subtitleDataBinder.getCache().removeSubtitle(item);
-		artworkDataBinder.getCache().removeArtwork(item);
+		titleDataBinder.getCache().removeTitle(modified);
+		subtitleDataBinder.getCache().removeSubtitle(modified);
+		artworkDataBinder.getCache().removeArtwork(modified);
 
-		super.onListItemModified(source, item, index);
+		super.onListItemModified(source, modified, index);
 	}
 
 	@Override
