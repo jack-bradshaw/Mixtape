@@ -38,17 +38,17 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	/**
 	 * A TextView for displaying titles. Must be a child of the root view.
 	 */
-	private final TextView titleTextView;
+	private final TextView titleHolder;
 
 	/**
 	 * A TextView for displaying subtitles. Must be a child of the root view.
 	 */
-	private final TextView subtitleTextView;
+	private final TextView subtitleHolder;
 
 	/**
 	 * An ImageView for displaying artwork. Must be a child of the root view.
 	 */
-	private final ImageView artworkImageView;
+	private final ImageView artworkHolder;
 
 	/**
 	 * A view which can be clicked to trigger the display of a contextual menu. Must be a child of
@@ -57,34 +57,42 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	private final View contextualMenuButton;
 
 	/**
-	 * Constructs a new BodyViewHolder from a Builder. All the views of the supplied Builder must be
-	 * non-null.
+	 * Constructs a new BodyViewHolder. The root view must be a hierarchical parent of the other
+	 * views.
 	 *
-	 * @param builder
-	 * 		the Builder to base the BodyViewHolder on, not null
+	 * @param rootView
+	 * 		the root view of the RecyclerView item, not null
+	 * @param titleHolder
+	 * 		a UI element for displaying LibraryItem titles, not null
+	 * @param subtitleHolder
+	 * 		a UI element for displaying LibraryItem subtitles, not null
+	 * @param artworkHolder
+	 * 		a UI element for displaying LibraryItem artwork, not null
+	 * @param contextualMenuButton
+	 * 		a UI element which can be clicked to display a contextual menu, not null
 	 * @throws IllegalArgumentException
-	 * 		if {@code builder} is null
+	 * 		if {@code rootView} is null
 	 * @throws IllegalArgumentException
-	 * 		if the root view of {@code builder} is null
+	 * 		if {@code titleHolder} is null
 	 * @throws IllegalArgumentException
-	 * 		if the title text view of {@code builder} is null
+	 * 		if {@code subtitleHolder} is null
 	 * @throws IllegalArgumentException
-	 * 		if the subtitle text view of {@code builder} is null
+	 * 		if {@code artworkHolder} is null
 	 * @throws IllegalArgumentException
-	 * 		if the artwork image view of {@code builder} is null
-	 * @throws IllegalArgumentException
-	 * 		if the contextual menu button of {@code builder} is null
+	 * 		if {@code contextualMenuButton} is null
 	 */
-	private BodyViewHolder(final Builder builder) {
-		//TODO do null check first
-		super(builder.rootView);
+	public BodyViewHolder(final View rootView,
+			final TextView titleHolder,
+			final TextView subtitleHolder,
+			final ImageView artworkHolder,
+			final View contextualMenuButton) {
+		super(rootView);
 
-		NullChecker.checkNotNull(builder, "builder cannot be null");
-		rootView = NullChecker.checkNotNull(builder.rootView);
-		titleTextView = NullChecker.checkNotNull(builder.titleTextView);
-		subtitleTextView = NullChecker.checkNotNull(builder.subtitleTextView);
-		artworkImageView = NullChecker.checkNotNull(builder.artworkImageView);
-		contextualMenuButton = NullChecker.checkNotNull(builder.contextualMenuButton);
+		this.rootView = NullChecker.checkNotNull(titleHolder);
+		this.titleHolder = NullChecker.checkNotNull(titleHolder);
+		this.subtitleHolder = NullChecker.checkNotNull(subtitleHolder);
+		this.artworkHolder = NullChecker.checkNotNull(artworkHolder);
+		this.contextualMenuButton = NullChecker.checkNotNull(contextualMenuButton);
 	}
 
 	/**
@@ -98,21 +106,21 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	 * @return the TextView for displaying titles, not null
 	 */
 	public final TextView getTitleTextView() {
-		return titleTextView;
+		return titleHolder;
 	}
 
 	/**
 	 * @return the TextView for displaying subtitles, not null
 	 */
 	public final TextView getSubtitleTextView() {
-		return subtitleTextView;
+		return subtitleHolder;
 	}
 
 	/**
 	 * @return the ImageView for displaying artwork, not null
 	 */
 	public final ImageView getArtworkImageView() {
-		return artworkImageView;
+		return artworkHolder;
 	}
 
 	/**
@@ -120,214 +128,5 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	 */
 	public final View getContextualMenuButton() {
 		return contextualMenuButton;
-	}
-
-	/**
-	 * Creates a new BodyViewHolder builder.
-	 *
-	 * @param rootView
-	 * 		the root view to use when building the ViewHolder, not null
-	 * @return the new builder
-	 * @throws IllegalArgumentException
-	 * 		if {@code rootView} is null
-	 */
-	public static Builder builder(View rootView) {
-		return new Builder(rootView);
-	}
-
-	/**
-	 * Builder class for the BodyViewHolder. A BodyViewHolder cannot be successfully built until the
-	 * builder's title text view, subtitle text view, artwork image view and contextual menu button
-	 * are set.
-	 */
-	public static final class Builder {
-		/**
-		 * The root view of the RecyclerView item.
-		 */
-		private View rootView;
-
-		/**
-		 * A TextView for displaying titles. Must be a child of the root view.
-		 */
-		private TextView titleTextView;
-
-		/**
-		 * A TextView for displaying subtitles. Must be a child of the root view.
-		 */
-		private TextView subtitleTextView;
-
-		/**
-		 * An ImageView for displaying artwork. Must be a child of the root view.
-		 */
-		private ImageView artworkImageView;
-
-		/**
-		 * A clickable view for triggering the display of an contextual menu. Must be a child of the
-		 * root view.
-		 */
-		private View contextualMenuButton;
-
-		/**
-		 * Constructs a new Builder.
-		 *
-		 * @param rootView
-		 * 		the root view to use when building the ViewHolder
-		 * @throws IllegalArgumentException
-		 * 		if {@code rootView} is null
-		 */
-		private Builder(final View rootView) {
-			this.rootView = NullChecker.checkNotNull(rootView, "rootView cannot be null");
-		}
-
-		/**
-		 * Sets the title TextView to use when building the ViewHolder.
-		 *
-		 * @param titleTextView
-		 * 		the title TextView to use, not null
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code titleTextView} is null
-		 */
-		public Builder withTitleTextView(final TextView titleTextView) {
-			NullChecker.checkNotNull(titleTextView, "titleTextView cannot be null");
-
-			// All checks must pass before modifying the member variables
-			this.titleTextView = titleTextView;
-			return this;
-		}
-
-		/**
-		 * Sets the title TextView to use when building the ViewHolder. The supplied resource ID
-		 * must correspond to a child of the root view, and the child must be a TextView.
-		 *
-		 * @param titleTextViewResId
-		 * 		the resource ID of the title TextView
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code titleTextViewResId} does not correspond to a TextView
-		 * @throws IllegalArgumentException
-		 * 		if {@code titleTextViewResId} does not correspond to a child of the root view
-		 */
-		public Builder withTitleTextView(final int titleTextViewResId) {
-			final TextView view = (TextView) rootView.findViewById(titleTextViewResId);
-			NullChecker.checkNotNull(view, "no corresponding child");
-			withTitleTextView(view);
-			return this;
-		}
-
-		/**
-		 * Sets the subtitle TextView to use when building the ViewHolder.
-		 *
-		 * @param subtitleTextView
-		 * 		the subtitle TextView to use, not null
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code subtitleTextView} is null
-		 */
-		public Builder withSubtitleTextView(final TextView subtitleTextView) {
-			NullChecker.checkNotNull(subtitleTextView, "subtitleTextView cannot be null");
-
-			// All checks must pass before modifying the member variables
-			this.subtitleTextView = subtitleTextView;
-			return this;
-		}
-
-		/**
-		 * Sets the subtitle TextView to use when building the ViewHolder. The supplied resource ID
-		 * must correspond to a child of the root view, and the child must be a TextView.
-		 *
-		 * @param subtitleTextViewResId
-		 * 		the resource ID of the subtitle TextView
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code subtitleTextViewResId} does not correspond to a TextView
-		 * @throws IllegalArgumentException
-		 * 		if {@code subtitleTextViewResId} does not correspond to a child of the root view
-		 */
-		public Builder withSubtitleTextView(final int subtitleTextViewResId) {
-			final TextView view = (TextView) rootView.findViewById(subtitleTextViewResId);
-			NullChecker.checkNotNull(view, "no corresponding child");
-			withSubtitleTextView(view);
-			return this;
-		}
-
-		/**
-		 * Sets the artwork ImageView to use when building the ViewHolder.
-		 *
-		 * @param artworkImageView
-		 * 		the artwork ImageView to use, not null
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code artworkImageView} is null
-		 */
-		public Builder withArtworkImageView(final ImageView artworkImageView) {
-			NullChecker.checkNotNull(artworkImageView, "artworkImageView cannot be null");
-
-			// All checks must pass before modifying the member variables
-			this.artworkImageView = artworkImageView;
-			return this;
-		}
-
-		/**
-		 * Sets the artwork ImageView to use when building the ViewHolder. The supplied resource ID
-		 * must correspond to a child of the root view, and the child must be an ImageView.
-		 *
-		 * @param artworkImageViewResId
-		 * 		the resource ID of the artwork ImageView
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code artworkImageViewResId} does not correspond to a ImageView
-		 * @throws IllegalArgumentException
-		 * 		if {@code artworkImageViewResId} does not correspond to a child of the root view
-		 */
-		public Builder withArtworkImageView(final int artworkImageViewResId) {
-			final ImageView view = (ImageView) rootView.findViewById(artworkImageViewResId);
-			NullChecker.checkNotNull(view, "no corresponding child");
-			withArtworkImageView(view);
-			return this;
-		}
-
-		/**
-		 * Sets the contextual menu button to use when building the ViewHolder.
-		 *
-		 * @param contextualMenuButton
-		 * 		the clickable view to use as the contextual menu button, not null
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code contextualMenuButton} is null
-		 */
-		public Builder withContextualMenuButton(final View contextualMenuButton) {
-			NullChecker.checkNotNull(contextualMenuButton, "contextualMenuButton cannot be null");
-
-			// All checks must be pass before modifying the member variables
-			this.contextualMenuButton = contextualMenuButton;
-			return this;
-		}
-
-		/**
-		 * Sets the contextual menu button to use when building the ViewHolder. The supplied
-		 * resource ID must correspond to a child of the root view, and the child must be a Button.
-		 *
-		 * @param contextualMenuButtonResId
-		 * 		the resource ID of the clickable view to use as the contextual menu button
-		 * @return this Builder
-		 * @throws IllegalArgumentException
-		 * 		if {@code contextualMenuButtonResId} does not correspond to a child of the root view
-		 */
-		public Builder withContextualMenuButton(final int contextualMenuButtonResId) {
-			final View view = rootView.findViewById(contextualMenuButtonResId);
-			NullChecker.checkNotNull(view, "no corresponding child");
-			withContextualMenuButton(view);
-			return this;
-		}
-
-		/**
-		 * Constructs a BodyViewHolder from this Builder.
-		 *
-		 * @return the new BodyViewHolder
-		 */
-		public BodyViewHolder build() {
-			return new BodyViewHolder(this);
-		}
 	}
 }
