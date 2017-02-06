@@ -16,12 +16,10 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_body;
 
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,7 +90,15 @@ public abstract class DirectBodyPresenter<
 	@Override
 	public void onLoadDataFailed(final BaseDataSource source) {
 		if (view != null) {
-			view.setItems(new ArrayList<LibraryItem>());
+			view.setItems(null);
+		}
+	}
+
+	@Override
+	public void onDataReplaced(final BaseDataSource<List<D>> source, final List<D> oldData,
+			final List<D> newData) {
+		if (view != null) {
+			view.setItems(newData);
 		}
 	}
 
@@ -104,10 +110,16 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onDataMoved(final ListDataSource<D> source, final D moved, final int initialIndex,
-			final int finalIndex) {
+	public void onLongOperationStarted(final BaseDataSource source) {
 		if (view != null) {
-			view.notifyItemMoved(initialIndex, finalIndex);
+			view.showLoadingIndicator(true);
+		}
+	}
+
+	@Override
+	public void onLongOperationFinished(final BaseDataSource source) {
+		if (view != null) {
+			view.showLoadingIndicator(false);
 		}
 	}
 
@@ -126,31 +138,18 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onDataReplaced(final BaseDataSource<List<D>> source, final List<D> oldData,
-			final List<D> newData) {
-		if (view != null) {
-			view.setItems(newData);
-		}
-	}
-
-	@Override
-	public void onListItemModified(final ListDataSource<D> source, final D modified, final int index) {
+	public void onListItemModified(final ListDataSource<D> source, final D modified,
+			final int index) {
 		if (view != null) {
 			view.notifyItemModified(index);
 		}
 	}
 
 	@Override
-	public void onLongOperationStarted(final BaseDataSource source) {
+	public void onDataMoved(final ListDataSource<D> source, final D moved, final int initialIndex,
+			final int finalIndex) {
 		if (view != null) {
-			view.showLoadingIndicator(true);
-		}
-	}
-
-	@Override
-	public void onLongOperationFinished(final BaseDataSource source) {
-		if (view != null) {
-			view.showLoadingIndicator(false);
+			view.notifyItemMoved(initialIndex, finalIndex);
 		}
 	}
 
