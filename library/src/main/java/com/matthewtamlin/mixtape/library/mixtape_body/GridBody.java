@@ -21,7 +21,6 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,8 +29,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.matthewtamlin.java_utilities.checkers.IntChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
@@ -72,7 +69,7 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	public GridBody(final Context context) {
 		super(context);
-		processAttributes(null, 0, 0);
+		init(null, 0, 0);
 	}
 
 	/**
@@ -85,7 +82,7 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	public GridBody(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-		processAttributes(attrs, 0, 0);
+		init(attrs, 0, 0);
 	}
 
 	/**
@@ -100,7 +97,7 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	public GridBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		processAttributes(attrs, defStyleAttr, 0);
+		init(attrs, defStyleAttr, 0);
 	}
 
 	/**
@@ -177,7 +174,7 @@ public final class GridBody extends RecyclerViewBody {
 	 * 		a resource which supplies default attributes, only used if {@code defStyleAttr}	is 0, pass
 	 * 		0 to ignore
 	 */
-	private void processAttributes(final AttributeSet attrs, final int defStyleAttr,
+	private void init(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.GridBody, defStyleAttr, defStyleRes);
