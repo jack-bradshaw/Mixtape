@@ -99,7 +99,7 @@ public class RecyclerViewBodyPresenter<
 
 
 	@Override
-	public void onDataModified(BaseDataSource<List<D>> source,	List<D> data) {
+	public void onDataModified(BaseDataSource<List<D>> source, List<D> data) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
 		titleDataBinder.getCache().clearTitles();
 		subtitleDataBinder.getCache().clearSubtitles();

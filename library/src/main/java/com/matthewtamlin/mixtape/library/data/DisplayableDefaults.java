@@ -23,8 +23,8 @@ import android.graphics.Bitmap;
  */
 public interface DisplayableDefaults {
 	/**
-	 * Supplies the default title. The returned value does not need to be consistent between
-	 * calls, and null may be returned.
+	 * Supplies the default title. The returned value does not need to be consistent between calls,
+	 * and null may be returned.
 	 *
 	 * @return the default title
 	 */
