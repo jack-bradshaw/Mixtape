@@ -29,8 +29,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
@@ -99,7 +97,7 @@ public final class ListBody extends RecyclerViewBody {
 		super(context);
 
 		decoration = createDecoration();
-		processAttributes(null, 0, 0);
+		init(null, 0, 0);
 	}
 
 	/**
@@ -114,7 +112,7 @@ public final class ListBody extends RecyclerViewBody {
 		super(context, attrs);
 
 		decoration = createDecoration();
-		processAttributes(attrs, 0, 0);
+		init(attrs, 0, 0);
 	}
 
 	/**
@@ -131,7 +129,7 @@ public final class ListBody extends RecyclerViewBody {
 		super(context, attrs, defStyleAttr);
 
 		decoration = createDecoration();
-		processAttributes(attrs, defStyleAttr, 0);
+		init(attrs, defStyleAttr, 0);
 	}
 
 	/**
@@ -247,7 +245,7 @@ public final class ListBody extends RecyclerViewBody {
 	 * 		a resource which supplies default attributes, only used if {@code defStyleAttr}	is 0, pass
 	 * 		0 to ignore
 	 */
-	private void processAttributes(final AttributeSet attrs, final int defStyleAttr,
+	private void init(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
