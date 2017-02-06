@@ -26,7 +26,7 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 
 /**
  * A ViewHolder for use in a RecyclerViewBody. The view holder contains a root view, views for
- * displaying a LibraryItem, and a view which can be clicked to display a contextual menu.
+ * displaying a LibraryItem metadata, and a view which can be clicked to display a contextual menu.
  */
 @Tested(testMethod = "unit")
 public final class BodyViewHolder extends RecyclerView.ViewHolder {
@@ -36,23 +36,22 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	private final View rootView;
 
 	/**
-	 * A TextView for displaying titles. Must be a child of the root view.
+	 * A TextView for displaying LibraryItem titles. Must be a child of the root view.
 	 */
 	private final TextView titleHolder;
 
 	/**
-	 * A TextView for displaying subtitles. Must be a child of the root view.
+	 * A TextView for displaying LibraryItem subtitles. Must be a child of the root view.
 	 */
 	private final TextView subtitleHolder;
 
 	/**
-	 * An ImageView for displaying artwork. Must be a child of the root view.
+	 * An ImageView for displaying LibraryItem artwork. Must be a child of the root view.
 	 */
 	private final ImageView artworkHolder;
 
 	/**
-	 * A view which can be clicked to trigger the display of a contextual menu. Must be a child of
-	 * the root view.
+	 * A view which can be clicked to display a contextual menu. Must be a child of the root view.
 	 */
 	private final View contextualMenuButton;
 
