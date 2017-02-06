@@ -161,13 +161,13 @@ public abstract class DirectBodyPresenter<
 	 */
 	protected void unsubscribeFromDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
+			dataSource.unregisterDataReplacedListener(this);
+			dataSource.unregisterDataModifiedListener(this);
+			dataSource.unregisterLongOperationListener(this);
 			dataSource.unregisterItemAddedListener(this);
 			dataSource.unregisterItemRemovedListener(this);
-			dataSource.unregisterDataReplacedListener(this);
 			dataSource.unregisterItemMovedListener(this);
-			dataSource.unregisterDataModifiedListener(this);
 			dataSource.unregisterItemModifiedListener(this);
-			dataSource.unregisterLongOperationListener(this);
 		}
 	}
 
@@ -179,13 +179,13 @@ public abstract class DirectBodyPresenter<
 	 */
 	protected void subscribeToDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
+			dataSource.registerDataReplacedListener(this);
+			dataSource.registerDataModifiedListener(this);
+			dataSource.registerLongOperationListener(this);
 			dataSource.registerItemAddedListener(this);
 			dataSource.registerItemRemovedListener(this);
-			dataSource.registerDataReplacedListener(this);
-			dataSource.registerItemMovedListener(this);
-			dataSource.registerDataModifiedListener(this);
 			dataSource.registerItemModifiedListener(this);
-			dataSource.registerLongOperationListener(this);
+			dataSource.registerItemMovedListener(this);
 		}
 	}
 
