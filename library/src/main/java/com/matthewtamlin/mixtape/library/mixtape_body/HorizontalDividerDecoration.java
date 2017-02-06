@@ -50,7 +50,7 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 
 	/**
 	 * Constructs a new HorizontalDividerDecoration. The provided inset values are used to inset the
-	 * divider from the edges of each RecycleView item.
+	 * divider from the edges of the RecycleView.
 	 *
 	 * @param context
 	 * 		the Context this decoration is operating in, not null
