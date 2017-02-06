@@ -29,9 +29,8 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
  */
 public interface HeaderContract {
 	/**
-	 * Displays a the title, subtitle and artwork of a single LibraryItem to the user, along with an
-	 * overflow menu button and a series of extra buttons. This view is designed to be used in a
-	 * MixtapeContainerView with a BodyContract.View.
+	 * Displays the title, subtitle and artwork of a single LibraryItem to the user, along with an
+	 * overflow menu button and a series of "extra" buttons.
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
