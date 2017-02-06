@@ -172,7 +172,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 
 	@Override
 	public void setHeaderElevationPx(final int elevationPx) {
-		// No need to check for null, since the header container should never be null
+		// No need to check for null, since the header container is never be null
 		ViewCompat.setElevation(headerContainer, DimensionHelper.dpToPx(getContext(), elevationPx));
 	}
 
