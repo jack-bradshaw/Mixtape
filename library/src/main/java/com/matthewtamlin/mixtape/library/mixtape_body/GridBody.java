@@ -62,7 +62,7 @@ public final class GridBody extends RecyclerViewBody {
 	/**
 	 * The number of columns to display.
 	 */
-	private int numberOfColumns = DEFAULT_NUMBER_OF_COLUMNS;
+	private int numberOfColumns;
 
 	/**
 	 * Constructs a new GridBody.
