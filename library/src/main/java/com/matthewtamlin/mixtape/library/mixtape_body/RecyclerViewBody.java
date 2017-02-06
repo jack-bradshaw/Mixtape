@@ -47,9 +47,8 @@ import java.util.Set;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A RecyclerView backed partial-implementation of the BodyContract.View interface. This class
- * handles binding data to the UI via DataBinders, but delegates the appearance of the UI to
- * subclasses.
+ * A RecyclerView backed partial-implementation of the BodyContract.View interface. This class binds
+ * data to the UI using DataBinders, and delegates the appearance of the UI to subclasses.
  */
 public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
 	/**
