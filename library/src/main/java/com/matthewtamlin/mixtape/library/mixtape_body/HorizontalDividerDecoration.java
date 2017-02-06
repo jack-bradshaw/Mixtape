@@ -55,13 +55,15 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	 * @param context
 	 * 		the Context this decoration is operating in, not null
 	 * @param leftInsetPx
-	 * 		the inset to apply to the left end of each divider, measured in pixels, not less than zero
+	 * 		the inset to apply to the left end of each divider, measured in pixels, at least zero
 	 * @param rightInsetPx
-	 * 		the inset to apply to the right end of the divider, measured in pixels, not less than zero
+	 * 		the inset to apply to the right end of the divider, measured in pixels, at least zero
 	 * @throws IllegalArgumentException
 	 * 		if {@code context} is null
 	 * @throws IllegalArgumentException
-	 * 		if {@code leftInsetPx} or {@code rightInsetPx} is less than zero
+	 * 		if {@code leftInsetPx} is less than zero
+	 * @throws IllegalArgumentException
+	 * 		if {@code rightInsetPx} is less than zero
 	 */
 	HorizontalDividerDecoration(final Context context, final int leftInsetPx,
 			final int rightInsetPx) {
