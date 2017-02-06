@@ -292,7 +292,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Registers a TopReachedListener to this RecyclerViewBody.
+	 * Registers a top reached listener to this RecyclerViewBody. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -302,7 +303,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Unregisters a TopReachedListener from this RecyclerViewBody.
+	 * Unregisters a top reached listener from this RecyclerViewBody. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
