@@ -302,6 +302,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 				}
 
 				if (body != null) {
+					//TODO this should be remove not clear
 					body.clearRegisteredTopReachedListeners();
 				}
 			}
