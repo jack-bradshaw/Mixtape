@@ -38,6 +38,19 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  * A RecyclerViewBody which displays the list of items with a grid of cards. Each card shows the
  * title, subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
  * menu. The number of columns can be customised, and defaults to 2.
+ * <p>
+ * The simplest way to use a GridBody is with a RecyclerViewBodyPresenter. For example:<pre>{@code
+ * 	RecyclerViewBodyPresenter<LibraryItem, ListDataSource<LibraryItem> presenter
+ * 		= new MyPresenter();
+ *
+ * 	ListDataSource<LibraryItem> dataSource = new MyDataSource();
+ * 	presenter.setDataSource(dataSource);
+ *
+ * 	GridBody body = new GridBody();
+ * 	presenter.setView(body);}
+ * </pre>
+ *
+ * This setup will pull data from the data source and display it in the view.
  */
 public final class GridBody extends RecyclerViewBody {
 	/**
