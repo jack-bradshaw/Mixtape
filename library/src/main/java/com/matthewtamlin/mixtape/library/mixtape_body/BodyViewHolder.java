@@ -87,7 +87,7 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	/**
-	 * @return the root view of the RecyclerView item, not null
+	 * @return the root view, not null
 	 */
 	public final View getRootView() {
 		return rootView;
@@ -122,11 +122,11 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	/**
-	 * Creates a new Builder which can be used to create a BodyViewHolder.
+	 * Creates a new BodyViewHolder builder.
 	 *
 	 * @param rootView
 	 * 		the root view to use when building the ViewHolder, not null
-	 * @return the new Builder
+	 * @return the new builder
 	 * @throws IllegalArgumentException
 	 * 		if {@code rootView} is null
 	 */
