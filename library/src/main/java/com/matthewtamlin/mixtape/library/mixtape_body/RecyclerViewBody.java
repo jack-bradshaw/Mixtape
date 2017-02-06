@@ -480,7 +480,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Callbacks to be invoked when a RecyclerViewBOdy is scrolled to the top.
+	 * Callbacks to be invoked when a RecyclerViewBody is scrolled to the top.
 	 */
 	public interface TopReachedListener {
 		/**
