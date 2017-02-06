@@ -27,6 +27,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
@@ -124,12 +126,12 @@ public final class GridBody extends RecyclerViewBody {
 		final View gridItem = LayoutInflater.from(getContext()).inflate(R.layout
 				.gridbodyitem, parent, false);
 
-		return BodyViewHolder.builder(gridItem)
-				.withTitleTextView(R.id.gridBodyItem_title)
-				.withSubtitleTextView(R.id.gridBodyItem_subtitle)
-				.withArtworkImageView(R.id.gridBodyItem_artwork)
-				.withContextualMenuButton(R.id.gridBodyItem_overflowMenuButton)
-				.build();
+		final TextView titleView = (TextView) gridItem.findViewById(R.id.gridBodyItem_title);
+		final TextView subtitleView = (TextView) gridItem.findViewById(R.id.gridBodyItem_subtitle);
+		final ImageView artworkView = (ImageView) gridItem.findViewById(R.id.gridBodyItem_artwork);
+		final View menuButton = gridItem.findViewById(R.id.gridBodyItem_menu);
+
+		return new BodyViewHolder(gridItem, titleView, subtitleView, artworkView, menuButton);
 	}
 
 	@Override
