@@ -65,7 +65,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	/**
 	 * The items to display in the recycler view.
 	 */
-	private List<? extends LibraryItem> data; // Default empty list avoids NPEs
+	private List<? extends LibraryItem> data; // TODO Default empty list avoids NPEs
 
 	/**
 	 * Contains supporting business logic and handles user interaction.
