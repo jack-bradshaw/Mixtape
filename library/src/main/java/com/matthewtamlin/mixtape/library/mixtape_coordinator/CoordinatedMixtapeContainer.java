@@ -230,15 +230,8 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	 */
 	private void createLayout() {
 		inflate(getContext(), R.layout.coordinatedheaderbodyview, this);
-
-		try {
-			coordinatorLayout = NullChecker.checkNotNull((CoordinatorLayout) findViewById(R.id
-					.coordinatedHeaderBodyView_root));
-			headerContainer = NullChecker.checkNotNull((AppBarLayout) findViewById(R.id
-					.coordinatedHeaderBodyView_container));
-		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException("layout does not contain all required views");
-		}
+		coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatedHeaderBodyView_root);
+		headerContainer = (AppBarLayout) findViewById(R.id.coordinatedHeaderBodyView_container);
 	}
 
 	/**
