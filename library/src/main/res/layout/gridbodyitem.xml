@@ -79,7 +79,7 @@
 			</RelativeLayout>
 
 			<ImageButton
-				android:id="@+id/gridBodyItem_overflowMenuButton"
+				android:id="@+id/gridBodyItem_menu"
 				style="?android:borderlessButtonStyle"
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
