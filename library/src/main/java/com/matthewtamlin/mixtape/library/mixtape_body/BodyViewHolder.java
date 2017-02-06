@@ -75,6 +75,7 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	 * 		if the contextual menu button of {@code builder} is null
 	 */
 	private BodyViewHolder(final Builder builder) {
+		//TODO do null check first
 		super(builder.rootView);
 
 		NullChecker.checkNotNull(builder, "builder cannot be null");
