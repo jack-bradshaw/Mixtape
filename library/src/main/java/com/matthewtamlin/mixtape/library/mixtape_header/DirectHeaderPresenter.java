@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 
 import android.graphics.Bitmap;
 
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;

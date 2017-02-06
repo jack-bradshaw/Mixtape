@@ -25,8 +25,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
-import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;

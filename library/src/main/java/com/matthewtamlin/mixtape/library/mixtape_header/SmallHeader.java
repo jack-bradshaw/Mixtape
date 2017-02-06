@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
@@ -351,8 +350,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 	/**
 	 * Initialises the overflow menu. The menu will be shown when the overflow menu button is
 	 * pressed, and selections will be propagated back to the presenter. The menu will always
-	 * display the current menu resource, unless the resource is changed while the menu is
-	 * open.
+	 * display the current menu resource, unless the resource is changed while the menu is open.
 	 */
 	private void initialiseOverflowMenu() {
 		overflowMenuButton.setOnClickListener(new OnClickListener() {

@@ -18,8 +18,6 @@ package com.matthewtamlin.mixtape.library.data;
 
 import android.graphics.Bitmap;
 
-import com.matthewtamlin.java_utilities.testing.Tested;
-
 /**
  * An immutable implementation of the DisplayableDefaults interface.
  */

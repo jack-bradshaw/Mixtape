@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 
 /**
  * A ViewHolder for use in a RecyclerViewBody. The view holder contains a root view, views for
