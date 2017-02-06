@@ -115,7 +115,8 @@ public interface BodyContract {
 		void notifyItemModified(int index);
 
 		/**
-		 * Notifies the view of a structural change to the current list where a single item was moved to a new index.
+		 * Notifies the view of a structural change to the current list where a single item was
+		 * moved to a new index.
 		 *
 		 * @param initialIndex
 		 * 		the index of the item before being moved
@@ -153,7 +154,8 @@ public interface BodyContract {
 			void onItemClicked(BodyContract.View hostView, LibraryItem item);
 
 			/**
-			 * Invoked when the user selects an option from an item specific contextual menu in a BodyContract.View.
+			 * Invoked when the user selects an option from an item specific contextual menu in a
+			 * BodyContract.View.
 			 *
 			 * @param hostView
 			 * 		the BodyContract.View hosting the menu, not the actual view which was clicked, not
