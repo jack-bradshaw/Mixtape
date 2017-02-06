@@ -35,7 +35,6 @@ import java.util.List;
  * @param <V>
  * 		the type of view to present to
  */
-@Tested(testMethod = "unit")
 public abstract class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,

@@ -33,7 +33,6 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  * Decorates a RecyclerView by displaying a horizontal divider beneath each item. The ends of the
  * divider can be inset by passing padding values to the constructor.
  */
-@Tested(testMethod = "manual")
 final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	/**
 	 * The padding to add to the left end of the divider, measured in pixels.

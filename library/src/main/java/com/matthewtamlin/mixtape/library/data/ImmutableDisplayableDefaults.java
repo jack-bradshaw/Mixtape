@@ -23,7 +23,6 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 /**
  * An immutable implementation of the DisplayableDefaults interface.
  */
-@Tested(testMethod = "unit")
 public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	/**
 	 * The default title.

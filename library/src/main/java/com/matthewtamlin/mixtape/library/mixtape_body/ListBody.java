@@ -41,7 +41,6 @@ import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelpe
  * subtitle and artwork of an item, however the artwork can be hidden. Additionally, horizontal
  * dividers can be drawn between each list item (disabled by default).
  */
-@Tested(testMethod = "manual")
 public final class ListBody extends RecyclerViewBody {
 	/**
 	 * Bundle key for saving and restoring the superclass state.

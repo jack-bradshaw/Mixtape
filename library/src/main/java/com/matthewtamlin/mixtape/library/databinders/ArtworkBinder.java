@@ -42,7 +42,6 @@ import java.util.concurrent.Executors;
  * future performance, and asynchronous processing is only used if data is not already cached. By
  * default a fade-in effect is used when artwork is bound, but this can be disable if desired.
  */
-@Tested(testMethod = "unit")
 public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * Identifies this class during logging.

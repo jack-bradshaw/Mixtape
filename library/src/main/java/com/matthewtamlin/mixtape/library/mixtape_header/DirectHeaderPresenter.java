@@ -32,7 +32,6 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
  * @param <V>
  * 		the type of view
  */
-@Tested(testMethod = "unit")
 public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V extends
 		HeaderContract.View> implements HeaderContract.Presenter<S, V> {
 	/**

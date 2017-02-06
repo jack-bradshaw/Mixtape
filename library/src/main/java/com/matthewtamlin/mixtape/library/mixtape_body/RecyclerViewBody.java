@@ -51,7 +51,6 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * A RecyclerView backed implementation of the BodyContract.View interface. This view must be
  * supplied with data binders to function.
  */
-@Tested(testMethod = "manual")
 public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
 	/**
 	 * Identifies this class during logging.

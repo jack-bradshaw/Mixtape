@@ -42,7 +42,6 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  * subtitle and artwork of an item, as well as a three-dot overflow button for the contextual menu.
  * The number of columns can be customised, and defaults to 2.
  */
-@Tested(testMethod = "manual")
 public final class GridBody extends RecyclerViewBody {
 	/**
 	 * Bundle key for saving and restoring the superclass state.

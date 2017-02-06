@@ -49,7 +49,6 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
  * top. Scrolling away from the top re-hides the header.</li> <li>The header is shown when the body
  * is scrolled towards the top, and hidden when the body is scrolled towards the bottom.</li> </ul>
  */
-@Tested(testMethod = "manual")
 public final class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
 	/**

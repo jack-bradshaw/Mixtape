@@ -47,7 +47,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * A simple implementation of the HeaderContract.View interface. This view must be provided with
  * DataBinders in order to function properly.
  */
-@Tested(testMethod = "manual")
 public class SmallHeader extends FrameLayout implements HeaderContract.View {
 	/**
 	 * Used to identify this class in the log.

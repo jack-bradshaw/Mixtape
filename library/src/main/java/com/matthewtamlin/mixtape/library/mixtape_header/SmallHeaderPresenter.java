@@ -38,7 +38,6 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
  * @param <S>
  * 		the type of data source
  */
-@Tested(testMethod = "unit")
 public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 		extends DirectHeaderPresenter<S, SmallHeader> {
 	/**

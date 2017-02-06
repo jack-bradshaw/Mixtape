@@ -38,7 +38,6 @@ import java.util.List;
  * @param <S>
  * 		the type of data source
  */
-@Tested(testMethod = "unit")
 public class RecyclerViewBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>>
