@@ -26,6 +26,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
 import com.matthewtamlin.java_utilities.testing.Tested;
@@ -176,12 +178,12 @@ public final class ListBody extends RecyclerViewBody {
 		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
 				.listbodyitem, parent, false);
 
-		return BodyViewHolder.builder(listItem)
-				.withTitleTextView(R.id.listBodyItem_title)
-				.withSubtitleTextView(R.id.listBodyItem_subtitle)
-				.withArtworkImageView(R.id.listBodyItem_artwork)
-				.withContextualMenuButton(R.id.listIBodytem_overflowMenuButton)
-				.build();
+		final TextView titleView = (TextView) listItem.findViewById(R.id.listBodyItem_title);
+		final TextView subtitleView = (TextView) listItem.findViewById(R.id.listBodyItem_subtitle);
+		final ImageView artworkView = (ImageView) listItem.findViewById(R.id.listBodyItem_artwork);
+		final View menuButton = listItem.findViewById(R.id.listIBodytem_menu);
+
+		return new BodyViewHolder(listItem, titleView, subtitleView, artworkView, menuButton);
 	}
 
 	@Override
