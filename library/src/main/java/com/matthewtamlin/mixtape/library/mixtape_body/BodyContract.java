@@ -174,9 +174,9 @@ public interface BodyContract {
 	 * view, and processing view callbacks.
 	 *
 	 * @param <D>
-	 * 		the type of data to presented
+	 * 		the type of data to present
 	 * @param <S>
-	 * 		the type of data source to presented from
+	 * 		the type of data source to present from
 	 * @param <V>
 	 * 		the type of view to present to
 	 */

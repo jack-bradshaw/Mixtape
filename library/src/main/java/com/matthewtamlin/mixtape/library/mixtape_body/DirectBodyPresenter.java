@@ -25,13 +25,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple implementation of the BodyContract.Presenter interface where the data structure returned
- * by the data source is directly reflected in the view.
+ * A simple implementation of the BodyContract.Presenter interface where the list returned by the
+ * data source is directly reflected in the view.
  *
+ * @param <D>
+ * 		the type of data to present
  * @param <S>
- * 		the type of data source
+ * 		the type of data source to present from
  * @param <V>
- * 		the type of view
+ * 		the type of view to present to
  */
 @Tested(testMethod = "unit")
 public abstract class DirectBodyPresenter<
@@ -40,12 +42,12 @@ public abstract class DirectBodyPresenter<
 		V extends BodyContract.View>
 		implements BodyContract.Presenter<D, S, V> {
 	/**
-	 * The data source supplying the LibraryItems.
+	 * The data source to present from.
 	 */
 	private S dataSource;
 
 	/**
-	 * The view being driven.
+	 * The view to present to.
 	 */
 	private V view;
 
@@ -161,7 +163,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	/**
-	 * Unsubscribes this presenter from all data source callbacks.
+	 * Unsubscribes this presenter from all callbacks delivered by the supplied data source.
 	 *
 	 * @param dataSource
 	 * 		the data source to unsubscribe from, may be null
@@ -179,7 +181,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	/**
-	 * Subscribes this presenter to all data source callbacks.
+	 * Subscribes this presenter to all callbacks delivered by the supplied source callbacks.
 	 *
 	 * @param dataSource
 	 * 		the data source to subscribe to, may be null
@@ -209,7 +211,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	/**
-	 * Sets the supplied view to use this instance as its presenter.
+	 * Sets this presenter as the supplied view's presenter.
 	 *
 	 * @param view
 	 * 		the view to modify, may be null
