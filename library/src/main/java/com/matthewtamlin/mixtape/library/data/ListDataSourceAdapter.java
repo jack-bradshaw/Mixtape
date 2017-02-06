@@ -77,7 +77,7 @@ public abstract class ListDataSourceAdapter<D> extends BaseDataSourceAdapter<Lis
 	}
 
 	@Override
-	public void registerListItemModifiedListener(final ListItemModifiedListener<D> listener) {
+	public void registerItemModifiedListener(final ListItemModifiedListener<D> listener) {
 		if (listener != null) {
 			itemModifiedListeners.add(listener);
 		}

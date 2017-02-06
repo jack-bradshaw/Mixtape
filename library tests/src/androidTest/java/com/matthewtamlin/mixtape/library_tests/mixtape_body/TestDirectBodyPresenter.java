@@ -32,7 +32,6 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -155,7 +154,7 @@ public abstract class TestDirectBodyPresenter<
 		verify(newDataSource).registerItemMovedListener(presenterWithViewOnly);
 		verify(newDataSource).registerItemRemovedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataReplacedListener(presenterWithViewOnly);
-		verify(newDataSource).registerListItemModifiedListener(presenterWithViewOnly);
+		verify(newDataSource).registerItemModifiedListener(presenterWithViewOnly);
 		verify(newDataSource).registerLongOperationListener(presenterWithViewOnly);
 	}
 
@@ -184,7 +183,7 @@ public abstract class TestDirectBodyPresenter<
 		verify(newDataSource).registerItemMovedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerItemRemovedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataReplacedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerListItemModifiedListener(presenterWithDataSourceOnly);
+		verify(newDataSource).registerItemModifiedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerLongOperationListener(presenterWithDataSourceOnly);
 	}
 

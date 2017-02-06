@@ -74,7 +74,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerListItemModifiedListener(ListItemModifiedListener<T> listener);
+	void registerItemModifiedListener(ListItemModifiedListener<T> listener);
 
 	/**
 	 * Unregisters the supplied listener for item modified callbacks. If the supplied listener is
