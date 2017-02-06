@@ -420,7 +420,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					@Override
 					public void onClick(final View v) {
 						if (presenter != null) {
-							presenter.onItemSelected(RecyclerViewBody.this, displayedDataItem);
+							presenter.onLibraryItemSelected(RecyclerViewBody.this, displayedDataItem);
 						}
 					}
 				});

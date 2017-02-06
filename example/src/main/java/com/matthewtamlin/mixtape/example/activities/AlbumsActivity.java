@@ -103,7 +103,7 @@ public class AlbumsActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
+			public void onLibraryItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 				handleItemClick(item);
 			}
 		};

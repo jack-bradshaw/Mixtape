@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
  * abstract, the user interaction handling methods do nothing. To handle user interactions, override
- * {@link #onItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
+ * {@link #onLibraryItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
  * (BodyContract.View, LibraryItem, MenuItem)}.
  *
  * @param <D>
@@ -120,7 +120,7 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
+	public void onLibraryItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 		// Default implementation does nothing
 	}
 

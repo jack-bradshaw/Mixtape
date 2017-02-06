@@ -150,7 +150,7 @@ public interface BodyContract {
 			 * @param item
 			 * 		the selected LibraryItem, not null
 			 */
-			void onItemSelected(BodyContract.View hostView, LibraryItem item);
+			void onLibraryItemSelected(BodyContract.View hostView, LibraryItem item);
 
 			/**
 			 * Invoked when the user selects an option from an item specific contextual menu in a
