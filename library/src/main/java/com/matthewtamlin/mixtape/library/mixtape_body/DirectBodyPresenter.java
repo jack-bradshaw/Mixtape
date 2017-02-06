@@ -120,7 +120,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onDataRemoved(final ListDataSource<D> source, final D item, final int index) {
+	public void onDataRemoved(final ListDataSource<D> source, final D removed, final int index) {
 		if (view != null) {
 			view.notifyItemRemoved(index);
 		}

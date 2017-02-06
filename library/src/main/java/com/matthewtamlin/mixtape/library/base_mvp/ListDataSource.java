@@ -135,12 +135,12 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 *
 		 * @param source
 		 * 		the data source the item used to be contained in, not null
-		 * @param item
+		 * @param removed
 		 * 		the item which was removed, may be null
 		 * @param index
 		 * 		the index of the item before removal
 		 */
-		void onDataRemoved(ListDataSource<I> source, I item, int index);
+		void onDataRemoved(ListDataSource<I> source, I removed, int index);
 	}
 
 	/**
