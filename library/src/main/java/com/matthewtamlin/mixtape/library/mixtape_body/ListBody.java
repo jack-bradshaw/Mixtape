@@ -34,6 +34,8 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
+import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelper.dpToPx;
+
 /**
  * A RecyclerViewBody which displays the items in a vertical list. Each list item shows the title,
  * subtitle and artwork of an item, however the artwork can be hidden. Additionally, horizontal
@@ -227,7 +229,8 @@ public final class ListBody extends RecyclerViewBody {
 	 * Creates and configures the item decorator for showing dividers between the list items.
 	 */
 	private HorizontalDividerDecoration createDecoration() {
-		final int decorationPaddingPx = DimensionHelper.dpToPx(getContext(), DECORATION_PADDING_DP);
+		final int decorationPaddingPx = dpToPx(getContext(), DECORATION_PADDING_DP);
+
 		return new HorizontalDividerDecoration(getContext(), decorationPaddingPx,
 				decorationPaddingPx);
 	}
