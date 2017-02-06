@@ -63,11 +63,11 @@ public class RecyclerViewBodyPresenter<
 	 * Constructs a new SmallHeaderPresenter.
 	 *
 	 * @param titleDataBinder
-	 * 		binds titles to the UI, not null
+	 * 		the DataBinder to use when binding titles to the UI, not null
 	 * @param subtitleDataBinder
-	 * 		bind subtitle to the UI, not null
+	 * 		the DataBinder to use when binding subtitles to the UI, not null
 	 * @param artworkDataBinder
-	 * 		binds artwork to the UI, not null
+	 * 		the DataBinder to use when binding artwork to the UI, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code titleDataBinder} is null
 	 * @throws IllegalArgumentException
