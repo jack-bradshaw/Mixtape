@@ -35,9 +35,9 @@ import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThan;
 
 /**
- * A RecyclerViewBody which displays the items in a grid of cards. Each card shows the title,
- * subtitle and artwork of an item, as well as a three-dot overflow button for the contextual menu.
- * The number of columns can be customised, and defaults to 2.
+ * A RecyclerViewBody which displays the list of items with a grid of cards. Each card shows the
+ * title, subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
+ * menu. The number of columns can be customised, and defaults to 2.
  */
 public final class GridBody extends RecyclerViewBody {
 	/**
