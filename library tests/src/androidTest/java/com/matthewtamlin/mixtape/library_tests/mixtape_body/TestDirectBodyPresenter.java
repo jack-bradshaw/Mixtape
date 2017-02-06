@@ -396,17 +396,17 @@ public abstract class TestDirectBodyPresenter<
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onListItemModified(ListDataSource,
+	 * Test to verify that the {@link DirectBodyPresenter#onItemModified(ListDataSource,
 	 * LibraryItem, int)} method functions correctly when the presenter does not have a view. The
 	 * test will only pass if the method exits normally.
 	 */
 	@Test
 	public void testOnListItemModified_withoutView() {
-		presenterWithDataSourceOnly.onListItemModified(dataSource, mock(LibraryItem.class), 1);
+		presenterWithDataSourceOnly.onItemModified(dataSource, mock(LibraryItem.class), 1);
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onListItemModified(ListDataSource,
+	 * Test to verify that the {@link DirectBodyPresenter#onItemModified(ListDataSource,
 	 * LibraryItem, int)} method functions properly when the presenter has a view. The test will
 	 * only pass if the view is notified of the event.
 	 */
@@ -415,7 +415,7 @@ public abstract class TestDirectBodyPresenter<
 		final int modifiedIndex = 1;
 
 		presenterWithDataSourceAndView
-				.onListItemModified(dataSource, mock(LibraryItem.class), modifiedIndex);
+				.onItemModified(dataSource, mock(LibraryItem.class), modifiedIndex);
 
 		verify(view).notifyItemModified(modifiedIndex);
 	}

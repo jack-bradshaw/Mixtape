@@ -19,7 +19,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 import android.view.MenuItem;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -110,13 +109,13 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onListItemModified(ListDataSource<D> source, D modified, int index) {
+	public void onItemModified(ListDataSource<D> source, D modified, int index) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
 		titleDataBinder.getCache().removeTitle(modified);
 		subtitleDataBinder.getCache().removeSubtitle(modified);
 		artworkDataBinder.getCache().removeArtwork(modified);
 
-		super.onListItemModified(source, modified, index);
+		super.onItemModified(source, modified, index);
 	}
 
 	@Override

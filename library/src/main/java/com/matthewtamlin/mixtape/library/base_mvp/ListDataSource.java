@@ -162,7 +162,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 * @param index
 		 * 		the index of the modified object
 		 */
-		void onListItemModified(ListDataSource<I> source, I modified, int index);
+		void onItemModified(ListDataSource<I> source, I modified, int index);
 	}
 
 	/**
