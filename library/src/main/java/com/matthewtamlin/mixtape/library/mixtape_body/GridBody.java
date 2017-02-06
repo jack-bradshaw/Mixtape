@@ -35,6 +35,7 @@ import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThan;
 
 /**
  * A RecyclerViewBody which displays the items in a grid of cards. Each card shows the title,
@@ -112,7 +113,7 @@ public final class GridBody extends RecyclerViewBody {
 	 * 		if {@code numberOfColumns} is not greater than zero
 	 */
 	public final void setNumberOfColumns(int numberOfColumns) {
-		this.numberOfColumns = IntChecker.checkGreaterThan(numberOfColumns, 0);
+		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
 		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
 	}
 
@@ -156,6 +157,7 @@ public final class GridBody extends RecyclerViewBody {
 	protected void onRestoreInstanceState(final Parcelable parcelableState) {
 		if (parcelableState instanceof Bundle) {
 			final Bundle bundleState = (Bundle) parcelableState;
+
 			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
 
 			setNumberOfColumns(bundleState.getInt(STATE_KEY_NUMBER_OF_COLUMNS,
@@ -178,7 +180,6 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	private void processAttributes(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
-		// Use a TypedArray to process all three types of attributes
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.GridBody, defStyleAttr, defStyleRes);
 
