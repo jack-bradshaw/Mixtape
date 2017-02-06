@@ -58,12 +58,12 @@ public class TestImmutableDisplayableDefaults {
 
 	@Test
 	public void testGetTitle_shouldReturnTestTitle() {
-		assertThat(displayableDefaults.getTitle(), is(TITLE));
+		assertThat(displayableDefaults.getTitle(), is((CharSequence) TITLE));
 	}
 
 	@Test
 	public void testGetSubtitle_shouldReturnTestSubtitle() {
-		assertThat(displayableDefaults.getSubtitle(), is(SUBTITLE));
+		assertThat(displayableDefaults.getSubtitle(), is((CharSequence) SUBTITLE));
 	}
 
 	@Test
