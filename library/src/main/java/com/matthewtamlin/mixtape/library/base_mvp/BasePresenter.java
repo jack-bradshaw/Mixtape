@@ -22,16 +22,6 @@ package com.matthewtamlin.mixtape.library.base_mvp;
  */
 public interface BasePresenter<S extends BaseDataSource, V extends BaseView> {
 	/**
-	 * Starts/restarts presentation by loading data from source and the updating the view. Calling
-	 * this method is safe at all times, however there may not always an effect.
-	 *
-	 * @param forceRefresh
-	 * 		true to discard cached data when loading from the source, false to use the default
-	 * 		behaviour
-	 */
-	void present(boolean forceRefresh);
-
-	/**
 	 * Sets the data source and registers this presenter for callbacks. Passing null removes any
 	 * existing data source without setting a new one.
 	 *

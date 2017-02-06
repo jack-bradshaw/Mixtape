@@ -137,40 +137,6 @@ public abstract class TestDirectHeaderPresenter<S extends BaseDataSource<Library
 	protected abstract DirectHeaderPresenter<S, V> createPresenter();
 
 	/**
-	 * Test to verify that the {@link DirectHeaderPresenter#present(boolean)} method functions
-	 * correctly when the presenter does not have a data source. The test will only pass if the
-	 * method exits normally.
-	 */
-	@Test
-	public void testPresent_withoutDataSource() {
-		presenterWithViewOnly.present(true);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectHeaderPresenter#present(boolean)} method functions
-	 * correctly when the presenter does not have a view. The test will only pass if the method
-	 * exits normally.
-	 */
-	public void testPresent_withoutView() {
-		presenterWithDataSourceOnly.present(true);
-
-		verify(dataSource).loadData(true, any(BaseDataSource.DataLoadedListener.class));
-	}
-
-	/**
-	 * Test to verify that the {@link DirectHeaderPresenter#present(boolean)} method functions
-	 * correctly when the presenter has a data source and a view. The test will only pass if the
-	 * method loads data from the data source, and sets the data to display in the view.
-	 */
-	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
-	public void testPresent_withDataSourceAndView() {
-		presenterWithDataSourceAndView.present(true);
-
-		verify(dataSource).loadData(eq(true), any(BaseDataSource.DataLoadedListener.class));
-	}
-
-	/**
 	 * Test to verify that the {@link DirectHeaderPresenter#setDataSource(BaseDataSource)} method
 	 * functions correctly when the presenter does not already have a data source. The test will
 	 * only pass if the method registers for all relevant callbacks from the new data source.

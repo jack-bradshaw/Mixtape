@@ -52,13 +52,6 @@ public abstract class DirectBodyPresenter<
 	private V view;
 
 	@Override
-	public void present(final boolean forceRefresh) {
-		if (dataSource != null) {
-			dataSource.loadData(forceRefresh, this);
-		}
-	}
-
-	@Override
 	public final void setDataSource(final S dataSource) {
 		unsubscribeFromDataSourceCallbacks(this.dataSource);
 		this.dataSource = dataSource;
