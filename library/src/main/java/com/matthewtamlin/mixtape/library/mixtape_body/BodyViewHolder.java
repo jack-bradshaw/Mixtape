@@ -102,28 +102,28 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	/**
-	 * @return the TextView for displaying titles, not null
+	 * @return the view for displaying LibraryItem titles, not null
 	 */
 	public final TextView getTitleTextView() {
 		return titleHolder;
 	}
 
 	/**
-	 * @return the TextView for displaying subtitles, not null
+	 * @return the view for displaying LibraryItem subtitles, not null
 	 */
 	public final TextView getSubtitleTextView() {
 		return subtitleHolder;
 	}
 
 	/**
-	 * @return the ImageView for displaying artwork, not null
+	 * @return the view for displaying LibraryItem artwork, not null
 	 */
 	public final ImageView getArtworkImageView() {
 		return artworkHolder;
 	}
 
 	/**
-	 * @return the clickable view for triggering the display of a contextual menu, not null
+	 * @return the view which can be clicked to display a contextual menu, not null
 	 */
 	public final View getContextualMenuButton() {
 		return contextualMenuButton;
