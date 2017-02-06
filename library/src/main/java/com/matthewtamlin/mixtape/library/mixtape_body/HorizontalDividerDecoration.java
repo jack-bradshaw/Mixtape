@@ -24,10 +24,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.matthewtamlin.java_utilities.checkers.IntChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
-
 import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThanOrEqualTo;
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
  * Decorates a RecyclerView by displaying a horizontal divider beneath each item. The ends of the
@@ -50,8 +48,7 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	private final Drawable dividerDrawable;
 
 	/**
-	 * Constructs a new HorizontalDividerDecoration. The provided inset values are used to inset the
-	 * divider from the edges of the RecycleView.
+	 * Constructs a new HorizontalDividerDecoration.
 	 *
 	 * @param context
 	 * 		the Context this decoration is operating in, not null
@@ -72,7 +69,7 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 		this.leftInsetPx = checkGreaterThanOrEqualTo(leftInsetPx, 0);
 		this.rightInsetPx = checkGreaterThanOrEqualTo(rightInsetPx, 0);
 
-		// Use a system resource for the divider drawable
+		// Use the list divider resource for the drawable
 		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
 		dividerDrawable = a.getDrawable(0);
 		a.recycle();
