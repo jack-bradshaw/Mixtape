@@ -37,11 +37,10 @@ import com.matthewtamlin.android_utilities.library.helpers.ThemeColorHelper;
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.Presenter;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.Presenter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -68,13 +67,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	private List<? extends LibraryItem> data; // TODO Default empty list avoids NPEs
 
 	/**
-	 * Contains supporting business logic and handles user interaction.
+	 * Drives this view and receives user interaction callbacks.
 	 */
 	private Presenter presenter;
 
 	/**
-	 * The menu resource to display when the contextual menu buttons in the recycler view are
-	 * clicked.
+	 * The menu resource of the item specific contextual menus. Default is -1 as specified by
+	 * interface.
 	 */
 	private int contextualMenuResourceId = -1;
 
@@ -94,17 +93,17 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	private DataBinder<LibraryItem, ImageView> artworkDataBinder;
 
 	/**
-	 * Displays the content to the user.
+	 * Displays the data list to the user.
 	 */
 	private RecyclerView recyclerView;
 
 	/**
-	 * An indefinite progress bar.
+	 * A progress bar to show when data is being loaded.
 	 */
 	private ProgressBar loadingIndicator;
 
 	/**
-	 * Adapts the data to the recycler view.
+	 * Adapts the data list to the recycler view.
 	 */
 	private Adapter<BodyViewHolder> adapter;
 
@@ -156,7 +155,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * 		the DataBinder to use for titles
 	 */
 	public void setTitleDataBinder(final DataBinder<LibraryItem, TextView> titleDataBinder) {
-		// Use reference equality since equality is hard to define for multithreaded objects
+		// Use reference equality since object equality is hard to define for multithreaded objects
 		if (this.titleDataBinder != titleDataBinder) {
 			if (this.titleDataBinder != null) {
 				this.titleDataBinder.cancelAll();
@@ -175,7 +174,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * 		the DataBinder to use for subtitles
 	 */
 	public void setSubtitleDataBinder(final DataBinder<LibraryItem, TextView> subtitleDataBinder) {
-		// Use reference equality since equality is hard to define for multithreaded objects
+		// Use reference equality since object equality is hard to define for multithreaded objects
 		if (this.subtitleDataBinder != subtitleDataBinder) {
 			if (this.subtitleDataBinder != null) {
 				this.subtitleDataBinder.cancelAll();
@@ -194,7 +193,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * 		the DataBinder to use for artwork
 	 */
 	public void setArtworkDataBinder(final DataBinder<LibraryItem, ImageView> artworkDataBinder) {
-		// Use reference equality since equality is hard to define for multithreaded objects
+		// Use reference equality since object equality is hard to define for multithreaded objects
 		if (this.artworkDataBinder != artworkDataBinder) {
 			if (this.artworkDataBinder != null) {
 				this.artworkDataBinder.cancelAll();
@@ -217,7 +216,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * @return the RecyclerView component of this view
+	 * @return the RecyclerView used to display the data
 	 */
 	public final RecyclerView getRecyclerView() {
 		return recyclerView;
@@ -293,9 +292,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Registers a TopReachedListener to this RecyclerViewListener. The listener will be notified
-	 * when this view is scrolled to the top. This method exits normally if the supplied listener is
-	 * null or is already registered.
+	 * Registers a TopReachedListener to this RecyclerViewBody.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -305,9 +302,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Unregisters a TopReachedListener from this RecyclerViewListener. The listener will no longer
-	 * be notified when this view is scrolled to the top. This method exits normally if the supplied
-	 * listener is null or is not already registered.
+	 * Unregisters a TopReachedListener from this RecyclerViewBody.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
@@ -325,7 +320,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Called when the RecyclerView is created to allow customisation before the adapter is set.
+	 * Called when the RecyclerView is created to allow customisation before the adapter is set. The
+	 * default implementation does nothing.
 	 *
 	 * @param recyclerView
 	 * 		the RecyclerView which was created, not null
@@ -345,6 +341,9 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	/**
 	 * Called each time a new BodyViewHolder is required.
 	 *
+	 * @param parent
+	 * 		the ViewGroup the new View will be added to when it is bound to an adapter
+	 * 		position
 	 * @return a new BodyViewHolder, not null
 	 */
 	protected abstract BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent);
