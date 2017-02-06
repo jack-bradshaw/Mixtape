@@ -432,7 +432,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					public void onClick(final View v) {
 						// If the resource hasn't been set, inflating the menu will fail
 						if (contextualMenuResourceId != -1) {
-							showMenu(displayedDataItem, overflowButton);
+							showMenu(overflowButton, displayedDataItem);
 						}
 					}
 				});
@@ -452,16 +452,16 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * Shows a contextual popup menu anchored to the supplied view. Item selections are passed to
 	 * the presenter
 	 *
+	 * @param anchor
+	 * 		the view to anchor the menu to, not null
 	 * @param item
 	 * 		the target of the contextual menu, not null
-	 * @param overflowButton
-	 * 		the view to anchor the menu to, not null
 	 */
-	private void showMenu(final LibraryItem item, final View overflowButton) {
+	private void showMenu(final View anchor, final LibraryItem item) {
 		checkNotNull(item, "item cannot be null.");
-		checkNotNull(overflowButton, "overflowButton cannot be null.");
+		checkNotNull(anchor, "overflowButton cannot be null.");
 
-		final PopupMenu menu = new PopupMenu(getContext(), overflowButton);
+		final PopupMenu menu = new PopupMenu(getContext(), anchor);
 		menu.inflate(contextualMenuResourceId);
 		menu.show();
 
