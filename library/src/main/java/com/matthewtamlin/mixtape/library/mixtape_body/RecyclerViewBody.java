@@ -235,8 +235,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 	@Override
 	public void setItems(final List<? extends LibraryItem> items) {
-		NullChecker.checkNotNull(items, "items cannot be null");
-		data = items;
+		data = items == null ? new ArrayList<LibraryItem>() : items;
 		adapter.notifyDataSetChanged();
 	}
 
