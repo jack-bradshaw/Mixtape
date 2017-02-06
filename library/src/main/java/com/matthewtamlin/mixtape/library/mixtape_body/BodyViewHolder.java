@@ -25,16 +25,12 @@ import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
 
 /**
- * A ViewHolder for displaying a LibraryItems in a BodyContract.View using a RecyclerView. The view
- * holder contains: <ul> <li>The root view of the RecyclerView item.</li> <li>A TextView for
- * displaying the title.</li> <li>A TextView for displaying the subtitle.</li> <li>An ImageView for
- * displaying the artwork.</li> <li>A Button for displaying a contextual menu.</li></ul> </br> This
- * class makes use of the builder pattern for constructing new instances.
+ * A ViewHolder for use in a RecyclerViewBody.
  */
 @Tested(testMethod = "unit")
 public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	/**
-	 * The root view of the RecyclerView item.
+	 * The root view.
 	 */
 	private final View rootView;
 
@@ -54,8 +50,8 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView artworkImageView;
 
 	/**
-	 * A clickable view for triggering the display of an contextual menu. Must be a child of the
-	 * root view.
+	 * A view which can be clicked to trigger the display of a contextual menu. Must be a child of
+	 * the root view.
 	 */
 	private final View contextualMenuButton;
 
@@ -79,6 +75,7 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	 * 		if the contextual menu button of {@code builder} is null
 	 */
 	private BodyViewHolder(final Builder builder) {
+		//TODO do null check first
 		super(builder.rootView);
 
 		NullChecker.checkNotNull(builder, "builder cannot be null");
@@ -90,7 +87,7 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	/**
-	 * @return the root view of the RecyclerView item, not null
+	 * @return the root view, not null
 	 */
 	public final View getRootView() {
 		return rootView;
@@ -125,11 +122,11 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	/**
-	 * Creates a new Builder which can be used to create a BodyViewHolder.
+	 * Creates a new BodyViewHolder builder.
 	 *
 	 * @param rootView
 	 * 		the root view to use when building the ViewHolder, not null
-	 * @return the new Builder
+	 * @return the new builder
 	 * @throws IllegalArgumentException
 	 * 		if {@code rootView} is null
 	 */

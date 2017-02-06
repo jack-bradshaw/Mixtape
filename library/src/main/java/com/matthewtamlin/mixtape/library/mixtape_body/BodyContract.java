@@ -30,7 +30,7 @@ import java.util.List;
  */
 public interface BodyContract {
 	/**
-	 * A View which displays a list of LibraryItems to the user. The view must show an overflow
+	 * A view which displays a list of LibraryItems to the user. The view shows a contextual menu
 	 * button for each item so that the user can perform item specific actions.
 	 * <p>
 	 * If the list of items is modified externally, then the view must be notified of the change.
@@ -38,43 +38,45 @@ public interface BodyContract {
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
-		 * Sets the items to display and updates the UI. To display nothing, pass an empty list.
+		 * Sets the items to display and updates the UI. The view must be notified of any external
+		 * changes to the supplied list. Supplying null is equivalent to supplying an empty list.
 		 *
 		 * @param items
-		 * 		the items to display, not null
+		 * 		the items to display
 		 */
 		void setItems(List<? extends LibraryItem> items);
 
 		/**
-		 * Returns the items currently displayed in this view. The view must be notified of any
-		 * external changes to the list.
+		 * Gets the items currently being displayed in this view. The view must be notified of any
+		 * external changes to the returned list.
 		 *
 		 * @return the items currently displayed in the view, not null
 		 */
 		List<? extends LibraryItem> getItems();
 
 		/**
-		 * Sets the menu to use for the item specific menus. If a menu is being displayed while this
-		 * method is called, there is no guarantee that it will be updated.
+		 * Sets the menu resource to use for the item specific contextual menus. There is no
+		 * guarantee that the UI will be updated if the resource is changed while a menu is being
+		 * displayed.
 		 *
 		 * @param contextualMenuResourceId
-		 * 		the resource ID to use for the item specific menus
+		 * 		the resource ID of the menu resource to use
 		 */
 		void setContextualMenuResource(int contextualMenuResourceId);
 
 		/**
-		 * Returns the current resource ID of the item specific contextual menus. If the resource
-		 * has not yet been set, then -1 is returned.
+		 * Gets the resource ID currently used when creating the item specific contextual menus. If
+		 * the resource has not yet been set, then -1 is returned.
 		 *
-		 * @return the resource ID of the contextual menu resource, -1 if absent
+		 * @return the resource ID used for the contextual menus, -1 if absent
 		 */
 		int getContextualMenuResource();
 
 		/**
-		 * Changes the view so that the item in the list at the specified index is shown.
+		 * Forces the view to display the item at the specified index.
 		 *
 		 * @param itemIndex
-		 * 		the index of the item to show
+		 * 		the index of the item to show, with respect to the current list
 		 */
 		void showItem(int itemIndex);
 
@@ -86,7 +88,7 @@ public interface BodyContract {
 		void notifyItemsChanged();
 
 		/**
-		 * Notifies the view of an addition to the current item list.
+		 * Notifies the view of an addition to the current list.
 		 *
 		 * @param index
 		 * 		the index of the added item
@@ -94,7 +96,7 @@ public interface BodyContract {
 		void notifyItemAdded(int index);
 
 		/**
-		 * Notifies the view of a removal from the current item list.
+		 * Notifies the view of a removal from the current list.
 		 *
 		 * @param index
 		 * 		the index of the removed item
@@ -102,9 +104,10 @@ public interface BodyContract {
 		void notifyItemRemoved(int index);
 
 		/**
-		 * Notifies the view of a change to one of the items in the item list. Unlike the other
-		 * notifications, this notification does not signify a change in the structure of the list,
-		 * but rather a change in the data represented by the contents.
+		 * Notifies the view of a change to one of the items in the current list. This method only
+		 * needs to be invoked if the change affected the title, subtitle or artwork of the item.
+		 * Unlike the other notifications, this notification does not signify a change in the
+		 * structure of the list, but rather a change in the data represented by the contents.
 		 *
 		 * @param index
 		 * 		the index of the changed item
@@ -112,7 +115,8 @@ public interface BodyContract {
 		void notifyItemModified(int index);
 
 		/**
-		 * Notifies the view of an item being moved within the item list.
+		 * Notifies the view of a structural change to the current list where a single item was
+		 * moved to a new index.
 		 *
 		 * @param initialIndex
 		 * 		the index of the item before being moved
@@ -135,31 +139,29 @@ public interface BodyContract {
 		boolean loadingIndicatorIsShown();
 
 		/**
-		 * Can be registered to receive user input callbacks from BodyContract.Views.
+		 * Receives callbacks from a BodyContract.View.
 		 */
 		interface Listener {
 			/**
-			 * Invoked to indicate that the user has clicked on a BodyContract.View element.
+			 * Invoked when the user selects a LibraryItem in a BodyContract.View.
 			 *
 			 * @param hostView
-			 * 		the BodyContract.View hosting the clicked element, not the actual view which was
-			 * 		clicked, not null
+			 * 		the BodyContract.View hosting the selected LibraryItem item, not null
 			 * @param item
-			 * 		the data item associated with the clicked view, not null
+			 * 		the selected LibraryItem, not null
 			 */
 			void onItemClicked(BodyContract.View hostView, LibraryItem item);
 
 			/**
-			 * Invoked to indicate that the user has selected a contextual menu item in a
+			 * Invoked when the user selects an option from an item specific contextual menu in a
 			 * BodyContract.View.
 			 *
 			 * @param hostView
-			 * 		the BodyContract.View hosting the menu, not the actual view which was clicked, not
-			 * 		null
+			 * 		the BodyContract.View hosting the menu, not null
 			 * @param libraryItem
-			 * 		the data item associated with the contextual menu, not null
+			 * 		the LibraryItem targeted by the contextual menu, not null
 			 * @param menuItem
-			 * 		the menu item which was clicked, not null
+			 * 		the selected menu option, not null
 			 */
 			void onContextualMenuItemClicked(BodyContract.View hostView, LibraryItem libraryItem,
 					MenuItem menuItem);
@@ -167,14 +169,16 @@ public interface BodyContract {
 	}
 
 	/**
-	 * Acts as the intermediary between a ListDataSource and a BodyContract.View, and contains the
-	 * business logic needed to update the data and drive the view. Must always be subscribed to
-	 * callback events from the data source and the view (if available).
+	 * The intermediary between a ListDataSource and a BodyContract.View. The presenter contains the
+	 * business logic for updating the data source, processing data source callbacks, driving the
+	 * view, and processing view callbacks.
 	 *
+	 * @param <D>
+	 * 		the type of data to presented
 	 * @param <S>
-	 * 		the type of data returned by the data source
+	 * 		the type of data source to presented from
 	 * @param <V>
-	 * 		the type of view
+	 * 		the type of view to present to
 	 */
 	public interface Presenter<
 			D extends LibraryItem,
