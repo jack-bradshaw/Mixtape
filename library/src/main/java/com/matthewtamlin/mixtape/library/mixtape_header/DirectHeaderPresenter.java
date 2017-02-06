@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 
 import android.graphics.Bitmap;
 
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
@@ -32,7 +31,6 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
  * @param <V>
  * 		the type of view
  */
-@Tested(testMethod = "unit")
 public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V extends
 		HeaderContract.View> implements HeaderContract.Presenter<S, V> {
 	/**
@@ -46,17 +44,14 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 	private V view;
 
 	@Override
-	public void present(final boolean forceRefresh) {
-		if (dataSource != null) {
-			dataSource.loadData(true, this); // Register this class for callbacks
-		}
-	}
-
-	@Override
 	public final void setDataSource(final S dataSource) {
 		unsubscribeFromDataSourceCallbacks(this.dataSource);
 		this.dataSource = dataSource;
 		subscribeToDataSourceCallbacks(this.dataSource);
+
+		if (dataSource != null) {
+			dataSource.loadData(true, this); // Register this class for callbacks
+		}
 	}
 
 	@Override
@@ -69,6 +64,10 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 		removeViewPresenter(this.view);
 		this.view = view;
 		setSelfAsViewPresenter(this.view);
+
+		if (dataSource != null) {
+			dataSource.loadData(true, this); // Register this class for callbacks
+		}
 	}
 
 	@Override

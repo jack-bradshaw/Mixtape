@@ -25,17 +25,16 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
- * Defines the contract between the model, view and presenter for the header.
+ * The MVP contract for a view which presents a single LibraryItems to the user.
  */
 public interface HeaderContract {
 	/**
-	 * Displays a the title, subtitle and artwork of a single LibraryItem to the user, along with an
-	 * overflow menu button and a series of extra buttons. This view is designed to be used in a
-	 * MixtapeContainerView with a BodyContract.View.
+	 * Displays the title, subtitle and artwork of a single LibraryItem to the user, along with an
+	 * overflow menu button and a series of "extra" buttons.
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
-		 * Sets the item to display and updates the UI.
+		 * Sets the item to display and updates the UI. Passing null clear the view.
 		 *
 		 * @param item
 		 * 		the item to display
@@ -43,10 +42,10 @@ public interface HeaderContract {
 		void setItem(LibraryItem item);
 
 		/**
-		 * Returns the item currently displayed in this view. If no item is displayed, then null
-		 * will be returned.
+		 * Gets the item currently displayed in this view. If no item is displayed, then null is
+		 * returned.
 		 *
-		 * @return the item displayed in the view
+		 * @return the item currently being displayed
 		 */
 		LibraryItem getItem();
 

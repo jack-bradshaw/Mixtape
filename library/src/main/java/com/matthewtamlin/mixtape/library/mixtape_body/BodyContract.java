@@ -75,10 +75,10 @@ public interface BodyContract {
 		/**
 		 * Forces the view to display the item at the specified index.
 		 *
-		 * @param itemIndex
+		 * @param index
 		 * 		the index of the item to show, with respect to the current list
 		 */
-		void showItem(int itemIndex);
+		void showItem(int index);
 
 		/**
 		 * Notifies the view of some undefined change to the current item list. This notification
@@ -150,7 +150,7 @@ public interface BodyContract {
 			 * @param item
 			 * 		the selected LibraryItem, not null
 			 */
-			void onItemClicked(BodyContract.View hostView, LibraryItem item);
+			void onItemSelected(BodyContract.View hostView, LibraryItem item);
 
 			/**
 			 * Invoked when the user selects an option from an item specific contextual menu in a
@@ -163,7 +163,7 @@ public interface BodyContract {
 			 * @param menuItem
 			 * 		the selected menu option, not null
 			 */
-			void onContextualMenuItemClicked(BodyContract.View hostView, LibraryItem libraryItem,
+			void onContextualMenuItemSelected(BodyContract.View hostView, LibraryItem libraryItem,
 					MenuItem menuItem);
 		}
 	}

@@ -21,23 +21,24 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.matthewtamlin.java_utilities.checkers.IntChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 
+import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThan;
+
 /**
- * A RecyclerViewBody which displays the items in a grid of cards. Each card shows the title,
- * subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
+ * A RecyclerViewBody which displays the list of items with a grid of cards. Each card shows the
+ * title, subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
  * menu. The number of columns can be customised, and defaults to 2.
  */
-@Tested(testMethod = "manual")
 public final class GridBody extends RecyclerViewBody {
 	/**
 	 * Bundle key for saving and restoring the superclass state.
@@ -58,7 +59,7 @@ public final class GridBody extends RecyclerViewBody {
 	/**
 	 * The number of columns to display.
 	 */
-	private int numberOfColumns = DEFAULT_NUMBER_OF_COLUMNS;
+	private int numberOfColumns;
 
 	/**
 	 * Constructs a new GridBody.
@@ -68,7 +69,7 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	public GridBody(final Context context) {
 		super(context);
-		processAttributes(null, 0, 0);
+		init(null, 0, 0);
 	}
 
 	/**
@@ -81,7 +82,7 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	public GridBody(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-		processAttributes(attrs, 0, 0);
+		init(attrs, 0, 0);
 	}
 
 	/**
@@ -96,7 +97,7 @@ public final class GridBody extends RecyclerViewBody {
 	 */
 	public GridBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		processAttributes(attrs, defStyleAttr, 0);
+		init(attrs, defStyleAttr, 0);
 	}
 
 	/**
@@ -105,15 +106,15 @@ public final class GridBody extends RecyclerViewBody {
 	 * @param numberOfColumns
 	 * 		the number of columns to display, greater than zero
 	 * @throws IllegalArgumentException
-	 * 		if {@code numberOfColumns} is not greater than zero
+	 * 		if {@code numberOfColumns} is less than zero
 	 */
-	public final void setNumberOfColumns(int numberOfColumns) {
-		this.numberOfColumns = IntChecker.checkGreaterThan(numberOfColumns, 0);
+	public final void setNumberOfColumns(final int numberOfColumns) {
+		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
 		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
 	}
 
 	/**
-	 * @return the number of columns currently displayed
+	 * @return the current number of columns
 	 */
 	public final int getNumberOfColumns() {
 		return numberOfColumns;
@@ -124,25 +125,27 @@ public final class GridBody extends RecyclerViewBody {
 		final View gridItem = LayoutInflater.from(getContext()).inflate(R.layout
 				.gridbodyitem, parent, false);
 
-		return BodyViewHolder.builder(gridItem)
-				.withTitleTextView(R.id.gridBodyItem_title)
-				.withSubtitleTextView(R.id.gridBodyItem_subtitle)
-				.withArtworkImageView(R.id.gridBodyItem_artwork)
-				.withContextualMenuButton(R.id.gridBodyItem_overflowMenuButton)
-				.build();
+		final TextView titleView = (TextView) gridItem.findViewById(R.id.gridBodyItem_title);
+		final TextView subtitleView = (TextView) gridItem.findViewById(R.id.gridBodyItem_subtitle);
+		final ImageView artworkView = (ImageView) gridItem.findViewById(R.id.gridBodyItem_artwork);
+		final View menuButton = gridItem.findViewById(R.id.gridBodyItem_menu);
+
+		return new BodyViewHolder(gridItem, titleView, subtitleView, artworkView, menuButton);
 	}
 
 	@Override
 	protected final void onRecyclerViewCreated(final RecyclerView recyclerView) {
-		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns < 1 ? 1
-				: numberOfColumns, LinearLayoutManager.VERTICAL, false));
+		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns,
+				VERTICAL, false));
 	}
 
 	@Override
 	protected Parcelable onSaveInstanceState() {
 		final Bundle savedState = new Bundle();
+
 		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
 		savedState.putInt(STATE_KEY_NUMBER_OF_COLUMNS, numberOfColumns);
+
 		return savedState;
 	}
 
@@ -150,6 +153,7 @@ public final class GridBody extends RecyclerViewBody {
 	protected void onRestoreInstanceState(final Parcelable parcelableState) {
 		if (parcelableState instanceof Bundle) {
 			final Bundle bundleState = (Bundle) parcelableState;
+
 			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
 
 			setNumberOfColumns(bundleState.getInt(STATE_KEY_NUMBER_OF_COLUMNS,
@@ -170,9 +174,8 @@ public final class GridBody extends RecyclerViewBody {
 	 * 		a resource which supplies default attributes, only used if {@code defStyleAttr}	is 0, pass
 	 * 		0 to ignore
 	 */
-	private void processAttributes(final AttributeSet attrs, final int defStyleAttr,
+	private void init(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
-		// Use a TypedArray to process all three types of attributes
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.GridBody, defStyleAttr, defStyleRes);
 

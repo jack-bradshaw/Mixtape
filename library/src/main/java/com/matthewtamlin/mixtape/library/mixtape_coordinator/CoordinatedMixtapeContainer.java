@@ -25,8 +25,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
-import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
@@ -49,7 +47,6 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
  * top. Scrolling away from the top re-hides the header.</li> <li>The header is shown when the body
  * is scrolled towards the top, and hidden when the body is scrolled towards the bottom.</li> </ul>
  */
-@Tested(testMethod = "manual")
 public final class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
 	/**
@@ -172,7 +169,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 
 	@Override
 	public void setHeaderElevationPx(final int elevationPx) {
-		// No need to check for null, since the header container should never be null
+		// No need to check for null, since the header container is never be null
 		ViewCompat.setElevation(headerContainer, DimensionHelper.dpToPx(getContext(), elevationPx));
 	}
 
@@ -230,15 +227,8 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	 */
 	private void createLayout() {
 		inflate(getContext(), R.layout.coordinatedheaderbodyview, this);
-
-		try {
-			coordinatorLayout = NullChecker.checkNotNull((CoordinatorLayout) findViewById(R.id
-					.coordinatedHeaderBodyView_root));
-			headerContainer = NullChecker.checkNotNull((AppBarLayout) findViewById(R.id
-					.coordinatedHeaderBodyView_container));
-		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException("layout does not contain all required views");
-		}
+		coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatedHeaderBodyView_root);
+		headerContainer = (AppBarLayout) findViewById(R.id.coordinatedHeaderBodyView_container);
 	}
 
 	/**
@@ -312,6 +302,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 				}
 
 				if (body != null) {
+					//TODO this should be remove not clear
 					body.clearRegisteredTopReachedListeners();
 				}
 			}
@@ -332,7 +323,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * The ways in which a header and a body can be constrained.
+	 * The supported header-body constraints.
 	 */
 	enum Constraint {
 		/**

@@ -16,12 +16,10 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_body;
 
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +33,6 @@ import java.util.List;
  * @param <V>
  * 		the type of view to present to
  */
-@Tested(testMethod = "unit")
 public abstract class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
@@ -50,13 +47,6 @@ public abstract class DirectBodyPresenter<
 	 * The view to present to.
 	 */
 	private V view;
-
-	@Override
-	public void present(final boolean forceRefresh) {
-		if (dataSource != null) {
-			dataSource.loadData(forceRefresh, this);
-		}
-	}
 
 	@Override
 	public final void setDataSource(final S dataSource) {
@@ -100,36 +90,7 @@ public abstract class DirectBodyPresenter<
 	@Override
 	public void onLoadDataFailed(final BaseDataSource source) {
 		if (view != null) {
-			view.setItems(new ArrayList<LibraryItem>());
-		}
-	}
-
-	@Override
-	public void onDataModified(final BaseDataSource<List<D>> source, final List<D> data) {
-		if (view != null) {
-			view.notifyItemsChanged();
-		}
-	}
-
-	@Override
-	public void onDataMoved(final ListDataSource<D> source, final D object, final int initialIndex,
-			final int finalIndex) {
-		if (view != null) {
-			view.notifyItemMoved(initialIndex, finalIndex);
-		}
-	}
-
-	@Override
-	public void onDataAdded(final ListDataSource<D> source, final D item, final int index) {
-		if (view != null) {
-			view.notifyItemAdded(index);
-		}
-	}
-
-	@Override
-	public void onDataRemoved(final ListDataSource<D> source, final D item, final int index) {
-		if (view != null) {
-			view.notifyItemRemoved(index);
+			view.setItems(null);
 		}
 	}
 
@@ -142,9 +103,9 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onListItemModified(final ListDataSource<D> source, final D item, final int index) {
+	public void onDataModified(final BaseDataSource<List<D>> source, final List<D> data) {
 		if (view != null) {
-			view.notifyItemModified(index);
+			view.notifyItemsChanged();
 		}
 	}
 
@@ -162,6 +123,36 @@ public abstract class DirectBodyPresenter<
 		}
 	}
 
+	@Override
+	public void onDataAdded(final ListDataSource<D> source, final D added, final int index) {
+		if (view != null) {
+			view.notifyItemAdded(index);
+		}
+	}
+
+	@Override
+	public void onDataRemoved(final ListDataSource<D> source, final D removed, final int index) {
+		if (view != null) {
+			view.notifyItemRemoved(index);
+		}
+	}
+
+	@Override
+	public void onItemModified(final ListDataSource<D> source, final D modified,
+			final int index) {
+		if (view != null) {
+			view.notifyItemModified(index);
+		}
+	}
+
+	@Override
+	public void onDataMoved(final ListDataSource<D> source, final D moved, final int initialIndex,
+			final int finalIndex) {
+		if (view != null) {
+			view.notifyItemMoved(initialIndex, finalIndex);
+		}
+	}
+
 	/**
 	 * Unsubscribes this presenter from all callbacks delivered by the supplied data source.
 	 *
@@ -170,13 +161,13 @@ public abstract class DirectBodyPresenter<
 	 */
 	protected void unsubscribeFromDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
+			dataSource.unregisterDataReplacedListener(this);
+			dataSource.unregisterDataModifiedListener(this);
+			dataSource.unregisterLongOperationListener(this);
 			dataSource.unregisterItemAddedListener(this);
 			dataSource.unregisterItemRemovedListener(this);
-			dataSource.unregisterDataReplacedListener(this);
 			dataSource.unregisterItemMovedListener(this);
-			dataSource.unregisterDataModifiedListener(this);
-			dataSource.unregisterListItemModifiedListener(this);
-			dataSource.unregisterLongOperationListener(this);
+			dataSource.unregisterItemModifiedListener(this);
 		}
 	}
 
@@ -188,13 +179,13 @@ public abstract class DirectBodyPresenter<
 	 */
 	protected void subscribeToDataSourceCallbacks(final S dataSource) {
 		if (dataSource != null) {
+			dataSource.registerDataReplacedListener(this);
+			dataSource.registerDataModifiedListener(this);
+			dataSource.registerLongOperationListener(this);
 			dataSource.registerItemAddedListener(this);
 			dataSource.registerItemRemovedListener(this);
-			dataSource.registerDataReplacedListener(this);
+			dataSource.registerItemModifiedListener(this);
 			dataSource.registerItemMovedListener(this);
-			dataSource.registerDataModifiedListener(this);
-			dataSource.registerListItemModifiedListener(this);
-			dataSource.registerLongOperationListener(this);
 		}
 	}
 

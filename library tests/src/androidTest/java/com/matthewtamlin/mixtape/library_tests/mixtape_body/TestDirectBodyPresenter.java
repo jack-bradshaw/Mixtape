@@ -32,7 +32,6 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -140,39 +139,6 @@ public abstract class TestDirectBodyPresenter<
 	protected abstract DirectBodyPresenter<LibraryItem, S, V> createPresenter();
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#present(boolean)} method functions
-	 * correctly when the presenter does not have a data source. The test will only pass if the
-	 * method exits normally.
-	 */
-	@Test
-	public void testPresent_withoutDataSource() {
-		presenterWithViewOnly.present(true);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#present(boolean)} method functions
-	 * correctly when the presenter does not have a view. The test will only pass if the method
-	 * loads data from the data source.
-	 */
-	public void testPresent_withoutView() {
-		presenterWithDataSourceOnly.present(true);
-
-		verify(dataSource).loadData(eq(true), any(BaseDataSource.DataLoadedListener.class));
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#present(boolean)} method functions
-	 * correctly when the presenter has a data source and a view. The test will only pass if the
-	 * method loads data from the data source.
-	 */
-	@Test
-	public void testPresent_withDataSourceAndView() {
-		presenterWithDataSourceAndView.present(true);
-
-		verify(dataSource).loadData(eq(true), any(BaseDataSource.DataLoadedListener.class));
-	}
-
-	/**
 	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
 	 * functions correctly when the presenter does not already have a data source. The test will
 	 * only pass if the method registers for all relevant callbacks from the new data source.
@@ -188,7 +154,7 @@ public abstract class TestDirectBodyPresenter<
 		verify(newDataSource).registerItemMovedListener(presenterWithViewOnly);
 		verify(newDataSource).registerItemRemovedListener(presenterWithViewOnly);
 		verify(newDataSource).registerDataReplacedListener(presenterWithViewOnly);
-		verify(newDataSource).registerListItemModifiedListener(presenterWithViewOnly);
+		verify(newDataSource).registerItemModifiedListener(presenterWithViewOnly);
 		verify(newDataSource).registerLongOperationListener(presenterWithViewOnly);
 	}
 
@@ -209,7 +175,7 @@ public abstract class TestDirectBodyPresenter<
 		verify(dataSource).unregisterItemMovedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterItemRemovedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterDataReplacedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterListItemModifiedListener(presenterWithDataSourceOnly);
+		verify(dataSource).unregisterItemModifiedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterLongOperationListener(presenterWithDataSourceOnly);
 
 		verify(newDataSource).registerItemAddedListener(presenterWithDataSourceOnly);
@@ -217,7 +183,7 @@ public abstract class TestDirectBodyPresenter<
 		verify(newDataSource).registerItemMovedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerItemRemovedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerDataReplacedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerListItemModifiedListener(presenterWithDataSourceOnly);
+		verify(newDataSource).registerItemModifiedListener(presenterWithDataSourceOnly);
 		verify(newDataSource).registerLongOperationListener(presenterWithDataSourceOnly);
 	}
 
@@ -430,17 +396,17 @@ public abstract class TestDirectBodyPresenter<
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onListItemModified(ListDataSource,
+	 * Test to verify that the {@link DirectBodyPresenter#onItemModified(ListDataSource,
 	 * LibraryItem, int)} method functions correctly when the presenter does not have a view. The
 	 * test will only pass if the method exits normally.
 	 */
 	@Test
 	public void testOnListItemModified_withoutView() {
-		presenterWithDataSourceOnly.onListItemModified(dataSource, mock(LibraryItem.class), 1);
+		presenterWithDataSourceOnly.onItemModified(dataSource, mock(LibraryItem.class), 1);
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onListItemModified(ListDataSource,
+	 * Test to verify that the {@link DirectBodyPresenter#onItemModified(ListDataSource,
 	 * LibraryItem, int)} method functions properly when the presenter has a view. The test will
 	 * only pass if the view is notified of the event.
 	 */
@@ -449,7 +415,7 @@ public abstract class TestDirectBodyPresenter<
 		final int modifiedIndex = 1;
 
 		presenterWithDataSourceAndView
-				.onListItemModified(dataSource, mock(LibraryItem.class), modifiedIndex);
+				.onItemModified(dataSource, mock(LibraryItem.class), modifiedIndex);
 
 		verify(view).notifyItemModified(modifiedIndex);
 	}

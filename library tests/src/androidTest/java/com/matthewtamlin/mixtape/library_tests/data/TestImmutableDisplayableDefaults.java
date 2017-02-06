@@ -37,8 +37,8 @@ import static org.hamcrest.Matchers.notNullValue;
 
 @RunWith(AndroidJUnit4.class)
 public class TestImmutableDisplayableDefaults {
-	private static final CharSequence TITLE = "cake";
-	private static final CharSequence SUBTITLE = "lie";
+	private static final String TITLE = "cake";
+	private static final String SUBTITLE = "lie";
 	private static final int IMAGE_RES_ID = R.raw.image1;
 
 	private Bitmap artwork;
@@ -58,12 +58,12 @@ public class TestImmutableDisplayableDefaults {
 
 	@Test
 	public void testGetTitle_shouldReturnTestTitle() {
-		assertThat(displayableDefaults.getTitle(), is(TITLE));
+		assertThat(displayableDefaults.getTitle(), is((CharSequence) TITLE));
 	}
 
 	@Test
 	public void testGetSubtitle_shouldReturnTestSubtitle() {
-		assertThat(displayableDefaults.getSubtitle(), is(SUBTITLE));
+		assertThat(displayableDefaults.getSubtitle(), is((CharSequence) SUBTITLE));
 	}
 
 	@Test

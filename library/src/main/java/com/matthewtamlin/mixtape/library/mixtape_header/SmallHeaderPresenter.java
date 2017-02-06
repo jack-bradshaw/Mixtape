@@ -19,7 +19,6 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 import android.view.MenuItem;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
@@ -38,7 +37,6 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
  * @param <S>
  * 		the type of data source
  */
-@Tested(testMethod = "unit")
 public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 		extends DirectHeaderPresenter<S, SmallHeader> {
 	/**

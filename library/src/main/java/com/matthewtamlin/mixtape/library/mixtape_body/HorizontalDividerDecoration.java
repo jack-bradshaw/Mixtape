@@ -24,14 +24,13 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.matthewtamlin.java_utilities.checkers.IntChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
+import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThanOrEqualTo;
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
  * Decorates a RecyclerView by displaying a horizontal divider beneath each item. The ends of the
- * divider can be inset by passing padding values to the constructor.
+ * divider can be inset by passing inset values to the constructor.
  */
-@Tested(testMethod = "manual")
 final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	/**
 	 * The padding to add to the left end of the divider, measured in pixels.
@@ -49,26 +48,30 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	private final Drawable dividerDrawable;
 
 	/**
-	 * Constructs a new HorizontalDividerDecoration. The provided inset values are used to inset the
-	 * divider from the edges of each RecycleView item.
+	 * Constructs a new HorizontalDividerDecoration.
 	 *
 	 * @param context
 	 * 		the Context this decoration is operating in, not null
 	 * @param leftInsetPx
-	 * 		the inset to apply to the left end of each divider, measured in pixels, not less than zero
+	 * 		the inset to apply to the left end of each divider, measured in pixels, at least zero
 	 * @param rightInsetPx
-	 * 		the inset to apply to the right end of the divider, measured in pixels, not less than zero
+	 * 		the inset to apply to the right end of the divider, measured in pixels, at least zero
 	 * @throws IllegalArgumentException
 	 * 		if {@code context} is null
 	 * @throws IllegalArgumentException
-	 * 		if {@code leftInsetPx} or {@code rightInsetPx} is less than zero
+	 * 		if {@code leftInsetPx} is less than zero
+	 * @throws IllegalArgumentException
+	 * 		if {@code rightInsetPx} is less than zero
 	 */
-	HorizontalDividerDecoration(final Context context, final int leftInsetPx,
+	HorizontalDividerDecoration(final Context context,
+			final int leftInsetPx,
 			final int rightInsetPx) {
-		this.leftInsetPx = IntChecker.checkGreaterThan(leftInsetPx, -1);
-		this.rightInsetPx = IntChecker.checkGreaterThan(rightInsetPx, -1);
+		checkNotNull(context, "context cannot be null.");
 
-		// Use a system resource for the divider drawable
+		this.leftInsetPx = checkGreaterThanOrEqualTo(leftInsetPx, 0);
+		this.rightInsetPx = checkGreaterThanOrEqualTo(rightInsetPx, 0);
+
+		// Use the list divider resource for the drawable
 		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
 		dividerDrawable = a.getDrawable(0);
 		a.recycle();

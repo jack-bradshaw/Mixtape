@@ -141,7 +141,6 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		headerPresenter.setView(header);
 		headerPresenter.setDataSource(headerDataSource);
-		headerPresenter.present(true);
 	}
 
 	private void setupBodyPresenter() {
@@ -157,13 +156,13 @@ public class PlaylistActivity extends AppCompatActivity {
 		bodyPresenter = new RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
-			public void onContextualMenuItemClicked(final BodyContract.View hostView,
+			public void onContextualMenuItemSelected(final BodyContract.View hostView,
 					final LibraryItem item, final MenuItem menuItem) {
 				handleBodyItemMenuItemClicked(item, menuItem);
 			}
 
 			@Override
-			public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
+			public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 				handleBodyItemClicked(item);
 			}
 		};

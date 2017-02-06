@@ -26,18 +26,20 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
+import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelper.dpToPx;
+
 /**
- * A RecyclerViewBody which displays the items in a vertical list. Each list item shows the title,
- * subtitle and artwork of an item, however the artwork can be hidden. Additionally, horizontal
- * dividers can be drawn between each list item (disabled by default).
+ * A RecyclerViewBody which displays the list of items in a vertical list. Each list item shows the
+ * title, subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
+ * menu. The view can be customised by hiding all artwork (shown by default) and showing horizontal
+ * dividers between items (hidden by default).
  */
-@Tested(testMethod = "manual")
 public final class ListBody extends RecyclerViewBody {
 	/**
 	 * Bundle key for saving and restoring the superclass state.
@@ -84,7 +86,7 @@ public final class ListBody extends RecyclerViewBody {
 	/**
 	 * The RecyclerView.ItemDecoration to show below each list item.
 	 */
-	private HorizontalDividerDecoration decoration;
+	private HorizontalDividerDecoration horizontalDividerDecoration;
 
 	/**
 	 * Constructs a new ListBody.
@@ -94,8 +96,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context) {
 		super(context);
-		decoration = createDecoration();
-		processAttributes(null, 0, 0);
+		init(null, 0, 0);
 	}
 
 	/**
@@ -108,8 +109,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-		decoration = createDecoration();
-		processAttributes(attrs, 0, 0);
+		init(attrs, 0, 0);
 	}
 
 	/**
@@ -124,8 +124,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		decoration = createDecoration();
-		processAttributes(attrs, defStyleAttr, 0);
+		init(attrs, defStyleAttr, 0);
 	}
 
 	/**
@@ -137,10 +136,10 @@ public final class ListBody extends RecyclerViewBody {
 	public final void showDividers(final boolean show) {
 		showDividers = show;
 
-		getRecyclerView().removeItemDecoration(decoration);
+		getRecyclerView().removeItemDecoration(horizontalDividerDecoration);
 
 		if (showDividers) {
-			getRecyclerView().addItemDecoration(decoration);
+			getRecyclerView().addItemDecoration(horizontalDividerDecoration);
 		}
 
 		getRecyclerView().invalidateItemDecorations();
@@ -161,7 +160,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public final void showArtwork(final boolean show) {
 		showArtwork = show;
-		getRecyclerView().getAdapter().notifyDataSetChanged(); // Needed to update UI
+		getRecyclerView().getAdapter().notifyDataSetChanged(); // Forces UI update
 	}
 
 	/**
@@ -176,12 +175,12 @@ public final class ListBody extends RecyclerViewBody {
 		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
 				.listbodyitem, parent, false);
 
-		return BodyViewHolder.builder(listItem)
-				.withTitleTextView(R.id.listBodyItem_title)
-				.withSubtitleTextView(R.id.listBodyItem_subtitle)
-				.withArtworkImageView(R.id.listBodyItem_artwork)
-				.withContextualMenuButton(R.id.listIBodytem_overflowMenuButton)
-				.build();
+		final TextView titleView = (TextView) listItem.findViewById(R.id.listBodyItem_title);
+		final TextView subtitleView = (TextView) listItem.findViewById(R.id.listBodyItem_subtitle);
+		final ImageView artworkView = (ImageView) listItem.findViewById(R.id.listBodyItem_artwork);
+		final View menuButton = listItem.findViewById(R.id.listIBodytem_menu);
+
+		return new BodyViewHolder(listItem, titleView, subtitleView, artworkView, menuButton);
 	}
 
 	@Override
@@ -191,7 +190,7 @@ public final class ListBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected void onRecyclerViewCreated(RecyclerView recyclerView) {
+	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
 		super.onRecyclerViewCreated(recyclerView);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 	}
@@ -199,9 +198,11 @@ public final class ListBody extends RecyclerViewBody {
 	@Override
 	protected Parcelable onSaveInstanceState() {
 		final Bundle savedState = new Bundle();
+
 		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
 		savedState.putBoolean(STATE_KEY_SHOW_DIVIDERS, showDividers);
 		savedState.putBoolean(STATE_KEY_SHOW_ARTWORK, showArtwork);
+
 		return savedState;
 	}
 
@@ -209,23 +210,14 @@ public final class ListBody extends RecyclerViewBody {
 	protected void onRestoreInstanceState(final Parcelable parcelableState) {
 		if (parcelableState instanceof Bundle) {
 			final Bundle bundleState = (Bundle) parcelableState;
+
 			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
 
-			showDividers(bundleState.getBoolean(STATE_KEY_SHOW_DIVIDERS,
-					DEFAULT_SHOW_DIVIDERS));
+			showDividers(bundleState.getBoolean(STATE_KEY_SHOW_DIVIDERS, DEFAULT_SHOW_DIVIDERS));
 			showArtwork(bundleState.getBoolean(STATE_KEY_SHOW_ARTWORK, DEFAULT_SHOW_ARTWORK));
 		} else {
 			super.onRestoreInstanceState(parcelableState);
 		}
-	}
-
-	/**
-	 * Creates and configures the item decorator for showing dividers between the list items.
-	 */
-	private HorizontalDividerDecoration createDecoration() {
-		final int decorationPaddingPx = DimensionHelper.dpToPx(getContext(), DECORATION_PADDING_DP);
-		return new HorizontalDividerDecoration(getContext(), decorationPaddingPx,
-				decorationPaddingPx);
 	}
 
 	/**
@@ -239,13 +231,16 @@ public final class ListBody extends RecyclerViewBody {
 	 * 		a resource which supplies default attributes, only used if {@code defStyleAttr}	is 0, pass
 	 * 		0 to ignore
 	 */
-	private void processAttributes(final AttributeSet attrs, final int defStyleAttr,
+	private void init(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
-		// Use a TypedArray to process all three types of attributes
+		final int decorationInsets = dpToPx(getContext(), DECORATION_PADDING_DP);
+		horizontalDividerDecoration = new HorizontalDividerDecoration(getContext(),
+				decorationInsets, decorationInsets);
+
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
 
-		// Methods handle setting member variables and updating the UI
+		// The methods handle both setting member variables and updating the UI
 		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers,
 				DEFAULT_SHOW_DIVIDERS));
 		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork,

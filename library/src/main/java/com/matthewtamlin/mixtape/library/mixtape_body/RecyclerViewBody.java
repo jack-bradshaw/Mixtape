@@ -34,8 +34,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.matthewtamlin.android_utilities.library.helpers.ThemeColorHelper;
-import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
@@ -46,11 +44,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
+
 /**
- * A RecyclerView backed implementation of the BodyContract.View interface. This view must be
- * supplied with data binders to function.
+ * A RecyclerView backed partial-implementation of the BodyContract.View interface. This class binds
+ * data to the UI using DataBinders, and delegates the appearance of the UI to subclasses.
  */
-@Tested(testMethod = "manual")
 public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
 	/**
 	 * Identifies this class during logging.
@@ -58,12 +57,12 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	private static final String TAG = "[RecyclerViewBody]";
 
 	/**
-	 * All registered TopReachedListeners.
+	 * All top reached listeners which are currently registered. This set must never contain null.
 	 */
 	private final Set<TopReachedListener> topReachedListeners = new HashSet<>();
 
 	/**
-	 * The items to display in the recycler view.
+	 * The items to display in the recycler view. This member variable must never be null.
 	 */
 	private List<? extends LibraryItem> data = new ArrayList<>();
 
@@ -163,7 +162,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			}
 
 			this.titleDataBinder = titleDataBinder;
-			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures new data binder is used
+			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
 	}
 
@@ -182,7 +181,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			}
 
 			this.subtitleDataBinder = subtitleDataBinder;
-			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures new data binder is used
+			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
 	}
 
@@ -201,7 +200,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			}
 
 			this.artworkDataBinder = artworkDataBinder;
-			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures new data binder is used
+			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
 	}
 
@@ -251,8 +250,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	@Override
-	public void showItem(final int itemIndex) {
-		recyclerView.smoothScrollToPosition(itemIndex);
+	public void showItem(final int index) {
+		recyclerView.smoothScrollToPosition(index);
 	}
 
 	@Override
@@ -292,22 +291,24 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Registers a TopReachedListener to this RecyclerViewBody.
+	 * Registers a top reached listener to this RecyclerViewBody. If the supplied listener is null
+	 * or is already registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	public void registerTopReachedListener(TopReachedListener listener) {
+	public void registerTopReachedListener(final TopReachedListener listener) {
 		topReachedListeners.add(listener);
 	}
 
 	/**
-	 * Unregisters a TopReachedListener from this RecyclerViewBody.
+	 * Unregisters a top reached listener from this RecyclerViewBody. If the supplied listener is
+	 * null or is not registered, this method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	public void unregisterTopReachedListener(TopReachedListener listener) {
+	public void unregisterTopReachedListener(final TopReachedListener listener) {
 		topReachedListeners.remove(listener);
 	}
 
@@ -326,7 +327,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param recyclerView
 	 * 		the RecyclerView which was created, not null
 	 */
-	protected void onRecyclerViewCreated(RecyclerView recyclerView) {}
+	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {}
 
 	/**
 	 * Called each time data binding completes. The default implementation does nothing.
@@ -342,8 +343,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * Called each time a new BodyViewHolder is required.
 	 *
 	 * @param parent
-	 * 		the ViewGroup the new View will be added to when it is bound to an adapter
-	 * 		position
+	 * 		the ViewGroup the new View will be added to when it is bound to an adapter position
 	 * @return a new BodyViewHolder, not null
 	 */
 	protected abstract BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent);
@@ -362,7 +362,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 		// Configure the recycler view
 		onRecyclerViewCreated(recyclerView);
-		generateAdapter();
+		createAdapter();
 		recyclerView.setAdapter(adapter);
 
 		// When the view is scrolled to the top, notify registered listeners
@@ -385,10 +385,9 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Generates a new adapter but does not assign it to the recycler view. The adapter uses the
-	 * current data binders to bind data to the view holders.
+	 * Creates a new reycler view adapter but does not assign it to the recycler view.
 	 */
-	private void generateAdapter() {
+	private void createAdapter() {
 		adapter = new Adapter<BodyViewHolder>() {
 			@Override
 			public BodyViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -421,7 +420,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					@Override
 					public void onClick(final View v) {
 						if (presenter != null) {
-							presenter.onItemClicked(RecyclerViewBody.this, displayedDataItem);
+							presenter.onItemSelected(RecyclerViewBody.this, displayedDataItem);
 						}
 					}
 				});
@@ -432,23 +431,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					public void onClick(final View v) {
 						// If the resource hasn't been set, inflating the menu will fail
 						if (contextualMenuResourceId != -1) {
-							final PopupMenu menu = new PopupMenu(getContext(), overflowButton);
-							menu.inflate(contextualMenuResourceId);
-							menu.show();
-
-							// Propagate menu selections back to the presenter
-							menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-								@Override
-								public boolean onMenuItemClick(final MenuItem menuItem) {
-									if (presenter != null) {
-										presenter.onContextualMenuItemClicked(RecyclerViewBody.this,
-												displayedDataItem, menuItem);
-										return true; // handled
-									} else {
-										return false; // not handled
-									}
-								}
-							});
+							showMenu(overflowButton, displayedDataItem);
 						}
 					}
 				});
@@ -465,14 +448,45 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Receives callbacks form a RecyclerViewBody when the view is scrolled to the top.
+	 * Shows a contextual popup menu anchored to the supplied view. Item selections are passed to
+	 * the presenter.
+	 *
+	 * @param anchor
+	 * 		the view to anchor the menu to, not null
+	 * @param item
+	 * 		the LibraryItem associated with the contextual menu, not null
+	 */
+	private void showMenu(final View anchor, final LibraryItem item) {
+		checkNotNull(item, "item cannot be null.");
+		checkNotNull(anchor, "overflowButton cannot be null.");
+
+		final PopupMenu menu = new PopupMenu(getContext(), anchor);
+		menu.inflate(contextualMenuResourceId);
+		menu.show();
+
+		// Propagate menu selections back to the presenter
+		menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(final MenuItem menuItem) {
+				if (presenter != null) {
+					presenter.onContextualMenuItemSelected(RecyclerViewBody.this, item, menuItem);
+					return true; // handled
+				} else {
+					return false; // not handled
+				}
+			}
+		});
+	}
+
+	/**
+	 * Callbacks to be invoked when a RecyclerViewBody is scrolled to the top.
 	 */
 	public interface TopReachedListener {
 		/**
-		 * Invoked to indicate that the supplied RecyclerViewBody has been scrolled to the top.
+		 * Invoked when a RecyclerViewBody is scrolled to the top.
 		 *
 		 * @param recyclerViewBody
-		 * 		the scrolled RecyclerViewBody, not null
+		 * 		the RecyclerViewBody, not null
 		 */
 		void onTopReached(RecyclerViewBody recyclerViewBody);
 	}

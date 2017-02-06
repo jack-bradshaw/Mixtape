@@ -19,7 +19,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 import android.view.MenuItem;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -30,15 +29,16 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import java.util.List;
 
 /**
- * A presenter for use with {@link RecyclerViewBody} views. The default implementation does not
- * handle user interaction. To handle user interaction, override the following methods: <ul>
- * <li>{@link #onItemClicked(BodyContract.View, LibraryItem)}</li> <li>{@link
- * #onContextualMenuItemClicked(BodyContract.View, LibraryItem, MenuItem)} </li> </ul>
+ * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
+ * abstract, the user interaction handling methods do nothing. To handle user interactions, override
+ * {@link #onItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
+ * (BodyContract.View, LibraryItem, MenuItem)}.
  *
+ * @param <D>
+ * 		the type of data to present
  * @param <S>
- * 		the type of data source
+ * 		the type of data source to present from
  */
-@Tested(testMethod = "unit")
 public class RecyclerViewBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>>
@@ -60,15 +60,14 @@ public class RecyclerViewBodyPresenter<
 	private ArtworkBinder artworkDataBinder;
 
 	/**
-	 * Constructs a new SmallHeaderPresenter. The supplied DataBinders are passed to the view to
-	 * bind data to the UI.
+	 * Constructs a new SmallHeaderPresenter.
 	 *
 	 * @param titleDataBinder
-	 * 		binds titles to the UI, not null
+	 * 		the DataBinder to use when binding titles to the UI, not null
 	 * @param subtitleDataBinder
-	 * 		bind subtitle to the UI, not null
+	 * 		the DataBinder to use when binding subtitles to the UI, not null
 	 * @param artworkDataBinder
-	 * 		binds artwork to the UI, not null
+	 * 		the DataBinder to use when binding artwork to the UI, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code titleDataBinder} is null
 	 * @throws IllegalArgumentException
@@ -89,7 +88,7 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void setView(RecyclerViewBody view) {
+	public void setView(final RecyclerViewBody view) {
 		super.setView(view);
 
 		if (view != null) {
@@ -101,7 +100,7 @@ public class RecyclerViewBodyPresenter<
 
 
 	@Override
-	public void onDataModified(BaseDataSource<List<D>> source,	List<D> data) {
+	public void onDataModified(final BaseDataSource<List<D>> source, final List<D> data) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
 		titleDataBinder.getCache().clearTitles();
 		subtitleDataBinder.getCache().clearSubtitles();
@@ -111,22 +110,22 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onListItemModified(ListDataSource<D> source, D item, int index) {
+	public void onItemModified(final ListDataSource<D> source, final D modified, final int index) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
-		titleDataBinder.getCache().removeTitle(item);
-		subtitleDataBinder.getCache().removeSubtitle(item);
-		artworkDataBinder.getCache().removeArtwork(item);
+		titleDataBinder.getCache().removeTitle(modified);
+		subtitleDataBinder.getCache().removeSubtitle(modified);
+		artworkDataBinder.getCache().removeArtwork(modified);
 
-		super.onListItemModified(source, item, index);
+		super.onItemModified(source, modified, index);
 	}
 
 	@Override
-	public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
+	public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onContextualMenuItemClicked(final BodyContract.View hostView, final LibraryItem
+	public void onContextualMenuItemSelected(final BodyContract.View hostView, final LibraryItem
 			libraryItem, final MenuItem menuItem) {
 		// Default implementation does nothing
 	}
