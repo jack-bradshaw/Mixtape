@@ -88,7 +88,7 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void setView(RecyclerViewBody view) {
+	public void setView(final RecyclerViewBody view) {
 		super.setView(view);
 
 		if (view != null) {
@@ -100,7 +100,7 @@ public class RecyclerViewBodyPresenter<
 
 
 	@Override
-	public void onDataModified(BaseDataSource<List<D>> source, List<D> data) {
+	public void onDataModified(final BaseDataSource<List<D>> source, final List<D> data) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
 		titleDataBinder.getCache().clearTitles();
 		subtitleDataBinder.getCache().clearSubtitles();
@@ -110,7 +110,7 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onItemModified(ListDataSource<D> source, D modified, int index) {
+	public void onItemModified(final ListDataSource<D> source, final D modified, final int index) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
 		titleDataBinder.getCache().removeTitle(modified);
 		subtitleDataBinder.getCache().removeSubtitle(modified);
