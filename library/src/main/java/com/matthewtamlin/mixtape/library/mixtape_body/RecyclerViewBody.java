@@ -251,8 +251,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	@Override
-	public void showItem(final int itemIndex) {
-		recyclerView.smoothScrollToPosition(itemIndex);
+	public void showItem(final int index) {
+		recyclerView.smoothScrollToPosition(index);
 	}
 
 	@Override

@@ -75,10 +75,10 @@ public interface BodyContract {
 		/**
 		 * Forces the view to display the item at the specified index.
 		 *
-		 * @param itemIndex
+		 * @param index
 		 * 		the index of the item to show, with respect to the current list
 		 */
-		void showItem(int itemIndex);
+		void showItem(int index);
 
 		/**
 		 * Notifies the view of some undefined change to the current item list. This notification
