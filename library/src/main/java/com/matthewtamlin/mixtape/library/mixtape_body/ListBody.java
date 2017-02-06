@@ -35,9 +35,10 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelper.dpToPx;
 
 /**
- * A RecyclerViewBody which displays the items in a vertical list. Each list item shows the title,
- * subtitle and artwork of an item, however the artwork can be hidden. Additionally, horizontal
- * dividers can be drawn between each list item (disabled by default).
+ * A RecyclerViewBody which displays the list of items in a vertical list. Each list item shows the
+ * title, subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
+ * menu. The view can be customised by hiding all artwork (shown by default) and showing horizontal
+ * dividers between items (hidden by default).
  */
 public final class ListBody extends RecyclerViewBody {
 	/**
