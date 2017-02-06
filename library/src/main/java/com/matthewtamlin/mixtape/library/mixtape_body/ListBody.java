@@ -233,7 +233,7 @@ public final class ListBody extends RecyclerViewBody {
 	private void init(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
 		final int decorationInsets = dpToPx(getContext(), DECORATION_PADDING_DP);
-		horizontalDividerDecoration =  new HorizontalDividerDecoration(getContext(),
+		horizontalDividerDecoration = new HorizontalDividerDecoration(getContext(),
 				decorationInsets, decorationInsets);
 
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
