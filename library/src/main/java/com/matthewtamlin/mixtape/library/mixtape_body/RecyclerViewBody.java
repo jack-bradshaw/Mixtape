@@ -34,7 +34,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.matthewtamlin.android_utilities.library.helpers.ThemeColorHelper;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
@@ -48,8 +47,9 @@ import java.util.Set;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 /**
- * A RecyclerView backed implementation of the BodyContract.View interface. This view must be
- * supplied with data binders to function.
+ * A RecyclerView backed partial-implementation of the BodyContract.View interface. This class
+ * handles binding data to the UI via DataBinders, but delegates the appearance of the UI to
+ * subclasses.
  */
 public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
 	/**
@@ -58,12 +58,12 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	private static final String TAG = "[RecyclerViewBody]";
 
 	/**
-	 * All registered TopReachedListeners.
+	 * All top reached listeners which are currently registered. This set must never contain null.
 	 */
 	private final Set<TopReachedListener> topReachedListeners = new HashSet<>();
 
 	/**
-	 * The items to display in the recycler view.
+	 * The items to display in the recycler view. This member variable must never be null.
 	 */
 	private List<? extends LibraryItem> data = new ArrayList<>();
 
@@ -163,7 +163,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			}
 
 			this.titleDataBinder = titleDataBinder;
-			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures new data binder is used
+			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
 	}
 
@@ -182,7 +182,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			}
 
 			this.subtitleDataBinder = subtitleDataBinder;
-			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures new data binder is used
+			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
 	}
 
@@ -201,7 +201,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			}
 
 			this.artworkDataBinder = artworkDataBinder;
-			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures new data binder is used
+			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
 	}
 
