@@ -115,7 +115,7 @@ public interface BodyContract {
 		void notifyItemModified(int index);
 
 		/**
-		 * Notifies the view of an item being moved within the item list.
+		 * Notifies the view of a structural change to the current list where a single item was moved to a new index.
 		 *
 		 * @param initialIndex
 		 * 		the index of the item before being moved
