@@ -41,6 +41,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.Presenter;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -64,7 +65,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	/**
 	 * The items to display in the recycler view.
 	 */
-	private List<? extends LibraryItem> data; // TODO Default empty list avoids NPEs
+	private List<? extends LibraryItem> data = new ArrayList<>();
 
 	/**
 	 * Drives this view and receives user interaction callbacks.
