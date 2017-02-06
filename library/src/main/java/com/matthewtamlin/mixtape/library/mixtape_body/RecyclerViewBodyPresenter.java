@@ -34,8 +34,10 @@ import java.util.List;
  * {@link #onItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
  * (BodyContract.View, LibraryItem, MenuItem)}.
  *
+ * @param <D>
+ * 		the type of data to present
  * @param <S>
- * 		the type of data source
+ * 		the type of data source to present from
  */
 public class RecyclerViewBodyPresenter<
 		D extends LibraryItem,
@@ -58,8 +60,7 @@ public class RecyclerViewBodyPresenter<
 	private ArtworkBinder artworkDataBinder;
 
 	/**
-	 * Constructs a new SmallHeaderPresenter. The supplied DataBinders are passed to the view to
-	 * bind data to the UI.
+	 * Constructs a new SmallHeaderPresenter.
 	 *
 	 * @param titleDataBinder
 	 * 		binds titles to the UI, not null
