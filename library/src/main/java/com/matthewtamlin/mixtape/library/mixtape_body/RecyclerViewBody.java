@@ -45,6 +45,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
+
 /**
  * A RecyclerView backed implementation of the BodyContract.View interface. This view must be
  * supplied with data binders to function.
@@ -446,7 +448,19 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 		};
 	}
 
+	/**
+	 * Shows a contextual popup menu anchored to the supplied view. Item selections are passed to
+	 * the presenter
+	 *
+	 * @param item
+	 * 		the target of the contextual menu, not null
+	 * @param overflowButton
+	 * 		the view to anchor the menu to, not null
+	 */
 	private void showMenu(final LibraryItem item, final View overflowButton) {
+		checkNotNull(item, "item cannot be null.");
+		checkNotNull(overflowButton, "overflowButton cannot be null.");
+
 		final PopupMenu menu = new PopupMenu(getContext(), overflowButton);
 		menu.inflate(contextualMenuResourceId);
 		menu.show();
