@@ -66,6 +66,10 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 		removeViewPresenter(this.view);
 		this.view = view;
 		setSelfAsViewPresenter(this.view);
+
+		if (dataSource != null) {
+			dataSource.loadData(true, this); // Register this class for callbacks
+		}
 	}
 
 	@Override
