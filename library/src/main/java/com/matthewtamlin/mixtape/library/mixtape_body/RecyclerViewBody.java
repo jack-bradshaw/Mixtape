@@ -354,10 +354,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	private void init() {
 		// Initialise overall view
 		inflate(getContext(), R.layout.reyclerviewbody, this);
-		getViewHandles();
+		recyclerView = (RecyclerView) findViewById(R.id.recyclerViewBody_recyclerView);
+		loadingIndicator = (ProgressBar) findViewById(R.id.recyclerViewBody_progressIndicator);
+
+		// Apply the accent color of the current theme to the loading indicator
 		setLoadingIndicatorColor(ThemeColorHelper.getAccentColor(getContext(), Color.GRAY));
 
-		// Configure recycler view
+		// Configure the recycler view
 		onRecyclerViewCreated(recyclerView);
 		generateAdapter();
 		recyclerView.setAdapter(adapter);
@@ -379,23 +382,6 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 				}
 			}
 		});
-	}
-
-	/**
-	 * Assigns the necessary views references to member variables.
-	 */
-	private void getViewHandles() {
-		//TODO get rid of try catch
-		try {
-			recyclerView = (RecyclerView) NullChecker.checkNotNull(findViewById(R.id
-					.recyclerViewBody_recyclerView), "init failed: recycler view not found");
-
-			loadingIndicator = (ProgressBar) NullChecker.checkNotNull(findViewById(R.id
-							.recyclerViewBody_progressIndicator),
-					"init failed: progress indicator not found");
-		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException("layout does not contain all required views");
-		}
 	}
 
 	/**
