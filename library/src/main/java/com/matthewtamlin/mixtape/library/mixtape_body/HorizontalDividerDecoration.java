@@ -27,6 +27,8 @@ import android.view.View;
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
 
+import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThanOrEqualTo;
+
 /**
  * Decorates a RecyclerView by displaying a horizontal divider beneath each item. The ends of the
  * divider can be inset by passing padding values to the constructor.
@@ -65,10 +67,11 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	 * @throws IllegalArgumentException
 	 * 		if {@code rightInsetPx} is less than zero
 	 */
-	HorizontalDividerDecoration(final Context context, final int leftInsetPx,
+	HorizontalDividerDecoration(final Context context,
+			final int leftInsetPx,
 			final int rightInsetPx) {
-		this.leftInsetPx = IntChecker.checkGreaterThan(leftInsetPx, -1);
-		this.rightInsetPx = IntChecker.checkGreaterThan(rightInsetPx, -1);
+		this.leftInsetPx = checkGreaterThanOrEqualTo(leftInsetPx, 0);
+		this.rightInsetPx = checkGreaterThanOrEqualTo(rightInsetPx, 0);
 
 		// Use a system resource for the divider drawable
 		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
