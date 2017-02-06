@@ -66,6 +66,8 @@ final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	HorizontalDividerDecoration(final Context context,
 			final int leftInsetPx,
 			final int rightInsetPx) {
+		checkNotNull(context, "context cannot be null.");
+
 		this.leftInsetPx = checkGreaterThanOrEqualTo(leftInsetPx, 0);
 		this.rightInsetPx = checkGreaterThanOrEqualTo(rightInsetPx, 0);
 
