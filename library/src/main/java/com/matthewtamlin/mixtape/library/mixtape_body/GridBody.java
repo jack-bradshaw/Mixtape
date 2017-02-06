@@ -36,8 +36,8 @@ import com.matthewtamlin.mixtape.library.R;
 
 /**
  * A RecyclerViewBody which displays the items in a grid of cards. Each card shows the title,
- * subtitle and artwork of an item, as well as a three-dot overflow button for the contextual
- * menu. The number of columns can be customised, and defaults to 2.
+ * subtitle and artwork of an item, as well as a three-dot overflow button for the contextual menu.
+ * The number of columns can be customised, and defaults to 2.
  */
 @Tested(testMethod = "manual")
 public final class GridBody extends RecyclerViewBody {
@@ -136,8 +136,8 @@ public final class GridBody extends RecyclerViewBody {
 
 	@Override
 	protected final void onRecyclerViewCreated(final RecyclerView recyclerView) {
-		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns < 1 ? 1
-				: numberOfColumns, LinearLayoutManager.VERTICAL, false));
+		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns,
+				LinearLayoutManager.VERTICAL, false));
 	}
 
 	@Override
