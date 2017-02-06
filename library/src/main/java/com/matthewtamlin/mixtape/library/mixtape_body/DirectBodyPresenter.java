@@ -105,7 +105,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onDataMoved(final ListDataSource<D> source, final D object, final int initialIndex,
+	public void onDataMoved(final ListDataSource<D> source, final D moved, final int initialIndex,
 			final int finalIndex) {
 		if (view != null) {
 			view.notifyItemMoved(initialIndex, finalIndex);

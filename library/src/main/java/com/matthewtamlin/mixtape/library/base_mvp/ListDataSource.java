@@ -177,14 +177,14 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 *
 		 * @param source
 		 * 		the data source containing the item, not null
-		 * @param object
+		 * @param moved
 		 * 		the item which was moved, may be null
 		 * @param initialIndex
 		 * 		the index of the object before being moved
 		 * @param finalIndex
 		 * 		the index of the object after being moved
 		 */
-		void onDataMoved(ListDataSource<I> source, I object, int initialIndex, int finalIndex);
+		void onDataMoved(ListDataSource<I> source, I moved, int initialIndex, int finalIndex);
 	}
 
 	/**
