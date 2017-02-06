@@ -25,7 +25,7 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
- * Defines the contract between the model, view and presenter for the header.
+ * The MVP contract for a view which presents a single LibraryItems to the user.
  */
 public interface HeaderContract {
 	/**
