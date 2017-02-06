@@ -133,7 +133,7 @@ public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * Task for asynchronously loading data and binding it to the UI when available.
 	 */
-	private final class BinderTask extends AsyncTask<Void, Void, CharSequence> {
+	private class BinderTask extends AsyncTask<Void, Void, CharSequence> {
 		/**
 		 * The TextView to bind data to.
 		 */
