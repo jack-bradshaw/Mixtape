@@ -175,7 +175,7 @@ public abstract class TestDirectBodyPresenter<
 		verify(dataSource).unregisterItemMovedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterItemRemovedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterDataReplacedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterListItemModifiedListener(presenterWithDataSourceOnly);
+		verify(dataSource).unregisterItemModifiedListener(presenterWithDataSourceOnly);
 		verify(dataSource).unregisterLongOperationListener(presenterWithDataSourceOnly);
 
 		verify(newDataSource).registerItemAddedListener(presenterWithDataSourceOnly);

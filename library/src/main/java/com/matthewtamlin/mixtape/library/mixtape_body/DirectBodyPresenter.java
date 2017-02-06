@@ -168,7 +168,7 @@ public abstract class DirectBodyPresenter<
 			dataSource.unregisterDataReplacedListener(this);
 			dataSource.unregisterItemMovedListener(this);
 			dataSource.unregisterDataModifiedListener(this);
-			dataSource.unregisterListItemModifiedListener(this);
+			dataSource.unregisterItemModifiedListener(this);
 			dataSource.unregisterLongOperationListener(this);
 		}
 	}

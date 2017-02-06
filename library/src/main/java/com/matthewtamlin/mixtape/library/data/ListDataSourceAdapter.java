@@ -84,7 +84,7 @@ public abstract class ListDataSourceAdapter<D> extends BaseDataSourceAdapter<Lis
 	}
 
 	@Override
-	public void unregisterListItemModifiedListener(final ListItemModifiedListener<D> listener) {
+	public void unregisterItemModifiedListener(final ListItemModifiedListener<D> listener) {
 		itemModifiedListeners.remove(listener);
 	}
 
