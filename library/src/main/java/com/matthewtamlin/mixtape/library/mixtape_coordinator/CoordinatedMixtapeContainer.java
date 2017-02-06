@@ -325,7 +325,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * The ways in which a header and a body can be constrained.
+	 * The supported header-body constraints.
 	 */
 	enum Constraint {
 		/**
