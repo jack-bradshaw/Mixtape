@@ -50,8 +50,7 @@ public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	 * @param artwork
 	 * 		the default artwork, null allowed
 	 */
-	// TODO change to String for title and subtitle
-	public ImmutableDisplayableDefaults(final CharSequence title, final CharSequence subtitle,
+	public ImmutableDisplayableDefaults(final String title, final String subtitle,
 			final Bitmap artwork) {
 		this.title = title;
 		this.subtitle = subtitle;
