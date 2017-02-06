@@ -98,6 +98,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context) {
 		super(context);
+
 		decoration = createDecoration();
 		processAttributes(null, 0, 0);
 	}
@@ -112,6 +113,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
+
 		decoration = createDecoration();
 		processAttributes(attrs, 0, 0);
 	}
@@ -128,6 +130,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public ListBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
+
 		decoration = createDecoration();
 		processAttributes(attrs, defStyleAttr, 0);
 	}
@@ -165,7 +168,7 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	public final void showArtwork(final boolean show) {
 		showArtwork = show;
-		getRecyclerView().getAdapter().notifyDataSetChanged(); // Needed to update UI
+		getRecyclerView().getAdapter().notifyDataSetChanged(); // Forces UI update
 	}
 
 	/**
@@ -195,7 +198,7 @@ public final class ListBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected void onRecyclerViewCreated(RecyclerView recyclerView) {
+	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
 		super.onRecyclerViewCreated(recyclerView);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 	}
@@ -230,7 +233,6 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	private HorizontalDividerDecoration createDecoration() {
 		final int decorationPaddingPx = dpToPx(getContext(), DECORATION_PADDING_DP);
-
 		return new HorizontalDividerDecoration(getContext(), decorationPaddingPx,
 				decorationPaddingPx);
 	}
@@ -248,11 +250,10 @@ public final class ListBody extends RecyclerViewBody {
 	 */
 	private void processAttributes(final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
-		// Use a TypedArray to process all three types of attributes
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
 
-		// Methods handle setting member variables and updating the UI
+		// The methods handle setting member variables and updating the UI
 		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers,
 				DEFAULT_SHOW_DIVIDERS));
 		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork,
