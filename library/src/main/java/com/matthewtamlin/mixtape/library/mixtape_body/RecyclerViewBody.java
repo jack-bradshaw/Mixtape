@@ -328,7 +328,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param recyclerView
 	 * 		the RecyclerView which was created, not null
 	 */
-	protected void onRecyclerViewCreated(RecyclerView recyclerView) {}
+	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {}
 
 	/**
 	 * Called each time data binding completes. The default implementation does nothing.
