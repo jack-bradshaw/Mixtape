@@ -34,7 +34,7 @@ public interface HeaderContract {
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
-		 * Sets the item to display and updates the UI.
+		 * Sets the item to display and updates the UI. Passing null clear the view.
 		 *
 		 * @param item
 		 * 		the item to display
@@ -42,10 +42,10 @@ public interface HeaderContract {
 		void setItem(LibraryItem item);
 
 		/**
-		 * Returns the item currently displayed in this view. If no item is displayed, then null
-		 * will be returned.
+		 * Gets the item currently displayed in this view. If no item is displayed, then null is
+		 * returned.
 		 *
-		 * @return the item displayed in the view
+		 * @return the item currently being displayed
 		 */
 		LibraryItem getItem();
 
