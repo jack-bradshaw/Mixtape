@@ -115,12 +115,12 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 		 *
 		 * @param source
 		 * 		the data source the item was added to, not null
-		 * @param item
+		 * @param added
 		 * 		the item which was added, may be null
 		 * @param index
 		 * 		the index of the added item
 		 */
-		void onDataAdded(ListDataSource<I> source, I item, int index);
+		void onDataAdded(ListDataSource<I> source, I added, int index);
 	}
 
 	/**
