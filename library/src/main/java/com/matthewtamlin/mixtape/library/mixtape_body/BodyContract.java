@@ -163,7 +163,7 @@ public interface BodyContract {
 			 * @param menuItem
 			 * 		the selected menu option, not null
 			 */
-			void onContextualMenuItemClicked(BodyContract.View hostView, LibraryItem libraryItem,
+			void onContextualMenuItemSelected(BodyContract.View hostView, LibraryItem libraryItem,
 					MenuItem menuItem);
 		}
 	}

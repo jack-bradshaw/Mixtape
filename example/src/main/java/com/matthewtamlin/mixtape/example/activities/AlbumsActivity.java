@@ -97,7 +97,7 @@ public class AlbumsActivity extends AppCompatActivity {
 		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
-			public void onContextualMenuItemClicked(final BodyContract.View hostView,
+			public void onContextualMenuItemSelected(final BodyContract.View hostView,
 					final LibraryItem libraryItem, final MenuItem menuItem) {
 				handleContextualMenuClick(libraryItem, menuItem);
 			}

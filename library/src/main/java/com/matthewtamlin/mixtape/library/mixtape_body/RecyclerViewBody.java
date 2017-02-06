@@ -440,7 +440,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 								@Override
 								public boolean onMenuItemClick(final MenuItem menuItem) {
 									if (presenter != null) {
-										presenter.onContextualMenuItemClicked(RecyclerViewBody.this,
+										presenter.onContextualMenuItemSelected(RecyclerViewBody.this,
 												displayedDataItem, menuItem);
 										return true; // handled
 									} else {
