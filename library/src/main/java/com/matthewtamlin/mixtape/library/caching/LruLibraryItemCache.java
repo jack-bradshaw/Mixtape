@@ -21,7 +21,6 @@ import android.util.Log;
 import android.util.LruCache;
 
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
@@ -57,8 +56,8 @@ public final class LruLibraryItemCache implements LibraryItemCache {
 	private final LruCache<LibraryItem, Bitmap> artworkCache;
 
 	/**
-	 * Constructs a new LruLibraryItemCache. The supplied capacities determine when to evict
-	 * items to free up space.
+	 * Constructs a new LruLibraryItemCache. The supplied capacities determine when to evict items
+	 * to free up space.
 	 *
 	 * @param titleSizeBytes
 	 * 		the capacity of the title cache, measured in bytes, greater than zero

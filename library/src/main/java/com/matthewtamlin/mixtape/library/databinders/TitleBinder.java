@@ -20,7 +20,6 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -30,8 +29,8 @@ import java.util.Iterator;
 
 /**
  * Binds title data from LibraryItems to TextViews. Data is cached as it is loaded to improve future
- * performance, and asynchronous processing is only used if data is not already cached. In case
- * an item fails to return a title, a default must be supplied.
+ * performance, and asynchronous processing is only used if data is not already cached. In case an
+ * item fails to return a title, a default must be supplied.
  */
 public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
