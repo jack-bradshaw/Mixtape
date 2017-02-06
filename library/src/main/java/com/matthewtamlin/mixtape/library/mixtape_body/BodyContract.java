@@ -142,7 +142,7 @@ public interface BodyContract {
 		 */
 		interface Listener {
 			/**
-			 * Invoked to indicate that the user has clicked on a BodyContract.View element.
+			 * Invoked when the user selects a LibraryItem in a BodyContract.View.
 			 *
 			 * @param hostView
 			 * 		the BodyContract.View hosting the clicked element, not the actual view which was
@@ -153,8 +153,7 @@ public interface BodyContract {
 			void onItemClicked(BodyContract.View hostView, LibraryItem item);
 
 			/**
-			 * Invoked to indicate that the user has selected a contextual menu item in a
-			 * BodyContract.View.
+			 * Invoked when the user selects an option from an item specific contextual menu in a BodyContract.View.
 			 *
 			 * @param hostView
 			 * 		the BodyContract.View hosting the menu, not the actual view which was clicked, not
