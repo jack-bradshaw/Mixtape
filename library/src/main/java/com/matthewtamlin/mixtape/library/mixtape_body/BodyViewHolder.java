@@ -28,7 +28,6 @@ import com.matthewtamlin.java_utilities.testing.Tested;
  * A ViewHolder for use in a RecyclerViewBody. The view holder contains a root view, views for
  * displaying a LibraryItem, and a view which can be clicked to display a contextual menu.
  */
-//TODO get rid of builder pattern
 @Tested(testMethod = "unit")
 public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	/**
