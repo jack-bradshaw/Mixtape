@@ -106,7 +106,7 @@ public final class GridBody extends RecyclerViewBody {
 	 * @param numberOfColumns
 	 * 		the number of columns to display, greater than zero
 	 * @throws IllegalArgumentException
-	 * 		if {@code numberOfColumns} is not greater than zero
+	 * 		if {@code numberOfColumns} is less than zero
 	 */
 	public final void setNumberOfColumns(int numberOfColumns) {
 		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
@@ -114,7 +114,7 @@ public final class GridBody extends RecyclerViewBody {
 	}
 
 	/**
-	 * @return the number of columns currently displayed
+	 * @return the current number of columns
 	 */
 	public final int getNumberOfColumns() {
 		return numberOfColumns;
