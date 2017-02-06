@@ -138,7 +138,7 @@ public interface BodyContract {
 		boolean loadingIndicatorIsShown();
 
 		/**
-		 * Can be registered to receive user input callbacks from BodyContract.Views.
+		 * Receives callbacks from a BodyContract.View.
 		 */
 		interface Listener {
 			/**
