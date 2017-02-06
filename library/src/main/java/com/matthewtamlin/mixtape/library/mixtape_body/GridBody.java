@@ -108,7 +108,7 @@ public final class GridBody extends RecyclerViewBody {
 	 * @throws IllegalArgumentException
 	 * 		if {@code numberOfColumns} is less than zero
 	 */
-	public final void setNumberOfColumns(int numberOfColumns) {
+	public final void setNumberOfColumns(final int numberOfColumns) {
 		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
 		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
 	}
