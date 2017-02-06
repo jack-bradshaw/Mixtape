@@ -47,7 +47,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A RecyclerView backed implementation of the BodyContract.View interface.
+ * A RecyclerView backed implementation of the BodyContract.View interface. This view must be
+ * supplied with data binders to function.
  */
 @Tested(testMethod = "manual")
 public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
@@ -57,7 +58,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	private static final String TAG = "[RecyclerViewBody]";
 
 	/**
-	 * The TopReachedListeners which are currently registered to this view.
+	 * All registered TopReachedListeners.
 	 */
 	private final Set<TopReachedListener> topReachedListeners = new HashSet<>();
 
