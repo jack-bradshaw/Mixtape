@@ -363,7 +363,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 		// Configure the recycler view
 		onRecyclerViewCreated(recyclerView);
-		generateAdapter();
+		createAdapter();
 		recyclerView.setAdapter(adapter);
 
 		// When the view is scrolled to the top, notify registered listeners
@@ -389,7 +389,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * Generates a new adapter but does not assign it to the recycler view. The adapter uses the
 	 * current data binders to bind data to the view holders.
 	 */
-	private void generateAdapter() {
+	private void createAdapter() {
 		adapter = new Adapter<BodyViewHolder>() {
 			@Override
 			public BodyViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
