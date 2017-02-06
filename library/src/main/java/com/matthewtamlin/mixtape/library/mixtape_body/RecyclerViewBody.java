@@ -341,8 +341,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * Called each time a new BodyViewHolder is required.
 	 *
 	 * @param parent
-	 * 		the ViewGroup the new View will be added to when it is bound to an adapter
-	 * 		position
+	 * 		the ViewGroup the new View will be added to when it is bound to an adapter position
 	 * @return a new BodyViewHolder, not null
 	 */
 	protected abstract BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent);
@@ -431,23 +430,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					public void onClick(final View v) {
 						// If the resource hasn't been set, inflating the menu will fail
 						if (contextualMenuResourceId != -1) {
-							final PopupMenu menu = new PopupMenu(getContext(), overflowButton);
-							menu.inflate(contextualMenuResourceId);
-							menu.show();
-
-							// Propagate menu selections back to the presenter
-							menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-								@Override
-								public boolean onMenuItemClick(final MenuItem menuItem) {
-									if (presenter != null) {
-										presenter.onContextualMenuItemSelected(RecyclerViewBody.this,
-												displayedDataItem, menuItem);
-										return true; // handled
-									} else {
-										return false; // not handled
-									}
-								}
-							});
+							showMenu(displayedDataItem, overflowButton);
 						}
 					}
 				});
@@ -461,6 +444,25 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 				return data == null ? 0 : data.size();
 			}
 		};
+	}
+
+	private void showMenu(final LibraryItem item, final View overflowButton) {
+		final PopupMenu menu = new PopupMenu(getContext(), overflowButton);
+		menu.inflate(contextualMenuResourceId);
+		menu.show();
+
+		// Propagate menu selections back to the presenter
+		menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(final MenuItem menuItem) {
+				if (presenter != null) {
+					presenter.onContextualMenuItemSelected(RecyclerViewBody.this, item, menuItem);
+					return true; // handled
+				} else {
+					return false; // not handled
+				}
+			}
+		});
 	}
 
 	/**
