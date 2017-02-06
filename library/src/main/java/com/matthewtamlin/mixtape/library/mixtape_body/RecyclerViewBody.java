@@ -385,6 +385,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * Assigns the necessary views references to member variables.
 	 */
 	private void getViewHandles() {
+		//TODO get rid of try catch
 		try {
 			recyclerView = (RecyclerView) NullChecker.checkNotNull(findViewById(R.id
 					.recyclerViewBody_recyclerView), "init failed: recycler view not found");
