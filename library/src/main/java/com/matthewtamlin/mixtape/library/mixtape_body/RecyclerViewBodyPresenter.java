@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * A presenter for use with {@link RecyclerViewBody} views. The default implementation does not
  * handle user interaction. To handle user interaction, override the following methods: <ul>
- * <li>{@link #onItemClicked(BodyContract.View, LibraryItem)}</li> <li>{@link
+ * <li>{@link #onItemSelected(BodyContract.View, LibraryItem)}</li> <li>{@link
  * #onContextualMenuItemClicked(BodyContract.View, LibraryItem, MenuItem)} </li> </ul>
  *
  * @param <S>
@@ -121,7 +121,7 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
+	public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 		// Default implementation does nothing
 	}
 

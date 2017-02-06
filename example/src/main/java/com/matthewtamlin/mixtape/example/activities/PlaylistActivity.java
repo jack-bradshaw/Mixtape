@@ -162,7 +162,7 @@ public class PlaylistActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onItemClicked(final BodyContract.View hostView, final LibraryItem item) {
+			public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 				handleBodyItemClicked(item);
 			}
 		};

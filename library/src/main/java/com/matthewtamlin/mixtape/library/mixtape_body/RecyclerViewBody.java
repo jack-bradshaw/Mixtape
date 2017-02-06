@@ -34,7 +34,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.matthewtamlin.android_utilities.library.helpers.ThemeColorHelper;
-import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -421,7 +420,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					@Override
 					public void onClick(final View v) {
 						if (presenter != null) {
-							presenter.onItemClicked(RecyclerViewBody.this, displayedDataItem);
+							presenter.onItemSelected(RecyclerViewBody.this, displayedDataItem);
 						}
 					}
 				});
