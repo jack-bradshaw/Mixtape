@@ -133,7 +133,7 @@ public class ListBody extends RecyclerViewBody {
 	 * @param show
 	 * 		true to show the dividers, false to hide them
 	 */
-	public final void showDividers(final boolean show) {
+	public void showDividers(final boolean show) {
 		showDividers = show;
 
 		getRecyclerView().removeItemDecoration(horizontalDividerDecoration);
@@ -158,7 +158,7 @@ public class ListBody extends RecyclerViewBody {
 	 * @param show
 	 * 		true to show artwork, false to hide it
 	 */
-	public final void showArtwork(final boolean show) {
+	public void showArtwork(final boolean show) {
 		showArtwork = show;
 		getRecyclerView().getAdapter().notifyDataSetChanged(); // Forces UI update
 	}
@@ -171,7 +171,7 @@ public class ListBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected final BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
+	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
 		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
 				.listbodyitem, parent, false);
 
@@ -184,7 +184,7 @@ public class ListBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected final void onViewHolderBound(final BodyViewHolder viewHolder,
+	protected void onViewHolderBound(final BodyViewHolder viewHolder,
 			final LibraryItem data) {
 		viewHolder.getArtworkImageView().setVisibility(showArtwork ? VISIBLE : GONE);
 	}
