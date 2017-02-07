@@ -56,7 +56,7 @@ public interface BodyContract {
 
 		/**
 		 * Sets the menu resource to use for the item specific contextual menus. There is no
-		 * guarantee that the UI will be updated if the resource is changed while a menu is being
+		 * guarantee that the UI will be updated if this method is called while a menu is being
 		 * displayed.
 		 *
 		 * @param contextualMenuResourceId
@@ -65,10 +65,7 @@ public interface BodyContract {
 		void setContextualMenuResource(int contextualMenuResourceId);
 
 		/**
-		 * Gets the resource ID currently used when creating the item specific contextual menus. If
-		 * the resource has not yet been set, then -1 is returned.
-		 *
-		 * @return the resource ID used for the contextual menus, -1 if absent
+		 * @return the resource ID used for the contextual menus, -1 if not yet set
 		 */
 		int getContextualMenuResource();
 
