@@ -121,7 +121,7 @@ public class GridBody extends RecyclerViewBody {
 	 * @throws IllegalArgumentException
 	 * 		if {@code numberOfColumns} is less than zero
 	 */
-	public final void setNumberOfColumns(final int numberOfColumns) {
+	public void setNumberOfColumns(final int numberOfColumns) {
 		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
 		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
 	}
@@ -129,12 +129,12 @@ public class GridBody extends RecyclerViewBody {
 	/**
 	 * @return the current number of columns
 	 */
-	public final int getNumberOfColumns() {
+	public int getNumberOfColumns() {
 		return numberOfColumns;
 	}
 
 	@Override
-	protected final BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
+	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
 		final View gridItem = LayoutInflater.from(getContext()).inflate(R.layout
 				.gridbodyitem, parent, false);
 
@@ -147,7 +147,7 @@ public class GridBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected final void onRecyclerViewCreated(final RecyclerView recyclerView) {
+	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns,
 				VERTICAL, false));
 	}
