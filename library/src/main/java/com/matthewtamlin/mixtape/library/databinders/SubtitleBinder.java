@@ -158,14 +158,14 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 		}
 
 		@Override
-		public final void onPreExecute() {
+		public void onPreExecute() {
 			if (!isCancelled()) {
 				textView.setText(null);
 			}
 		}
 
 		@Override
-		public final CharSequence doInBackground(final Void... params) {
+		public CharSequence doInBackground(final Void... params) {
 			if (isCancelled() || data == null) {
 				return null;
 			}
@@ -177,7 +177,7 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 		}
 
 		@Override
-		protected final void onPostExecute(final CharSequence subtitle) {
+		protected void onPostExecute(final CharSequence subtitle) {
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(subtitle);
