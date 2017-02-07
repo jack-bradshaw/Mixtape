@@ -87,7 +87,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 */
 	public CoordinatedMixtapeContainer(final Context context) {
 		super(context);
-		createLayout();
+		init();
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 */
 	public CoordinatedMixtapeContainer(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-		createLayout();
+		init();
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	public CoordinatedMixtapeContainer(final Context context, final AttributeSet attrs, final int
 			defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		createLayout();
+		init();
 	}
 
 	@Override
@@ -225,7 +225,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * Creates the layout and assigns necessary views references to member variables.
 	 */
-	private void createLayout() {
+	private void init() {
 		inflate(getContext(), R.layout.coordinatedheaderbodyview, this);
 		coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatedHeaderBodyView_root);
 		headerContainer = (AppBarLayout) findViewById(R.id.coordinatedHeaderBodyView_container);
