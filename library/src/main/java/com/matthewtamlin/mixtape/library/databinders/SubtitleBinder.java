@@ -71,7 +71,7 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	@Override
-	public final void bind(final TextView view, final LibraryItem data) {
+	public void bind(final TextView view, final LibraryItem data) {
 		NullChecker.checkNotNull(view, "textView cannot be null");
 
 		// There should never be more than one task operating on the same TextView concurrently
@@ -91,7 +91,7 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	@Override
-	public final void cancel(final TextView view) {
+	public void cancel(final TextView view) {
 		final AsyncTask task = tasks.get(view);
 
 		if (task != null) {
@@ -101,7 +101,7 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	@Override
-	public final void cancelAll() {
+	public void cancelAll() {
 		final Iterator<TextView> textViewIterator = tasks.keySet().iterator();
 
 		while (textViewIterator.hasNext()) {
@@ -117,14 +117,14 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * @return the cache used to store subtitles
 	 */
-	public final LibraryItemCache getCache() {
+	public LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
 	 * @return the defaults used when subtitles cannot be accessed
 	 */
-	public final DisplayableDefaults getDefaults() {
+	public DisplayableDefaults getDefaults() {
 		return defaults;
 	}
 
