@@ -326,7 +326,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * The supported header-body constraints.
 	 */
-	private enum Constraint {
+	protected enum Constraint {
 		/**
 		 * The header is always hidden, regardless of body scroll events.
 		 */
