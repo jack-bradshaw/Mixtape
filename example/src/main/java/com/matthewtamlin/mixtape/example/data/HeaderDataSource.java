@@ -18,11 +18,11 @@ package com.matthewtamlin.mixtape.example.data;
 
 import android.graphics.Bitmap;
 
-import com.matthewtamlin.mixtape.library.data.BaseDataSourceAdapter;
+import com.matthewtamlin.mixtape.library.data.BaseDataSourceHelper;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
-public class HeaderDataSource extends BaseDataSourceAdapter<LibraryItem> {
+public class HeaderDataSource extends BaseDataSourceHelper<LibraryItem> {
 	private final LibraryItem item;
 
 	public HeaderDataSource(final CharSequence title, final CharSequence subtitle,

@@ -28,7 +28,7 @@ import java.util.Set;
  * @param <D>
  * 		the type of data supplied by the source
  */
-public abstract class BaseDataSourceAdapter<D> implements BaseDataSource<D> {
+public abstract class BaseDataSourceHelper<D> implements BaseDataSource<D> {
 	/**
 	 * All data replaced listeners which are currently registered. This set must never contain
 	 * null.

@@ -29,7 +29,7 @@ import java.util.Set;
  * @param <D>
  * 		the type of objects contained within the list
  */
-public abstract class ListDataSourceAdapter<D> extends BaseDataSourceAdapter<List<D>> implements
+public abstract class ListDataSourceAdapter<D> extends BaseDataSourceHelper<List<D>> implements
 		ListDataSource<D> {
 	/**
 	 * All item added listeners which are currently registered. This set must never contain null.
