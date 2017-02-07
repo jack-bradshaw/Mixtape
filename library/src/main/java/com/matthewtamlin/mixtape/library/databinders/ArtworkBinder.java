@@ -69,14 +69,14 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	private int fadeInDurationMs = 300;
 
 	/**
-	 * The default width to use when loading artwork. This value is used if the ImageView is not
-	 * ready to return its dimensions.
+	 * The width to use when decoding artwork if the optimal dimension cannot be inferred from the
+	 * target ImageView.
 	 */
 	private int fallbackDecodingWidth = 300;
 
 	/**
-	 * The default height to use when loading artwork. This value is used if the ImageView is not
-	 * ready to return its dimensions.
+	 * The height to use when decoding artwork if the optimal dimension cannot be inferred from the
+	 * target ImageView.
 	 */
 	private int fallbackDecodingHeight = 300;
 
