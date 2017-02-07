@@ -48,6 +48,12 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	private static final String TAG = "[ArtworkBinder]";
 
 	/**
+	 * A record of all bind tasks currently in progress. Each task is mapped to the target
+	 * ImageView.
+	 */
+	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
+
+	/**
 	 * Caches artwork to increase efficiency and performance.
 	 */
 	private final LibraryItemCache cache;
@@ -56,12 +62,6 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * Supplies the default artwork.
 	 */
 	private final DisplayableDefaults defaults;
-
-	/**
-	 * A record of all bind tasks currently in progress. Each task is mapped to the target
-	 * ImageView.
-	 */
-	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
 
 	/**
 	 * The duration to use when transitioning artwork, measured in milliseconds.
