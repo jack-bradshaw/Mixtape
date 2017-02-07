@@ -210,7 +210,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * Configures this view to only show the header if the start of the recycler view is visible.
 	 * This overrides any behaviour set previously.
 	 */
-	public void showHeaderAtTopOnly() {
+	public void showHeaderAtStartOnly() {
 		constraint = SHOW_HEADER_AT_TOP_ONLY;
 		applyCurrentConstraint();
 	}
@@ -220,7 +220,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * hide the header whenever the body is scrolled towards the end. This overrides any behaviour
 	 * set previously.
 	 */
-	public void showHeaderOnDownwardScrollOnly() {
+	public void showHeaderOnScrollTowardsStartOnly() {
 		constraint = SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
 		applyCurrentConstraint();
 	}
