@@ -95,7 +95,6 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
 		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
 		this.defaults = NullChecker.checkNotNull(defaults, "defaults cannot be null");
-		this.fadeInDurationMs = IntChecker.checkGreaterThan(fadeInDurationMs, -1);
 	}
 
 	@Override
