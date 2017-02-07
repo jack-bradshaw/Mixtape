@@ -218,7 +218,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	/**
 	 * @return the RecyclerView used to display the data
 	 */
-	public final RecyclerView getRecyclerView() {
+	public RecyclerView getRecyclerView() {
 		return recyclerView;
 	}
 
