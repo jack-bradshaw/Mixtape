@@ -58,15 +58,15 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	private final DisplayableDefaults defaults;
 
 	/**
-	 * The duration to use when transitioning artwork, measured in milliseconds.
-	 */
-	private final int fadeInDurationMs;
-
-	/**
 	 * A record of all bind tasks currently in progress. Each task is mapped to the target
 	 * ImageView.
 	 */
 	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
+
+	/**
+	 * The duration to use when transitioning artwork, measured in milliseconds.
+	 */
+	private int fadeInDurationMs;
 
 	/**
 	 * The default width to use when loading artwork. This value is used if the ImageView is not
