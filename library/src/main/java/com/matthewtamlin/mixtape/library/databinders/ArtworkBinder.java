@@ -39,7 +39,7 @@ import java.util.concurrent.Executors;
 /**
  * Binds artwork data from LibraryItems to ImageViews. Data is cached as it is loaded to improve
  * future performance, and asynchronous processing is only used if data is not already cached. By
- * default a fade-in effect is used when artwork is bound, but this can be disable if desired.
+ * default a fade-in effect is used when artwork is bound, but this can be disabled if desired.
  */
 public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
