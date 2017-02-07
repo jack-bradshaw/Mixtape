@@ -155,6 +155,23 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	}
 
 	/**
+	 * @return the duration used when fading in artwork
+	 */
+	public int getFadeInDurationMs() {
+		return fadeInDurationMs;
+	}
+
+	/**
+	 * Sets the duration to use when fading in artwork.
+	 *
+	 * @param durationMs
+	 * 		the duration to use, measured in milliseconds, not less than zero
+	 */
+	public void setFadeInDurationMs(final int durationMs) {
+		fadeInDurationMs = durationMs;
+	}
+
+	/**
 	 * Sets the width to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
