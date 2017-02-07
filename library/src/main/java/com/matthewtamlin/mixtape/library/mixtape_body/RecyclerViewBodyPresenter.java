@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
  * abstract, the user interaction handling methods do nothing. To handle user interactions, override
- * {@link #onItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
+ * {@link #onLibraryItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
  * (BodyContract.View, LibraryItem, MenuItem)}.
  *
  * @param <D>
@@ -47,17 +47,17 @@ public class RecyclerViewBodyPresenter<
 	/**
 	 * Binds title data to the view.
 	 */
-	private TitleBinder titleDataBinder;
+	private final TitleBinder titleDataBinder;
 
 	/**
 	 * Binds subtitle data to the view.
 	 */
-	private SubtitleBinder subtitleDataBinder;
+	private final SubtitleBinder subtitleDataBinder;
 
 	/**
 	 * Binds artwork data to the view.
 	 */
-	private ArtworkBinder artworkDataBinder;
+	private final ArtworkBinder artworkDataBinder;
 
 	/**
 	 * Constructs a new SmallHeaderPresenter.
@@ -75,8 +75,9 @@ public class RecyclerViewBodyPresenter<
 	 * @throws IllegalArgumentException
 	 * 		if {@code artworkDataBinder} is null
 	 */
-	public RecyclerViewBodyPresenter(final TitleBinder titleDataBinder, final SubtitleBinder
-			subtitleDataBinder, final ArtworkBinder artworkDataBinder) {
+	public RecyclerViewBodyPresenter(final TitleBinder titleDataBinder,
+			final SubtitleBinder subtitleDataBinder,
+			final ArtworkBinder artworkDataBinder) {
 		super();
 
 		this.titleDataBinder = NullChecker.checkNotNull(titleDataBinder,
@@ -120,7 +121,7 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
+	public void onLibraryItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 		// Default implementation does nothing
 	}
 
@@ -133,21 +134,21 @@ public class RecyclerViewBodyPresenter<
 	/**
 	 * @return the TitleBinder used to bind titles to the UI, not null
 	 */
-	public final TitleBinder getTitleDataBinder() {
+	public TitleBinder getTitleDataBinder() {
 		return titleDataBinder;
 	}
 
 	/**
 	 * @return the SubtitleBinder used to bind subtitles to the UI, not null
 	 */
-	public final SubtitleBinder getSubtitleDataBinder() {
+	public SubtitleBinder getSubtitleDataBinder() {
 		return subtitleDataBinder;
 	}
 
 	/**
 	 * @return the ArtworkBinder used to bind artwork to the UI, not null
 	 */
-	public final ArtworkBinder getArtworkDataBinder() {
+	public ArtworkBinder getArtworkDataBinder() {
 		return artworkDataBinder;
 	}
 }

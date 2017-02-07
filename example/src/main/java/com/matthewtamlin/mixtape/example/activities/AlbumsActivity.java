@@ -92,7 +92,7 @@ public class AlbumsActivity extends AppCompatActivity {
 
 		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults, 300);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults);
 
 		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
@@ -103,7 +103,7 @@ public class AlbumsActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onItemSelected(final BodyContract.View hostView, final LibraryItem item) {
+			public void onLibraryItemSelected(final BodyContract.View hostView, final LibraryItem item) {
 				handleItemClick(item);
 			}
 		};

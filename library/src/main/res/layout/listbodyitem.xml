@@ -16,6 +16,7 @@
   -->
 
 <LinearLayout
+	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/listBodyItem_root"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
@@ -30,7 +31,8 @@
 		android:layout_marginLeft="8dp"
 		android:layout_marginStart="8dp"
 		android:layout_marginTop="8dp"
-		android:scaleType="centerCrop"/>
+		android:scaleType="centerCrop"
+		tools:ignore="ContentDescription"/>
 
 	<RelativeLayout
 		android:layout_width="0dp"
@@ -60,8 +62,9 @@
 			android:textSize="14sp"/>
 	</RelativeLayout>
 
+	<!-->TODO add content description<-->
 	<ImageButton
-		android:id="@+id/listIBodytem_menu"
+		android:id="@+id/listIBodyItem_menu"
 		style="?android:borderlessButtonStyle"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

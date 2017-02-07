@@ -31,7 +31,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
  * out of memory. Titles, subtitles and artwork are stored independently, so that eviction of one
  * data type does not affect the others.
  */
-public final class LruLibraryItemCache implements LibraryItemCache {
+public class LruLibraryItemCache implements LibraryItemCache {
 	/**
 	 * Used to identify this class during debugging.
 	 */

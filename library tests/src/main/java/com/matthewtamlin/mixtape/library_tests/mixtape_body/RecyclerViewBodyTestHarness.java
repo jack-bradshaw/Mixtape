@@ -154,8 +154,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults,
-						fadeDurationMs));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 			}
 		});
 
@@ -176,8 +175,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 			@Override
 			public void onClick(final View v) {
 				fadeDurationMs += 25;
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults,
-						fadeDurationMs));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 
 			}
 		});
@@ -200,8 +198,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 			public void onClick(final View v) {
 				// Never less than zero
 				fadeDurationMs = Math.max(fadeDurationMs - 25, 0);
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults,
-						fadeDurationMs));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 			}
 		});
 

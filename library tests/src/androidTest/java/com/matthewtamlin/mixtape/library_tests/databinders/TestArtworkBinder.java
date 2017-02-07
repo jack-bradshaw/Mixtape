@@ -118,7 +118,7 @@ public class TestArtworkBinder {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullCache() {
-		new ArtworkBinder(null, displayableDefaults, FADE_IN_DURATION_MS);
+		new ArtworkBinder(null, displayableDefaults);
 	}
 
 	/**
@@ -128,37 +128,7 @@ public class TestArtworkBinder {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullDefaults() {
-		new ArtworkBinder(cache, null, FADE_IN_DURATION_MS);
-	}
-
-	/**
-	 * Test to verify that the correct exception is thrown when the {@code fadeInDurationMs}
-	 * argument of {@link ArtworkBinder#bind(ImageView, LibraryItem)} is less than zero. The test
-	 * will only pass if an IllegalArgumentException is thrown.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructor_invalidArgs_negativeFadeInDuration() {
-		new ArtworkBinder(cache, displayableDefaults, -1);
-	}
-
-	/**
-	 * Test to verify that the {@link ArtworkBinder#ArtworkBinder(LibraryItemCache,
-	 * DisplayableDefaults, int)} constructor functions correctly when the provided with valid
-	 * arguments. This case examines the boundary case where the fade in duration is 0ms.
-	 */
-	@Test
-	public void testConstructor_validArgs_zeroFadeIn() {
-		new ArtworkBinder(cache, displayableDefaults, 0); // Shouldn't throw exception
-	}
-
-	/**
-	 * Test to verify that the {@link ArtworkBinder#ArtworkBinder(LibraryItemCache,
-	 * DisplayableDefaults, int)} constructor functions correctly when the provided with valid
-	 * arguments. This case examines the boundary case where the fade in duration is 1ms.
-	 */
-	@Test
-	public void testConstructor_validArgs_PositiveFadeIn() {
-		new ArtworkBinder(cache, displayableDefaults, 0); // Shouldn't throw exception
+		new ArtworkBinder(cache, null);
 	}
 
 	/**
@@ -168,8 +138,7 @@ public class TestArtworkBinder {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testBind_invalidArgs_nullView() {
-		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults,
-				FADE_IN_DURATION_MS);
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		binder.bind(null, libraryItem);
 	}
 
@@ -180,8 +149,7 @@ public class TestArtworkBinder {
 	 */
 	@Test
 	public void testBind_nullData() {
-		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults,
-				FADE_IN_DURATION_MS);
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 
 		binder.bind(imageView, null);
 
@@ -198,8 +166,7 @@ public class TestArtworkBinder {
 	 */
 	@Test
 	public void testBind_dataCached() {
-		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults,
-				FADE_IN_DURATION_MS);
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		cache.cacheTitle(libraryItem, false);
 
 		binder.bind(imageView, libraryItem);
@@ -215,8 +182,7 @@ public class TestArtworkBinder {
 	 */
 	@Test
 	public void testBind_dataAccessibleButNotCached() {
-		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults,
-				FADE_IN_DURATION_MS);
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		cache.removeTitle(libraryItem); // In case it was somehow cached previously
 
 		binder.bind(imageView, libraryItem);
@@ -233,8 +199,7 @@ public class TestArtworkBinder {
 	 */
 	@Test
 	public void testBind_dataInaccessibleAndNotCached() {
-		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults,
-				FADE_IN_DURATION_MS);
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		final LibraryItem inaccessibleItem = new InaccessibleLibraryItem();
 
 		binder.bind(imageView, inaccessibleItem);

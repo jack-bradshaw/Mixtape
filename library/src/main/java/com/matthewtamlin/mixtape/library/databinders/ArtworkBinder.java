@@ -36,16 +36,24 @@ import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
+
 /**
  * Binds artwork data from LibraryItems to ImageViews. Data is cached as it is loaded to improve
  * future performance, and asynchronous processing is only used if data is not already cached. By
- * default a fade-in effect is used when artwork is bound, but this can be disable if desired.
+ * default a fade-in effect is used when artwork is bound, but this can be disabled if desired.
  */
-public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
+public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * Identifies this class during logging.
 	 */
 	private static final String TAG = "[ArtworkBinder]";
+
+	/**
+	 * A record of all bind tasks currently in progress. Each task is mapped to the target
+	 * ImageView.
+	 */
+	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
 
 	/**
 	 * Caches artwork to increase efficiency and performance.
@@ -60,25 +68,19 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * The duration to use when transitioning artwork, measured in milliseconds.
 	 */
-	private final int fadeInDurationMs;
+	private int fadeInDurationMs = 300;
 
 	/**
-	 * A record of all bind tasks currently in progress. Each task is mapped to the target
-	 * ImageView.
+	 * The width to use when decoding artwork if the optimal dimension cannot be inferred from the
+	 * target ImageView.
 	 */
-	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
+	private int fallbackDecodingWidth = 300;
 
 	/**
-	 * The default width to use when loading artwork. This value is used if the ImageView is not
-	 * ready to return its dimensions.
+	 * The height to use when decoding artwork if the optimal dimension cannot be inferred from the
+	 * target ImageView.
 	 */
-	private int defaultWidth = 300;
-
-	/**
-	 * The default height to use when loading artwork. This value is used if the ImageView is not
-	 * ready to return its dimensions.
-	 */
-	private int defaultHeight = 300;
+	private int fallbackDecodingHeight = 300;
 
 	/**
 	 * Constructs a new ArtworkBinder.
@@ -87,25 +89,19 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * 		a cache for storing artwork, may already contain data, not null
 	 * @param defaults
 	 * 		supplies the default artwork, not null
-	 * @param fadeInDurationMs
-	 * 		the duration to use when fading-in artwork, measured in milliseconds, not less than zero
 	 * @throws IllegalArgumentException
 	 * 		if {@code cache} is null
 	 * @throws IllegalArgumentException
 	 * 		if {@code defaults} is null
-	 * @throws IllegalArgumentException
-	 * 		if {@code fadeInDurationMs} is less than zero
 	 */
-	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults,
-			final int fadeInDurationMs) {
-		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
-		this.defaults = NullChecker.checkNotNull(defaults, "defaults cannot be null");
-		this.fadeInDurationMs = IntChecker.checkGreaterThan(fadeInDurationMs, -1);
+	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
+		this.cache = checkNotNull(cache, "cache cannot be null");
+		this.defaults = checkNotNull(defaults, "defaults cannot be null");
 	}
 
 	@Override
 	public void bind(final ImageView imageView, final LibraryItem data) {
-		NullChecker.checkNotNull(imageView, "imageView cannot be null");
+		checkNotNull(imageView, "imageView cannot be null");
 
 		// There should never be more than one task operating on the same ImageView concurrently
 		cancel(imageView);
@@ -143,31 +139,64 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * @return the cache used to store artwork
 	 */
-	public final LibraryItemCache getCache() {
+	public LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
 	 * @return the defaults used when artwork cannot be accessed
 	 */
-	public final DisplayableDefaults getDefaults() {
+	public DisplayableDefaults getDefaults() {
 		return defaults;
+	}
+
+	/**
+	 * @return the duration used when fading in artwork
+	 */
+	public int getFadeInDurationMs() {
+		return fadeInDurationMs;
+	}
+
+	/**
+	 * Sets the duration to use when fading in artwork.
+	 *
+	 * @param durationMs
+	 * 		the duration to use, measured in milliseconds, not less than zero
+	 */
+	public void setFadeInDurationMs(final int durationMs) {
+		fadeInDurationMs = durationMs;
+	}
+
+	/**
+	 * @return the width dimension to use when decoding artwork if the optimal dimension cannot be
+	 * inferred from the target ImageView
+	 */
+	public int getFallbackDecodingWidth() {
+		return fallbackDecodingWidth;
 	}
 
 	/**
 	 * Sets the width to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
-	public final void setDefaultWidth(final int defaultWidth) {
-		this.defaultWidth = defaultWidth;
+	public void setFallbackDecodingWidth(final int width) {
+		this.fallbackDecodingWidth = width;
+	}
+
+	/**
+	 * @return the height dimension to use when decoding artwork if the optimal dimension cannot be
+	 * inferred from the target ImageView
+	 */
+	public int getFallbackDecodingHeight() {
+		return fallbackDecodingHeight;
 	}
 
 	/**
 	 * Sets the height to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
-	public final void setDefaultHeight(final int defaultHeight) {
-		this.defaultHeight = defaultHeight;
+	public void setFallbackDecodingHeight(final int height) {
+		this.fallbackDecodingHeight = height;
 	}
 
 	/**
@@ -207,7 +236,7 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		 * 		if {@code imageView} is null
 		 */
 		public BinderTask(final ImageView imageView, final LibraryItem data) {
-			this.imageView = NullChecker.checkNotNull(imageView, "imageView cannot be null");
+			this.imageView = checkNotNull(imageView, "imageView cannot be null");
 			this.data = data;
 		}
 
@@ -224,8 +253,8 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 
 		@Override
 		public Bitmap doInBackground(final Void... params) {
-			final int width = viewWidth == -1 ? defaultWidth : viewWidth;
-			final int height = viewHeight == -1 ? defaultHeight : viewHeight;
+			final int width = viewWidth == -1 ? fallbackDecodingWidth : viewWidth;
+			final int height = viewHeight == -1 ? fallbackDecodingHeight : viewHeight;
 
 			if (isCancelled() || data == null) {
 				return null;
@@ -298,8 +327,8 @@ public final class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			es.execute(new Runnable() {
 				@Override
 				public void run() {
-					final int width = viewWidth == 0 ? defaultWidth : viewWidth;
-					final int height = viewHeight == 0 ? defaultHeight : viewHeight;
+					final int width = viewWidth == 0 ? fallbackDecodingWidth : viewWidth;
+					final int height = viewHeight == 0 ? fallbackDecodingHeight : viewHeight;
 
 					cache.cacheArtwork(data, true, width, height);
 				}

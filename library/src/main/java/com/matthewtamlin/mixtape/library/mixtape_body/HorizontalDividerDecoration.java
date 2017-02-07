@@ -31,7 +31,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * Decorates a RecyclerView by displaying a horizontal divider beneath each item. The ends of the
  * divider can be inset by passing inset values to the constructor.
  */
-final class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
+public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	/**
 	 * The padding to add to the left end of the divider, measured in pixels.
 	 */

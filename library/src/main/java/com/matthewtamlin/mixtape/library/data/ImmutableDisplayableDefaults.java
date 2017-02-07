@@ -55,17 +55,17 @@ public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	}
 
 	@Override
-	public final CharSequence getTitle() {
+	public CharSequence getTitle() {
 		return title;
 	}
 
 	@Override
-	public final CharSequence getSubtitle() {
+	public CharSequence getSubtitle() {
 		return subtitle;
 	}
 
 	@Override
-	public final Bitmap getArtwork() {
+	public Bitmap getArtwork() {
 		return artwork;
 	}
 }

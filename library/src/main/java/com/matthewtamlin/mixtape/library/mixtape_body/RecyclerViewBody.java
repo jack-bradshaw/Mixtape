@@ -218,7 +218,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	/**
 	 * @return the RecyclerView used to display the data
 	 */
-	public final RecyclerView getRecyclerView() {
+	public RecyclerView getRecyclerView() {
 		return recyclerView;
 	}
 
@@ -385,7 +385,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Creates a new reycler view adapter but does not assign it to the recycler view.
+	 * Creates a new recycler view adapter but does not assign it to the recycler view.
 	 */
 	private void createAdapter() {
 		adapter = new Adapter<BodyViewHolder>() {
@@ -420,7 +420,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					@Override
 					public void onClick(final View v) {
 						if (presenter != null) {
-							presenter.onItemSelected(RecyclerViewBody.this, displayedDataItem);
+							presenter.onLibraryItemSelected(RecyclerViewBody.this, displayedDataItem);
 						}
 					}
 				});

@@ -27,7 +27,7 @@ import com.matthewtamlin.java_utilities.checkers.NullChecker;
  * A ViewHolder for use in a RecyclerViewBody. The view holder contains a root view, views for
  * displaying a LibraryItem metadata, and a view which can be clicked to display a contextual menu.
  */
-public final class BodyViewHolder extends RecyclerView.ViewHolder {
+public class BodyViewHolder extends RecyclerView.ViewHolder {
 	/**
 	 * The root view.
 	 */
@@ -95,35 +95,35 @@ public final class BodyViewHolder extends RecyclerView.ViewHolder {
 	/**
 	 * @return the root view, not null
 	 */
-	public final View getRootView() {
+	public View getRootView() {
 		return rootView;
 	}
 
 	/**
 	 * @return the view for displaying LibraryItem titles, not null
 	 */
-	public final TextView getTitleTextView() {
+	public TextView getTitleTextView() {
 		return titleHolder;
 	}
 
 	/**
 	 * @return the view for displaying LibraryItem subtitles, not null
 	 */
-	public final TextView getSubtitleTextView() {
+	public TextView getSubtitleTextView() {
 		return subtitleHolder;
 	}
 
 	/**
 	 * @return the view for displaying LibraryItem artwork, not null
 	 */
-	public final ImageView getArtworkImageView() {
+	public ImageView getArtworkImageView() {
 		return artworkHolder;
 	}
 
 	/**
 	 * @return the view which can be clicked to display a contextual menu, not null
 	 */
-	public final View getContextualMenuButton() {
+	public View getContextualMenuButton() {
 		return contextualMenuButton;
 	}
 }

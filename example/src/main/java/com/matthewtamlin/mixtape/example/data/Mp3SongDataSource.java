@@ -20,7 +20,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 
 import com.matthewtamlin.java_utilities.file.FileFinder;
-import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
+import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.Set;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class Mp3SongDataSource extends ListDataSourceAdapter<Mp3Song> {
+public class Mp3SongDataSource extends ListDataSourceHelper<Mp3Song> {
 	private List<Mp3Song> songs = null;
 
 	@Override

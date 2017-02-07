@@ -21,7 +21,7 @@ import android.os.Environment;
 
 import com.matthewtamlin.java_utilities.file.FileFinder;
 import com.matthewtamlin.mixtape.example.util.Id3Util;
-import com.matthewtamlin.mixtape.library.data.ListDataSourceAdapter;
+import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import java.util.Set;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM;
 
-public class Mp3AlbumDataSource extends ListDataSourceAdapter<Mp3Album> {
+public class Mp3AlbumDataSource extends ListDataSourceHelper<Mp3Album> {
 	private List<Mp3Album> albums = null;
 
 	@Override

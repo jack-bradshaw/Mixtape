@@ -32,11 +32,16 @@ import java.util.Iterator;
  * performance, and asynchronous processing is only used if data is not already cached. In case an
  * item fails to return a title, a default must be supplied.
  */
-public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
+public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * Identifies this class during logging.
 	 */
 	private static final String TAG = "[TitleBinder]";
+
+	/**
+	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
+	 */
+	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
 
 	/**
 	 * Caches titles to increase efficiency and performance.
@@ -47,11 +52,6 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	 * Supplies the default title.
 	 */
 	private final DisplayableDefaults defaults;
-
-	/**
-	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
-	 */
-	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
 
 	/**
 	 * Constructs a new TitleBinder.
@@ -71,7 +71,7 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	@Override
-	public final void bind(final TextView view, final LibraryItem data) {
+	public void bind(final TextView view, final LibraryItem data) {
 		NullChecker.checkNotNull(view, "textView cannot be null");
 
 		// There should never be more than one task operating on the same TextView concurrently
@@ -91,7 +91,7 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	@Override
-	public final void cancel(final TextView view) {
+	public void cancel(final TextView view) {
 		final AsyncTask task = tasks.get(view);
 
 		if (task != null) {
@@ -101,7 +101,7 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	@Override
-	public final void cancelAll() {
+	public void cancelAll() {
 		final Iterator<TextView> textViewIterator = tasks.keySet().iterator();
 
 		while (textViewIterator.hasNext()) {
@@ -117,14 +117,14 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * @return the cache used to store titles
 	 */
-	public final LibraryItemCache getCache() {
+	public LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
 	 * @return the defaults used when titles cannot be accessed
 	 */
-	public final DisplayableDefaults getDefaults() {
+	public DisplayableDefaults getDefaults() {
 		return defaults;
 	}
 
@@ -158,14 +158,14 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 		}
 
 		@Override
-		public final void onPreExecute() {
+		public void onPreExecute() {
 			if (!isCancelled()) {
 				textView.setText(null);
 			}
 		}
 
 		@Override
-		public final CharSequence doInBackground(final Void... params) {
+		public CharSequence doInBackground(final Void... params) {
 			if (isCancelled() || data == null) {
 				return null;
 			}
@@ -176,7 +176,7 @@ public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
 		}
 
 		@Override
-		protected final void onPostExecute(final CharSequence title) {
+		protected void onPostExecute(final CharSequence title) {
 			if (!isCancelled()) {
 				textView.setText(null); // Resets the view to ensure the text changes
 				textView.setText(title);

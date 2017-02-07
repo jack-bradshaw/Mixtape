@@ -47,7 +47,7 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
  * top. Scrolling away from the top re-hides the header.</li> <li>The header is shown when the body
  * is scrolled towards the top, and hidden when the body is scrolled towards the bottom.</li> </ul>
  */
-public final class CoordinatedMixtapeContainer extends FrameLayout implements
+public class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
 	/**
 	 * The layout which actually performs the coordination of the header and the body.
@@ -87,7 +87,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	 */
 	public CoordinatedMixtapeContainer(final Context context) {
 		super(context);
-		createLayout();
+		init();
 	}
 
 	/**
@@ -100,7 +100,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	 */
 	public CoordinatedMixtapeContainer(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
-		createLayout();
+		init();
 	}
 
 	/**
@@ -113,10 +113,11 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public CoordinatedMixtapeContainer(final Context context, final AttributeSet attrs, final int
-			defStyleAttr) {
+	public CoordinatedMixtapeContainer(final Context context,
+			final AttributeSet attrs,
+			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		createLayout();
+		init();
 	}
 
 	@Override
@@ -225,7 +226,7 @@ public final class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * Creates the layout and assigns necessary views references to member variables.
 	 */
-	private void createLayout() {
+	private void init() {
 		inflate(getContext(), R.layout.coordinatedheaderbodyview, this);
 		coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatedHeaderBodyView_root);
 		headerContainer = (AppBarLayout) findViewById(R.id.coordinatedHeaderBodyView_container);
