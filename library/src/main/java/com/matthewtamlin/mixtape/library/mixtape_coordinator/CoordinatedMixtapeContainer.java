@@ -38,13 +38,12 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
 import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
 
 /**
- * Displays and coordinates a header and a body. The header can be any view, but the body must be a
- * RecyclerViewBody. Scroll events in the body affect the display of the header according to the
- * current configuration. The available configurations are: <ul> <li>The header is always hidden,
- * regardless of body scroll events.</li> <li>The header is always shown, regardless of body scroll
- * events.</li> <li>The header is always hidden except when the body is scrolled all the way to the
- * top. Scrolling away from the top re-hides the header.</li> <li>The header is shown when the body
- * is scrolled towards the top, and hidden when the body is scrolled towards the bottom.</li> </ul>
+ * A MixtapeContainer which shows and hides the header based on body scroll events. There are four
+ * available coordination profiles: <ul> <li>The header is always hidden, regardless of body scroll
+ * events.</li> <li>The header is always shown, regardless of body scroll events.</li> <li>The
+ * header is only shown if the start of the recycler view is visible.</li> <li>The header is shown
+ * if the body is scrolled towards the start, and hidden if the body is scrolled towards the
+ * end.</li> </ul>
  */
 public class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
