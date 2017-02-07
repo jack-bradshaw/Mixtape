@@ -40,7 +40,7 @@ import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelpe
  * menu. The view can be customised by hiding all artwork (shown by default) and showing horizontal
  * dividers between items (hidden by default).
  */
-public final class ListBody extends RecyclerViewBody {
+public class ListBody extends RecyclerViewBody {
 	/**
 	 * Bundle key for saving and restoring the superclass state.
 	 */
