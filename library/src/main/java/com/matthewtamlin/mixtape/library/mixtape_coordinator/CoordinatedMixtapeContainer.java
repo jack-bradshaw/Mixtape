@@ -50,7 +50,7 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
 public class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
 	/**
-	 * The layout which actually performs the coordination of the header and the body.
+	 * Performs the actual coordination.
 	 */
 	private CoordinatorLayout coordinatorLayout;
 
@@ -60,22 +60,22 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	private AppBarLayout headerContainer;
 
 	/**
-	 * The header view to display at the top of the view.
+	 * The header to display at the top of the view.
 	 */
 	private SmallHeader header;
 
 	/**
-	 * The body view to display beneath the header.
+	 * The body to display beneath the header.
 	 */
 	private RecyclerViewBody body;
 
 	/**
-	 * The material elevation of the body view.
+	 * The current elevation of the body.
 	 */
 	private int bodyElevationPx = 0;
 
 	/**
-	 * The constraint to apply to the header and body to facilitate coordinated scrolling.
+	 * The current constraint between the header and the body.
 	 */
 	private Constraint constraint = PERSISTENT_HEADER;
 
@@ -83,7 +83,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * Constructs a new CoordinatedMixtapeCoordinatorView.
 	 *
 	 * @param context
-	 * 		the context this view is attached to, not null
+	 * 		the context this view is operating in, not null
 	 */
 	public CoordinatedMixtapeContainer(final Context context) {
 		super(context);
@@ -94,7 +94,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * Constructs a new CoordinatedMixtapeCoordinatorView.
 	 *
 	 * @param context
-	 * 		the Context the view is attached to, not null
+	 * 		the Context the view is operating in, not null
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 */
@@ -107,7 +107,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * Constructs a new CoordinatedMixtapeCoordinatorView.
 	 *
 	 * @param context
-	 * 		the Context the view is attached to, not null
+	 * 		the Context the view is operating in, not null
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 * @param defStyleAttr
