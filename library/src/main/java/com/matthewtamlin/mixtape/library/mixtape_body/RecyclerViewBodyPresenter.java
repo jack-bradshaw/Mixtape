@@ -121,12 +121,12 @@ public class RecyclerViewBodyPresenter<
 	}
 
 	@Override
-	public void onLibraryItemSelected(final BodyContract.View hostView, final LibraryItem item) {
+	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onContextualMenuItemSelected(final BodyContract.View hostView, final LibraryItem
+	public void onContextualMenuItemSelected(final BodyContract.View bodyView, final LibraryItem
 			libraryItem, final MenuItem menuItem) {
 		// Default implementation does nothing
 	}

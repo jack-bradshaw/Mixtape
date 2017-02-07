@@ -142,25 +142,25 @@ public interface BodyContract {
 			/**
 			 * Invoked when the user selects a LibraryItem in a BodyContract.View.
 			 *
-			 * @param hostView
+			 * @param bodyView
 			 * 		the BodyContract.View hosting the selected LibraryItem item, not null
 			 * @param item
 			 * 		the selected LibraryItem, not null
 			 */
-			void onLibraryItemSelected(BodyContract.View hostView, LibraryItem item);
+			void onLibraryItemSelected(BodyContract.View bodyView, LibraryItem item);
 
 			/**
 			 * Invoked when the user selects an option from an item specific contextual menu in a
 			 * BodyContract.View.
 			 *
-			 * @param hostView
+			 * @param bodyView
 			 * 		the BodyContract.View hosting the menu, not null
 			 * @param libraryItem
 			 * 		the LibraryItem targeted by the contextual menu, not null
 			 * @param menuItem
 			 * 		the selected menu option, not null
 			 */
-			void onContextualMenuItemSelected(BodyContract.View hostView, LibraryItem libraryItem,
+			void onContextualMenuItemSelected(BodyContract.View bodyView, LibraryItem libraryItem,
 					MenuItem menuItem);
 		}
 	}
