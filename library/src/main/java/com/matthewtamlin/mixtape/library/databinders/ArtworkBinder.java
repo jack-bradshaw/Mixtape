@@ -139,14 +139,14 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * @return the cache used to store artwork
 	 */
-	public final LibraryItemCache getCache() {
+	public LibraryItemCache getCache() {
 		return cache;
 	}
 
 	/**
 	 * @return the defaults used when artwork cannot be accessed
 	 */
-	public final DisplayableDefaults getDefaults() {
+	public DisplayableDefaults getDefaults() {
 		return defaults;
 	}
 
@@ -179,7 +179,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * Sets the width to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
-	public final void setFallbackDecodingWidth(final int width) {
+	public void setFallbackDecodingWidth(final int width) {
 		this.fallbackDecodingWidth = width;
 	}
 
@@ -195,7 +195,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * Sets the height to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
-	public final void setFallbackDecodingHeight(final int height) {
+	public void setFallbackDecodingHeight(final int height) {
 		this.fallbackDecodingHeight = height;
 	}
 
