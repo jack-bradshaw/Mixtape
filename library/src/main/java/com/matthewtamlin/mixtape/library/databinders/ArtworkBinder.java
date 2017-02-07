@@ -91,8 +91,6 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * 		if {@code cache} is null
 	 * @throws IllegalArgumentException
 	 * 		if {@code defaults} is null
-	 * @throws IllegalArgumentException
-	 * 		if {@code fadeInDurationMs} is less than zero
 	 */
 	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
 		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
