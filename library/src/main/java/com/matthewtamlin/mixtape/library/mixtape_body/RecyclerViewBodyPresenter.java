@@ -75,8 +75,9 @@ public class RecyclerViewBodyPresenter<
 	 * @throws IllegalArgumentException
 	 * 		if {@code artworkDataBinder} is null
 	 */
-	public RecyclerViewBodyPresenter(final TitleBinder titleDataBinder, final SubtitleBinder
-			subtitleDataBinder, final ArtworkBinder artworkDataBinder) {
+	public RecyclerViewBodyPresenter(final TitleBinder titleDataBinder,
+			final SubtitleBinder subtitleDataBinder,
+			final ArtworkBinder artworkDataBinder) {
 		super();
 
 		this.titleDataBinder = NullChecker.checkNotNull(titleDataBinder,
