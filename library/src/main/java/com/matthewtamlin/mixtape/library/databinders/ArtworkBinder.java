@@ -66,7 +66,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * The duration to use when transitioning artwork, measured in milliseconds.
 	 */
-	private int fadeInDurationMs;
+	private int fadeInDurationMs = 300;
 
 	/**
 	 * The default width to use when loading artwork. This value is used if the ImageView is not
