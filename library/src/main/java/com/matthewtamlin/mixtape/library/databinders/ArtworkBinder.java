@@ -72,13 +72,13 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * The default width to use when loading artwork. This value is used if the ImageView is not
 	 * ready to return its dimensions.
 	 */
-	private int defaultWidth = 300;
+	private int fallbackDecodingWidth = 300;
 
 	/**
 	 * The default height to use when loading artwork. This value is used if the ImageView is not
 	 * ready to return its dimensions.
 	 */
-	private int defaultHeight = 300;
+	private int fallbackDecodingHeight = 300;
 
 	/**
 	 * Constructs a new ArtworkBinder.
@@ -159,7 +159,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * dimensions.
 	 */
 	public final void setDefaultWidth(final int defaultWidth) {
-		this.defaultWidth = defaultWidth;
+		this.fallbackDecodingWidth = defaultWidth;
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * dimensions.
 	 */
 	public final void setDefaultHeight(final int defaultHeight) {
-		this.defaultHeight = defaultHeight;
+		this.fallbackDecodingHeight = defaultHeight;
 	}
 
 	/**
@@ -224,8 +224,8 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 
 		@Override
 		public Bitmap doInBackground(final Void... params) {
-			final int width = viewWidth == -1 ? defaultWidth : viewWidth;
-			final int height = viewHeight == -1 ? defaultHeight : viewHeight;
+			final int width = viewWidth == -1 ? fallbackDecodingWidth : viewWidth;
+			final int height = viewHeight == -1 ? fallbackDecodingHeight : viewHeight;
 
 			if (isCancelled() || data == null) {
 				return null;
@@ -298,8 +298,8 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			es.execute(new Runnable() {
 				@Override
 				public void run() {
-					final int width = viewWidth == 0 ? defaultWidth : viewWidth;
-					final int height = viewHeight == 0 ? defaultHeight : viewHeight;
+					final int width = viewWidth == 0 ? fallbackDecodingWidth : viewWidth;
+					final int height = viewHeight == 0 ? fallbackDecodingHeight : viewHeight;
 
 					cache.cacheArtwork(data, true, width, height);
 				}
