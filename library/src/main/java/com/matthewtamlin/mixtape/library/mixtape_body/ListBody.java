@@ -178,7 +178,7 @@ public final class ListBody extends RecyclerViewBody {
 		final TextView titleView = (TextView) listItem.findViewById(R.id.listBodyItem_title);
 		final TextView subtitleView = (TextView) listItem.findViewById(R.id.listBodyItem_subtitle);
 		final ImageView artworkView = (ImageView) listItem.findViewById(R.id.listBodyItem_artwork);
-		final View menuButton = listItem.findViewById(R.id.listIBodytem_menu);
+		final View menuButton = listItem.findViewById(R.id.listIBodyItem_menu);
 
 		return new BodyViewHolder(listItem, titleView, subtitleView, artworkView, menuButton);
 	}
