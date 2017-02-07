@@ -32,7 +32,7 @@ import java.util.Iterator;
  * future performance, and asynchronous processing is only used if data is not already cached. In
  * case an item fails to return a subtitle, a default must be supplied.
  */
-public final class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
+public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * Identifies this class during logging.
 	 */
