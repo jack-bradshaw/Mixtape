@@ -302,7 +302,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testView.showHeaderAtStartOnly();
+				testView.showHeaderAtStart();
 			}
 		});
 
@@ -323,7 +323,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				testView.showHeaderOnScrollTowardsStartOnly();
+				testView.showHeaderOnScrollTowardsStart();
 			}
 		});
 
