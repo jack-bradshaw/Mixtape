@@ -134,21 +134,21 @@ public class RecyclerViewBodyPresenter<
 	/**
 	 * @return the TitleBinder used to bind titles to the UI, not null
 	 */
-	public final TitleBinder getTitleDataBinder() {
+	public TitleBinder getTitleDataBinder() {
 		return titleDataBinder;
 	}
 
 	/**
 	 * @return the SubtitleBinder used to bind subtitles to the UI, not null
 	 */
-	public final SubtitleBinder getSubtitleDataBinder() {
+	public SubtitleBinder getSubtitleDataBinder() {
 		return subtitleDataBinder;
 	}
 
 	/**
 	 * @return the ArtworkBinder used to bind artwork to the UI, not null
 	 */
-	public final ArtworkBinder getArtworkDataBinder() {
+	public ArtworkBinder getArtworkDataBinder() {
 		return artworkDataBinder;
 	}
 }
