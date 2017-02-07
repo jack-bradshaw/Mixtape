@@ -52,7 +52,7 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  *
  * This setup will pull data from the data source and display it in the view.
  */
-public final class GridBody extends RecyclerViewBody {
+public class GridBody extends RecyclerViewBody {
 	/**
 	 * Bundle key for saving and restoring the superclass state.
 	 */
