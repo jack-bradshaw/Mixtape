@@ -113,8 +113,9 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public CoordinatedMixtapeContainer(final Context context, final AttributeSet attrs, final int
-			defStyleAttr) {
+	public CoordinatedMixtapeContainer(final Context context,
+			final AttributeSet attrs,
+			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
 	}
