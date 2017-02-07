@@ -41,7 +41,7 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
  * A MixtapeContainer which shows and hides the header based on body scroll events. There are four
  * available coordination profiles: <ul> <li>The header is always hidden, regardless of body scroll
  * events.</li> <li>The header is always shown, regardless of body scroll events.</li> <li>The
- * header is only shown if the start of the recycler view is visible.</li> <li>The header is shown
+ * header is hidden unless the body is scrolled to the start position.</li> <li>The header is shown
  * whenever the body is scrolled towards the start, and hidden whenever the body is scrolled towards
  * the end.</li> </ul>
  */
@@ -207,7 +207,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to hide the header unless the start of the body is visible.
+	 * Configures this view to hide the header unless the body is scrolled to the start position.
+	 * This overrides any behaviour set previously.
 	 */
 	public void showHeaderAtStartOnly() {
 		constraint = SHOW_HEADER_AT_START;
@@ -325,13 +326,13 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 		PERSISTENT_HEADER,
 
 		/**
-		 * The header is hidden unless the start of the body is visible.
+		 * The header is hidden unless the body is scrolled to the start position.
 		 */
 		SHOW_HEADER_AT_START,
 
 		/**
-		 * The header is shown whenever the body is scrolled towards the start and hidden
-		 * whenever the body is scrolled towards the end.
+		 * The header is shown whenever the body is scrolled towards the start and hidden whenever
+		 * the body is scrolled towards the end.
 		 */
 		SHOW_HEADER_ON_SCROLL_TO_START
 	}
