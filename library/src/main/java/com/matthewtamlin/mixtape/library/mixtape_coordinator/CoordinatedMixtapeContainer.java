@@ -207,7 +207,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to hide the header unless the recycler view is scrolled to the start.
+	 * Configures this view to hide the header unless the start of the body is visible.
 	 */
 	public void showHeaderAtStartOnly() {
 		constraint = SHOW_HEADER_AT_START;
@@ -325,14 +325,13 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 		PERSISTENT_HEADER,
 
 		/**
-		 * The header is always hidden except when the body is scrolled to the very top. Scrolling
-		 * away from the top hides the header again.
+		 * The header is hidden unless the start of the body is visible.
 		 */
 		SHOW_HEADER_AT_START,
 
 		/**
-		 * The header is always shown on downwards scroll events in the body, and hidden on upwards
-		 * scroll events.
+		 * The header is shown whenever the body is scrolled towards the start and hidden
+		 * whenever the body is scrolled towards the end.
 		 */
 		SHOW_HEADER_ON_SCROLL_TO_START
 	}
