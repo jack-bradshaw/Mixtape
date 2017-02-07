@@ -20,8 +20,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 
 /**
- * Coordinates the display of two views: a header and a body. The header is displayed at the top of
- * the view, and the body is displayed directly below it.
+ * Coordinates the display of two views: a header and a body.
  */
 public interface MixtapeContainerView<H extends HeaderContract.View, B extends BodyContract.View> {
 	/**
