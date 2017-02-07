@@ -104,27 +104,27 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	}
 
 	@Override
-	public void onTitleClicked(final HeaderContract.View hostView) {
+	public void onTitleClicked(final HeaderContract.View headerView) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onSubtitleClicked(final HeaderContract.View hostView) {
+	public void onSubtitleClicked(final HeaderContract.View headerView) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onArtworkClicked(final HeaderContract.View hostView) {
+	public void onArtworkClicked(final HeaderContract.View headerView) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onExtraButtonClicked(final HeaderContract.View hostView, final int index) {
+	public void onExtraButtonClicked(final HeaderContract.View headerView, final int index) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onOverflowMenuItemClicked(final HeaderContract.View hostView,
+	public void onOverflowMenuItemClicked(final HeaderContract.View headerView,
 			final MenuItem menuItem) {
 		// Default implementation does nothing
 	}

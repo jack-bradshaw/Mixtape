@@ -128,12 +128,12 @@ public class PlaylistActivity extends AppCompatActivity {
 		headerPresenter = new SmallHeaderPresenter<HeaderDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
-			public void onExtraButtonClicked(final HeaderContract.View hostView, final int index) {
+			public void onExtraButtonClicked(final HeaderContract.View headerView, final int index) {
 				handleHeaderExtraButtonClicked(index);
 			}
 
 			@Override
-			public void onOverflowMenuItemClicked(final HeaderContract.View hostView,
+			public void onOverflowMenuItemClicked(final HeaderContract.View headerView,
 					final MenuItem menuItem) {
 				handleHeaderOverflowMenuItemClicked(menuItem);
 			}

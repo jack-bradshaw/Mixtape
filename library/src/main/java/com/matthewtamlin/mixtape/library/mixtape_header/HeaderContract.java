@@ -78,49 +78,49 @@ public interface HeaderContract {
 			/**
 			 * Invoked when the user clicks the title in a HeaderContract.View.
 			 *
-			 * @param hostView
+			 * @param headerView
 			 * 		the HeaderContract.View hosting the clicked title, not null
 			 */
-			void onTitleClicked(HeaderContract.View hostView);
+			void onTitleClicked(HeaderContract.View headerView);
 
 			/**
 			 * Invoked when the user clicks the subtitle in a HeaderContract.View.
 			 *
-			 * @param hostView
+			 * @param headerView
 			 * 		the HeaderContract.View hosting the clicked subtitle, not null
 			 */
-			void onSubtitleClicked(HeaderContract.View hostView);
+			void onSubtitleClicked(HeaderContract.View headerView);
 
 			/**
 			 * Invoked when the user clicks the artwork in a HeaderContract.View.
 			 *
-			 * @param hostView
+			 * @param headerView
 			 * 		the HeaderContract.View hosting the clicked artwork, not null
 			 */
-			void onArtworkClicked(HeaderContract.View hostView);
+			void onArtworkClicked(HeaderContract.View headerView);
 
 			/**
 			 * Invoked when the user clicks an extra button in a HeaderContract.View.
 			 *
-			 * @param hostView
+			 * @param headerView
 			 * 		the HeaderContract.View hosting the clicked subtitle, not the actual view which was
 			 * 		clicked, not null
 			 * @param index
 			 * 		the index of the clicked button, with reference to the array last passed to {@link
 			 * 		HeaderContract.View#setExtraButtons(Bitmap[])}
 			 */
-			void onExtraButtonClicked(HeaderContract.View hostView, int index);
+			void onExtraButtonClicked(HeaderContract.View headerView, int index);
 
 			/**
 			 * Invoked when the user selects an option from the overflow menu of a HeaderContract
 			 * .View.
 			 *
-			 * @param hostView
+			 * @param headerView
 			 * 		the HeaderContract.View hosting the menu, not null
 			 * @param menuItem
 			 * 		the selected menu option, not null
 			 */
-			void onOverflowMenuItemClicked(HeaderContract.View hostView, MenuItem menuItem);
+			void onOverflowMenuItemClicked(HeaderContract.View headerView, MenuItem menuItem);
 		}
 	}
 
