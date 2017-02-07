@@ -199,7 +199,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * Sets the height to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
-	public final void setDefaultHeight(final int defaultHeight) {
+	public final void setFallbackDecodingHeight(final int defaultHeight) {
 		this.fallbackDecodingHeight = defaultHeight;
 	}
 
