@@ -36,6 +36,8 @@ import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
+
 /**
  * Binds artwork data from LibraryItems to ImageViews. Data is cached as it is loaded to improve
  * future performance, and asynchronous processing is only used if data is not already cached. By
@@ -93,13 +95,13 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * 		if {@code defaults} is null
 	 */
 	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
-		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
-		this.defaults = NullChecker.checkNotNull(defaults, "defaults cannot be null");
+		this.cache = checkNotNull(cache, "cache cannot be null");
+		this.defaults = checkNotNull(defaults, "defaults cannot be null");
 	}
 
 	@Override
 	public void bind(final ImageView imageView, final LibraryItem data) {
-		NullChecker.checkNotNull(imageView, "imageView cannot be null");
+		checkNotNull(imageView, "imageView cannot be null");
 
 		// There should never be more than one task operating on the same ImageView concurrently
 		cancel(imageView);
@@ -234,7 +236,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		 * 		if {@code imageView} is null
 		 */
 		public BinderTask(final ImageView imageView, final LibraryItem data) {
-			this.imageView = NullChecker.checkNotNull(imageView, "imageView cannot be null");
+			this.imageView = checkNotNull(imageView, "imageView cannot be null");
 			this.data = data;
 		}
 
