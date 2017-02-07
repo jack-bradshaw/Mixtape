@@ -47,17 +47,17 @@ public class RecyclerViewBodyPresenter<
 	/**
 	 * Binds title data to the view.
 	 */
-	private TitleBinder titleDataBinder;
+	private final TitleBinder titleDataBinder;
 
 	/**
 	 * Binds subtitle data to the view.
 	 */
-	private SubtitleBinder subtitleDataBinder;
+	private final SubtitleBinder subtitleDataBinder;
 
 	/**
 	 * Binds artwork data to the view.
 	 */
-	private ArtworkBinder artworkDataBinder;
+	private final ArtworkBinder artworkDataBinder;
 
 	/**
 	 * Constructs a new SmallHeaderPresenter.
