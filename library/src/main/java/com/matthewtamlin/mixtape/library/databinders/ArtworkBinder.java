@@ -183,7 +183,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * Sets the width to use when decoding artwork if the target ImageView cannot return its
 	 * dimensions.
 	 */
-	public final void setDefaultWidth(final int defaultWidth) {
+	public final void setFallbackDecodingWidth(final int defaultWidth) {
 		this.fallbackDecodingWidth = defaultWidth;
 	}
 
