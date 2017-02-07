@@ -120,7 +120,7 @@ public interface HeaderContract {
 			 * @param menuItem
 			 * 		the selected menu option, not null
 			 */
-			void onOverflowMenuItemClicked(HeaderContract.View headerView, MenuItem menuItem);
+			void onOverflowMenuItemSelected(HeaderContract.View headerView, MenuItem menuItem);
 		}
 	}
 

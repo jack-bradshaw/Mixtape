@@ -133,7 +133,7 @@ public class PlaylistActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onOverflowMenuItemClicked(final HeaderContract.View headerView,
+			public void onOverflowMenuItemSelected(final HeaderContract.View headerView,
 					final MenuItem menuItem) {
 				handleHeaderOverflowMenuItemClicked(menuItem);
 			}
