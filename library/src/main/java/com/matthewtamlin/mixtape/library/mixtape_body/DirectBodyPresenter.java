@@ -49,7 +49,7 @@ public abstract class DirectBodyPresenter<
 	private V view;
 
 	@Override
-	public final void setDataSource(final S dataSource) {
+	public void setDataSource(final S dataSource) {
 		unsubscribeFromDataSourceCallbacks(this.dataSource);
 		this.dataSource = dataSource;
 		subscribeToDataSourceCallbacks(this.dataSource);
@@ -60,7 +60,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public final S getDataSource() {
+	public S getDataSource() {
 		return dataSource;
 	}
 
@@ -76,7 +76,7 @@ public abstract class DirectBodyPresenter<
 	}
 
 	@Override
-	public final V getView() {
+	public V getView() {
 		return view;
 	}
 
