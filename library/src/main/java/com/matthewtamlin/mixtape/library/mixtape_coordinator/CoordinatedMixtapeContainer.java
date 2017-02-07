@@ -189,7 +189,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to always hide the header regardless of body scroll events.
+	 * Configures this view to always hide the header regardless of body scroll events. This
+	 * overrides any behaviour set previously.
 	 */
 	public void hideHeaderAlways() {
 		constraint = Constraint.HIDDEN_HEADER;
@@ -197,7 +198,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to always show the header regardless of body scroll events.
+	 * Configures this view to always show the header regardless of body scroll events. This
+	 * overrides any behaviour set previously.
 	 */
 	public void showHeaderAlways() {
 		constraint = PERSISTENT_HEADER;
@@ -206,6 +208,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 
 	/**
 	 * Configures this view to only show the header if the start of the recycler view is visible.
+	 * This overrides any behaviour set previously.
 	 */
 	public void showHeaderAtTopOnly() {
 		constraint = SHOW_HEADER_AT_TOP_ONLY;
@@ -214,7 +217,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 
 	/**
 	 * Configures this view to show the header whenever the body is scrolled towards the start, and
-	 * hide the header whenever the body is scrolled towards the end.
+	 * hide the header whenever the body is scrolled towards the end. This overrides any behaviour
+	 * set previously.
 	 */
 	public void showHeaderOnDownwardScrollOnly() {
 		constraint = SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
