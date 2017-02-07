@@ -123,7 +123,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 100000);
 		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults, 300);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults);
 
 		headerPresenter = new SmallHeaderPresenter<HeaderDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
@@ -151,7 +151,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 1000000);
 		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults, 300);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults);
 
 		bodyPresenter = new RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {

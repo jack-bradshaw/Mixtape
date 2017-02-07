@@ -145,7 +145,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				smallHeader.setItem(headerItem);
 				smallHeader.setTitleDataBinder(new TitleBinder(cache, defaults));
 				smallHeader.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				smallHeader.setArtworkDataBinder(new ArtworkBinder(cache, defaults, 100));
+				smallHeader.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 
 				testView.setHeader(smallHeader);
 			}
@@ -192,7 +192,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				body.setItems(bodyItems);
 				body.setTitleDataBinder(new TitleBinder(cache, defaults));
 				body.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				body.setArtworkDataBinder(new ArtworkBinder(cache, defaults, 100));
+				body.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 
 				testView.setBody(body);
 			}
@@ -219,7 +219,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				body.setItems(bodyItems);
 				body.setTitleDataBinder(new TitleBinder(cache, defaults));
 				body.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				body.setArtworkDataBinder(new ArtworkBinder(cache, defaults, 100));
+				body.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 
 				testView.setBody(body);
 			}

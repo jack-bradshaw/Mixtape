@@ -87,8 +87,6 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * 		a cache for storing artwork, may already contain data, not null
 	 * @param defaults
 	 * 		supplies the default artwork, not null
-	 * @param fadeInDurationMs
-	 * 		the duration to use when fading-in artwork, measured in milliseconds, not less than zero
 	 * @throws IllegalArgumentException
 	 * 		if {@code cache} is null
 	 * @throws IllegalArgumentException
@@ -96,8 +94,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * @throws IllegalArgumentException
 	 * 		if {@code fadeInDurationMs} is less than zero
 	 */
-	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults,
-			final int fadeInDurationMs) {
+	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
 		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
 		this.defaults = NullChecker.checkNotNull(defaults, "defaults cannot be null");
 		this.fadeInDurationMs = IntChecker.checkGreaterThan(fadeInDurationMs, -1);

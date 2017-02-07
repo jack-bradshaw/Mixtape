@@ -54,7 +54,7 @@ public class TestRecyclerViewBodyPresenter extends TestDirectBodyPresenter {
 		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(null, null, null);
 		titleBinder = new TitleBinder(cache, defaults);
 		subtitleBinder = new SubtitleBinder(cache, defaults);
-		artworkBinder = new ArtworkBinder(cache, defaults, 1);
+		artworkBinder = new ArtworkBinder(cache, defaults);
 
 		// Create a presenter for testing
 		presenter = createPresenter();

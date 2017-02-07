@@ -135,8 +135,7 @@ public class SmallHeaderTestHarness extends HeaderContractViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults,
-						fadeDurationMs));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 			}
 		});
 
