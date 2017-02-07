@@ -21,7 +21,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
@@ -290,20 +289,6 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				}
 
 				if (body != null) {
-					body.clearRegisteredTopReachedListeners();
-				}
-
-				break;
-			}
-
-			default: { // Use persistent case as default
-				if (header != null) {
-					header.setVisibility(View.VISIBLE);
-					setHeaderScrollFlags(0);
-				}
-
-				if (body != null) {
-					//TODO this should be remove not clear
 					body.clearRegisteredTopReachedListeners();
 				}
 			}
