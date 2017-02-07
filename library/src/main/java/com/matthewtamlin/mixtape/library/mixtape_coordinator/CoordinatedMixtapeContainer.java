@@ -42,8 +42,8 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
  * available coordination profiles: <ul> <li>The header is always hidden, regardless of body scroll
  * events.</li> <li>The header is always shown, regardless of body scroll events.</li> <li>The
  * header is only shown if the start of the recycler view is visible.</li> <li>The header is shown
- * if the body is scrolled towards the start, and hidden if the body is scrolled towards the
- * end.</li> </ul>
+ * whenever the body is scrolled towards the start, and hidden whenever the body is scrolled towards
+ * the end.</li> </ul>
  */
 public class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
@@ -189,7 +189,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to always hide the header.
+	 * Configures this view to always hide the header regardless of body scroll events.
 	 */
 	public void hideHeaderAlways() {
 		constraint = Constraint.HIDDEN_HEADER;
@@ -197,7 +197,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to always show the header.
+	 * Configures this view to always show the header regardless of body scroll events.
 	 */
 	public void showHeaderAlways() {
 		constraint = PERSISTENT_HEADER;
@@ -205,8 +205,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to show the header when the first element in the body is visible, and
-	 * hide it otherwise.
+	 * Configures this view to only show the header if the start of the recycler view is visible.
 	 */
 	public void showHeaderAtTopOnly() {
 		constraint = SHOW_HEADER_AT_TOP_ONLY;
@@ -214,8 +213,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view to show the header on any downwards scroll event in the body, and hide
-	 * it on any upwards scroll event.
+	 * Configures this view to show the header whenever the body is scrolled towards the start, and
+	 * hide the header whenever the body is scrolled towards the end.
 	 */
 	public void showHeaderOnDownwardScrollOnly() {
 		constraint = SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
