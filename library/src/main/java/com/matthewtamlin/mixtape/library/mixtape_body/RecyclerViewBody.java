@@ -385,7 +385,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Creates a new reycler view adapter but does not assign it to the recycler view.
+	 * Creates a new recycler view adapter but does not assign it to the recycler view.
 	 */
 	private void createAdapter() {
 		adapter = new Adapter<BodyViewHolder>() {
