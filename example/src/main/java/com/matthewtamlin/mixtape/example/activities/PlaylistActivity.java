@@ -104,7 +104,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		rootView.setBody(body);
 		rootView.setHeader(header);
-		rootView.showHeaderAtStart();
+		rootView.showHeaderAtStartOnly();
 	}
 
 	private void setupDataSources() {
