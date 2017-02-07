@@ -32,7 +32,7 @@ import java.util.Iterator;
  * performance, and asynchronous processing is only used if data is not already cached. In case an
  * item fails to return a title, a default must be supplied.
  */
-public final class TitleBinder implements DataBinder<LibraryItem, TextView> {
+public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * Identifies this class during logging.
 	 */
