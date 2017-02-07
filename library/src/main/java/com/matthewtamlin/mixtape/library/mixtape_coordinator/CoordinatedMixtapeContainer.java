@@ -224,7 +224,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Creates the layout and assigns necessary views references to member variables.
+	 * Creates the layout and assigns the necessary views references to member variables.
 	 */
 	private void init() {
 		inflate(getContext(), R.layout.coordinatedheaderbodyview, this);
