@@ -34,8 +34,8 @@ import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLA
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.PERSISTENT_HEADER;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_AT_TOP_ONLY;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
+import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_AT_START;
+import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_SCROLL_TO_START;
 
 /**
  * A MixtapeContainer which shows and hides the header based on body scroll events. There are four
@@ -211,7 +211,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * This overrides any behaviour set previously.
 	 */
 	public void showHeaderAtStart() {
-		constraint = SHOW_HEADER_AT_TOP_ONLY;
+		constraint = SHOW_HEADER_AT_START;
 		applyCurrentConstraint();
 	}
 
@@ -221,7 +221,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * set previously.
 	 */
 	public void showHeaderOnScrollTowardsStart() {
-		constraint = SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
+		constraint = SHOW_HEADER_ON_SCROLL_TO_START;
 		applyCurrentConstraint();
 	}
 
@@ -266,7 +266,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				break;
 			}
 
-			case SHOW_HEADER_AT_TOP_ONLY: {
+			case SHOW_HEADER_AT_START: {
 				if (header != null) {
 					header.setVisibility(VISIBLE);
 					setHeaderScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_SNAP);
@@ -284,7 +284,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				break;
 			}
 
-			case SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY: {
+			case SHOW_HEADER_ON_SCROLL_TO_START: {
 				if (header != null) {
 					header.setVisibility(VISIBLE);
 					setHeaderScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_ENTER_ALWAYS |
@@ -329,12 +329,12 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 		 * The header is always hidden except when the body is scrolled to the very top. Scrolling
 		 * away from the top hides the header again.
 		 */
-		SHOW_HEADER_AT_TOP_ONLY,
+		SHOW_HEADER_AT_START,
 
 		/**
 		 * The header is always shown on downwards scroll events in the body, and hidden on upwards
 		 * scroll events.
 		 */
-		SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY
+		SHOW_HEADER_ON_SCROLL_TO_START
 	}
 }
