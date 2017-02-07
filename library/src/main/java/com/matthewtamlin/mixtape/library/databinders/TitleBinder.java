@@ -39,6 +39,11 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	private static final String TAG = "[TitleBinder]";
 
 	/**
+	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
+	 */
+	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
+
+	/**
 	 * Caches titles to increase efficiency and performance.
 	 */
 	private final LibraryItemCache cache;
@@ -47,11 +52,6 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	 * Supplies the default title.
 	 */
 	private final DisplayableDefaults defaults;
-
-	/**
-	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
-	 */
-	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
 
 	/**
 	 * Constructs a new TitleBinder.
