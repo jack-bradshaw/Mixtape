@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.data;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 /**
  * Supplies default titles, subtitles and artwork.
@@ -44,5 +44,5 @@ public interface DisplayableDefaults {
 	 *
 	 * @return the default artwork
 	 */
-	Bitmap getArtwork();
+	Drawable getArtwork();
 }
