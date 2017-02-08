@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.caching;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.LruCache;
 
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
@@ -54,7 +54,7 @@ public class LruLibraryItemCache implements LibraryItemCache {
 	 * Contains the cached artwork. Each item of artwork is mapped to the LibraryItem object it was
 	 * sourced from.
 	 */
-	private final LruCache<LibraryItem, Bitmap> artworkCache;
+	private final LruCache<LibraryItem, Drawable> artworkCache;
 
 	/**
 	 * Constructs a new LruLibraryItemCache. The supplied capacities determine when to evict items
@@ -93,12 +93,8 @@ public class LruLibraryItemCache implements LibraryItemCache {
 			}
 		};
 
-		artworkCache = new LruCache<LibraryItem, Bitmap>(artworkSizeBytes) {
-			@Override
-			protected int sizeOf(final LibraryItem key, final Bitmap value) {
-				return value.getByteCount();
-			}
-		};
+		//TODO implement ejection
+		artworkCache = new LruCache<>(artworkSizeBytes);
 	}
 
 	@Override
@@ -144,7 +140,7 @@ public class LruLibraryItemCache implements LibraryItemCache {
 		if ((item != null) && !(onlyIfNotCached && containsArtwork(item))) {
 			try {
 				// May throw access exception
-				final Bitmap artwork = item.getArtwork(preferredWidth, preferredHeight);
+				final Drawable artwork = item.getArtwork(preferredWidth, preferredHeight);
 
 				// Execution will only reach here if an exception was not thrown
 				if (artwork != null) {
@@ -168,7 +164,7 @@ public class LruLibraryItemCache implements LibraryItemCache {
 	}
 
 	@Override
-	public final Bitmap getArtwork(final LibraryItem item) {
+	public final Drawable getArtwork(final LibraryItem item) {
 		return (item == null) ? null : artworkCache.get(item);
 	}
 
