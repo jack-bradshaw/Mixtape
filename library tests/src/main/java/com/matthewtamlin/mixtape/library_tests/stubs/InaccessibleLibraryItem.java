@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library_tests.stubs;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
@@ -37,7 +37,7 @@ public final class InaccessibleLibraryItem implements LibraryItem {
 	}
 
 	@Override
-	public final Bitmap getArtwork(int width, int height) throws LibraryReadException {
+	public final Drawable getArtwork(int width, int height) throws LibraryReadException {
 		throw new LibraryReadException("Artwork is never accessible.");
 	}
 }
