@@ -73,4 +73,4 @@ public class TestImmutableDisplayableDefaults {
 	public void testGetArtwork_shouldReturnTestArtwork() {
 		assertThat(displayableDefaults.getArtwork(), is(artwork));
 	}
-}	
+}
