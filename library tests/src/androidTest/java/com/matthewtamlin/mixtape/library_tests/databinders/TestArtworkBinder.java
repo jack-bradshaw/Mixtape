@@ -173,7 +173,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(imageView).setImageBitmap(artwork); // Called once to clear and once to set
+		verify(imageView).setImageDrawable(artwork); // Called once to clear and once to set
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(imageView).setImageBitmap(artwork);
+		verify(imageView).setImageDrawable(artwork);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, inaccessibleItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(imageView).setImageBitmap(defaultArtwork);
+		verify(imageView).setImageDrawable(defaultArtwork);
 	}
 
 	/**
