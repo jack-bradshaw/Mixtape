@@ -16,7 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.data;
 
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 /**
@@ -46,15 +45,15 @@ public interface LibraryItem {
 	CharSequence getSubtitle() throws LibraryReadException;
 
 	/**
-	 * Accesses the artwork of this item. This method may be long running. The width and height
-	 * parameters are used to optimise the memory used by the artwork. If either value is less than
-	 * or equal to zero, then the unoptimised artwork is returned.
+	 * Accesses the artwork of this LibraryItem. The supplied dimensions may be used to optimise
+	 * memory usage and performance, however some implementations may not support this feature. This
+	 * method may be long running.
 	 *
 	 * @param width
 	 * 		the desired width of the artwork, measured in pixels
 	 * @param height
 	 * 		the desired height of the artwork, measured in pixels
-	 * @return the artwork of this item, null if none exists
+	 * @return the artwork, null if none exists
 	 * @throws LibraryReadException
 	 * 		if the artwork cannot be accessed
 	 */
