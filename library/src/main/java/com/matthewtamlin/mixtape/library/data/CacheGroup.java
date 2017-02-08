@@ -20,22 +20,21 @@ import android.graphics.drawable.Drawable;
 import android.util.LruCache;
 
 /**
- * Provides access to three caches which can be used to store the titles, subtitles and artwork of
- * LibraryItems.
+ * Provides access to LRU caches for storing LibraryItem titles, subtitles and artwork.
  */
 public interface CacheGroup {
 	/**
-	 * @return a cache for storing titles, not null
+	 * @return a cache for storing LibraryItem titles, not null
 	 */
 	public LruCache<LibraryItem, CharSequence> getTitleCache();
 
 	/**
-	 * @return a cache for storing subtitles, not null
+	 * @return a cache for storing LibraryItem subtitles, not null
 	 */
 	public LruCache<LibraryItem, CharSequence> getSubtitleCache();
 
 	/**
-	 * @return a cache for storing artwork, not null
+	 * @return a cache for storing LibraryItem artwork, not null
 	 */
 	public LruCache<LibraryItem, Drawable> getArtworkCache();
 }
