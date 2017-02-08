@@ -24,7 +24,6 @@ import android.support.v4.widget.Space;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -38,6 +37,8 @@ import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.Presenter;
+
+import timber.log.Timber;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -387,7 +388,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 		if (titleDataBinder != null) {
 			titleDataBinder.bind(titleTextView, data);
 		} else {
-			Log.w(TAG, "No title data binder set, could not bind title.");
+			Timber.w("No title data binder set, could not bind title.");
 		}
 	}
 
@@ -399,7 +400,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 		if (subtitleDataBinder != null) {
 			subtitleDataBinder.bind(subtitleTextView, data);
 		} else {
-			Log.w(TAG, "No subtitle data binder set, could not bind subtitle.");
+			Timber.w("No subtitle data binder set, could not bind subtitle.");
 		}
 	}
 
@@ -411,7 +412,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 		if (artworkDataBinder != null) {
 			artworkDataBinder.bind(artworkImageView, data);
 		} else {
-			Log.w(TAG, "No artwork data binder set, could not bind artwork.");
+			Timber.w("No artwork data binder set, could not bind artwork.");
 		}
 	}
 
