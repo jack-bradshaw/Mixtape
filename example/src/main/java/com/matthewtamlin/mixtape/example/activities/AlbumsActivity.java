@@ -18,6 +18,7 @@ package com.matthewtamlin.mixtape.example.activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,6 @@ import android.view.MenuItem;
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.Mp3Album;
 import com.matthewtamlin.mixtape.example.data.Mp3AlbumDataSource;
-import com.matthewtamlin.mixtape.example.data.Mp3Song;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
@@ -86,7 +86,9 @@ public class AlbumsActivity extends AppCompatActivity {
 				.default_artwork);
 
 		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
-				"Unknown title", "Unknown subtitle", defaultArtwork);
+				"Unknown title",
+				"Unknown subtitle",
+				new BitmapDrawable(getResources(), defaultArtwork));
 
 		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 10000000);
 
