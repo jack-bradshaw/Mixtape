@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.mixtape.example.data;
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Environment;
 
@@ -30,7 +31,13 @@ import java.util.Set;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class Mp3SongDataSource extends ListDataSourceHelper<Mp3Song> {
+	private final Resources resources;
+
 	private List<Mp3Song> songs = null;
+
+	public Mp3SongDataSource(final Resources resources) {
+		this.resources = resources;
+	}
 
 	@Override
 	public void loadData(final boolean forceRefresh,
@@ -79,7 +86,7 @@ public class Mp3SongDataSource extends ListDataSourceHelper<Mp3Song> {
 
 			if (splitName.length > 1) {
 				if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
-					mp3Songs.add(new Mp3Song(file));
+					mp3Songs.add(new Mp3Song(file, resources));
 				}
 			}
 		}
