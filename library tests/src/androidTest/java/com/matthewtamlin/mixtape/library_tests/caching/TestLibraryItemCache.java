@@ -17,8 +17,11 @@
 package com.matthewtamlin.mixtape.library_tests.caching;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -49,7 +52,7 @@ public abstract class TestLibraryItemCache {
 	private static final int ARTWORK_RES_ID = R.raw.image1;
 	private static final int DIMENSION = 1;
 
-	private Bitmap artwork;
+	private Drawable artwork;
 
 	private LibraryItemCache cache;
 
@@ -64,7 +67,8 @@ public abstract class TestLibraryItemCache {
 	public void setup() throws LibraryReadException {
 		// Context is now available so test image can be decoded
 		final Context context = InstrumentationRegistry.getTargetContext();
-		artwork = BitmapFactory.decodeResource(context.getResources(), ARTWORK_RES_ID);
+		final Resources res = context.getResources();
+		artwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
 		assertThat("precondition failed: artwork is null", artwork, is(notNullValue()));
 
 		// Source the cache to test from the subclass

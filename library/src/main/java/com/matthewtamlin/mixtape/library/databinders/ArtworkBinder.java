@@ -19,7 +19,7 @@ package com.matthewtamlin.mixtape.library.databinders;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
@@ -201,7 +201,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * Task for asynchronously loading data and binding it to the UI when available.
 	 */
-	private class BinderTask extends AsyncTask<Void, Void, Bitmap> {
+	private class BinderTask extends AsyncTask<Void, Void, Drawable> {
 		/**
 		 * The ImageView to bind data to.
 		 */
@@ -251,17 +251,18 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		}
 
 		@Override
-		public Bitmap doInBackground(final Void... params) {
+		public Drawable doInBackground(final Void... params) {
 			final int width = viewWidth == -1 ? fallbackDecodingWidth : viewWidth;
 			final int height = viewHeight == -1 ? fallbackDecodingHeight : viewHeight;
 
 			if (isCancelled() || data == null) {
 				return null;
 			} else if (cache.containsArtwork(data)) {
-				final Bitmap cachedArtwork = cache.getArtwork(data);
+				final Drawable cachedArtwork = cache.getArtwork(data);
 
 				// Only use the cached artwork if it is an adequate size
-				if (cachedArtwork.getWidth() < width || cachedArtwork.getHeight() < height) {
+				if (cachedArtwork.getIntrinsicWidth() < width ||
+						cachedArtwork.getIntrinsicHeight() < height) {
 					cache.removeArtwork(data); // Don't keep the data if it's not useful anymore
 					return getArtworkDirectly(width, height);
 				} else {
@@ -273,12 +274,12 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		}
 
 		@Override
-		public void onPostExecute(final Bitmap artwork) {
+		public void onPostExecute(final Drawable artwork) {
 			// Skip the animation if it isn't necessary
 			if (fadeInDurationMs <= 0 || artwork == null) {
 				if (!isCancelled()) {
 					imageView.setImageBitmap(null); // Resets view
-					imageView.setImageBitmap(artwork);
+					imageView.setImageDrawable(artwork);
 				}
 			} else {
 				// Animation to fade in from fully invisible to fully visible
@@ -292,7 +293,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 						if (!isCancelled()) {
 							imageView.setAlpha(0f);
 							imageView.setImageBitmap(null); // Resets ensures image changes
-							imageView.setImageBitmap(artwork);
+							imageView.setImageDrawable(artwork);
 						}
 					}
 
@@ -345,7 +346,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		 * 		the desired height of the artwork, measured in pixels
 		 * @return the artwork
 		 */
-		private Bitmap getArtworkDirectly(final int width, final int height) {
+		private Drawable getArtworkDirectly(final int width, final int height) {
 			try {
 				return data.getArtwork(width, height);
 			} catch (final LibraryReadException e) {

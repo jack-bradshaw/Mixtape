@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.mixtape.example.data;
 
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Environment;
 
@@ -35,7 +36,13 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 import static com.matthewtamlin.mixtape.example.util.Id3Util.MetadataField.ALBUM;
 
 public class Mp3AlbumDataSource extends ListDataSourceHelper<Mp3Album> {
+	private final Resources resources;
+
 	private List<Mp3Album> albums = null;
+
+	public Mp3AlbumDataSource(final Resources resources) {
+		this.resources = resources;
+	}
 
 	@Override
 	public void loadData(final boolean forceRefresh,
@@ -85,7 +92,7 @@ public class Mp3AlbumDataSource extends ListDataSourceHelper<Mp3Album> {
 			final String[] splitName = file.getName().split("\\.");
 
 			if (splitName[splitName.length - 1].toLowerCase().equals("mp3")) {
-				mp3Songs.add(new Mp3Song(file));
+				mp3Songs.add(new Mp3Song(file, resources));
 			}
 		}
 

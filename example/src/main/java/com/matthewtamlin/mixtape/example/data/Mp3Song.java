@@ -16,7 +16,10 @@
 
 package com.matthewtamlin.mixtape.example.data;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import com.matthewtamlin.mixtape.example.util.Id3Util;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -28,10 +31,13 @@ import java.io.IOException;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
 public class Mp3Song implements LibraryItem {
+	private final Resources resources;
+
 	private File mp3File;
 
-	public Mp3Song(final File mp3File) {
+	public Mp3Song(final File mp3File, final Resources resources) {
 		this.mp3File = checkNotNull(mp3File, "mp3File cannot be null.");
+		this.resources = checkNotNull(resources, "resources cannot be null.");
 	}
 
 	public File getMp3File() {
@@ -57,9 +63,10 @@ public class Mp3Song implements LibraryItem {
 	}
 
 	@Override
-	public Bitmap getArtwork(final int width, final int height) throws LibraryReadException {
+	public Drawable getArtwork(final int width, final int height) throws LibraryReadException {
 		try {
-			return Id3Util.getCoverArtFromId3Tag(mp3File, width, height);
+			final Bitmap artwork = Id3Util.getCoverArtFromId3Tag(mp3File, width, height);
+			return new BitmapDrawable(resources, artwork);
 		} catch (final IOException e) {
 			throw new LibraryReadException("Cannot read ID3 tag from file " + mp3File, e);
 		}

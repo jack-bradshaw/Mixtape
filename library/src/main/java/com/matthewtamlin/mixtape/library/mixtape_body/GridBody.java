@@ -40,16 +40,13 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  * menu. The number of columns can be customised, and defaults to 2.
  * <p>
  * The simplest way to use a GridBody is with a RecyclerViewBodyPresenter. For example:<pre>{@code
- * 	RecyclerViewBodyPresenter<LibraryItem, ListDataSource<LibraryItem>> presenter
- * 		= new MyPresenter();
- *
- * 	ListDataSource<LibraryItem> dataSource = new MyDataSource();
- * 	presenter.setDataSource(dataSource);
- *
- * 	GridBody body = new GridBody();
- * 	presenter.setView(body);}
- * </pre>
- *
+ *   RecyclerViewBodyPresenter<LibraryItem, ListDataSource<LibraryItem>> presenter
+ * 	   = new MyPresenter();
+ *   ListDataSource<LibraryItem> dataSource = new MyDataSource();
+ *   presenter.setDataSource(dataSource);
+ *   GridBody body = new GridBody();
+ *   presenter.setView(body);}
+ * </pre><p>
  * This setup will pull data from the data source and display it in the view.
  */
 public class GridBody extends RecyclerViewBody {
@@ -148,8 +145,8 @@ public class GridBody extends RecyclerViewBody {
 
 	@Override
 	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
-		recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns,
-				VERTICAL, false));
+		recyclerView.setLayoutManager(new GridLayoutManager(getContext(),
+				numberOfColumns < 1 ? 1 : numberOfColumns, VERTICAL, false));
 	}
 
 	@Override

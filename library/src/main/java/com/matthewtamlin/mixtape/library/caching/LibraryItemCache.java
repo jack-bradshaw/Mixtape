@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.caching;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
@@ -96,7 +96,7 @@ public interface LibraryItemCache {
 	 * 		the item to retrieve the artwork of
 	 * @return the cached artwork, null if none exists
 	 */
-	Bitmap getArtwork(LibraryItem item);
+	Drawable getArtwork(LibraryItem item);
 
 	/**
 	 * Removes all titles from the cache without removing any subtitles or artwork.

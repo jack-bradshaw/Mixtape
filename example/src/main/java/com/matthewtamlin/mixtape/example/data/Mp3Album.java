@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.example.data;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 import com.matthewtamlin.mixtape.example.util.Id3Util;
@@ -66,12 +66,12 @@ public class Mp3Album extends ArrayList<Mp3Song> implements LibraryItem {
 	}
 
 	@Override
-	public Bitmap getArtwork(final int width, final int height) throws LibraryReadException {
+	public Drawable getArtwork(final int width, final int height) throws LibraryReadException {
 		if (isEmpty()) {
 			return null;
 		} else {
 			try {
-				return Id3Util.getCoverArtFromId3Tag(get(0).getMp3File(), width, height);
+				return get(0).getArtwork(width, height);
 			} catch (final IOException e) {
 				throw new LibraryReadException("Cannot read ID3 tag from file " +
 						get(0).getMp3File(), e);

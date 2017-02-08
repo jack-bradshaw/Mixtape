@@ -19,6 +19,8 @@ package com.matthewtamlin.mixtape.library_tests.stubs;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
@@ -79,8 +81,9 @@ public final class NormalLibraryItem implements LibraryItem {
 	}
 
 	@Override
-	public Bitmap getArtwork(int width, int height) throws LibraryReadException {
-		return BitmapFactory.decodeResource(resources, artworkId);
+	public Drawable getArtwork(int width, int height) throws LibraryReadException {
+		final Bitmap artwork = BitmapFactory.decodeResource(resources, artworkId);
+		return new BitmapDrawable(resources, artwork);
 	}
 
 

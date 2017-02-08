@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.data;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 /**
  * An immutable implementation of the DisplayableDefaults interface.
@@ -35,7 +35,7 @@ public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	/**
 	 * The default artwork.
 	 */
-	private final Bitmap artwork;
+	private final Drawable artwork;
 
 	/**
 	 * Constructs a new ImmutableDisplayableDefaults using the supplied values.
@@ -48,7 +48,7 @@ public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	 * 		the default artwork, null allowed
 	 */
 	public ImmutableDisplayableDefaults(final String title, final String subtitle,
-			final Bitmap artwork) {
+			final Drawable artwork) {
 		this.title = title;
 		this.subtitle = subtitle;
 		this.artwork = artwork;
@@ -65,7 +65,7 @@ public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	}
 
 	@Override
-	public Bitmap getArtwork() {
+	public Drawable getArtwork() {
 		return artwork;
 	}
 }

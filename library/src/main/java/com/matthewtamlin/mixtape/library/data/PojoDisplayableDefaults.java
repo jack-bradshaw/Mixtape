@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.data;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 /**
  * An implementation of the DisplayableDefaults interface which exposes setters for the values.
@@ -26,7 +26,7 @@ public class PojoDisplayableDefaults implements DisplayableDefaults {
 
 	private CharSequence subtitle;
 
-	private Bitmap artwork;
+	private Drawable artwork;
 
 	public void setTitle(final CharSequence title) {
 		this.title = title;
@@ -36,7 +36,7 @@ public class PojoDisplayableDefaults implements DisplayableDefaults {
 		this.subtitle = subtitle;
 	}
 
-	public void setArtwork(final Bitmap artwork) {
+	public void setArtwork(final Drawable artwork) {
 		this.artwork = artwork;
 	}
 
@@ -51,7 +51,7 @@ public class PojoDisplayableDefaults implements DisplayableDefaults {
 	}
 
 	@Override
-	public Bitmap getArtwork() {
+	public Drawable getArtwork() {
 		return artwork;
 	}
 }

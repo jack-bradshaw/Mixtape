@@ -19,6 +19,7 @@ package com.matthewtamlin.mixtape.example.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -108,17 +109,21 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupDataSources() {
-		bodyDataSource = new Mp3SongDataSource();
+		bodyDataSource = new Mp3SongDataSource(getResources());
 
 		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
 				R.raw.header_artwork);
-		headerDataSource = new HeaderDataSource("All Songs", "Various artists", headerArtwork);
+		headerDataSource = new HeaderDataSource("All Songs",
+				"Various artists",
+				new BitmapDrawable(getResources(), headerArtwork));
 	}
 
 	private void setupHeaderPresenter() {
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
-				"Playlist", "Unknown artists", BitmapFactory.decodeResource(getResources(),
-				R.raw.default_artwork));
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Playlist",
+				"Unknown artists",
+				new BitmapDrawable(getResources(), defaultArtwork));
 
 		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 100000);
 		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
@@ -144,9 +149,11 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupBodyPresenter() {
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
-				"Unknown title", "Unknown artist", BitmapFactory.decodeResource(getResources(),
-				R.raw.default_artwork));
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Unknown title",
+				"Unknown artist",
+				new BitmapDrawable(getResources(), defaultArtwork));
 
 		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 1000000);
 		final TitleBinder titleBinder = new TitleBinder(cache, defaults);

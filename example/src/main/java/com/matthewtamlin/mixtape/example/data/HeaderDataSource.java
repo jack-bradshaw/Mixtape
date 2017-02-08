@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.example.data;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import com.matthewtamlin.mixtape.library.data.BaseDataSourceHelper;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -26,7 +26,7 @@ public class HeaderDataSource extends BaseDataSourceHelper<LibraryItem> {
 	private final LibraryItem item;
 
 	public HeaderDataSource(final CharSequence title, final CharSequence subtitle,
-			final Bitmap artwork) {
+			final Drawable artwork) {
 		this.item = new LibraryItem() {
 			@Override
 			public CharSequence getTitle() throws LibraryReadException {
@@ -39,7 +39,7 @@ public class HeaderDataSource extends BaseDataSourceHelper<LibraryItem> {
 			}
 
 			@Override
-			public Bitmap getArtwork(final int width, final int height)
+			public Drawable getArtwork(final int width, final int height)
 					throws LibraryReadException {
 				return artwork;
 			}

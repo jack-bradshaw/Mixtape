@@ -19,6 +19,8 @@ package com.matthewtamlin.mixtape.library_tests.data;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -31,6 +33,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.graphics.BitmapFactory.decodeResource;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -41,7 +44,7 @@ public class TestImmutableDisplayableDefaults {
 	private static final String SUBTITLE = "lie";
 	private static final int IMAGE_RES_ID = R.raw.image1;
 
-	private Bitmap artwork;
+	private Drawable artwork;
 
 	private DisplayableDefaults displayableDefaults;
 
@@ -49,11 +52,11 @@ public class TestImmutableDisplayableDefaults {
 	public void setup() {
 		// Decode an image for use in testing
 		final Context context = InstrumentationRegistry.getTargetContext();
-		artwork = BitmapFactory.decodeResource(context.getResources(), IMAGE_RES_ID);
+		artwork = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(context
+				.getResources(), IMAGE_RES_ID));
 		assertThat("precondition failed: artwork is null", artwork, is(notNullValue()));
 
-		displayableDefaults = new ImmutableDisplayableDefaults(TITLE, SUBTITLE,
-				artwork);
+		displayableDefaults = new ImmutableDisplayableDefaults(TITLE, SUBTITLE, artwork);
 	}
 
 	@Test
