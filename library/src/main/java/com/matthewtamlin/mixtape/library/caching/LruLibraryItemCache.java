@@ -17,12 +17,13 @@
 package com.matthewtamlin.mixtape.library.caching;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.util.LruCache;
 
 import com.matthewtamlin.java_utilities.checkers.IntChecker;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
+
+import timber.log.Timber;
 
 /**
  * An in-memory LibraryItemCache which operates using the least-recently-used (LRU) principle. When
@@ -113,7 +114,7 @@ public class LruLibraryItemCache implements LibraryItemCache {
 				}
 			} catch (final LibraryReadException e) {
 				// Log the error and perform no caching
-				Log.e(TAG, "Title for item \"" + item + "\" could not be accessed.", e);
+				Timber.w("Title for item \"" + item + "\" could not be accessed.", e);
 			}
 		}
 	}
@@ -131,7 +132,7 @@ public class LruLibraryItemCache implements LibraryItemCache {
 				}
 			} catch (final LibraryReadException e) {
 				// Log the error and perform no caching
-				Log.e(TAG, "Subtitle for item \"" + item + "\" could not be accessed.", e);
+				Timber.w("Subtitle for item \"" + item + "\" could not be accessed.", e);
 			}
 		}
 	}
@@ -151,7 +152,7 @@ public class LruLibraryItemCache implements LibraryItemCache {
 				}
 			} catch (final LibraryReadException e) {
 				// Log the error and perform no caching
-				Log.e(TAG, "Artwork for item \"" + item + "\" could not be accessed.", e);
+				Timber.w("Artwork for item \"" + item + "\" could not be accessed.", e);
 			}
 		}
 	}

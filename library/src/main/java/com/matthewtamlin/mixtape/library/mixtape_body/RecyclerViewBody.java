@@ -24,7 +24,6 @@ import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import timber.log.Timber;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
@@ -401,26 +402,27 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 				if (titleDataBinder != null) {
 					titleDataBinder.bind(holder.getTitleTextView(), displayedDataItem);
 				} else {
-					Log.w(TAG, "No title data binder set, could not bind title.");
+					Timber.w("No title data binder set, could not bind title.");
 				}
 
 				if (subtitleDataBinder != null) {
 					subtitleDataBinder.bind(holder.getSubtitleTextView(), displayedDataItem);
 				} else {
-					Log.w(TAG, "No subtitle data binder set, could not bind subtitle.");
+					Timber.w("No subtitle data binder set, could not bind subtitle.");
 				}
 
 				if (artworkDataBinder != null) {
 					artworkDataBinder.bind(holder.getArtworkImageView(), displayedDataItem);
 				} else {
-					Log.w(TAG, "No artwork data binder set, could not bind artwork.");
+					Timber.w("No artwork data binder set, could not bind artwork.");
 				}
 
 				holder.getRootView().setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(final View v) {
 						if (presenter != null) {
-							presenter.onLibraryItemSelected(RecyclerViewBody.this, displayedDataItem);
+							presenter.onLibraryItemSelected(RecyclerViewBody.this,
+									displayedDataItem);
 						}
 					}
 				});
