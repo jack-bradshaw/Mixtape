@@ -109,7 +109,7 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupDataSources() {
-		bodyDataSource = new Mp3SongDataSource();
+		bodyDataSource = new Mp3SongDataSource(getResources());
 
 		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
 				R.raw.header_artwork);
