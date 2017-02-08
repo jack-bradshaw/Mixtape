@@ -17,6 +17,7 @@
 package com.matthewtamlin.mixtape.library.data;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 /**
  * A item of content in a media library which can be displayed by showing a title, subtitle and
@@ -57,5 +58,5 @@ public interface LibraryItem {
 	 * @throws LibraryReadException
 	 * 		if the artwork cannot be accessed
 	 */
-	Bitmap getArtwork(int width, int height) throws LibraryReadException;
+	Drawable getArtwork(int width, int height) throws LibraryReadException;
 }
