@@ -104,7 +104,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		rootView.setBody(body);
 		rootView.setHeader(header);
-		rootView.showHeaderAtTopOnly();
+		rootView.showHeaderAtStartOnly();
 	}
 
 	private void setupDataSources() {
@@ -128,12 +128,12 @@ public class PlaylistActivity extends AppCompatActivity {
 		headerPresenter = new SmallHeaderPresenter<HeaderDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
-			public void onExtraButtonClicked(final HeaderContract.View hostView, final int index) {
+			public void onExtraButtonClicked(final HeaderContract.View headerView, final int index) {
 				handleHeaderExtraButtonClicked(index);
 			}
 
 			@Override
-			public void onOverflowMenuItemClicked(final HeaderContract.View hostView,
+			public void onOverflowMenuItemSelected(final HeaderContract.View headerView,
 					final MenuItem menuItem) {
 				handleHeaderOverflowMenuItemClicked(menuItem);
 			}
@@ -156,13 +156,13 @@ public class PlaylistActivity extends AppCompatActivity {
 		bodyPresenter = new RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
-			public void onContextualMenuItemSelected(final BodyContract.View hostView,
+			public void onContextualMenuItemSelected(final BodyContract.View bodyView,
 					final LibraryItem item, final MenuItem menuItem) {
 				handleBodyItemMenuItemClicked(item, menuItem);
 			}
 
 			@Override
-			public void onLibraryItemSelected(final BodyContract.View hostView, final LibraryItem item) {
+			public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
 				handleBodyItemClicked(item);
 			}
 		};

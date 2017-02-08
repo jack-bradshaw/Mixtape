@@ -21,7 +21,6 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
@@ -35,22 +34,21 @@ import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLA
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.PERSISTENT_HEADER;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_AT_TOP_ONLY;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
+import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_AT_START;
+import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_SCROLL_TO_START;
 
 /**
- * Displays and coordinates a header and a body. The header can be any view, but the body must be a
- * RecyclerViewBody. Scroll events in the body affect the display of the header according to the
- * current configuration. The available configurations are: <ul> <li>The header is always hidden,
- * regardless of body scroll events.</li> <li>The header is always shown, regardless of body scroll
- * events.</li> <li>The header is always hidden except when the body is scrolled all the way to the
- * top. Scrolling away from the top re-hides the header.</li> <li>The header is shown when the body
- * is scrolled towards the top, and hidden when the body is scrolled towards the bottom.</li> </ul>
+ * A MixtapeContainer which shows and hides the header based on body scroll events. There are four
+ * available coordination profiles: <ul> <li>The header is always hidden, regardless of body scroll
+ * events.</li> <li>The header is always shown, regardless of body scroll events.</li> <li>The
+ * header is hidden unless the body is scrolled to the start position.</li> <li>The header is shown
+ * whenever the body is scrolled towards the start, and hidden whenever the body is scrolled towards
+ * the end.</li> </ul>
  */
 public class CoordinatedMixtapeContainer extends FrameLayout implements
 		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
 	/**
-	 * The layout which actually performs the coordination of the header and the body.
+	 * Performs the actual coordination.
 	 */
 	private CoordinatorLayout coordinatorLayout;
 
@@ -60,30 +58,31 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	private AppBarLayout headerContainer;
 
 	/**
-	 * The header view to display at the top of the view.
+	 * The header to display at the top of the view.
 	 */
 	private SmallHeader header;
 
 	/**
-	 * The body view to display beneath the header.
+	 * The body to display beneath the header.
 	 */
 	private RecyclerViewBody body;
 
 	/**
-	 * The material elevation of the body view.
+	 * The current elevation of the body.
 	 */
 	private int bodyElevationPx = 0;
 
 	/**
-	 * The constraint to apply to the header and body to facilitate coordinated scrolling.
+	 * The current constraint between the header and the body.
 	 */
+	//TODO persist this value
 	private Constraint constraint = PERSISTENT_HEADER;
 
 	/**
 	 * Constructs a new CoordinatedMixtapeCoordinatorView.
 	 *
 	 * @param context
-	 * 		the context this view is attached to, not null
+	 * 		the context this view is operating in, not null
 	 */
 	public CoordinatedMixtapeContainer(final Context context) {
 		super(context);
@@ -94,7 +93,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * Constructs a new CoordinatedMixtapeCoordinatorView.
 	 *
 	 * @param context
-	 * 		the Context the view is attached to, not null
+	 * 		the Context the view is operating in, not null
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 */
@@ -107,7 +106,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	 * Constructs a new CoordinatedMixtapeCoordinatorView.
 	 *
 	 * @param context
-	 * 		the Context the view is attached to, not null
+	 * 		the Context the view is operating in, not null
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 * @param defStyleAttr
@@ -190,7 +189,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view so that the header is always hidden, regardless of body scroll events.
+	 * Configures this view to always hide the header regardless of body scroll events. This
+	 * overrides any behaviour set previously.
 	 */
 	public void hideHeaderAlways() {
 		constraint = Constraint.HIDDEN_HEADER;
@@ -198,7 +198,8 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view so that the header is always shown, regardless of body scroll events.
+	 * Configures this view to always show the header regardless of body scroll events. This
+	 * overrides any behaviour set previously.
 	 */
 	public void showHeaderAlways() {
 		constraint = PERSISTENT_HEADER;
@@ -206,25 +207,26 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	/**
-	 * Configures this view so that the header is always hidden except when the body is scrolled all
-	 * the way to the top. Scrolling away from the top re-hides the header.
+	 * Configures this view to hide the header unless the body is scrolled to the start position.
+	 * This overrides any behaviour set previously.
 	 */
-	public void showHeaderAtTopOnly() {
-		constraint = SHOW_HEADER_AT_TOP_ONLY;
+	public void showHeaderAtStartOnly() {
+		constraint = SHOW_HEADER_AT_START;
 		applyCurrentConstraint();
 	}
 
 	/**
-	 * Configures this view so that the header is shown when the body is scrolled towards the top,
-	 * and hidden when the body is scrolled towards the bottom.
+	 * Configures this view to show the header whenever the body is scrolled towards the start, and
+	 * hide the header whenever the body is scrolled towards the end. This overrides any behaviour
+	 * set previously.
 	 */
-	public void showHeaderOnDownwardScrollOnly() {
-		constraint = SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY;
+	public void showHeaderOnScrollToStartOnly() {
+		constraint = SHOW_HEADER_ON_SCROLL_TO_START;
 		applyCurrentConstraint();
 	}
 
 	/**
-	 * Creates the layout and assigns necessary views references to member variables.
+	 * Creates the layout and assigns the necessary views references to member variables.
 	 */
 	private void init() {
 		inflate(getContext(), R.layout.coordinatedheaderbodyview, this);
@@ -264,7 +266,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				break;
 			}
 
-			case SHOW_HEADER_AT_TOP_ONLY: {
+			case SHOW_HEADER_AT_START: {
 				if (header != null) {
 					header.setVisibility(VISIBLE);
 					setHeaderScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_SNAP);
@@ -282,7 +284,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				break;
 			}
 
-			case SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY: {
+			case SHOW_HEADER_ON_SCROLL_TO_START: {
 				if (header != null) {
 					header.setVisibility(VISIBLE);
 					setHeaderScrollFlags(SCROLL_FLAG_SCROLL | SCROLL_FLAG_ENTER_ALWAYS |
@@ -290,20 +292,6 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				}
 
 				if (body != null) {
-					body.clearRegisteredTopReachedListeners();
-				}
-
-				break;
-			}
-
-			default: { // Use persistent case as default
-				if (header != null) {
-					header.setVisibility(View.VISIBLE);
-					setHeaderScrollFlags(0);
-				}
-
-				if (body != null) {
-					//TODO this should be remove not clear
 					body.clearRegisteredTopReachedListeners();
 				}
 			}
@@ -326,7 +314,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * The supported header-body constraints.
 	 */
-	enum Constraint {
+	protected enum Constraint {
 		/**
 		 * The header is always hidden, regardless of body scroll events.
 		 */
@@ -338,15 +326,14 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 		PERSISTENT_HEADER,
 
 		/**
-		 * The header is always hidden except when the body is scrolled to the very top. Scrolling
-		 * away from the top hides the header again.
+		 * The header is hidden unless the body is scrolled to the start position.
 		 */
-		SHOW_HEADER_AT_TOP_ONLY,
+		SHOW_HEADER_AT_START,
 
 		/**
-		 * The header is always shown on downwards scroll events in the body, and hidden on upwards
-		 * scroll events.
+		 * The header is shown whenever the body is scrolled towards the start and hidden whenever
+		 * the body is scrolled towards the end.
 		 */
-		SHOW_HEADER_ON_DOWNWARD_SCROLL_ONLY
+		SHOW_HEADER_ON_SCROLL_TO_START
 	}
 }

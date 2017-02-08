@@ -31,7 +31,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
  * interaction. To handle user interaction, override the following methods:  <ul> <li>{@link
  * #onTitleClicked(HeaderContract.View)}</li> <li>{@link #onSubtitleClicked(HeaderContract.View)}</li>
  * <li>{@link #onArtworkClicked(HeaderContract.View)}</li> <li>{@link
- * #onExtraButtonClicked(HeaderContract.View, int)}</li> <li>{@link #onOverflowMenuItemClicked
+ * #onExtraButtonClicked(HeaderContract.View, int)}</li> <li>{@link #onOverflowMenuItemSelected
  * (HeaderContract.View, MenuItem)}</li> </ul>
  *
  * @param <S>
@@ -104,27 +104,27 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	}
 
 	@Override
-	public void onTitleClicked(final HeaderContract.View hostView) {
+	public void onTitleClicked(final HeaderContract.View headerView) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onSubtitleClicked(final HeaderContract.View hostView) {
+	public void onSubtitleClicked(final HeaderContract.View headerView) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onArtworkClicked(final HeaderContract.View hostView) {
+	public void onArtworkClicked(final HeaderContract.View headerView) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onExtraButtonClicked(final HeaderContract.View hostView, final int index) {
+	public void onExtraButtonClicked(final HeaderContract.View headerView, final int index) {
 		// Default implementation does nothing
 	}
 
 	@Override
-	public void onOverflowMenuItemClicked(final HeaderContract.View hostView,
+	public void onOverflowMenuItemSelected(final HeaderContract.View headerView,
 			final MenuItem menuItem) {
 		// Default implementation does nothing
 	}

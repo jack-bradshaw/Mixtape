@@ -56,7 +56,7 @@ public interface BodyContract {
 
 		/**
 		 * Sets the menu resource to use for the item specific contextual menus. There is no
-		 * guarantee that the UI will be updated if the resource is changed while a menu is being
+		 * guarantee that the UI will be updated if this method is called while a menu is being
 		 * displayed.
 		 *
 		 * @param contextualMenuResourceId
@@ -65,10 +65,7 @@ public interface BodyContract {
 		void setContextualMenuResource(int contextualMenuResourceId);
 
 		/**
-		 * Gets the resource ID currently used when creating the item specific contextual menus. If
-		 * the resource has not yet been set, then -1 is returned.
-		 *
-		 * @return the resource ID used for the contextual menus, -1 if absent
+		 * @return the resource ID used for the contextual menus, -1 if not yet set
 		 */
 		int getContextualMenuResource();
 
@@ -145,25 +142,25 @@ public interface BodyContract {
 			/**
 			 * Invoked when the user selects a LibraryItem in a BodyContract.View.
 			 *
-			 * @param hostView
+			 * @param bodyView
 			 * 		the BodyContract.View hosting the selected LibraryItem item, not null
 			 * @param item
 			 * 		the selected LibraryItem, not null
 			 */
-			void onLibraryItemSelected(BodyContract.View hostView, LibraryItem item);
+			void onLibraryItemSelected(BodyContract.View bodyView, LibraryItem item);
 
 			/**
 			 * Invoked when the user selects an option from an item specific contextual menu in a
 			 * BodyContract.View.
 			 *
-			 * @param hostView
+			 * @param bodyView
 			 * 		the BodyContract.View hosting the menu, not null
 			 * @param libraryItem
 			 * 		the LibraryItem targeted by the contextual menu, not null
 			 * @param menuItem
 			 * 		the selected menu option, not null
 			 */
-			void onContextualMenuItemSelected(BodyContract.View hostView, LibraryItem libraryItem,
+			void onContextualMenuItemSelected(BodyContract.View bodyView, LibraryItem libraryItem,
 					MenuItem menuItem);
 		}
 	}

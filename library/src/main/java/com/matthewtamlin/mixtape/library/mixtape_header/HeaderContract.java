@@ -25,16 +25,17 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
- * The MVP contract for a view which presents a single LibraryItems to the user.
+ * The MVP contract for a view which presents a single LibraryItem to the user.
  */
 public interface HeaderContract {
 	/**
-	 * Displays the title, subtitle and artwork of a single LibraryItem to the user, along with an
-	 * overflow menu button and a series of "extra" buttons.
+	 * A view which displays the title, subtitle and artwork of a single LibraryItem to the user,
+	 * along with an overflow menu button and a series of additional buttons.
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
-		 * Sets the item to display and updates the UI. Passing null clear the view.
+		 * Displays the title, subtitle and artwork of the provided item. Passing null clears the
+		 * view.
 		 *
 		 * @param item
 		 * 		the item to display
@@ -42,25 +43,23 @@ public interface HeaderContract {
 		void setItem(LibraryItem item);
 
 		/**
-		 * Gets the item currently displayed in this view. If no item is displayed, then null is
-		 * returned.
-		 *
-		 * @return the item currently being displayed
+		 * @return the item currently being displayed, may be null
 		 */
 		LibraryItem getItem();
 
 		/**
-		 * Sets the extra buttons to display and updates the UI. An extra button is generated for
-		 * each Bitmap in the passed array. Pass null or an empty array to show no extra buttons.
+		 * Removes any existing extra buttons and creates new ones. For each Bitmap in the supplied
+		 * array, a button is created with the Bitmap as the icon. Clicks are relayed to the
+		 * presenter using the indexing of the supplied array.
 		 *
 		 * @param buttonIcons
-		 * 		the icons to display in the extra buttons, not null
+		 * 		the icons to display in the buttons
 		 */
 		void setExtraButtons(Bitmap[] buttonIcons);
 
 		/**
-		 * Sets the menu resource to use each time the overflow menu button is clicked. This method
-		 * will not update the menu if it is currently being displayed.
+		 * Sets the menu resource to use for the overflow menu. There is no guarantee that the UI
+		 * will be updated if this method is called while the menu is being displayed.
 		 *
 		 * @param menuResource
 		 * 		the resource ID to use for the overflow menu
@@ -68,69 +67,60 @@ public interface HeaderContract {
 		void setOverflowMenuResource(int menuResource);
 
 		/**
-		 * Returns the resource ID of the current overflow menu. If no resource has been set, then
-		 * -1 is returned.
-		 *
-		 * @return the resource ID of the overflow menu resource
+		 * @return the resource ID used for the overflow menus, -1 if not yet set
 		 */
 		int getOverflowMenuResource();
 
 		/**
-		 * Listens to user input events from HeaderContract.Views.
+		 * Receives callbacks from a HeaderContract.View.
 		 */
 		interface Listener {
 			/**
-			 * Invoked to indicate that the user has clicked the title in a HeaderContract.View.
+			 * Invoked when the user clicks the title in a HeaderContract.View.
 			 *
-			 * @param hostView
-			 * 		the HeaderContract.View hosting the clicked title, not the actual view which was
-			 * 		clicked, not null
+			 * @param headerView
+			 * 		the HeaderContract.View hosting the clicked title, not null
 			 */
-			void onTitleClicked(HeaderContract.View hostView);
+			void onTitleClicked(HeaderContract.View headerView);
 
 			/**
-			 * Invoked to indicate that the user has clicked the subtitle in a HeaderContract
-			 * .View.
+			 * Invoked when the user clicks the subtitle in a HeaderContract.View.
 			 *
-			 * @param hostView
-			 * 		the HeaderContract.View hosting the clicked subtitle, not the actual view which was
-			 * 		clicked, not null
+			 * @param headerView
+			 * 		the HeaderContract.View hosting the clicked subtitle, not null
 			 */
-			void onSubtitleClicked(HeaderContract.View hostView);
+			void onSubtitleClicked(HeaderContract.View headerView);
 
 			/**
-			 * Invoked to indicate that the user has clicked the artwork in a HeaderContract .View.
+			 * Invoked when the user clicks the artwork in a HeaderContract.View.
 			 *
-			 * @param hostView
-			 * 		the HeaderContract.View hosting the clicked artwork, not the actual view which was
-			 * 		clicked, not null
+			 * @param headerView
+			 * 		the HeaderContract.View hosting the clicked artwork, not null
 			 */
-			void onArtworkClicked(HeaderContract.View hostView);
+			void onArtworkClicked(HeaderContract.View headerView);
 
 			/**
-			 * Invoked to indicate that the user has clicked an extra button in a HeaderContract
-			 * .View.
+			 * Invoked when the user clicks an extra button in a HeaderContract.View.
 			 *
-			 * @param hostView
+			 * @param headerView
 			 * 		the HeaderContract.View hosting the clicked subtitle, not the actual view which was
 			 * 		clicked, not null
 			 * @param index
-			 * 		the index of the clicked button, with reference to the order of the Bitmaps passed
-			 * 		to {@link HeaderContract.View#setExtraButtons(Bitmap[])}
+			 * 		the index of the clicked button, with reference to the array last passed to {@link
+			 * 		HeaderContract.View#setExtraButtons(Bitmap[])}
 			 */
-			void onExtraButtonClicked(HeaderContract.View hostView, int index);
+			void onExtraButtonClicked(HeaderContract.View headerView, int index);
 
 			/**
-			 * Invoked to indicate that the user has selected an overflow menu item in a
-			 * HeaderContract.View.
+			 * Invoked when the user selects an option from the overflow menu of a HeaderContract
+			 * .View.
 			 *
-			 * @param hostView
-			 * 		the HeaderContract.View hosting the menu, not the actual view which was clicked,
-			 * 		not null
+			 * @param headerView
+			 * 		the HeaderContract.View hosting the menu, not null
 			 * @param menuItem
-			 * 		the menu item which was clicked, not null
+			 * 		the selected menu option, not null
 			 */
-			void onOverflowMenuItemClicked(HeaderContract.View hostView, MenuItem menuItem);
+			void onOverflowMenuItemSelected(HeaderContract.View headerView, MenuItem menuItem);
 		}
 	}
 

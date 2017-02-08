@@ -367,7 +367,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 						@Override
 						public boolean onMenuItemClick(final MenuItem item) {
 							if (presenter != null) {
-								presenter.onOverflowMenuItemClicked(SmallHeader.this, item);
+								presenter.onOverflowMenuItemSelected(SmallHeader.this, item);
 								return true; // Handled
 							} else {
 								return false; // Not handled
