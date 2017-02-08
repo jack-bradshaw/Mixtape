@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -68,7 +69,9 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		super.onCreate(savedInstanceState);
 
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
-		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle", artwork);
+		defaults = new ImmutableDisplayableDefaults("Default title",
+				"Default subtitle",
+				new BitmapDrawable(getResources(), artwork));
 
 		getControlsContainer().addView(createChangeTitleBinderButton());
 		getControlsContainer().addView(createChangeSubtitleBinderButton());
