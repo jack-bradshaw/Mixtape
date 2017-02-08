@@ -78,7 +78,7 @@ public class AlbumsActivity extends AppCompatActivity {
 	}
 
 	private void setupDataSource() {
-		dataSource = new Mp3AlbumDataSource();
+		dataSource = new Mp3AlbumDataSource(getResources());
 	}
 
 	private void setupPresenter() {
