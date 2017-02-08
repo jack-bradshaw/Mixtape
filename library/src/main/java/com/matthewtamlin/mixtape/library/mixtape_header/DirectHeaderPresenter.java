@@ -16,7 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -181,7 +181,7 @@ public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem
 		}
 
 		@Override
-		public Bitmap getArtwork(final int width, final int height) throws LibraryReadException {
+		public Drawable getArtwork(final int width, final int height) throws LibraryReadException {
 			return null;
 		}
 	}
