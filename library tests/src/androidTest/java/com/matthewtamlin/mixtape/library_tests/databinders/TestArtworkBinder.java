@@ -19,11 +19,12 @@ package com.matthewtamlin.mixtape.library_tests.databinders;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.ImageView;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
@@ -63,12 +64,12 @@ public class TestArtworkBinder {
 	/**
 	 * The image to use as the artwork.
 	 */
-	private Bitmap artwork;
+	private Drawable artwork;
 
 	/**
 	 * The image to use as the default artwork.
 	 */
-	private Bitmap defaultArtwork;
+	private Drawable defaultArtwork;
 
 	/**
 	 * A read-only LibraryItem for use in testing, which uses {@code artwork} for the artwork and
@@ -99,8 +100,8 @@ public class TestArtworkBinder {
 	public void setup() throws LibraryReadException {
 		final Resources res = InstrumentationRegistry.getTargetContext().getResources();
 
-		artwork = BitmapFactory.decodeResource(res, ARTWORK_RES_ID);
-		defaultArtwork = BitmapFactory.decodeResource(res, ARTWORK_RES_ID);
+		artwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
+		defaultArtwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
 		assertThat("Precondition failed, artwork is null.", artwork, is(notNullValue()));
 		assertThat("Precondition failed, default artwork is null.", defaultArtwork,
 				is(notNullValue()));
@@ -155,8 +156,8 @@ public class TestArtworkBinder {
 
 		pause(); // Allow time for async processing to complete
 		verify(imageView, atLeastOnce()).setImageBitmap(null);
-		verify(imageView, never()).setImageBitmap(artwork);
-		verify(imageView, never()).setImageBitmap(defaultArtwork);
+		verify(imageView, never()).setImageDrawable(artwork);
+		verify(imageView, never()).setImageDrawable(defaultArtwork);
 	}
 
 	/**
