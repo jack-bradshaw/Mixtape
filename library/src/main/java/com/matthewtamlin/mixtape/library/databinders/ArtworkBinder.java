@@ -21,11 +21,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.ImageView;
 
-import com.matthewtamlin.java_utilities.checkers.IntChecker;
-import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -35,6 +32,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import timber.log.Timber;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
@@ -350,7 +349,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			try {
 				return data.getArtwork(width, height);
 			} catch (final LibraryReadException e) {
-				Log.e(TAG, "Artwork for item \"" + data + "\" could not be accessed.", e);
+				Timber.w("Artwork for item \"" + data + "\" could not be accessed.", e);
 				return defaults.getArtwork();
 			}
 		}
