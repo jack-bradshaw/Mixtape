@@ -237,7 +237,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		@Override
 		public void onPreExecute() {
 			if (!isCancelled()) {
-				imageView.setImageBitmap(null);
+				imageView.setImageDrawable(null);
 
 				// Read the dimensions from the image view and select decoding values
 				final int viewWidth = imageView.getWidth();
@@ -296,7 +296,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 						// If the task has been cancelled, it must not modify the UI
 						if (!isCancelled()) {
 							imageView.setAlpha(0f);
-							imageView.setImageBitmap(null); // Resets ensures image changes
+							imageView.setImageDrawable(null); // Resets ensures image changes
 							imageView.setImageDrawable(artwork);
 						}
 					}
