@@ -85,17 +85,16 @@ public class PlaylistActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.example_layout);
 
+		setupDataSources();
 		setupCaches();
+		precacheText();
+
 		setupHeaderView();
 		setupBodyView();
 		setupContainerView();
 
-		setupDataSources();
-
 		setupHeaderPresenter();
 		setupBodyPresenter();
-
-		precacheText();
 	}
 
 	private void setupCaches() {
