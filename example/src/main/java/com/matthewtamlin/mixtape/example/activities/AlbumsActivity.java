@@ -19,17 +19,17 @@ package com.matthewtamlin.mixtape.example.activities;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.LruCache;
 import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.Mp3Album;
 import com.matthewtamlin.mixtape.example.data.Mp3AlbumDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -46,6 +46,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import timber.log.Timber;
+
 public class AlbumsActivity extends AppCompatActivity {
 	private GridBody body;
 
@@ -55,16 +57,37 @@ public class AlbumsActivity extends AppCompatActivity {
 
 	private RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource> presenter;
 
+	private LruCache<LibraryItem, CharSequence> titleCache;
+
+	private LruCache<LibraryItem, CharSequence> subtitleCache;
+
+	private LruCache<LibraryItem, Drawable> artworkCache;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("Albums");
 
+		setupCaches();
 		setupView();
 		setupDataSource();
 		setupPresenter();
 
 		precacheText();
+	}
+
+	private void setupCaches() {
+		// Titles and subtitles are small enough to stay cached, so use a very high max size
+		titleCache = new LruCache<>(10000);
+		subtitleCache = new LruCache<>(10000);
+
+		// Every artwork item will be a BitmapDrawable, so use the bitmap byte count for sizing
+		artworkCache = new LruCache<LibraryItem, Drawable>(50000000) {
+			@Override
+			protected int sizeOf(final LibraryItem key, final Drawable value) {
+				return ((BitmapDrawable) value).getBitmap().getByteCount();
+			}
+		};
 	}
 
 	private void setupView() {
@@ -90,11 +113,9 @@ public class AlbumsActivity extends AppCompatActivity {
 				"Unknown subtitle",
 				new BitmapDrawable(getResources(), defaultArtwork));
 
-		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 10000000);
-
-		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults);
+		final TitleBinder titleBinder = new TitleBinder(titleCache, defaults);
+		final SubtitleBinder subtitleBinder = new SubtitleBinder(subtitleCache, defaults);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(artworkCache, defaults);
 
 		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
@@ -105,7 +126,8 @@ public class AlbumsActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
+			public void onLibraryItemSelected(final BodyContract.View bodyView,
+					final LibraryItem item) {
 				handleItemClick(item);
 			}
 		};
@@ -115,9 +137,6 @@ public class AlbumsActivity extends AppCompatActivity {
 	}
 
 	private void precacheText() {
-		final LibraryItemCache bodyTitleCache = presenter.getTitleDataBinder().getCache();
-		final LibraryItemCache bodySubtitleCache = presenter.getSubtitleDataBinder().getCache();
-
 		dataSource.loadData(true, new BaseDataSource.DataLoadedListener<List<Mp3Album>>() {
 			@Override
 			public void onDataLoaded(final BaseDataSource<List<Mp3Album>> source,
@@ -131,8 +150,12 @@ public class AlbumsActivity extends AppCompatActivity {
 							cacheExecutor.execute(new Runnable() {
 								@Override
 								public void run() {
-									bodyTitleCache.cacheTitle(album, true);
-									bodySubtitleCache.cacheSubtitle(album, true);
+									try {
+										titleCache.put(album, album.getTitle());
+										subtitleCache.put(album, album.getSubtitle());
+									} catch (final LibraryReadException e) {
+										Timber.w("A library item could not be pre-cached.", e);
+									}
 								}
 							});
 						}
