@@ -96,9 +96,9 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 
 	@Override
 	public void onDataModified(final BaseDataSource<LibraryItem> source, final LibraryItem data) {
-		titleDataBinder.getCache().removeTitle(data);
-		subtitleDataBinder.getCache().removeSubtitle(data);
-		artworkDataBinder.getCache().removeArtwork(data);
+		titleDataBinder.getCache().remove(data);
+		subtitleDataBinder.getCache().remove(data);
+		artworkDataBinder.getCache().remove(data);
 
 		super.onDataModified(source, data);
 	}
