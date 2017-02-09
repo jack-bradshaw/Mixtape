@@ -282,7 +282,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			// Skip the animation if it isn't necessary
 			if (fadeInDurationMs <= 0 || artwork == null) {
 				if (!isCancelled()) {
-					imageView.setImageBitmap(null); // Resets view
+					imageView.setImageDrawable(null); // Resets view
 					imageView.setImageDrawable(artwork);
 				}
 			} else {
@@ -304,7 +304,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 					@Override
 					public void onAnimationCancel(final Animator animation) {
 						imageView.setAlpha(1f);
-						imageView.setImageBitmap(null);
+						imageView.setImageDrawable(null);
 					}
 				});
 
