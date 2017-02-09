@@ -68,12 +68,12 @@ public class AlbumsActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setTitle("Albums");
 
-		setupCaches();
-		setupView();
 		setupDataSource();
-		setupPresenter();
-
+		setupCaches();
 		precacheText();
+
+		setupView();
+		setupPresenter();
 	}
 
 	private void setupCaches() {
