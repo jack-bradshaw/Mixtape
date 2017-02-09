@@ -31,8 +31,8 @@ import java.util.List;
 /**
  * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
  * abstract, the user interaction handling methods do nothing. To handle user interactions, override
- * {@link #onLibraryItemSelected(BodyContract.View, LibraryItem)} and {@link #onContextualMenuItemSelected
- * (BodyContract.View, LibraryItem, MenuItem)}.
+ * {@link #onLibraryItemSelected(BodyContract.View, LibraryItem)} and {@link
+ * #onContextualMenuItemSelected (BodyContract.View, LibraryItem, MenuItem)}.
  *
  * @param <D>
  * 		the type of data to present
@@ -103,9 +103,9 @@ public class RecyclerViewBodyPresenter<
 	@Override
 	public void onDataModified(final BaseDataSource<List<D>> source, final List<D> data) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
-		titleDataBinder.getCache().clearTitles();
-		subtitleDataBinder.getCache().clearSubtitles();
-		artworkDataBinder.getCache().clearArtwork();
+		titleDataBinder.getCache().evictAll();
+		subtitleDataBinder.getCache().evictAll();
+		artworkDataBinder.getCache().evictAll();
 
 		super.onDataModified(source, data);
 	}
@@ -113,9 +113,9 @@ public class RecyclerViewBodyPresenter<
 	@Override
 	public void onItemModified(final ListDataSource<D> source, final D modified, final int index) {
 		// If the old data is not removed from the cache, the data binders will not update the UI
-		titleDataBinder.getCache().removeTitle(modified);
-		subtitleDataBinder.getCache().removeSubtitle(modified);
-		artworkDataBinder.getCache().removeArtwork(modified);
+		titleDataBinder.getCache().remove(modified);
+		subtitleDataBinder.getCache().remove(modified);
+		artworkDataBinder.getCache().remove(modified);
 
 		super.onItemModified(source, modified, index);
 	}
