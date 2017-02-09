@@ -21,19 +21,15 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.util.LruCache;
 import android.widget.ImageView;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import timber.log.Timber;
 
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 
@@ -55,9 +51,9 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	private final HashMap<ImageView, BinderTask> tasks = new HashMap<>();
 
 	/**
-	 * Caches artwork to increase efficiency and performance.
+	 * Stores artwork to increase performance and efficiency.
 	 */
-	private final LibraryItemCache cache;
+	private final LruCache<LibraryItem, Drawable> cache;
 
 	/**
 	 * Supplies the default artwork.
@@ -85,17 +81,18 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	 * Constructs a new ArtworkBinder.
 	 *
 	 * @param cache
-	 * 		a cache for storing artwork, may already contain data, not null
+	 * 		stores subtitles to increase performance and efficiency, not null
 	 * @param defaults
-	 * 		supplies the default artwork, not null
+	 * 		supplies the default subtitle, not null
 	 * @throws IllegalArgumentException
 	 * 		if {@code cache} is null
 	 * @throws IllegalArgumentException
 	 * 		if {@code defaults} is null
 	 */
-	public ArtworkBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
-		this.cache = checkNotNull(cache, "cache cannot be null");
-		this.defaults = checkNotNull(defaults, "defaults cannot be null");
+	public ArtworkBinder(final LruCache<LibraryItem, Drawable> cache,
+			final DisplayableDefaults defaults) {
+		this.cache = checkNotNull(cache, "cache cannot be null.");
+		this.defaults = checkNotNull(defaults, "defaults cannot be null.");
 	}
 
 	@Override
@@ -105,7 +102,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		// There should never be more than one task operating on the same ImageView concurrently
 		cancel(imageView);
 
-		// Create the task but don't execute it immediately
+		// Create, register and start task
 		final BinderTask task = new BinderTask(imageView, data);
 		tasks.put(imageView, task);
 		task.execute();
@@ -136,14 +133,14 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	}
 
 	/**
-	 * @return the cache used to store artwork
+	 * @return the cache used to store artwork, not null
 	 */
-	public LibraryItemCache getCache() {
+	public LruCache<LibraryItem, Drawable> getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the defaults used when artwork cannot be accessed
+	 * @return the default artwork supplier, not null
 	 */
 	public DisplayableDefaults getDefaults() {
 		return defaults;
@@ -213,16 +210,14 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 		private final LibraryItem data;
 
 		/**
-		 * The width of the ImageView, measured in pixels. This value must be saved in {@code
-		 * onPreExecute()} since the UI cannot be queried from the background task.
+		 * The width to use when decoding the artwork, measured in pixels.
 		 */
-		private int viewWidth;
+		private int imageWidth;
 
 		/**
-		 * The height of the ImageView, measured in pixels. This value must be saved in {@code
-		 * onPreExecute()} since the UI cannot be queried from the background task.
+		 * The height to use when decoding the artwork, measured in pixels.
 		 */
-		private int viewHeight;
+		private int imageHeight;
 
 		/**
 		 * Constructs a new BinderTask.
@@ -244,32 +239,41 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			if (!isCancelled()) {
 				imageView.setImageBitmap(null);
 
-				// Zero dimensions require the defaults
-				viewWidth = imageView.getWidth() == 0 ? -1 : imageView.getWidth();
-				viewHeight = imageView.getHeight() == 0 ? -1 : imageView.getHeight();
+				// Read the dimensions from the image view and select decoding values
+				final int viewWidth = imageView.getWidth();
+				final int viewHeight = imageView.getHeight();
+				imageWidth = viewWidth == 0 ? fallbackDecodingWidth : viewWidth;
+				imageHeight = viewHeight == 0 ? fallbackDecodingHeight : viewHeight;
 			}
 		}
 
 		@Override
 		public Drawable doInBackground(final Void... params) {
-			final int width = viewWidth == -1 ? fallbackDecodingWidth : viewWidth;
-			final int height = viewHeight == -1 ? fallbackDecodingHeight : viewHeight;
-
 			if (isCancelled() || data == null) {
 				return null;
-			} else if (cache.containsArtwork(data)) {
-				final Drawable cachedArtwork = cache.getArtwork(data);
+			}
 
-				// Only use the cached artwork if it is an adequate size
-				if (cachedArtwork.getIntrinsicWidth() < width ||
-						cachedArtwork.getIntrinsicHeight() < height) {
-					cache.removeArtwork(data); // Don't keep the data if it's not useful anymore
-					return getArtworkDirectly(width, height);
-				} else {
-					return cachedArtwork;
+			final Drawable cachedArtwork = cache.get(data);
+
+			if (cachedArtwork == null) {
+				try {
+					final Drawable loadedArtwork = data.getArtwork(imageWidth, imageHeight);
+					cache.put(data, loadedArtwork);
+					return loadedArtwork;
+				} catch (final LibraryReadException e) {
+					return defaults.getArtwork();
+				}
+			} else if (cachedArtwork.getIntrinsicWidth() < imageWidth ||
+					cachedArtwork.getIntrinsicHeight() < imageHeight) {
+				try {
+					final Drawable loadedArtwork = data.getArtwork(imageWidth, imageHeight);
+					cache.put(data, loadedArtwork);
+					return loadedArtwork;
+				} catch (final LibraryReadException e) {
+					return defaults.getArtwork();
 				}
 			} else {
-				return getArtworkDirectly(width, height);
+				return cachedArtwork;
 			}
 		}
 
@@ -320,38 +324,6 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 
 				fadeInAnimation.setDuration(fadeInDurationMs);
 				fadeInAnimation.start();
-			}
-
-			// Cache the data in the background to optimise future performance
-			final ExecutorService es = Executors.newSingleThreadExecutor();
-			es.execute(new Runnable() {
-				@Override
-				public void run() {
-					final int width = viewWidth == 0 ? fallbackDecodingWidth : viewWidth;
-					final int height = viewHeight == 0 ? fallbackDecodingHeight : viewHeight;
-
-					cache.cacheArtwork(data, true, width, height);
-				}
-			});
-		}
-
-		/**
-		 * Gets the artwork directly from the data. If a LibraryReadException occurs when reading
-		 * the data, then the default artwork is returned. This method does not interact with the
-		 * cache in anyway.
-		 *
-		 * @param width
-		 * 		the desired width of the artwork, measured in pixels
-		 * @param height
-		 * 		the desired height of the artwork, measured in pixels
-		 * @return the artwork
-		 */
-		private Drawable getArtworkDirectly(final int width, final int height) {
-			try {
-				return data.getArtwork(width, height);
-			} catch (final LibraryReadException e) {
-				Timber.w("Artwork for item \"" + data + "\" could not be accessed.", e);
-				return defaults.getArtwork();
 			}
 		}
 	}
