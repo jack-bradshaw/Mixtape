@@ -20,9 +20,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.LruCache;
 import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
@@ -30,8 +32,6 @@ import com.matthewtamlin.mixtape.example.data.HeaderDataSource;
 import com.matthewtamlin.mixtape.example.data.Mp3Song;
 import com.matthewtamlin.mixtape.example.data.Mp3SongDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -51,6 +51,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import timber.log.Timber;
+
 public class PlaylistActivity extends AppCompatActivity {
 	private CoordinatedMixtapeContainer rootView;
 
@@ -66,11 +68,24 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter;
 
+	private LruCache<LibraryItem, CharSequence> bodyTitleCache;
+
+	private LruCache<LibraryItem, CharSequence> bodySubtitleCache;
+
+	private LruCache<LibraryItem, Drawable> bodyArtworkCache;
+
+	private LruCache<LibraryItem, CharSequence> headerTitleCache;
+
+	private LruCache<LibraryItem, CharSequence> headerSubtitleCache;
+
+	private LruCache<LibraryItem, Drawable> headerArtworkCache;
+
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.example_layout);
 
+		setupCaches();
 		setupHeaderView();
 		setupBodyView();
 		setupContainerView();
@@ -81,6 +96,25 @@ public class PlaylistActivity extends AppCompatActivity {
 		setupBodyPresenter();
 
 		precacheText();
+	}
+
+	private void setupCaches() {
+		// Titles and subtitles are small enough to stay cached, so use a very high max size
+		bodyTitleCache = new LruCache<>(10000);
+		bodySubtitleCache = new LruCache<>(10000);
+
+		// Every artwork item will be a BitmapDrawable, so use the bitmap byte count for sizing
+		bodyArtworkCache = new LruCache<LibraryItem, Drawable>(50000000) {
+			@Override
+			protected int sizeOf(final LibraryItem key, final Drawable value) {
+				return ((BitmapDrawable) value).getBitmap().getByteCount();
+			}
+		};
+
+		// Header cache will only contain one item
+		headerTitleCache = new LruCache<>(2);
+		headerSubtitleCache = new LruCache<>(2);
+		headerArtworkCache = new LruCache<>(2);
 	}
 
 	private void setupHeaderView() {
@@ -125,15 +159,15 @@ public class PlaylistActivity extends AppCompatActivity {
 				"Unknown artists",
 				new BitmapDrawable(getResources(), defaultArtwork));
 
-		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 100000);
-		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults);
+		final TitleBinder titleBinder = new TitleBinder(headerTitleCache, defaults);
+		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
 		headerPresenter = new SmallHeaderPresenter<HeaderDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
-			public void onExtraButtonClicked(final HeaderContract.View headerView, final int index) {
+			public void onExtraButtonClicked(final HeaderContract.View headerView,
+					final int index) {
 				handleHeaderExtraButtonClicked(index);
 			}
 
@@ -155,10 +189,9 @@ public class PlaylistActivity extends AppCompatActivity {
 				"Unknown artist",
 				new BitmapDrawable(getResources(), defaultArtwork));
 
-		final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 1000000);
-		final TitleBinder titleBinder = new TitleBinder(cache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(cache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(cache, defaults);
+		final TitleBinder titleBinder = new TitleBinder(bodyTitleCache, defaults);
+		final SubtitleBinder subtitleBinder = new SubtitleBinder(bodySubtitleCache, defaults);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(bodyArtworkCache, defaults);
 
 		bodyPresenter = new RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
@@ -169,7 +202,8 @@ public class PlaylistActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
+			public void onLibraryItemSelected(final BodyContract.View bodyView,
+					final LibraryItem item) {
 				handleBodyItemClicked(item);
 			}
 		};
@@ -179,9 +213,6 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void precacheText() {
-		final LibraryItemCache bodyTitleCache = bodyPresenter.getTitleDataBinder().getCache();
-		final LibraryItemCache bodySubtitleCache = bodyPresenter.getSubtitleDataBinder().getCache();
-
 		bodyDataSource.loadData(true, new BaseDataSource.DataLoadedListener<List<Mp3Song>>() {
 			@Override
 			public void onDataLoaded(final BaseDataSource<List<Mp3Song>> source,
@@ -195,8 +226,12 @@ public class PlaylistActivity extends AppCompatActivity {
 							cacheExecutor.execute(new Runnable() {
 								@Override
 								public void run() {
-									bodyTitleCache.cacheTitle(song, true);
-									bodySubtitleCache.cacheSubtitle(song, true);
+									try {
+										bodyTitleCache.put(song, song.getTitle());
+										bodySubtitleCache.put(song, song.getSubtitle());
+									} catch (final LibraryReadException e) {
+										Timber.w("A library item could not be pre-cached.", e);
+									}
 								}
 							});
 						}
