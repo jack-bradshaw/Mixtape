@@ -17,12 +17,13 @@
 package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
+import android.util.LruCache;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
+import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,9 +45,9 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
 
 	/**
-	 * Caches titles to increase efficiency and performance.
+	 * Stores titles to increase performance and efficiency.
 	 */
-	private final LibraryItemCache cache;
+	private final LruCache<LibraryItem, CharSequence> cache;
 
 	/**
 	 * Supplies the default title.
@@ -57,7 +58,7 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	 * Constructs a new TitleBinder.
 	 *
 	 * @param cache
-	 * 		a cache for storing titles, may already contain data, not null
+	 * 		stores titles to increase performance and efficiency, not null
 	 * @param defaults
 	 * 		supplies the default title, not null
 	 * @throws IllegalArgumentException
@@ -65,7 +66,8 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	 * @throws IllegalArgumentException
 	 * 		if {@code defaults} is null
 	 */
-	public TitleBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
+	public TitleBinder(final LruCache<LibraryItem, CharSequence> cache,
+			final DisplayableDefaults defaults) {
 		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
 		this.defaults = NullChecker.checkNotNull(defaults, "defaults cannot be null");
 	}
@@ -74,17 +76,19 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	public void bind(final TextView view, final LibraryItem data) {
 		NullChecker.checkNotNull(view, "textView cannot be null");
 
-		// There should never be more than one task operating on the same TextView concurrently
+		// There must never be more than one task operating on the same TextView concurrently
 		cancel(view);
 
 		// Create the task but don't execute it immediately
 		final BinderTask task = new BinderTask(view, data);
 		tasks.put(view, task);
 
-		// Asynchronous processing is unnecessary overhead if the title is already cached
-		if (cache.containsTitle(data)) {
+		// Using asynchronous processing is unnecessary if the title is already cached
+		if (data == null) {
+			task.execute();
+		} else if (cache.get(data) != null) {
 			task.onPreExecute();
-			task.onPostExecute(cache.getTitle(data));
+			task.onPostExecute(cache.get(data));
 		} else {
 			task.execute();
 		}
@@ -115,14 +119,14 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	/**
-	 * @return the cache used to store titles
+	 * @return the cache used to store titles, not null
 	 */
-	public LibraryItemCache getCache() {
+	public LruCache<LibraryItem, CharSequence> getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the defaults used when titles cannot be accessed
+	 * @return the default title supplier, not null
 	 */
 	public DisplayableDefaults getDefaults() {
 		return defaults;
@@ -170,9 +174,19 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 				return null;
 			}
 
-			cache.cacheTitle(data, true);
+			final CharSequence cachedTitle = cache.get(data);
 
-			return cache.getTitle(data) == null ? defaults.getTitle() : cache.getTitle(data);
+			if (cachedTitle != null) {
+				return cachedTitle;
+			} else {
+				try {
+					final CharSequence loadedTitle = data.getTitle();
+					cache.put(data, loadedTitle);
+					return loadedTitle;
+				} catch (final LibraryReadException e) {
+					return defaults.getTitle();
+				}
+			}
 		}
 
 		@Override

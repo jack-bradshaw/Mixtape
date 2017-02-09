@@ -17,12 +17,13 @@
 package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
+import android.util.LruCache;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
+import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -44,9 +45,9 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();
 
 	/**
-	 * Caches subtitles to increase efficiency and performance.
+	 * Stores subtitles to increase performance and efficiency.
 	 */
-	private final LibraryItemCache cache;
+	private final LruCache<LibraryItem, CharSequence> cache;
 
 	/**
 	 * Supplies the default subtitle.
@@ -57,7 +58,7 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	 * Constructs a new SubtitleBinder.
 	 *
 	 * @param cache
-	 * 		a cache for storing subtitles, may already contain data, not null
+	 * 		stores subtitles to increase performance and efficiency, not null
 	 * @param defaults
 	 * 		supplies the default subtitle, not null
 	 * @throws IllegalArgumentException
@@ -65,7 +66,8 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	 * @throws IllegalArgumentException
 	 * 		if {@code defaults} is null
 	 */
-	public SubtitleBinder(final LibraryItemCache cache, final DisplayableDefaults defaults) {
+	public SubtitleBinder(final LruCache<LibraryItem, CharSequence> cache,
+			final DisplayableDefaults defaults) {
 		this.cache = NullChecker.checkNotNull(cache, "cache cannot be null");
 		this.defaults = NullChecker.checkNotNull(defaults, "defaults cannot be null");
 	}
@@ -74,17 +76,19 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	public void bind(final TextView view, final LibraryItem data) {
 		NullChecker.checkNotNull(view, "textView cannot be null");
 
-		// There should never be more than one task operating on the same TextView concurrently
+		// There must never be more than one task operating on the same TextView concurrently
 		cancel(view);
 
 		// Create the task but don't execute it immediately
 		final BinderTask task = new BinderTask(view, data);
 		tasks.put(view, task);
 
-		// Asynchronous processing is unnecessary overhead if the subtitle is already cached
-		if (cache.containsSubtitle(data)) {
+		// Using asynchronous processing is unnecessary if the subtitle is already cached
+		if (data == null) {
+			task.execute();
+		} else if (cache.get(data) != null) {
 			task.onPreExecute();
-			task.onPostExecute(cache.getSubtitle(data));
+			task.onPostExecute(cache.get(data));
 		} else {
 			task.execute();
 		}
@@ -115,14 +119,14 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	}
 
 	/**
-	 * @return the cache used to store subtitles
+	 * @return the cache used to store subtitles, not null
 	 */
-	public LibraryItemCache getCache() {
+	public LruCache<LibraryItem, CharSequence> getCache() {
 		return cache;
 	}
 
 	/**
-	 * @return the defaults used when subtitles cannot be accessed
+	 * @return the default subtitle supplier, not null
 	 */
 	public DisplayableDefaults getDefaults() {
 		return defaults;
@@ -170,10 +174,19 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 				return null;
 			}
 
-			cache.cacheSubtitle(data, true);
+			final CharSequence cachedSubtitle = cache.get(data);
 
-			return cache.getSubtitle(data) == null ? defaults.getSubtitle() :
-					cache.getSubtitle(data);
+			if (cachedSubtitle != null) {
+				return cachedSubtitle;
+			} else {
+				try {
+					final CharSequence loadedSubtitle = data.getSubtitle();
+					cache.put(data, loadedSubtitle);
+					return loadedSubtitle;
+				} catch (final LibraryReadException e) {
+					return defaults.getSubtitle();
+				}
+			}
 		}
 
 		@Override
