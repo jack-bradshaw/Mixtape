@@ -103,7 +103,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		bodySubtitleCache = new LruCache<>(10000);
 
 		// Every artwork item will be a BitmapDrawable, so use the bitmap byte count for sizing
-		bodyArtworkCache = new LruCache<LibraryItem, Drawable>(50000000) {
+		bodyArtworkCache = new LruCache<LibraryItem, Drawable>(1000000) {
 			@Override
 			protected int sizeOf(final LibraryItem key, final Drawable value) {
 				return ((BitmapDrawable) value).getBitmap().getByteCount();
