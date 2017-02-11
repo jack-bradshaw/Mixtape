@@ -35,11 +35,6 @@ import java.util.Iterator;
  */
 public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
-	 * Identifies this class during logging.
-	 */
-	private static final String TAG = "[SubtitleBinder]";
-
-	/**
 	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
 	 */
 	private final HashMap<TextView, BinderTask> tasks = new HashMap<>();

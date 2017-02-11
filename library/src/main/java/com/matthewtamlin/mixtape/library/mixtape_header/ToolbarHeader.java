@@ -49,11 +49,6 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  */
 public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	/**
-	 * Used to identify this class in the log.
-	 */
-	private static final String TAG = "SimpleHeader";
-
-	/**
 	 * Contains supporting business logic and handles user interaction.
 	 */
 	private Presenter presenter;

@@ -53,11 +53,6 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  */
 public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
 	/**
-	 * Identifies this class during logging.
-	 */
-	private static final String TAG = "[RecyclerViewBody]";
-
-	/**
 	 * All top reached listeners which are currently registered. This set must never contain null.
 	 */
 	private final Set<TopReachedListener> topReachedListeners = new HashSet<>();
