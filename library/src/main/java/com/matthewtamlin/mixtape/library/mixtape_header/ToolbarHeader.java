@@ -234,13 +234,13 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	private void getViewHandles() {
 		try {
 			titleTextView = (TextView) NullChecker.checkNotNull(findViewById(R.id
-					.smallHeader_titleHolder), "init failed: titleTextView not found");
+					.toolbarHeader_titleContainer), "init failed: titleTextView not found");
 
 			subtitleTextView = (TextView) NullChecker.checkNotNull(findViewById(R.id
-					.smallHeader_subtitleHolder), "init failed: subtitleTextView not found");
+					.toolbarHeader_subtitleContainer), "init failed: subtitleTextView not found");
 
 			artworkImageView = (ImageView) NullChecker.checkNotNull(findViewById(R.id
-					.smallHeader_artworkHolder), "init failed: artworkImageView not found");
+					.toolbarHeader_artworkContainer), "init failed: artworkImageView not found");
 		} catch (final IllegalArgumentException e) {
 			throw new RuntimeException("layout does not contain all required views");
 		}
