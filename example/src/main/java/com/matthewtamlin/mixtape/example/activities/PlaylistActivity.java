@@ -119,13 +119,7 @@ public class PlaylistActivity extends AppCompatActivity {
 	private void setupHeaderView() {
 		header = new ToolbarHeader(this);
 
-		header.setOverflowMenuResource(R.menu.header_menu);
-
-		header.setExtraButtons(new Bitmap[]{
-				BitmapFactory.decodeResource(getResources(), R.drawable.ic_play),
-				BitmapFactory.decodeResource(getResources(), R.drawable.ic_share),
-				BitmapFactory.decodeResource(getResources(), R.drawable.ic_shuffle)
-		});
+		
 	}
 
 	private void setupBodyView() {
