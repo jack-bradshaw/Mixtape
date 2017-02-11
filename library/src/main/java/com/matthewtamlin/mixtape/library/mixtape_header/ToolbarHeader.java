@@ -41,8 +41,9 @@ import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 /**
- * A simple implementation of the HeaderContract.View interface. This view must be provided with
- * DataBinders in order to function properly.
+ * An implementation of the HeaderContract.View interface which displays a toolbar in addition to
+ * the LibraryItem. The toolbar can be used to display actions specific to the item in context. This
+ * view must be provided with DataBinders in order to function properly.
  */
 public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	/**
@@ -99,7 +100,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
-	 * Constructs a new SimpleHeader.
+	 * Constructs a new ToolbarHeader.
 	 *
 	 * @param context
 	 * 		the Context the header is attached to, not null
@@ -112,7 +113,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
-	 * Constructs a new SimpleHeader.
+	 * Constructs a new ToolbarHeader.
 	 *
 	 * @param context
 	 * 		the Context the header is attached to, not null
@@ -127,7 +128,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
-	 * Constructs a new SimpleHeader.
+	 * Constructs a new ToolbarHeader.
 	 *
 	 * @param context
 	 * 		the Context the header is attached to, not null
