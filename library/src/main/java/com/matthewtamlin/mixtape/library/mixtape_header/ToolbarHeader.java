@@ -331,25 +331,4 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 			Timber.w("No artwork data binder set, could not bind artwork.");
 		}
 	}
-
-	/**
-	 * Constructs a new extra button.
-	 *
-	 * @param icon
-	 * 		the icon to show in the extra button
-	 */
-	private ImageButton createExtraButton(final Bitmap icon) {
-		NullChecker.checkNotNull(icon);
-
-		final ImageButton b = new ImageButton(getContext(), null, R.attr.borderlessButtonStyle);
-
-		b.setMinimumHeight(0);
-		b.setMinimumWidth(0);
-		b.setPadding(0, b.getPaddingTop(), 0, b.getPaddingBottom());
-		b.setLayoutParams(new LinearLayout.LayoutParams(WRAP_CONTENT, MATCH_PARENT));
-		b.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		b.setImageBitmap(icon);
-
-		return b;
-	}
 }
