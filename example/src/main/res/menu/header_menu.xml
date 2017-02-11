@@ -17,8 +17,33 @@
 
 <menu
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:ignore="HardcodedText">
+
+	<item
+		android:checkable="false"
+		android:enabled="true"
+		android:icon="@drawable/ic_play"
+		android:title="Play"
+		android:visible="true"
+		app:showAsAction="ifRoom"/>
+
+	<item
+		android:checkable="false"
+		android:enabled="true"
+		android:icon="@drawable/ic_share"
+		android:title="Share"
+		android:visible="true"
+		app:showAsAction="ifRoom"/>
+
+	<item
+		android:checkable="false"
+		android:enabled="true"
+		android:icon="@drawable/ic_shuffle"
+		android:title="Shuffle"
+		android:visible="true"
+		app:showAsAction="ifRoom"/>
 
 	<item
 		android:id="@+id/header_menu_download_all_songs"
