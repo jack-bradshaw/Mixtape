@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.LruCache;
 import android.view.MenuItem;
 
@@ -116,7 +117,11 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupHeaderView() {
+		final Toolbar toolbar = new Toolbar(this);
+		getMenuInflater().inflate(R.menu.header_menu, toolbar.getMenu());
+
 		header = new ToolbarHeader(this);
+		header.setToolbar(toolbar);
 	}
 
 	private void setupBodyView() {
