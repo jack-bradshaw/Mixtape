@@ -67,5 +67,11 @@
 			android:layout_marginBottom="12dp"
 			android:layout_marginTop="12dp"
 			android:background="@android:color/darker_gray"/>
+
+		<FrameLayout
+			android:id="@+id/toolbarHeader_toolbarContainer"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"/>
 	</LinearLayout>
 </RelativeLayout>
