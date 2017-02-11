@@ -248,21 +248,12 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 * Assigns the necessary view references to member variables.
 	 */
 	private void getViewHandles() {
-		try {
-			titleTextView = (TextView) NullChecker.checkNotNull(findViewById(R.id
-					.toolbarHeader_titleContainer), "init failed: titleTextView not found");
-
-			subtitleTextView = (TextView) NullChecker.checkNotNull(findViewById(R.id
-					.toolbarHeader_subtitleContainer), "init failed: subtitleTextView not found");
-
-			artworkImageView = (ImageView) NullChecker.checkNotNull(findViewById(R.id
-					.toolbarHeader_artworkContainer), "init failed: artworkImageView not found");
-			toolbarContainer = (FrameLayout) NullChecker.checkNotNull(findViewById(R.id
-					.toolbarHeader_toolbarContainer), "init failed: toolbarContainer not found");
-		} catch (final IllegalArgumentException e) {
-			throw new RuntimeException("layout does not contain all required views");
-		}
+		titleTextView = (TextView) findViewById(R.id.toolbarHeader_titleContainer);
+		subtitleTextView = (TextView) findViewById(R.id.toolbarHeader_subtitleContainer);
+		artworkImageView = (ImageView) findViewById(R.id.toolbarHeader_artworkContainer);
+		toolbarContainer = (FrameLayout) findViewById(R.id.toolbarHeader_toolbarContainer);
 	}
+
 
 	/**
 	 * Initialises on click listeners for the title view, the subtitle view, and the artwork view.
