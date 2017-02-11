@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -83,6 +84,8 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 * Displays the artwork.
 	 */
 	private ImageView artworkImageView;
+
+	private FrameLayout toolbarContainer;
 
 	/**
 	 * Constructs a new SimpleHeader.
@@ -219,6 +222,19 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		return data;
 	}
 
+	public void setToolbar(final Toolbar toolbar) {
+		toolbarContainer.removeAllViews();
+		toolbarContainer.addView(toolbar);
+	}
+
+	public Toolbar getToolbar() {
+		if (toolbarContainer.getChildCount() > 0) {
+			return (Toolbar) toolbarContainer.getChildAt(0);
+		} else {
+			return null;
+		}
+	}
+
 	/**
 	 * Initialises this view. This method should only be called from a constructor.
 	 */
@@ -241,6 +257,8 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 
 			artworkImageView = (ImageView) NullChecker.checkNotNull(findViewById(R.id
 					.toolbarHeader_artworkContainer), "init failed: artworkImageView not found");
+			toolbarContainer = (FrameLayout) NullChecker.checkNotNull(findViewById(R.id
+					.toolbarHeader_toolbarContainer), "init failed: toolbarContainer not found");
 		} catch (final IllegalArgumentException e) {
 			throw new RuntimeException("layout does not contain all required views");
 		}
