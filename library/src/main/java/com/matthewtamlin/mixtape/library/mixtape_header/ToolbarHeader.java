@@ -59,11 +59,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	private LibraryItem data;
 
 	/**
-	 * The menu resource to display when the overflow menu button is clicked.
-	 */
-	private int overflowMenuResourceId = -1;
-
-	/**
 	 * Binds title data to the view.
 	 */
 	private DataBinder<LibraryItem, TextView> titleDataBinder;
@@ -92,16 +87,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 * Displays the artwork.
 	 */
 	private ImageView artworkImageView;
-
-	/**
-	 * Holds the extra buttons.
-	 */
-	private LinearLayout extraButtonContainer;
-
-	/**
-	 * Displays an overflow menu when clicked.
-	 */
-	private ImageButton overflowMenuButton;
 
 	/**
 	 * Constructs a new SimpleHeader.
@@ -238,42 +223,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		return data;
 	}
 
-	@Override
-	public void setExtraButtons(final Bitmap[] buttonIcons) {
-		extraButtonContainer.removeAllViews();
-
-		if (buttonIcons != null) {
-			for (int i = 0; i < buttonIcons.length; i++) {
-				final ImageButton extraButton = createExtraButton(buttonIcons[i]);
-				extraButtonContainer.addView(extraButton);
-
-				// Propagate clicks back to the presenter
-				final int fixedButtonIndex = i; // Need a constant copy of the iteration variable
-				extraButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(final View v) {
-						if (presenter != null) {
-							presenter.onExtraButtonClicked(ToolbarHeader.this, fixedButtonIndex);
-						}
-					}
-				});
-			}
-
-			addSpacingToExtraButtonContainer();
-		}
-	}
-
-	@Override
-	public void setOverflowMenuResource(final int overflowMenuResource) {
-		// The resource is not used until the overflow button is clicked, so save the value
-		this.overflowMenuResourceId = overflowMenuResource;
-	}
-
-	@Override
-	public int getOverflowMenuResource() {
-		return overflowMenuResourceId;
-	}
-
 	/**
 	 * Initialises this view. This method should only be called from a constructor.
 	 */
@@ -281,7 +230,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		inflate(getContext(), R.layout.smallheader, this);
 		getViewHandles();
 		initialiseOnClickListeners();
-		initialiseOverflowMenu();
 	}
 
 	/**
@@ -297,14 +245,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 
 			artworkImageView = (ImageView) NullChecker.checkNotNull(findViewById(R.id
 					.smallHeader_artworkHolder), "init failed: artworkImageView not found");
-
-			extraButtonContainer = (LinearLayout) NullChecker.checkNotNull(findViewById(R.id
-							.smallHeader_extraButtonContainer),
-					"init failed: extraButtonContainer not found");
-
-			overflowMenuButton = (ImageButton) NullChecker.checkNotNull(findViewById(R.id
-							.smallHeader_overflowMenuButton),
-					"init failed: overflow menu button not found");
 		} catch (final IllegalArgumentException e) {
 			throw new RuntimeException("layout does not contain all required views");
 		}
@@ -338,38 +278,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 			public void onClick(View v) {
 				if (presenter != null) {
 					presenter.onArtworkClicked(ToolbarHeader.this);
-				}
-			}
-		});
-	}
-
-	/**
-	 * Initialises the overflow menu. The menu will be shown when the overflow menu button is
-	 * pressed, and selections will be propagated back to the presenter. The menu will always
-	 * display the current menu resource, unless the resource is changed while the menu is open.
-	 */
-	private void initialiseOverflowMenu() {
-		overflowMenuButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				// If the resource hasn't been set, inflating the menu will fail
-				if (overflowMenuResourceId != -1) {
-					final PopupMenu menu = new PopupMenu(getContext(), overflowMenuButton);
-					menu.inflate(overflowMenuResourceId);
-					menu.show();
-
-					// Propagate menu selections back to the presenter
-					menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(final MenuItem item) {
-							if (presenter != null) {
-								presenter.onOverflowMenuItemSelected(ToolbarHeader.this, item);
-								return true; // Handled
-							} else {
-								return false; // Not handled
-							}
-						}
-					});
 				}
 			}
 		});
@@ -430,22 +338,5 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		b.setImageBitmap(icon);
 
 		return b;
-	}
-
-	/**
-	 * Adds a space between each view currently in the extra button container. The spaces evenly pad
-	 * the container contents without changing the bounds of the contents.
-	 */
-	private void addSpacingToExtraButtonContainer() {
-		// Iterate backwards from the end of the container to simplify indexing
-		for (int i = extraButtonContainer.getChildCount(); i > 0; i--) {
-			final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
-					(MATCH_PARENT, MATCH_PARENT);
-			layoutParams.weight = 1;
-
-			final Space space = new Space(getContext());
-			space.setLayoutParams(layoutParams);
-			extraButtonContainer.addView(space, i);
-		}
 	}
 }
