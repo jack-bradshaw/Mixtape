@@ -43,7 +43,6 @@ import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeaderPresenter;
 
@@ -154,20 +153,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
-		headerPresenter = new ToolbarHeaderPresenter<HeaderDataSource>
-				(titleBinder, subtitleBinder, artworkBinder) {
-			@Override
-			public void onExtraButtonClicked(final HeaderContract.View headerView,
-					final int index) {
-				handleHeaderExtraButtonClicked(index);
-			}
-
-			@Override
-			public void onOverflowMenuItemSelected(final HeaderContract.View headerView,
-					final MenuItem menuItem) {
-				handleHeaderOverflowMenuItemClicked(menuItem);
-			}
-		};
+		headerPresenter = new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
 
 		headerPresenter.setView(header);
 		headerPresenter.setDataSource(headerDataSource);
