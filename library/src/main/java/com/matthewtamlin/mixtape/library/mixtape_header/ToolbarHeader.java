@@ -213,6 +213,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	@Override
 	public void setItem(final LibraryItem item) {
 		this.data = item;
+		
 		updateTitle();
 		updateSubtitle();
 		updateArtwork();
