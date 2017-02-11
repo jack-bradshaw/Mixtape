@@ -17,6 +17,7 @@
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
 import android.graphics.Bitmap;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
@@ -48,30 +49,6 @@ public interface HeaderContract {
 		LibraryItem getItem();
 
 		/**
-		 * Removes any existing extra buttons and creates new ones. For each Bitmap in the supplied
-		 * array, a button is created with the Bitmap as the icon. Clicks are relayed to the
-		 * presenter using the indexing of the supplied array.
-		 *
-		 * @param buttonIcons
-		 * 		the icons to display in the buttons
-		 */
-		void setExtraButtons(Bitmap[] buttonIcons);
-
-		/**
-		 * Sets the menu resource to use for the overflow menu. There is no guarantee that the UI
-		 * will be updated if this method is called while the menu is being displayed.
-		 *
-		 * @param menuResource
-		 * 		the resource ID to use for the overflow menu
-		 */
-		void setOverflowMenuResource(int menuResource);
-
-		/**
-		 * @return the resource ID used for the overflow menus, -1 if not yet set
-		 */
-		int getOverflowMenuResource();
-
-		/**
 		 * Receives callbacks from a HeaderContract.View.
 		 */
 		interface Listener {
@@ -98,29 +75,6 @@ public interface HeaderContract {
 			 * 		the HeaderContract.View hosting the clicked artwork, not null
 			 */
 			void onArtworkClicked(HeaderContract.View headerView);
-
-			/**
-			 * Invoked when the user clicks an extra button in a HeaderContract.View.
-			 *
-			 * @param headerView
-			 * 		the HeaderContract.View hosting the clicked subtitle, not the actual view which was
-			 * 		clicked, not null
-			 * @param index
-			 * 		the index of the clicked button, with reference to the array last passed to {@link
-			 * 		HeaderContract.View#setExtraButtons(Bitmap[])}
-			 */
-			void onExtraButtonClicked(HeaderContract.View headerView, int index);
-
-			/**
-			 * Invoked when the user selects an option from the overflow menu of a HeaderContract
-			 * .View.
-			 *
-			 * @param headerView
-			 * 		the HeaderContract.View hosting the menu, not null
-			 * @param menuItem
-			 * 		the selected menu option, not null
-			 */
-			void onOverflowMenuItemSelected(HeaderContract.View headerView, MenuItem menuItem);
 		}
 	}
 
