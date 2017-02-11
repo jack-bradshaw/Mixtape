@@ -240,26 +240,12 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 */
 	private void init() {
 		inflate(getContext(), R.layout.toolbarheader, this);
-		getViewHandles();
-		initialiseOnClickListeners();
-	}
 
-	/**
-	 * Assigns the necessary view references to member variables.
-	 */
-	private void getViewHandles() {
 		titleTextView = (TextView) findViewById(R.id.toolbarHeader_titleContainer);
 		subtitleTextView = (TextView) findViewById(R.id.toolbarHeader_subtitleContainer);
 		artworkImageView = (ImageView) findViewById(R.id.toolbarHeader_artworkContainer);
 		toolbarContainer = (FrameLayout) findViewById(R.id.toolbarHeader_toolbarContainer);
-	}
 
-
-	/**
-	 * Initialises on click listeners for the title view, the subtitle view, and the artwork view.
-	 * Clicks will be propagated back to the presenter.
-	 */
-	private void initialiseOnClickListeners() {
 		titleTextView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
