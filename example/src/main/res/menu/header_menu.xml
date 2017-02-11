@@ -47,9 +47,17 @@
 
 	<item
 		android:id="@+id/header_menu_download_all_songs"
-		android:title="Download all songs"/>
+		android:checkable="false"
+		android:enabled="true"
+		android:title="Download all songs"
+		android:visible="true"
+		app:showAsAction="never"/>
 
 	<item
 		android:id="@+id/header_menu_remove_downloads"
-		android:title="Remove downloads"/>
+		android:checkable="false"
+		android:enabled="true"
+		android:title="Remove downloads"
+		android:visible="true"
+		app:showAsAction="never"/>
 </menu>
