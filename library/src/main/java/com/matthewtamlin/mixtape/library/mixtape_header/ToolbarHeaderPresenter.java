@@ -118,17 +118,6 @@ public class ToolbarHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 		// Default implementation does nothing
 	}
 
-	@Override
-	public void onExtraButtonClicked(final HeaderContract.View headerView, final int index) {
-		// Default implementation does nothing
-	}
-
-	@Override
-	public void onOverflowMenuItemSelected(final HeaderContract.View headerView,
-			final MenuItem menuItem) {
-		// Default implementation does nothing
-	}
-
 	/**
 	 * @return the TitleBinder used to bind titles to the UI, not null
 	 */
