@@ -236,6 +236,27 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
+	 * @return the TextView used to display the item title
+	 */
+	public TextView getTitleContainer() {
+		return titleTextView;
+	}
+
+	/**
+	 * @return the TextView used to display the item subtitle
+	 */
+	public TextView getSubtitleContainer() {
+		return subtitleTextView;
+	}
+
+	/**
+	 * @return the ImageView used to display the item artwork
+	 */
+	public ImageView getArtworkContainer() {
+		return artworkImageView;
+	}
+
+	/**
 	 * Initialises this view. This method should only be called from a constructor.
 	 */
 	private void init() {
