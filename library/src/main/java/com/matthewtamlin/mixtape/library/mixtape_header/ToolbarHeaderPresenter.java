@@ -16,8 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import android.view.MenuItem;
-
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -25,17 +23,13 @@ import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 
-
 /**
- * Presenter for use with {@link ToolbarHeader} views. The default implementation does not handle user
- * interaction. To handle user interaction, override the following methods:  <ul> <li>{@link
- * #onTitleClicked(HeaderContract.View)}</li> <li>{@link #onSubtitleClicked(HeaderContract.View)}</li>
- * <li>{@link #onArtworkClicked(HeaderContract.View)}</li> <li>{@link
- * #onExtraButtonClicked(HeaderContract.View, int)}</li> <li>{@link #onOverflowMenuItemSelected
- * (HeaderContract.View, MenuItem)}</li> </ul>
+ * Presenter for use with {@link ToolbarHeader} views. User interaction can be handled by extending
+ * the class and overriding the view callback methods. The default implementations of these methods
+ * are empty.
  *
  * @param <S>
- * 		the type of data source
+ * 		the type of data source to present from
  */
 public class ToolbarHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 		extends DirectHeaderPresenter<S, ToolbarHeader> {
