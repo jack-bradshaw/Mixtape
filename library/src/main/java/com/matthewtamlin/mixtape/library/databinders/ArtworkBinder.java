@@ -40,11 +40,6 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  */
 public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
-	 * Identifies this class during logging.
-	 */
-	private static final String TAG = "[ArtworkBinder]";
-
-	/**
 	 * A record of all bind tasks currently in progress. Each task is mapped to the target
 	 * ImageView.
 	 */
