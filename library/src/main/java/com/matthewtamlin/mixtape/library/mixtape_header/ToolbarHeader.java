@@ -20,11 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.RequiresApi;
-import android.support.v4.widget.Space;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.PopupMenu.OnMenuItemClickListener;
 import android.util.AttributeSet;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -227,7 +223,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 * Initialises this view. This method should only be called from a constructor.
 	 */
 	private void init() {
-		inflate(getContext(), R.layout.smallheader, this);
+		inflate(getContext(), R.layout.toolbarheader, this);
 		getViewHandles();
 		initialiseOnClickListeners();
 	}
