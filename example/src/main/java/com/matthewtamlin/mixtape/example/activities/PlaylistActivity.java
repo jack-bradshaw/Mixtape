@@ -118,8 +118,6 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private void setupHeaderView() {
 		header = new ToolbarHeader(this);
-
-		
 	}
 
 	private void setupBodyView() {
