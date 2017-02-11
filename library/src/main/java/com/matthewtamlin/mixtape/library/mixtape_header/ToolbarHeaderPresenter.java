@@ -27,7 +27,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 
 
 /**
- * Presenter for use with {@link SmallHeader} views. The default implementation does not handle user
+ * Presenter for use with {@link ToolbarHeader} views. The default implementation does not handle user
  * interaction. To handle user interaction, override the following methods:  <ul> <li>{@link
  * #onTitleClicked(HeaderContract.View)}</li> <li>{@link #onSubtitleClicked(HeaderContract.View)}</li>
  * <li>{@link #onArtworkClicked(HeaderContract.View)}</li> <li>{@link
@@ -37,8 +37,8 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
  * @param <S>
  * 		the type of data source
  */
-public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
-		extends DirectHeaderPresenter<S, SmallHeader> {
+public class ToolbarHeaderPresenter<S extends BaseDataSource<LibraryItem>>
+		extends DirectHeaderPresenter<S, ToolbarHeader> {
 	/**
 	 * Binds title data to the view.
 	 */
@@ -55,7 +55,7 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	private final ArtworkBinder artworkDataBinder;
 
 	/**
-	 * Constructs a new SmallHeaderPresenter. The supplied DataBinders are passed to the view to
+	 * Constructs a new ToolbarHeaderPresenter. The supplied DataBinders are passed to the view to
 	 * bind data to the UI.
 	 *
 	 * @param titleDataBinder
@@ -71,7 +71,7 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	 * @throws IllegalArgumentException
 	 * 		if {@code artworkDataBinder} is null
 	 */
-	public SmallHeaderPresenter(final TitleBinder titleDataBinder, final SubtitleBinder
+	public ToolbarHeaderPresenter(final TitleBinder titleDataBinder, final SubtitleBinder
 			subtitleDataBinder, final ArtworkBinder artworkDataBinder) {
 		super();
 
@@ -84,7 +84,7 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	}
 
 	@Override
-	public void setView(final SmallHeader view) {
+	public void setView(final ToolbarHeader view) {
 		super.setView(view);
 
 		if (view != null) {

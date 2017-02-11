@@ -44,8 +44,8 @@ import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeaderPresenter;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeaderPresenter;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -56,7 +56,7 @@ import timber.log.Timber;
 public class PlaylistActivity extends AppCompatActivity {
 	private CoordinatedMixtapeContainer rootView;
 
-	private SmallHeader header;
+	private ToolbarHeader header;
 
 	private ListBody body;
 
@@ -64,7 +64,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private Mp3SongDataSource bodyDataSource;
 
-	private SmallHeaderPresenter<HeaderDataSource> headerPresenter;
+	private ToolbarHeaderPresenter<HeaderDataSource> headerPresenter;
 
 	private RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter;
 
@@ -117,7 +117,7 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupHeaderView() {
-		header = new SmallHeader(this);
+		header = new ToolbarHeader(this);
 
 		header.setOverflowMenuResource(R.menu.header_menu);
 
@@ -162,7 +162,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
-		headerPresenter = new SmallHeaderPresenter<HeaderDataSource>
+		headerPresenter = new ToolbarHeaderPresenter<HeaderDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
 			public void onExtraButtonClicked(final HeaderContract.View headerView,

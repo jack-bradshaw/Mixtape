@@ -26,7 +26,7 @@ import android.widget.FrameLayout;
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 
 import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
 import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL;
@@ -46,7 +46,7 @@ import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedM
  * the end.</li> </ul>
  */
 public class CoordinatedMixtapeContainer extends FrameLayout implements
-		MixtapeContainerView<SmallHeader, RecyclerViewBody> {
+		MixtapeContainerView<ToolbarHeader, RecyclerViewBody> {
 	/**
 	 * Performs the actual coordination.
 	 */
@@ -60,7 +60,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * The header to display at the top of the view.
 	 */
-	private SmallHeader header;
+	private ToolbarHeader header;
 
 	/**
 	 * The body to display beneath the header.
@@ -120,12 +120,12 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	@Override
-	public SmallHeader getHeader() {
+	public ToolbarHeader getHeader() {
 		return header;
 	}
 
 	@Override
-	public void setHeader(final SmallHeader header) {
+	public void setHeader(final ToolbarHeader header) {
 		headerContainer.removeView(this.header);
 
 		if (header != null) {

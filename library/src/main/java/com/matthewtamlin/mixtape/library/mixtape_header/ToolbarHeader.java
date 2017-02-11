@@ -47,7 +47,7 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * A simple implementation of the HeaderContract.View interface. This view must be provided with
  * DataBinders in order to function properly.
  */
-public class SmallHeader extends FrameLayout implements HeaderContract.View {
+public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	/**
 	 * Used to identify this class in the log.
 	 */
@@ -114,7 +114,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 	 * @param context
 	 * 		the Context the header is attached to, not null
 	 */
-	public SmallHeader(final Context context) {
+	public ToolbarHeader(final Context context) {
 		super(context);
 		init();
 	}
@@ -127,7 +127,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 */
-	public SmallHeader(final Context context, final AttributeSet attrs) {
+	public ToolbarHeader(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
@@ -142,7 +142,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public SmallHeader(final Context context, final AttributeSet attrs, final int defStyleAttr) {
+	public ToolbarHeader(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
 	}
@@ -162,7 +162,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 	 */
 	@RequiresApi(21) // For caller
 	@TargetApi(21) // For lint
-	public SmallHeader(final Context context, final AttributeSet attrs, final int defStyleAttr,
+	public ToolbarHeader(final Context context, final AttributeSet attrs, final int defStyleAttr,
 			final int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 		init();
@@ -258,7 +258,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 					@Override
 					public void onClick(final View v) {
 						if (presenter != null) {
-							presenter.onExtraButtonClicked(SmallHeader.this, fixedButtonIndex);
+							presenter.onExtraButtonClicked(ToolbarHeader.this, fixedButtonIndex);
 						}
 					}
 				});
@@ -324,7 +324,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 			@Override
 			public void onClick(View v) {
 				if (presenter != null) {
-					presenter.onTitleClicked(SmallHeader.this);
+					presenter.onTitleClicked(ToolbarHeader.this);
 				}
 			}
 		});
@@ -333,7 +333,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 			@Override
 			public void onClick(View v) {
 				if (presenter != null) {
-					presenter.onSubtitleClicked(SmallHeader.this);
+					presenter.onSubtitleClicked(ToolbarHeader.this);
 				}
 			}
 		});
@@ -342,7 +342,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 			@Override
 			public void onClick(View v) {
 				if (presenter != null) {
-					presenter.onArtworkClicked(SmallHeader.this);
+					presenter.onArtworkClicked(ToolbarHeader.this);
 				}
 			}
 		});
@@ -368,7 +368,7 @@ public class SmallHeader extends FrameLayout implements HeaderContract.View {
 						@Override
 						public boolean onMenuItemClick(final MenuItem item) {
 							if (presenter != null) {
-								presenter.onOverflowMenuItemSelected(SmallHeader.this, item);
+								presenter.onOverflowMenuItemSelected(ToolbarHeader.this, item);
 								return true; // Handled
 							} else {
 								return false; // Not handled
