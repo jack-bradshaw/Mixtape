@@ -60,7 +60,7 @@ public class RecyclerViewBodyPresenter<
 	private final ArtworkBinder artworkDataBinder;
 
 	/**
-	 * Constructs a new SmallHeaderPresenter.
+	 * Constructs a new ToolbarHeaderPresenter.
 	 *
 	 * @param titleDataBinder
 	 * 		the DataBinder to use when binding titles to the UI, not null

@@ -45,7 +45,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeaderPresenter;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeaderPresenter;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -64,7 +64,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private Mp3SongDataSource bodyDataSource;
 
-	private SmallHeaderPresenter<HeaderDataSource> headerPresenter;
+	private ToolbarHeaderPresenter<HeaderDataSource> headerPresenter;
 
 	private RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter;
 
@@ -162,7 +162,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
-		headerPresenter = new SmallHeaderPresenter<HeaderDataSource>
+		headerPresenter = new ToolbarHeaderPresenter<HeaderDataSource>
 				(titleBinder, subtitleBinder, artworkBinder) {
 			@Override
 			public void onExtraButtonClicked(final HeaderContract.View headerView,
