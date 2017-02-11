@@ -86,6 +86,9 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 */
 	private ImageView artworkImageView;
 
+	/**
+	 * Displays the toolbar. This view should never contain more than one direct child view.
+	 */
 	private FrameLayout toolbarContainer;
 
 	/**
@@ -213,7 +216,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	@Override
 	public void setItem(final LibraryItem item) {
 		this.data = item;
-		
+
 		updateTitle();
 		updateSubtitle();
 		updateArtwork();
