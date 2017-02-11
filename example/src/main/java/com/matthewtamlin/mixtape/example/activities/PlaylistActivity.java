@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.LruCache;
 import android.view.MenuItem;
 
@@ -43,7 +44,6 @@ import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeaderPresenter;
 
@@ -117,15 +117,11 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupHeaderView() {
+		final Toolbar toolbar = new Toolbar(this);
+		getMenuInflater().inflate(R.menu.header_menu, toolbar.getMenu());
+
 		header = new ToolbarHeader(this);
-
-		header.setOverflowMenuResource(R.menu.header_menu);
-
-		header.setExtraButtons(new Bitmap[]{
-				BitmapFactory.decodeResource(getResources(), R.drawable.ic_play),
-				BitmapFactory.decodeResource(getResources(), R.drawable.ic_share),
-				BitmapFactory.decodeResource(getResources(), R.drawable.ic_shuffle)
-		});
+		header.setToolbar(toolbar);
 	}
 
 	private void setupBodyView() {
@@ -162,20 +158,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
-		headerPresenter = new ToolbarHeaderPresenter<HeaderDataSource>
-				(titleBinder, subtitleBinder, artworkBinder) {
-			@Override
-			public void onExtraButtonClicked(final HeaderContract.View headerView,
-					final int index) {
-				handleHeaderExtraButtonClicked(index);
-			}
-
-			@Override
-			public void onOverflowMenuItemSelected(final HeaderContract.View headerView,
-					final MenuItem menuItem) {
-				handleHeaderOverflowMenuItemClicked(menuItem);
-			}
-		};
+		headerPresenter = new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
 
 		headerPresenter.setView(header);
 		headerPresenter.setDataSource(headerDataSource);

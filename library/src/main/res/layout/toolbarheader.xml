@@ -16,14 +16,14 @@
   -->
 
 <RelativeLayout
-	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/smallHeader_root"
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content">
 
 	<ImageView
-		android:id="@+id/smallHeader_artworkHolder"
+		android:id="@+id/toolbarHeader_artworkContainer"
 		android:layout_width="@dimen/fragment_listDetail_artworkSize"
 		android:layout_height="@dimen/fragment_listDetail_artworkSize"
 		android:layout_alignParentLeft="true"
@@ -35,17 +35,17 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_alignBottom="@+id/smallHeader_artworkHolder"
+		android:layout_alignBottom="@+id/toolbarHeader_artworkContainer"
 		android:layout_alignParentEnd="true"
 		android:layout_alignParentRight="true"
-		android:layout_alignTop="@id/smallHeader_artworkHolder"
-		android:layout_toEndOf="@+id/smallHeader_artworkHolder"
-		android:layout_toRightOf="@+id/smallHeader_artworkHolder"
+		android:layout_alignTop="@id/toolbarHeader_artworkContainer"
+		android:layout_toEndOf="@+id/toolbarHeader_artworkContainer"
+		android:layout_toRightOf="@+id/toolbarHeader_artworkContainer"
 		android:orientation="vertical"
 		android:padding="12dp">
 
 		<TextView
-			android:id="@+id/smallHeader_titleHolder"
+			android:id="@+id/toolbarHeader_titleContainer"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
@@ -54,7 +54,7 @@
 			android:textSize="22sp"/>
 
 		<TextView
-			android:id="@+id/smallHeader_subtitleHolder"
+			android:id="@+id/toolbarHeader_subtitleContainer"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:ellipsize="end"
@@ -68,33 +68,10 @@
 			android:layout_marginTop="12dp"
 			android:background="@android:color/darker_gray"/>
 
-		<LinearLayout
+		<FrameLayout
+			android:id="@+id/toolbarHeader_toolbarContainer"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
-
-			<LinearLayout
-				android:id="@+id/smallHeader_extraButtonContainer"
-				android:layout_width="0dp"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="horizontal">
-			</LinearLayout>
-
-			<!-->TODO add content description<-->
-			<ImageButton
-				android:id="@+id/smallHeader_overflowMenuButton"
-				style="@style/Widget.AppCompat.Button.Borderless"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:minHeight="0dp"
-				android:minWidth="0dp"
-				android:paddingBottom="0dp"
-				android:paddingLeft="0dp"
-				android:paddingRight="0dp"
-				android:paddingTop="0dp"
-				android:scaleType="centerCrop"
-				android:src="@drawable/ic_dots_vertical"/>
-		</LinearLayout>
+			android:layout_height="0dp"
+			android:layout_weight="1"/>
 	</LinearLayout>
 </RelativeLayout>
