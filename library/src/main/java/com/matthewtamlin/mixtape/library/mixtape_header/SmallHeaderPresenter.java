@@ -27,7 +27,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 
 
 /**
- * Presenter for use with {@link SmallHeader} views. The default implementation does not handle user
+ * Presenter for use with {@link ToolbarHeader} views. The default implementation does not handle user
  * interaction. To handle user interaction, override the following methods:  <ul> <li>{@link
  * #onTitleClicked(HeaderContract.View)}</li> <li>{@link #onSubtitleClicked(HeaderContract.View)}</li>
  * <li>{@link #onArtworkClicked(HeaderContract.View)}</li> <li>{@link
@@ -38,7 +38,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
  * 		the type of data source
  */
 public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
-		extends DirectHeaderPresenter<S, SmallHeader> {
+		extends DirectHeaderPresenter<S, ToolbarHeader> {
 	/**
 	 * Binds title data to the view.
 	 */
@@ -84,7 +84,7 @@ public class SmallHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	}
 
 	@Override
-	public void setView(final SmallHeader view) {
+	public void setView(final ToolbarHeader view) {
 		super.setView(view);
 
 		if (view != null) {

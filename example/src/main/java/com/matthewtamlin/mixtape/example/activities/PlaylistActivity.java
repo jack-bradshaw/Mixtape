@@ -44,7 +44,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeaderPresenter;
 
 import java.util.List;
@@ -56,7 +56,7 @@ import timber.log.Timber;
 public class PlaylistActivity extends AppCompatActivity {
 	private CoordinatedMixtapeContainer rootView;
 
-	private SmallHeader header;
+	private ToolbarHeader header;
 
 	private ListBody body;
 
@@ -117,7 +117,7 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupHeaderView() {
-		header = new SmallHeader(this);
+		header = new ToolbarHeader(this);
 
 		header.setOverflowMenuResource(R.menu.header_menu);
 
