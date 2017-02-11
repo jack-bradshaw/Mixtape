@@ -13,10 +13,10 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
-
-<manifest package="com.matthewtamlin.mixtape.example"
-		  xmlns:android="http://schemas.android.com/apk/res/android">
+-->
+<manifest
+	package="com.matthewtamlin.mixtape.example"
+	xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -30,6 +30,7 @@
 		<activity android:name=".activities.LauncherActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
+
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
