@@ -67,34 +67,5 @@
 			android:layout_marginBottom="12dp"
 			android:layout_marginTop="12dp"
 			android:background="@android:color/darker_gray"/>
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal">
-
-			<LinearLayout
-				android:id="@+id/smallHeader_extraButtonContainer"
-				android:layout_width="0dp"
-				android:layout_height="match_parent"
-				android:layout_weight="1"
-				android:orientation="horizontal">
-			</LinearLayout>
-
-			<!-->TODO add content description<-->
-			<ImageButton
-				android:id="@+id/smallHeader_overflowMenuButton"
-				style="@style/Widget.AppCompat.Button.Borderless"
-				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:minHeight="0dp"
-				android:minWidth="0dp"
-				android:paddingBottom="0dp"
-				android:paddingLeft="0dp"
-				android:paddingRight="0dp"
-				android:paddingTop="0dp"
-				android:scaleType="centerCrop"
-				android:src="@drawable/ic_dots_vertical"/>
-		</LinearLayout>
 	</LinearLayout>
 </RelativeLayout>
