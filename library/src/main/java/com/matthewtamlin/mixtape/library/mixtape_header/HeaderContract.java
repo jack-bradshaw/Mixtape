@@ -16,10 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import android.graphics.Bitmap;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
@@ -31,7 +27,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 public interface HeaderContract {
 	/**
 	 * A view which displays the title, subtitle and artwork of a single LibraryItem to the user,
-	 * along with an overflow menu button and a series of additional buttons.
+	 * in a way which highlights the primary library item in the context.
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
