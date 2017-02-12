@@ -67,8 +67,6 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private ToolbarHeaderPresenter<HeaderDataSource> headerPresenter;
 
-	private RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter;
-
 	private LruCache<LibraryItem, CharSequence> bodyTitleCache;
 
 	private LruCache<LibraryItem, CharSequence> bodySubtitleCache;
@@ -179,20 +177,21 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(bodySubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(bodyArtworkCache, defaults);
 
-		bodyPresenter = new RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
-				(titleBinder, subtitleBinder, artworkBinder) {
-			@Override
-			public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-					final LibraryItem item, final MenuItem menuItem) {
-				handleBodyItemMenuItemClicked(item, menuItem);
-			}
+		final RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter = new
+				RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
+						(titleBinder, subtitleBinder, artworkBinder) {
+					@Override
+					public void onContextualMenuItemSelected(final BodyContract.View bodyView,
+							final LibraryItem item, final MenuItem menuItem) {
+						handleBodyItemMenuItemClicked(item, menuItem);
+					}
 
-			@Override
-			public void onLibraryItemSelected(final BodyContract.View bodyView,
-					final LibraryItem item) {
-				handleBodyItemClicked(item);
-			}
-		};
+					@Override
+					public void onLibraryItemSelected(final BodyContract.View bodyView,
+							final LibraryItem item) {
+						handleBodyItemClicked(item);
+					}
+				};
 
 		bodyPresenter.setView(body);
 		bodyPresenter.setDataSource(bodyDataSource);
