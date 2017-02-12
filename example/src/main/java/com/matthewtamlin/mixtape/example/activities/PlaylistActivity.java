@@ -31,6 +31,8 @@ import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.HeaderDataSource;
+import com.matthewtamlin.mixtape.example.data.Mp3Album;
+import com.matthewtamlin.mixtape.example.data.Mp3AlbumDataSource;
 import com.matthewtamlin.mixtape.example.data.Mp3Song;
 import com.matthewtamlin.mixtape.example.data.Mp3SongDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
@@ -42,7 +44,11 @@ import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
+import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
+import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.ContextualMenuItemSelectedListener;
+import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
+import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
@@ -219,20 +225,27 @@ public class PlaylistActivity extends AppCompatActivity {
 		final ArtworkBinder artworkBinder = new ArtworkBinder(bodyArtworkCache, defaults);
 
 		final RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter = new
-				RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
-						(titleBinder, subtitleBinder, artworkBinder) {
-					@Override
-					public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-							final LibraryItem item, final MenuItem menuItem) {
-						handleBodyItemMenuItemClicked(item, menuItem);
-					}
+				RecyclerViewBodyPresenter<>(titleBinder, subtitleBinder, artworkBinder);
 
+		bodyPresenter.registerListener(
+				new LibraryItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerViewBody>() {
 					@Override
-					public void onLibraryItemSelected(final BodyContract.View bodyView,
-							final LibraryItem item) {
+					public void onLibraryItemSelected(
+							final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerViewBody>
+									presenter,	final Mp3Song item) {
 						handleBodyItemClicked(item);
 					}
-				};
+				});
+
+		bodyPresenter.registerListener(
+				new ContextualMenuItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerViewBody>() {
+					@Override
+					public void onContextualMenuItemSelected(
+							final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerViewBody> presenter,
+							final Mp3Song libraryItem, final MenuItem menuItem) {
+						handleBodyItemMenuItemClicked(libraryItem, menuItem);
+					}
+				});
 
 		bodyPresenter.setView(body);
 		bodyPresenter.setDataSource(bodyDataSource);
