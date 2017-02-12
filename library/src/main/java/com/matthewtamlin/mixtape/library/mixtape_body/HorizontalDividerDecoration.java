@@ -21,6 +21,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -65,7 +66,8 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	 */
 	HorizontalDividerDecoration(final Context context,
 			final int leftInsetPx,
-			final int rightInsetPx) {
+			final int rightInsetPx,
+			final int dividerColor) {
 		checkNotNull(context, "context cannot be null.");
 
 		this.leftInsetPx = checkGreaterThanOrEqualTo(leftInsetPx, 0);
@@ -75,6 +77,8 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
 		dividerDrawable = a.getDrawable(0);
 		a.recycle();
+
+		DrawableCompat.setTint(dividerDrawable, dividerColor);
 	}
 
 	@Override
