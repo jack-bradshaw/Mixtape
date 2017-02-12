@@ -171,30 +171,6 @@ public class GridBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected Parcelable onSaveInstanceState() {
-		final Bundle savedState = new Bundle();
-
-		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
-		savedState.putInt(STATE_KEY_NUMBER_OF_COLUMNS, numberOfColumns);
-
-		return savedState;
-	}
-
-	@Override
-	protected void onRestoreInstanceState(final Parcelable parcelableState) {
-		if (parcelableState instanceof Bundle) {
-			final Bundle bundleState = (Bundle) parcelableState;
-
-			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
-
-			setNumberOfColumns(bundleState.getInt(STATE_KEY_NUMBER_OF_COLUMNS,
-					DEFAULT_NUMBER_OF_COLUMNS));
-		} else {
-			super.onRestoreInstanceState(parcelableState);
-		}
-	}
-
-	@Override
 	public void setTitleTextColor(final int color) {
 		titleTextColor = color;
 
