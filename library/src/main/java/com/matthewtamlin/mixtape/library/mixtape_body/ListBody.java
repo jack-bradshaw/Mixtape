@@ -19,8 +19,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -66,14 +64,14 @@ public class ListBody extends RecyclerViewBody {
 	private HorizontalDividerDecoration horizontalDividerDecoration;
 
 	/**
-	 * The color to use when displaying the item titles in the UI, as an ARGB hex code. The default
+	 * The color to use when displaying item titles in the UI, as an ARGB hex code. The default
 	 * value is black.
 	 */
 	private int titleTextColor = 0xFF000000;
 
 	/**
-	 * The color to use when displaying the item subtitles in the UI, as an ARGB hex code. The
-	 * default value is light grey.
+	 * The color to use when displaying item subtitles in the UI, as an ARGB hex code. The default
+	 * value is light grey.
 	 */
 	private int subtitleTextColor = 0xFF808080;
 
@@ -83,7 +81,6 @@ public class ListBody extends RecyclerViewBody {
 	 */
 	private int overflowButtonColor = 0xFF000000;
 
-	
 	/**
 	 * Constructs a new ListBody.
 	 *
@@ -121,6 +118,59 @@ public class ListBody extends RecyclerViewBody {
 	public ListBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init(attrs, defStyleAttr, 0);
+	}
+
+	@Override
+	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
+		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
+				.listbodyitem, parent, false);
+
+		final TextView titleView = (TextView) listItem.findViewById(R.id.listBodyItem_title);
+		final TextView subtitleView = (TextView) listItem.findViewById(R.id.listBodyItem_subtitle);
+		final ImageView artworkView = (ImageView) listItem.findViewById(R.id.listBodyItem_artwork);
+		final View menuButton = listItem.findViewById(R.id.listIBodyItem_menu);
+
+		return new BodyViewHolder(listItem, titleView, subtitleView, artworkView, menuButton);
+	}
+
+	@Override
+	protected void onViewHolderBound(final BodyViewHolder viewHolder,
+			final LibraryItem data) {
+		viewHolder.getArtworkImageView().setVisibility(showArtwork ? VISIBLE : GONE);
+
+		viewHolder.getTitleTextView().setTextColor(titleTextColor);
+		viewHolder.getSubtitleTextView().setTextColor(subtitleTextColor);
+		((ImageButton) viewHolder.getContextualMenuButton()).setColorFilter(overflowButtonColor);
+	}
+
+	@Override
+	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
+		super.onRecyclerViewCreated(recyclerView);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+	}
+
+	@Override
+	public void setTitleTextColor(final int color) {
+		titleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setSubtitleTextColor(final int color) {
+		subtitleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setOverflowMenuButtonColor(final int color) {
+		this.overflowButtonColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
 	}
 
 	/**
@@ -184,59 +234,6 @@ public class ListBody extends RecyclerViewBody {
 		}
 
 		getRecyclerView().invalidateItemDecorations();
-	}
-
-	@Override
-	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
-		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
-				.listbodyitem, parent, false);
-
-		final TextView titleView = (TextView) listItem.findViewById(R.id.listBodyItem_title);
-		final TextView subtitleView = (TextView) listItem.findViewById(R.id.listBodyItem_subtitle);
-		final ImageView artworkView = (ImageView) listItem.findViewById(R.id.listBodyItem_artwork);
-		final View menuButton = listItem.findViewById(R.id.listIBodyItem_menu);
-
-		return new BodyViewHolder(listItem, titleView, subtitleView, artworkView, menuButton);
-	}
-
-	@Override
-	protected void onViewHolderBound(final BodyViewHolder viewHolder,
-			final LibraryItem data) {
-		viewHolder.getArtworkImageView().setVisibility(showArtwork ? VISIBLE : GONE);
-
-		viewHolder.getTitleTextView().setTextColor(titleTextColor);
-		viewHolder.getSubtitleTextView().setTextColor(subtitleTextColor);
-		((ImageButton) viewHolder.getContextualMenuButton()).setColorFilter(overflowButtonColor);
-	}
-
-	@Override
-	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
-		super.onRecyclerViewCreated(recyclerView);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-	}
-
-	@Override
-	public void setTitleTextColor(final int color) {
-		titleTextColor = color;
-
-		// Ensures the UI updates
-		notifyItemsChanged();
-	}
-
-	@Override
-	public void setSubtitleTextColor(final int color) {
-		subtitleTextColor = color;
-
-		// Ensures the UI updates
-		notifyItemsChanged();
-	}
-
-	@Override
-	public void setOverflowMenuButtonColor(final int color) {
-		this.overflowButtonColor = color;
-
-		// Ensures the UI updates
-		notifyItemsChanged();
 	}
 
 	/**

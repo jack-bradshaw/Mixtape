@@ -57,14 +57,14 @@ public class GridBody extends RecyclerViewBody {
 	private int numberOfColumns;
 
 	/**
-	 * The color to use when displaying the item titles in the UI, as an ARGB hex code. The default
+	 * The color to use when displaying item titles in the UI, as an ARGB hex code. The default
 	 * value is black.
 	 */
 	private int titleTextColor = 0xFF000000;
 
 	/**
-	 * The color to use when displaying the item subtitles in the UI, as an ARGB hex code. The
-	 * default value is light grey.
+	 * The color to use when displaying item subtitles in the UI, as an ARGB hex code. The default
+	 * value is light grey.
 	 */
 	private int subtitleTextColor = 0xFF808080;
 
@@ -75,7 +75,7 @@ public class GridBody extends RecyclerViewBody {
 	private int overflowButtonColor = 0xFF000000;
 
 	/**
-	 * the color to use for the background of the item cards in the UI, as an ARGB hex code. The
+	 * The color to use for the background of the item cards in the UI, as an ARGB hex code. The
 	 * default color is white.
 	 */
 	private int cardBackgroundColor = 0xFFFFFFFF;
@@ -117,26 +117,6 @@ public class GridBody extends RecyclerViewBody {
 	public GridBody(final Context context, final AttributeSet attrs, final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init(attrs, defStyleAttr, 0);
-	}
-
-	/**
-	 * Sets the number of grid columns to display.
-	 *
-	 * @param numberOfColumns
-	 * 		the number of columns to display, greater than zero
-	 * @throws IllegalArgumentException
-	 * 		if {@code numberOfColumns} is less than zero
-	 */
-	public void setNumberOfColumns(final int numberOfColumns) {
-		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
-		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
-	}
-
-	/**
-	 * @return the current number of columns
-	 */
-	public int getNumberOfColumns() {
-		return numberOfColumns;
 	}
 
 	@Override
@@ -190,6 +170,26 @@ public class GridBody extends RecyclerViewBody {
 
 		// Ensures the UI updates
 		notifyItemsChanged();
+	}
+
+	/**
+	 * Sets the number of grid columns to display.
+	 *
+	 * @param numberOfColumns
+	 * 		the number of columns to display, greater than zero
+	 * @throws IllegalArgumentException
+	 * 		if {@code numberOfColumns} is less than zero
+	 */
+	public void setNumberOfColumns(final int numberOfColumns) {
+		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
+		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+	}
+
+	/**
+	 * @return the current number of columns
+	 */
+	public int getNumberOfColumns() {
+		return numberOfColumns;
 	}
 
 	/**

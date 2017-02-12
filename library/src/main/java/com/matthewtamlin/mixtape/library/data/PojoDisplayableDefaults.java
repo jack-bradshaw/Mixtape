@@ -28,21 +28,13 @@ public class PojoDisplayableDefaults implements DisplayableDefaults {
 
 	private Drawable artwork;
 
-	public void setTitle(final CharSequence title) {
-		this.title = title;
-	}
-
-	public void setSubtitle(final CharSequence subtitle) {
-		this.subtitle = subtitle;
-	}
-
-	public void setArtwork(final Drawable artwork) {
-		this.artwork = artwork;
-	}
-
 	@Override
 	public CharSequence getTitle() {
 		return title;
+	}
+
+	public void setTitle(final CharSequence title) {
+		this.title = title;
 	}
 
 	@Override
@@ -50,8 +42,16 @@ public class PojoDisplayableDefaults implements DisplayableDefaults {
 		return subtitle;
 	}
 
+	public void setSubtitle(final CharSequence subtitle) {
+		this.subtitle = subtitle;
+	}
+
 	@Override
 	public Drawable getArtwork() {
 		return artwork;
+	}
+
+	public void setArtwork(final Drawable artwork) {
+		this.artwork = artwork;
 	}
 }

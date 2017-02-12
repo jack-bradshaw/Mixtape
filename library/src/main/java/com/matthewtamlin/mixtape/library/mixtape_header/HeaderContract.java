@@ -26,8 +26,8 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
  */
 public interface HeaderContract {
 	/**
-	 * A view which displays the title, subtitle and artwork of a single LibraryItem to the user,
-	 * in a way which highlights the primary library item in the context.
+	 * A view which displays the title, subtitle and artwork of a single LibraryItem to the user, in
+	 * a way which highlights the primary library item in the context.
 	 */
 	public interface View extends BaseView<Presenter> {
 		/**
