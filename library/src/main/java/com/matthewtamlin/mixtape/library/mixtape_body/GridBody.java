@@ -74,10 +74,22 @@ public class GridBody extends RecyclerViewBody {
 	 */
 	private int numberOfColumns;
 
+	/**
+	 * The color to use when displaying the item titles in the UI, as an ARGB hex code. The default
+	 * value is black.
+	 */
 	private int titleTextColor = 0xFF000000;
 
-	private int subtitleTextColor =  0xFF808080;
+	/**
+	 * The color to use when displaying the item subtitles in the UI, as an ARGB hex code. The
+	 * default value is light grey.
+	 */
+	private int subtitleTextColor = 0xFF808080;
 
+	/**
+	 * The color to use for the overflow menu buttons, as an ARGB hex code. The default color is
+	 * black.
+	 */
 	private int overflowButtonColor = 0xFF000000;
 
 	private int cardBackgroundColor = 0xFFFFFFFF;
