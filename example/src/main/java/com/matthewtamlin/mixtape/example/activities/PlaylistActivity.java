@@ -67,8 +67,6 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private ToolbarHeaderPresenter<HeaderDataSource> headerPresenter;
 
-	private RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter;
-
 	private LruCache<LibraryItem, CharSequence> bodyTitleCache;
 
 	private LruCache<LibraryItem, CharSequence> bodySubtitleCache;
@@ -98,6 +96,16 @@ public class PlaylistActivity extends AppCompatActivity {
 		setupBodyPresenter();
 	}
 
+	private void setupDataSources() {
+		bodyDataSource = new Mp3SongDataSource(getResources());
+
+		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
+				R.raw.header_artwork);
+		headerDataSource = new HeaderDataSource("All Songs",
+				"Various artists",
+				new BitmapDrawable(getResources(), headerArtwork));
+	}
+
 	private void setupCaches() {
 		// Titles and subtitles are small enough to stay cached, so use a very high max size
 		bodyTitleCache = new LruCache<>(10000);
@@ -115,86 +123,6 @@ public class PlaylistActivity extends AppCompatActivity {
 		headerTitleCache = new LruCache<>(2);
 		headerSubtitleCache = new LruCache<>(2);
 		headerArtworkCache = new LruCache<>(2);
-	}
-
-	private void setupHeaderView() {
-		final Toolbar toolbar = new Toolbar(this);
-		getMenuInflater().inflate(R.menu.header_menu, toolbar.getMenu());
-
-		header = new ToolbarHeader(this);
-		header.setToolbar(toolbar);
-
-		header.setBackgroundColor(Color.WHITE);
-	}
-
-	private void setupBodyView() {
-		body = new ListBody(this);
-		body.setContextualMenuResource(R.menu.song_menu);
-	}
-
-	private void setupContainerView() {
-		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
-
-		rootView.setBody(body);
-		rootView.setHeader(header);
-		rootView.showHeaderAtStartOnly();
-	}
-
-	private void setupDataSources() {
-		bodyDataSource = new Mp3SongDataSource(getResources());
-
-		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
-				R.raw.header_artwork);
-		headerDataSource = new HeaderDataSource("All Songs",
-				"Various artists",
-				new BitmapDrawable(getResources(), headerArtwork));
-	}
-
-	private void setupHeaderPresenter() {
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
-				.default_artwork);
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Playlist",
-				"Unknown artists",
-				new BitmapDrawable(getResources(), defaultArtwork));
-
-		final TitleBinder titleBinder = new TitleBinder(headerTitleCache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
-
-		headerPresenter = new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
-
-		headerPresenter.setView(header);
-		headerPresenter.setDataSource(headerDataSource);
-	}
-
-	private void setupBodyPresenter() {
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
-				.default_artwork);
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Unknown title",
-				"Unknown artist",
-				new BitmapDrawable(getResources(), defaultArtwork));
-
-		final TitleBinder titleBinder = new TitleBinder(bodyTitleCache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(bodySubtitleCache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(bodyArtworkCache, defaults);
-
-		bodyPresenter = new RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
-				(titleBinder, subtitleBinder, artworkBinder) {
-			@Override
-			public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-					final LibraryItem item, final MenuItem menuItem) {
-				handleBodyItemMenuItemClicked(item, menuItem);
-			}
-
-			@Override
-			public void onLibraryItemSelected(final BodyContract.View bodyView,
-					final LibraryItem item) {
-				handleBodyItemClicked(item);
-			}
-		};
-
-		bodyPresenter.setView(body);
-		bodyPresenter.setDataSource(bodyDataSource);
 	}
 
 	private void precacheText() {
@@ -231,14 +159,93 @@ public class PlaylistActivity extends AppCompatActivity {
 		});
 	}
 
-	private void handleHeaderExtraButtonClicked(final int index) {
-		switch (index) {
-			case 0: {
+	private void setupHeaderView() {
+		final Toolbar toolbar = new Toolbar(this);
+		getMenuInflater().inflate(R.menu.header_menu, toolbar.getMenu());
+		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(final MenuItem item) {
+				return handleToolbarItemClick();
+			}
+		});
+
+		header = new ToolbarHeader(this);
+		header.setToolbar(toolbar);
+
+		header.setBackgroundColor(Color.WHITE);
+	}
+
+	private void setupBodyView() {
+		body = new ListBody(this);
+		body.setContextualMenuResource(R.menu.song_menu);
+	}
+
+	private void setupContainerView() {
+		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
+
+		rootView.setBody(body);
+		rootView.setHeader(header);
+		rootView.showHeaderAtStartOnly();
+	}
+
+	private void setupHeaderPresenter() {
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Playlist",
+				"Unknown artists",
+				new BitmapDrawable(getResources(), defaultArtwork));
+
+		final TitleBinder titleBinder = new TitleBinder(headerTitleCache, defaults);
+		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
+
+		final ToolbarHeaderPresenter<HeaderDataSource> headerPresenter =
+				new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
+
+		headerPresenter.setView(header);
+		headerPresenter.setDataSource(headerDataSource);
+	}
+
+	private void setupBodyPresenter() {
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Unknown title",
+				"Unknown artist",
+				new BitmapDrawable(getResources(), defaultArtwork));
+
+		final TitleBinder titleBinder = new TitleBinder(bodyTitleCache, defaults);
+		final SubtitleBinder subtitleBinder = new SubtitleBinder(bodySubtitleCache, defaults);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(bodyArtworkCache, defaults);
+
+		final RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter = new
+				RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource>
+						(titleBinder, subtitleBinder, artworkBinder) {
+					@Override
+					public void onContextualMenuItemSelected(final BodyContract.View bodyView,
+							final LibraryItem item, final MenuItem menuItem) {
+						handleBodyItemMenuItemClicked(item, menuItem);
+					}
+
+					@Override
+					public void onLibraryItemSelected(final BodyContract.View bodyView,
+							final LibraryItem item) {
+						handleBodyItemClicked(item);
+					}
+				};
+
+		bodyPresenter.setView(body);
+		bodyPresenter.setDataSource(bodyDataSource);
+	}
+
+	private void handleToolbarItemClick(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.header_menu_play: {
 				displayMessage("Playing all songs...");
+
 				break;
 			}
 
-			case 1: {
+			case R.id.header_menu_share: {
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_TEXT, "https://github.com/MatthewTamlin/Mixtape");
@@ -248,14 +255,10 @@ public class PlaylistActivity extends AppCompatActivity {
 				break;
 			}
 
-			case 2: {
-				displayMessage("Shuffling all songs...");
+			case R.id.header_menu_shuffle: {
+				displayMessage("Playing all songs, shuffled...");
 			}
-		}
-	}
 
-	private void handleHeaderOverflowMenuItemClicked(final MenuItem item) {
-		switch (item.getItemId()) {
 			case R.id.header_menu_download_all_songs: {
 				displayMessage("Downloading all songs...");
 

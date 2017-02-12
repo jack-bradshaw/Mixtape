@@ -22,6 +22,7 @@
 	tools:ignore="HardcodedText">
 
 	<item
+		android:id="@+id/header_menu_play"
 		android:checkable="false"
 		android:enabled="true"
 		android:icon="@drawable/ic_play"
@@ -30,6 +31,7 @@
 		app:showAsAction="always"/>
 
 	<item
+		android:id="@+id/header_menu_share"
 		android:checkable="false"
 		android:enabled="true"
 		android:icon="@drawable/ic_share"
@@ -38,6 +40,7 @@
 		app:showAsAction="always"/>
 
 	<item
+		android:id="@+id/header_menu_shuffle"
 		android:checkable="false"
 		android:enabled="true"
 		android:icon="@drawable/ic_shuffle"
