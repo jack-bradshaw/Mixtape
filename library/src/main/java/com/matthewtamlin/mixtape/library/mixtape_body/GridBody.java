@@ -234,6 +234,12 @@ public class GridBody extends RecyclerViewBody {
 		notifyItemsChanged();
 	}
 
+	/**
+	 * Sets the color of the cards in the UI.
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
 	public void setCardBackgroundColor(final int color) {
 		cardBackgroundColor = color;
 
