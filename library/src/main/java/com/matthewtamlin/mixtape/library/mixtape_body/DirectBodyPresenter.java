@@ -232,7 +232,12 @@ public class DirectBodyPresenter<
 			S extends ListDataSource<D>,
 			V extends BodyContract.View> {
 		public void onLibraryItemSelected(DirectBodyPresenter<D, S, V> presenter, final D item);
+	}
 
+	public interface ContextualMenuItemSelectedListener<
+			D extends LibraryItem,
+			S extends ListDataSource<D>,
+			V extends BodyContract.View> {
 		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter, final D
 				libraryItem, final MenuItem menuItem);
 	}
