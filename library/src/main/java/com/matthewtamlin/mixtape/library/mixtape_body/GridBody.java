@@ -75,7 +75,7 @@ public class GridBody extends RecyclerViewBody {
 	private int overflowButtonColor = 0xFF000000;
 
 	/**
-	 * the color to use for the background of the item cards in the UI, as an ARGB hex code. The
+	 * The color to use for the background of the item cards in the UI, as an ARGB hex code. The
 	 * default color is white.
 	 */
 	private int cardBackgroundColor = 0xFFFFFFFF;
