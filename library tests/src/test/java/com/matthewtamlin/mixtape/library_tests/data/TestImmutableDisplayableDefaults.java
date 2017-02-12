@@ -17,7 +17,6 @@
 package com.matthewtamlin.mixtape.library_tests.data;
 
 import android.graphics.drawable.Drawable;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
@@ -25,13 +24,14 @@ import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Mockito.mock;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(JUnit4.class)
 public class TestImmutableDisplayableDefaults {
 	private String title;
 
