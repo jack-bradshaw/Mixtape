@@ -317,10 +317,28 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 		topReachedListeners.clear();
 	}
 
+	/**
+	 * Sets the color to use when displaying item titles in the UI.
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
 	public abstract void setTitleTextColor(final int color);
 
+	/**
+	 * Sets the color to use when displaying item subtitles in the UI.
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
 	public abstract void setSubtitleTextColor(final int color);
 
+	/**
+	 * Sets the color to use for the overflow menu buttons.
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
 	public abstract void setOverflowMenuButtonColor(final int color);
 
 	/**
