@@ -43,35 +43,6 @@ public interface HeaderContract {
 		 * @return the item currently being displayed, may be null
 		 */
 		LibraryItem getItem();
-
-		/**
-		 * Receives callbacks from a HeaderContract.View.
-		 */
-		interface Listener {
-			/**
-			 * Invoked when the user clicks the title in a HeaderContract.View.
-			 *
-			 * @param headerView
-			 * 		the HeaderContract.View hosting the clicked title, not null
-			 */
-			void onTitleClicked(HeaderContract.View headerView);
-
-			/**
-			 * Invoked when the user clicks the subtitle in a HeaderContract.View.
-			 *
-			 * @param headerView
-			 * 		the HeaderContract.View hosting the clicked subtitle, not null
-			 */
-			void onSubtitleClicked(HeaderContract.View headerView);
-
-			/**
-			 * Invoked when the user clicks the artwork in a HeaderContract.View.
-			 *
-			 * @param headerView
-			 * 		the HeaderContract.View hosting the clicked artwork, not null
-			 */
-			void onArtworkClicked(HeaderContract.View headerView);
-		}
 	}
 
 	/**
@@ -80,5 +51,5 @@ public interface HeaderContract {
 	 * callback events from the data source and the view (if possible).
 	 */
 	public interface Presenter<S extends BaseDataSource<LibraryItem>, V extends View> extends
-			BasePresenter<S, V>, BaseDataSource.FullListener<LibraryItem>, View.Listener {}
+			BasePresenter<S, V>, BaseDataSource.FullListener<LibraryItem> {}
 }
