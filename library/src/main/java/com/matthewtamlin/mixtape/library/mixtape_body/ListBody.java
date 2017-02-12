@@ -44,21 +44,6 @@ import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelpe
  */
 public class ListBody extends RecyclerViewBody {
 	/**
-	 * Bundle key for saving and restoring the superclass state.
-	 */
-	private static final String STATE_KEY_SUPER = "ListBody.super";
-
-	/**
-	 * Bundle key for saving and restoring the showDividers member variable.
-	 */
-	private static final String STATE_KEY_SHOW_DIVIDERS = "ListBody.showDividers";
-
-	/**
-	 * Bundle key for saving and restoring the showArtwork member variable.
-	 */
-	private static final String STATE_KEY_SHOW_ARTWORK = "ListBody.showArtwork";
-
-	/**
 	 * The default value for the showDividers member variable.
 	 */
 	private static final boolean DEFAULT_SHOW_DIVIDERS = false;
