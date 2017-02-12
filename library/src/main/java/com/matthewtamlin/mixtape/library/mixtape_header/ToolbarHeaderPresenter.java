@@ -97,21 +97,6 @@ public class ToolbarHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 		super.onDataModified(source, data);
 	}
 
-	@Override
-	public void onTitleClicked(final HeaderContract.View headerView) {
-		// Default implementation does nothing
-	}
-
-	@Override
-	public void onSubtitleClicked(final HeaderContract.View headerView) {
-		// Default implementation does nothing
-	}
-
-	@Override
-	public void onArtworkClicked(final HeaderContract.View headerView) {
-		// Default implementation does nothing
-	}
-
 	/**
 	 * @return the TitleBinder used to bind titles to the UI, not null
 	 */

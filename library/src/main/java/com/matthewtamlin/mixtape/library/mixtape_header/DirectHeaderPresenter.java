@@ -31,7 +31,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
  * @param <V>
  * 		the type of view
  */
-public abstract class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V extends
+public class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V extends
 		HeaderContract.View> implements HeaderContract.Presenter<S, V> {
 	/**
 	 * The data source supplying the LibraryItems.
