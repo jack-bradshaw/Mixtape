@@ -16,6 +16,8 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_body;
 
+import android.view.MenuItem;
+
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -33,7 +35,7 @@ import java.util.List;
  * @param <V>
  * 		the type of view to present to
  */
-public abstract class DirectBodyPresenter<
+public class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
 		V extends BodyContract.View>
@@ -151,6 +153,18 @@ public abstract class DirectBodyPresenter<
 		if (view != null) {
 			view.notifyItemMoved(initialIndex, finalIndex);
 		}
+	}
+
+	@Override
+	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
+		
+	}
+
+	@Override
+	public void onContextualMenuItemSelected(final BodyContract.View bodyView,
+			final LibraryItem libraryItem,
+			final MenuItem menuItem) {
+
 	}
 
 	/**
