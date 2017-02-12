@@ -27,10 +27,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import java.util.List;
 
 /**
- * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
- * abstract, the user interaction handling methods do nothing. To handle user interactions, override
- * {@link #onLibraryItemSelected(BodyContract.View, LibraryItem)} and {@link
- * #onContextualMenuItemSelected (BodyContract.View, LibraryItem, MenuItem)}.
+ * A DirectBodyPresenter which can be used with a RecyclerViewBody.
  *
  * @param <D>
  * 		the type of data to present
