@@ -26,6 +26,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -231,6 +232,10 @@ public class ListBody extends RecyclerViewBody {
 	protected void onViewHolderBound(final BodyViewHolder viewHolder,
 			final LibraryItem data) {
 		viewHolder.getArtworkImageView().setVisibility(showArtwork ? VISIBLE : GONE);
+
+		viewHolder.getTitleTextView().setTextColor(titleTextColor);
+		viewHolder.getSubtitleTextView().setTextColor(subtitleTextColor);
+		((ImageButton) viewHolder.getContextualMenuButton()).setColorFilter(overflowButtonColor);
 	}
 
 	@Override
