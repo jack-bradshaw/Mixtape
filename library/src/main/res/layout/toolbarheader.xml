@@ -24,8 +24,8 @@
 
 	<ImageView
 		android:id="@+id/toolbarHeader_artworkContainer"
-		android:layout_width="@dimen/fragment_listDetail_artworkSize"
-		android:layout_height="@dimen/fragment_listDetail_artworkSize"
+		android:layout_width="@dimen/toolbarHeader_artworkSize"
+		android:layout_height="@dimen/toolbarHeader_artworkSize"
 		android:layout_alignParentLeft="true"
 		android:layout_alignParentStart="true"
 		android:layout_alignParentTop="true"

@@ -17,5 +17,5 @@
 
 <resources>
 	<dimen name="listBodyItem_artworkSize">56dp</dimen>
-	<dimen name="fragment_listDetail_artworkSize">140dp</dimen>
+	<dimen name="toolbarHeader_artworkSize">140dp</dimen>
 </resources>
