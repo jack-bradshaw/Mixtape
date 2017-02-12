@@ -22,7 +22,9 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A simple implementation of the BodyContract.Presenter interface where the list returned by the
@@ -40,6 +42,12 @@ public class DirectBodyPresenter<
 		S extends ListDataSource<D>,
 		V extends BodyContract.View>
 		implements BodyContract.Presenter<D, S, V> {
+	private final Set<LibraryItemSelectedListener<D, S, V>> libraryItemSelectedListeners =
+			new HashSet<>();
+
+	private final Set<ContextualMenuItemSelectedListener<D, S, V>>
+			contextualMenuItemSelectedListeners = new HashSet<>();
+
 	/**
 	 * The data source to present from.
 	 */
@@ -165,6 +173,54 @@ public class DirectBodyPresenter<
 			final LibraryItem libraryItem,
 			final MenuItem menuItem) {
 
+	}
+
+	/**
+	 * Registers a library item selected listener to this presenter. If the supplied listener is
+	 * null or is already registered, this method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 */
+	public void registerListener(final LibraryItemSelectedListener<D, S, V> listener) {
+		if (listener != null) {
+			libraryItemSelectedListeners.add(listener);
+		}
+	}
+
+	/**
+	 * Unregisters a library item selected listener from this data source. If the supplied listener
+	 * is null or is not registered, this method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to unregister
+	 */
+	public void unregisterListener(final LibraryItemSelectedListener<D, S, V> listener) {
+		libraryItemSelectedListeners.remove(listener);
+	}
+
+	/**
+	 * Registers a contextual menu item selected listener to this presenter. If the supplied
+	 * listener is null or is already registered, this method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 */
+	public void registerListener(final ContextualMenuItemSelectedListener<D, S, V> listener) {
+		if (listener != null) {
+			contextualMenuItemSelectedListeners.add(listener);
+		}
+	}
+
+	/**
+	 * Unregisters a contextual menu item selected listener from this data source. If the supplied
+	 * listener is null or is not registered, this method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to unregister
+	 */
+	public void unregisterListener(final ContextualMenuItemSelectedListener<D, S, V> listener) {
+		contextualMenuItemSelectedListeners.remove(listener);
 	}
 
 	/**
