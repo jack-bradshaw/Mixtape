@@ -28,7 +28,8 @@ import java.util.Set;
 
 /**
  * A simple implementation of the BodyContract.Presenter interface where the list returned by the
- * data source is directly reflected in the view.
+ * data source is directly reflected in the view. Listeners can be registered to handle user
+ * input events.
  *
  * @param <D>
  * 		the type of data to present
