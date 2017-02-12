@@ -165,7 +165,8 @@ public class PlaylistActivity extends AppCompatActivity {
 		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(final MenuItem item) {
-				return handleToolbarItemClick();
+				handleToolbarItemClick(item);
+				return true;
 			}
 		});
 
