@@ -287,12 +287,6 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 		return recyclerView;
 	}
 
-	public abstract void setTitleTextColor(final int color);
-
-	public abstract void setSubtitleTextColor(final int color);
-
-	public abstract void setOverflowMenuButtonColor(final int color);
-
 	/**
 	 * Registers a top reached listener to this RecyclerViewBody. If the supplied listener is null
 	 * or is already registered, this method exits normally.
@@ -350,6 +344,12 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @return a new BodyViewHolder, not null
 	 */
 	protected abstract BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent);
+
+	public abstract void setTitleTextColor(final int color);
+
+	public abstract void setSubtitleTextColor(final int color);
+
+	public abstract void setOverflowMenuButtonColor(final int color);
 
 	/**
 	 * Initialises this view. This method should only be called from a constructor.
