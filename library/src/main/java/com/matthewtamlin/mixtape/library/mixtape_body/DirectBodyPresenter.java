@@ -165,14 +165,23 @@ public class DirectBodyPresenter<
 
 	@Override
 	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
-
+		for (final LibraryItemSelectedListener<D, S, V> listener : libraryItemSelectedListeners) {
+			// Should be fine so long as there is no external interference
+			// noinspection unchecked
+			listener.onLibraryItemSelected(this, (D) item);
+		}
 	}
 
 	@Override
 	public void onContextualMenuItemSelected(final BodyContract.View bodyView,
 			final LibraryItem libraryItem,
 			final MenuItem menuItem) {
-
+		for (final ContextualMenuItemSelectedListener<D, S, V> listener :
+				contextualMenuItemSelectedListeners) {
+			// Should be fine so long as there is no external interference
+			// noinspection unchecked
+			listener.onContextualMenuItemSelected(this, (D) libraryItem, menuItem);
+		}
 	}
 
 	/**
