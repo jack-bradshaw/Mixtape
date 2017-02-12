@@ -292,17 +292,60 @@ public class DirectBodyPresenter<
 		}
 	}
 
+	/**
+	 * Callback to be invoked when a DirectBodyPresenter receives an item selection event from the
+	 * view it is presenting to.
+	 *
+	 * @param <D>
+	 * 		the type of data being presented
+	 * @param <S>
+	 * 		the type of data source being presented from
+	 * @param <V>
+	 * 		the type of view being presented to
+	 */
 	public interface LibraryItemSelectedListener<
 			D extends LibraryItem,
 			S extends ListDataSource<D>,
 			V extends BodyContract.View> {
+		/**
+		 * Invoked when a DirectBodyPresenter receives an item selection event from the view is is
+		 * presenting to.
+		 *
+		 * @param presenter
+		 * 		the presenter, not null
+		 * @param item
+		 * 		the selected item, not null
+		 */
 		public void onLibraryItemSelected(DirectBodyPresenter<D, S, V> presenter, final D item);
 	}
 
+	/**
+	 * Callback to be invoked when a DirectBodyPresenter receives a contextual menu item selection
+	 * event from the view it is presenting to.
+	 *
+	 * @param <D>
+	 * 		the type of data being presented
+	 * @param <S>
+	 * 		the type of data source being presented from
+	 * @param <V>
+	 * 		the type of view being presented to
+	 */
 	public interface ContextualMenuItemSelectedListener<
 			D extends LibraryItem,
 			S extends ListDataSource<D>,
 			V extends BodyContract.View> {
+
+		/**
+		 * Invoked when a DirectBodyPresenter receives a contextual menu item selection event from
+		 * the view it is presenting to
+		 *
+		 * @param presenter
+		 * 		the presenter, not null
+		 * @param libraryItem
+		 * 		the library item the contextual menu is attached to, not null
+		 * @param menuItem
+		 * 		the selected menu item, not null
+		 */
 		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter, final D
 				libraryItem, final MenuItem menuItem);
 	}
