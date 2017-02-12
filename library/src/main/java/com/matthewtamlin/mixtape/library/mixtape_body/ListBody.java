@@ -19,8 +19,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -72,8 +70,8 @@ public class ListBody extends RecyclerViewBody {
 	private int titleTextColor = 0xFF000000;
 
 	/**
-	 * The color to use when displaying item subtitles in the UI, as an ARGB hex code. The
-	 * default value is light grey.
+	 * The color to use when displaying item subtitles in the UI, as an ARGB hex code. The default
+	 * value is light grey.
 	 */
 	private int subtitleTextColor = 0xFF808080;
 
@@ -83,7 +81,6 @@ public class ListBody extends RecyclerViewBody {
 	 */
 	private int overflowButtonColor = 0xFF000000;
 
-	
 	/**
 	 * Constructs a new ListBody.
 	 *
