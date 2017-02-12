@@ -120,17 +120,6 @@ public class RecyclerViewBodyPresenter<
 		super.onItemModified(source, modified, index);
 	}
 
-	@Override
-	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
-		// Default implementation does nothing
-	}
-
-	@Override
-	public void onContextualMenuItemSelected(final BodyContract.View bodyView, final LibraryItem
-			libraryItem, final MenuItem menuItem) {
-		// Default implementation does nothing
-	}
-
 	/**
 	 * @return the TitleBinder used to bind titles to the UI, not null
 	 */
