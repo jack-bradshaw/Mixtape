@@ -75,7 +75,6 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * The current constraint between the header and the body.
 	 */
-	//TODO persist this value
 	private Constraint constraint = PERSISTENT_HEADER;
 
 	/**
