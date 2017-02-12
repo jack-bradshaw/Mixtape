@@ -166,7 +166,7 @@ public class DirectBodyPresenter<
 	@Override
 	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
 		for (final LibraryItemSelectedListener<D, S, V> listener : libraryItemSelectedListeners) {
-			// Should be fine so long as there is no external interference
+			// Should be fine so long as there is no external interference with the view's data
 			// noinspection unchecked
 			listener.onLibraryItemSelected(this, (D) item);
 		}
@@ -178,7 +178,7 @@ public class DirectBodyPresenter<
 			final MenuItem menuItem) {
 		for (final ContextualMenuItemSelectedListener<D, S, V> listener :
 				contextualMenuItemSelectedListeners) {
-			// Should be fine so long as there is no external interference
+			// Should be fine so long as there is no external interference with view's data
 			// noinspection unchecked
 			listener.onContextualMenuItemSelected(this, (D) libraryItem, menuItem);
 		}
