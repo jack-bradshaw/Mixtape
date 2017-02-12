@@ -162,6 +162,12 @@ public class PlaylistActivity extends AppCompatActivity {
 	private void setupHeaderView() {
 		final Toolbar toolbar = new Toolbar(this);
 		getMenuInflater().inflate(R.menu.header_menu, toolbar.getMenu());
+		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(final MenuItem item) {
+				return handleToolbarItemClick();
+			}
+		});
 
 		header = new ToolbarHeader(this);
 		header.setToolbar(toolbar);
@@ -231,14 +237,15 @@ public class PlaylistActivity extends AppCompatActivity {
 		bodyPresenter.setDataSource(bodyDataSource);
 	}
 
-	private void handleHeaderExtraButtonClicked(final int index) {
-		switch (index) {
-			case 0: {
+	private void handleToolbarItemClick(final MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.header_menu_play: {
 				displayMessage("Playing all songs...");
+
 				break;
 			}
 
-			case 1: {
+			case R.id.header_menu_share: {
 				final Intent sendIntent = new Intent();
 				sendIntent.setAction(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_TEXT, "https://github.com/MatthewTamlin/Mixtape");
@@ -248,14 +255,10 @@ public class PlaylistActivity extends AppCompatActivity {
 				break;
 			}
 
-			case 2: {
-				displayMessage("Shuffling all songs...");
+			case R.id.header_menu_shuffle: {
+				displayMessage("Playing all songs, shuffled...");
 			}
-		}
-	}
 
-	private void handleHeaderOverflowMenuItemClicked(final MenuItem item) {
-		switch (item.getItemId()) {
 			case R.id.header_menu_download_all_songs: {
 				displayMessage("Downloading all songs...");
 
