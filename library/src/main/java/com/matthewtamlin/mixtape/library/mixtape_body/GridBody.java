@@ -119,26 +119,6 @@ public class GridBody extends RecyclerViewBody {
 		init(attrs, defStyleAttr, 0);
 	}
 
-	/**
-	 * Sets the number of grid columns to display.
-	 *
-	 * @param numberOfColumns
-	 * 		the number of columns to display, greater than zero
-	 * @throws IllegalArgumentException
-	 * 		if {@code numberOfColumns} is less than zero
-	 */
-	public void setNumberOfColumns(final int numberOfColumns) {
-		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
-		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
-	}
-
-	/**
-	 * @return the current number of columns
-	 */
-	public int getNumberOfColumns() {
-		return numberOfColumns;
-	}
-
 	@Override
 	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
 		final View gridItem = LayoutInflater.from(getContext()).inflate(R.layout
@@ -190,6 +170,26 @@ public class GridBody extends RecyclerViewBody {
 
 		// Ensures the UI updates
 		notifyItemsChanged();
+	}
+
+	/**
+	 * Sets the number of grid columns to display.
+	 *
+	 * @param numberOfColumns
+	 * 		the number of columns to display, greater than zero
+	 * @throws IllegalArgumentException
+	 * 		if {@code numberOfColumns} is less than zero
+	 */
+	public void setNumberOfColumns(final int numberOfColumns) {
+		this.numberOfColumns = checkGreaterThan(numberOfColumns, 0);
+		getRecyclerView().setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+	}
+
+	/**
+	 * @return the current number of columns
+	 */
+	public int getNumberOfColumns() {
+		return numberOfColumns;
 	}
 
 	/**
