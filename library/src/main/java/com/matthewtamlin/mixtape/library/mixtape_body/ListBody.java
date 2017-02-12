@@ -226,31 +226,6 @@ public class ListBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected Parcelable onSaveInstanceState() {
-		final Bundle savedState = new Bundle();
-
-		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
-		savedState.putBoolean(STATE_KEY_SHOW_DIVIDERS, showDividers);
-		savedState.putBoolean(STATE_KEY_SHOW_ARTWORK, showArtwork);
-
-		return savedState;
-	}
-
-	@Override
-	protected void onRestoreInstanceState(final Parcelable parcelableState) {
-		if (parcelableState instanceof Bundle) {
-			final Bundle bundleState = (Bundle) parcelableState;
-
-			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
-
-			showDividers(bundleState.getBoolean(STATE_KEY_SHOW_DIVIDERS, DEFAULT_SHOW_DIVIDERS));
-			showArtwork(bundleState.getBoolean(STATE_KEY_SHOW_ARTWORK, DEFAULT_SHOW_ARTWORK));
-		} else {
-			super.onRestoreInstanceState(parcelableState);
-		}
-	}
-
-	@Override
 	public void setTitleTextColor(final int color) {
 		titleTextColor = color;
 
