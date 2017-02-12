@@ -18,18 +18,14 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
@@ -37,10 +33,6 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.Presenter
 
 import timber.log.Timber;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
-//TODO fix javadoc
 /**
  * An implementation of the HeaderContract.View interface which displays a toolbar in addition to
  * the LibraryItem. The toolbar can be used to display actions specific to the item in context. This
@@ -228,11 +220,21 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		return data;
 	}
 
+	/**
+	 * Sets the toolbar to display. This method will fail if the supplied toolbar if already
+	 * attached to a view group.
+	 *
+	 * @param toolbar
+	 * 		the toolbar to display
+	 */
 	public void setToolbar(final Toolbar toolbar) {
 		toolbarContainer.removeAllViews();
 		toolbarContainer.addView(toolbar);
 	}
 
+	/**
+	 * @return the current toolbar, null if there is none
+	 */
 	public Toolbar getToolbar() {
 		if (toolbarContainer.getChildCount() > 0) {
 			return (Toolbar) toolbarContainer.getChildAt(0);
