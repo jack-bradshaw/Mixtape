@@ -18,8 +18,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,22 +51,6 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  * This setup will pull data from the data source and display it in the view.
  */
 public class GridBody extends RecyclerViewBody {
-	/**
-	 * Bundle key for saving and restoring the superclass state.
-	 */
-	private static final String STATE_KEY_SUPER = "GridBody.super";
-
-	/**
-	 * Bundle key for saving and restoring the numberOfColumns member variable.
-	 */
-	private static final String STATE_KEY_NUMBER_OF_COLUMNS = "GridBody.numberOfColumns";
-
-	/**
-	 * The default value to use for the number of columns. The default is 2 since this displays well
-	 * on the average sized phone screen.
-	 */
-	private static final int DEFAULT_NUMBER_OF_COLUMNS = 2;
-
 	/**
 	 * The number of columns to display.
 	 */
@@ -187,30 +169,6 @@ public class GridBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected Parcelable onSaveInstanceState() {
-		final Bundle savedState = new Bundle();
-
-		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
-		savedState.putInt(STATE_KEY_NUMBER_OF_COLUMNS, numberOfColumns);
-
-		return savedState;
-	}
-
-	@Override
-	protected void onRestoreInstanceState(final Parcelable parcelableState) {
-		if (parcelableState instanceof Bundle) {
-			final Bundle bundleState = (Bundle) parcelableState;
-
-			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
-
-			setNumberOfColumns(bundleState.getInt(STATE_KEY_NUMBER_OF_COLUMNS,
-					DEFAULT_NUMBER_OF_COLUMNS));
-		} else {
-			super.onRestoreInstanceState(parcelableState);
-		}
-	}
-
-	@Override
 	public void setTitleTextColor(final int color) {
 		titleTextColor = color;
 
@@ -263,8 +221,7 @@ public class GridBody extends RecyclerViewBody {
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.GridBody, defStyleAttr, defStyleRes);
 
-		setNumberOfColumns(attributes.getInt(R.styleable.GridBody_numberOfColumns,
-				DEFAULT_NUMBER_OF_COLUMNS));
+		setNumberOfColumns(attributes.getInt(R.styleable.GridBody_numberOfColumns, 2));
 
 		attributes.recycle();
 	}

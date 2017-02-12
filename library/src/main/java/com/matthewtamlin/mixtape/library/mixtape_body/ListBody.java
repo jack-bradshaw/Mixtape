@@ -44,31 +44,6 @@ import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelpe
  */
 public class ListBody extends RecyclerViewBody {
 	/**
-	 * Bundle key for saving and restoring the superclass state.
-	 */
-	private static final String STATE_KEY_SUPER = "ListBody.super";
-
-	/**
-	 * Bundle key for saving and restoring the showDividers member variable.
-	 */
-	private static final String STATE_KEY_SHOW_DIVIDERS = "ListBody.showDividers";
-
-	/**
-	 * Bundle key for saving and restoring the showArtwork member variable.
-	 */
-	private static final String STATE_KEY_SHOW_ARTWORK = "ListBody.showArtwork";
-
-	/**
-	 * The default value for the showDividers member variable.
-	 */
-	private static final boolean DEFAULT_SHOW_DIVIDERS = false;
-
-	/**
-	 * The default value for the showArtwork member variable.
-	 */
-	private static final boolean DEFAULT_SHOW_ARTWORK = true;
-
-	/**
 	 * The padding to apply to the ends of the list dividers. This value was selected to align the
 	 * ends of the dividers with the components of each list item, with reference to the layout
 	 * defined in resource 'R.layout.listbodyitem'.
@@ -241,31 +216,6 @@ public class ListBody extends RecyclerViewBody {
 	}
 
 	@Override
-	protected Parcelable onSaveInstanceState() {
-		final Bundle savedState = new Bundle();
-
-		savedState.putParcelable(STATE_KEY_SUPER, super.onSaveInstanceState());
-		savedState.putBoolean(STATE_KEY_SHOW_DIVIDERS, showDividers);
-		savedState.putBoolean(STATE_KEY_SHOW_ARTWORK, showArtwork);
-
-		return savedState;
-	}
-
-	@Override
-	protected void onRestoreInstanceState(final Parcelable parcelableState) {
-		if (parcelableState instanceof Bundle) {
-			final Bundle bundleState = (Bundle) parcelableState;
-
-			super.onRestoreInstanceState(bundleState.getParcelable(STATE_KEY_SUPER));
-
-			showDividers(bundleState.getBoolean(STATE_KEY_SHOW_DIVIDERS, DEFAULT_SHOW_DIVIDERS));
-			showArtwork(bundleState.getBoolean(STATE_KEY_SHOW_ARTWORK, DEFAULT_SHOW_ARTWORK));
-		} else {
-			super.onRestoreInstanceState(parcelableState);
-		}
-	}
-
-	@Override
 	public void setTitleTextColor(final int color) {
 		titleTextColor = color;
 
@@ -311,10 +261,8 @@ public class ListBody extends RecyclerViewBody {
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
 
 		// The methods handle both setting member variables and updating the UI
-		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers,
-				DEFAULT_SHOW_DIVIDERS));
-		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork,
-				DEFAULT_SHOW_ARTWORK));
+		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers, false));
+		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork, true));
 
 		attributes.recycle();
 	}
