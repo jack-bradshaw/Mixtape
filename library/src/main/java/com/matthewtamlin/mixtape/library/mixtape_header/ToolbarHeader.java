@@ -21,7 +21,6 @@ import android.content.Context;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -277,33 +276,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		subtitleTextView = (TextView) findViewById(R.id.toolbarHeader_subtitleContainer);
 		artworkImageView = (ImageView) findViewById(R.id.toolbarHeader_artworkContainer);
 		toolbarContainer = (FrameLayout) findViewById(R.id.toolbarHeader_toolbarContainer);
-
-		titleTextView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (presenter != null) {
-					presenter.onTitleClicked(ToolbarHeader.this);
-				}
-			}
-		});
-
-		subtitleTextView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (presenter != null) {
-					presenter.onSubtitleClicked(ToolbarHeader.this);
-				}
-			}
-		});
-
-		artworkImageView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (presenter != null) {
-					presenter.onArtworkClicked(ToolbarHeader.this);
-				}
-			}
-		});
 	}
 
 	/**
