@@ -137,7 +137,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public RecyclerViewBody(final Context context, final AttributeSet attrs,
+	public RecyclerViewBody(final Context context, 
+			final AttributeSet attrs,
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
