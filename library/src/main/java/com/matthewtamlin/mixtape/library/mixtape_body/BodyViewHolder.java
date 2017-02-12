@@ -85,7 +85,7 @@ public class BodyViewHolder extends RecyclerView.ViewHolder {
 			final View contextualMenuButton) {
 		super(rootView);
 
-		this.rootView = NullChecker.checkNotNull(titleHolder);
+		this.rootView = NullChecker.checkNotNull(rootView);
 		this.titleHolder = NullChecker.checkNotNull(titleHolder);
 		this.subtitleHolder = NullChecker.checkNotNull(subtitleHolder);
 		this.artworkHolder = NullChecker.checkNotNull(artworkHolder);
