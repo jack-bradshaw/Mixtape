@@ -16,11 +16,72 @@
 
 package com.matthewtamlin.mixtape.library_tests.data;
 
+import android.graphics.drawable.Drawable;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
+import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
+
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.mockito.Mockito.mock;
 
 @RunWith(AndroidJUnit4.class)
 public class TestImmutableDisplayableDefaults {
-	
+	private String title;
+
+	private String subtitle;
+
+	private Drawable artwork;
+
+	@Before
+	public void setup() {
+		title = "cake";
+		subtitle = "lie";
+		artwork = mock(Drawable.class);
+	}
+
+	@Test
+	public void testConstructAndGet_nullTitle() {
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(null, subtitle,
+				artwork);
+
+		assertThat("Incorrect title.", defaults.getTitle(), is(nullValue()));
+		assertThat("Incorrect subtitle.", defaults.getSubtitle(), is((CharSequence) subtitle));
+		assertThat("Incorrect artwork.", defaults.getArtwork(), is(artwork));
+	}
+
+	@Test
+	public void testConstructAndGet_nullSubtitle() {
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(title, null, artwork);
+
+		assertThat("Incorrect title.", defaults.getTitle(), is((CharSequence) title));
+		assertThat("Incorrect subtitle.", defaults.getSubtitle(), is(nullValue()));
+		assertThat("Incorrect artwork.", defaults.getArtwork(), is(artwork));
+	}
+
+	@Test
+	public void testConstructAndGet_nullArtwork() {
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(title, subtitle,
+				null);
+
+		assertThat("Incorrect title.", defaults.getTitle(), is((CharSequence) title));
+		assertThat("Incorrect subtitle.", defaults.getSubtitle(), is((CharSequence) subtitle));
+		assertThat("Incorrect artwork.", defaults.getArtwork(), is(nullValue()));
+	}
+
+	@Test
+	public void testConstructAndGet_noNullArguments() {
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(title, subtitle,
+				artwork);
+
+		assertThat("Incorrect title.", defaults.getTitle(), is((CharSequence) title));
+		assertThat("Incorrect subtitle.", defaults.getSubtitle(), is((CharSequence) subtitle));
+		assertThat("Incorrect artwork.", defaults.getArtwork(), is(artwork));
+	}
 }
