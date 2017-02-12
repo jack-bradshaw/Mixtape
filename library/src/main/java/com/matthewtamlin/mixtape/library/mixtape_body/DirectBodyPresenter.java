@@ -346,7 +346,7 @@ public class DirectBodyPresenter<
 		 * @param menuItem
 		 * 		the selected menu item, not null
 		 */
-		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter, final D
-				libraryItem, final MenuItem menuItem);
+		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter,
+				final D	libraryItem, final MenuItem menuItem);
 	}
 }
