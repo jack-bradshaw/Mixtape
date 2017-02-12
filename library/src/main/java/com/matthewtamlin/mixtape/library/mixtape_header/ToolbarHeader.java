@@ -85,7 +85,7 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	private FrameLayout toolbarContainer;
 
 	/**
-	 * Constructs a new SimpleHeader.
+	 * Constructs a new ToolbarHeader.
 	 *
 	 * @param context
 	 * 		the Context the header is attached to, not null
