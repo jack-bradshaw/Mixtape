@@ -44,16 +44,6 @@ import static com.matthewtamlin.android_utilities.library.helpers.DimensionHelpe
  */
 public class ListBody extends RecyclerViewBody {
 	/**
-	 * The default value for the showDividers member variable.
-	 */
-	private static final boolean DEFAULT_SHOW_DIVIDERS = false;
-
-	/**
-	 * The default value for the showArtwork member variable.
-	 */
-	private static final boolean DEFAULT_SHOW_ARTWORK = true;
-
-	/**
 	 * The padding to apply to the ends of the list dividers. This value was selected to align the
 	 * ends of the dividers with the components of each list item, with reference to the layout
 	 * defined in resource 'R.layout.listbodyitem'.
@@ -271,10 +261,8 @@ public class ListBody extends RecyclerViewBody {
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
 
 		// The methods handle both setting member variables and updating the UI
-		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers,
-				DEFAULT_SHOW_DIVIDERS));
-		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork,
-				DEFAULT_SHOW_ARTWORK));
+		showDividers(attributes.getBoolean(R.styleable.ListBody_showListDividers, false));
+		showArtwork(attributes.getBoolean(R.styleable.ListBody_showListArtwork, true));
 
 		attributes.recycle();
 	}
