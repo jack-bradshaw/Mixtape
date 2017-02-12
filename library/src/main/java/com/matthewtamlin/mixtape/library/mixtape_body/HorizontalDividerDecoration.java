@@ -21,6 +21,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -75,6 +76,8 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.listDivider});
 		dividerDrawable = a.getDrawable(0);
 		a.recycle();
+
+		DrawableCompat.setTint(dividerDrawable, 0xFF808080);
 	}
 
 	@Override
@@ -104,5 +107,16 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	public void getItemOffsets(final Rect outRect, final View view, final RecyclerView parent,
 			final RecyclerView.State state) {
 		outRect.set(0, 0, 0, dividerDrawable.getIntrinsicHeight());
+	}
+
+	/**
+	 * Sets the color of the dividers. The recycler view might not immediately reflect the change,
+	 * so the decoration should be invalidated after calling this method.
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
+	public void setDividerColor(final int color) {
+		DrawableCompat.setTint(dividerDrawable, color);
 	}
 }

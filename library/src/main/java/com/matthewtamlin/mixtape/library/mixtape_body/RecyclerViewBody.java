@@ -218,6 +218,12 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 		return recyclerView;
 	}
 
+	public abstract void setTitleTextColor(final int color);
+
+	public abstract void setSubtitleTextColor(final int color);
+
+	public abstract void setOverflowMenuButtonColor(final int color);
+
 	@Override
 	public void setPresenter(final BodyContract.Presenter presenter) {
 		this.presenter = presenter;

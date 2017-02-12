@@ -18,6 +18,7 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -88,6 +90,25 @@ public class ListBody extends RecyclerViewBody {
 	 */
 	private HorizontalDividerDecoration horizontalDividerDecoration;
 
+	/**
+	 * The color to use when displaying the item titles in the UI, as an ARGB hex code. The default
+	 * value is black.
+	 */
+	private int titleTextColor = 0xFF000000;
+
+	/**
+	 * The color to use when displaying the item subtitles in the UI, as an ARGB hex code. The
+	 * default value is light grey.
+	 */
+	private int subtitleTextColor = 0xFF808080;
+
+	/**
+	 * The color to use for the overflow menu buttons, as an ARGB hex code. The default color is
+	 * black.
+	 */
+	private int overflowButtonColor = 0xFF000000;
+
+	
 	/**
 	 * Constructs a new ListBody.
 	 *
@@ -170,6 +191,26 @@ public class ListBody extends RecyclerViewBody {
 		return showArtwork;
 	}
 
+	/**
+	 * Sets the color to use for the dividers in-between the list items. The visibility of the
+	 * dividers is not changed by calling this method
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
+	public void setDividerColor(final int color) {
+		horizontalDividerDecoration.setDividerColor(color);
+
+		// Make sure the UI updates
+		getRecyclerView().removeItemDecoration(horizontalDividerDecoration);
+
+		if (showDividers) {
+			getRecyclerView().addItemDecoration(horizontalDividerDecoration);
+		}
+
+		getRecyclerView().invalidateItemDecorations();
+	}
+
 	@Override
 	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
 		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
@@ -187,6 +228,10 @@ public class ListBody extends RecyclerViewBody {
 	protected void onViewHolderBound(final BodyViewHolder viewHolder,
 			final LibraryItem data) {
 		viewHolder.getArtworkImageView().setVisibility(showArtwork ? VISIBLE : GONE);
+
+		viewHolder.getTitleTextView().setTextColor(titleTextColor);
+		viewHolder.getSubtitleTextView().setTextColor(subtitleTextColor);
+		((ImageButton) viewHolder.getContextualMenuButton()).setColorFilter(overflowButtonColor);
 	}
 
 	@Override
@@ -220,6 +265,30 @@ public class ListBody extends RecyclerViewBody {
 		}
 	}
 
+	@Override
+	public void setTitleTextColor(final int color) {
+		titleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setSubtitleTextColor(final int color) {
+		subtitleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setOverflowMenuButtonColor(final int color) {
+		this.overflowButtonColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
 	/**
 	 * Processes the attributes supplied at construction.
 	 *
@@ -236,6 +305,7 @@ public class ListBody extends RecyclerViewBody {
 		final int decorationInsets = dpToPx(getContext(), DECORATION_PADDING_DP);
 		horizontalDividerDecoration = new HorizontalDividerDecoration(getContext(),
 				decorationInsets, decorationInsets);
+		horizontalDividerDecoration.setDividerColor(Color.BLACK);
 
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
