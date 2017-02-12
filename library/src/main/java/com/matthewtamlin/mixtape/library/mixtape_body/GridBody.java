@@ -20,16 +20,19 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthewtamlin.mixtape.library.R;
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterThan;
@@ -70,6 +73,14 @@ public class GridBody extends RecyclerViewBody {
 	 * The number of columns to display.
 	 */
 	private int numberOfColumns;
+
+	private int titleTextColor = 0xFF000000;
+
+	private int subtitleTextColor =  0xFF808080;
+
+	private int overflowButtonColor = 0xFF000000;
+
+	private int cardBackgroundColor = 0xFFFFFFFF;
 
 	/**
 	 * Constructs a new GridBody.
@@ -144,6 +155,16 @@ public class GridBody extends RecyclerViewBody {
 	}
 
 	@Override
+	protected void onViewHolderBound(final BodyViewHolder viewHolder, final LibraryItem data) {
+		super.onViewHolderBound(viewHolder, data);
+
+		((CardView) viewHolder.getRootView()).setCardBackgroundColor(cardBackgroundColor);
+		viewHolder.getTitleTextView().setTextColor(titleTextColor);
+		viewHolder.getSubtitleTextView().setTextColor(subtitleTextColor);
+		((ImageButton) viewHolder.getContextualMenuButton()).setColorFilter(overflowButtonColor);
+	}
+
+	@Override
 	protected void onRecyclerViewCreated(final RecyclerView recyclerView) {
 		recyclerView.setLayoutManager(new GridLayoutManager(getContext(),
 				numberOfColumns < 1 ? 1 : numberOfColumns, VERTICAL, false));
@@ -171,6 +192,37 @@ public class GridBody extends RecyclerViewBody {
 		} else {
 			super.onRestoreInstanceState(parcelableState);
 		}
+	}
+
+	@Override
+	public void setTitleTextColor(final int color) {
+		titleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setSubtitleTextColor(final int color) {
+		subtitleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setOverflowMenuButtonColor(final int color) {
+		overflowButtonColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	public void setCardBackgroundColor(final int color) {
+		cardBackgroundColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
 	}
 
 	/**
