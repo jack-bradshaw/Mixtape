@@ -19,7 +19,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -110,6 +109,13 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 		outRect.set(0, 0, 0, dividerDrawable.getIntrinsicHeight());
 	}
 
+	/**
+	 * Sets the color of the dividers. The recycler view might not immediately reflect the change,
+	 * so the decoration should be invalidated after calling this method.
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
 	public void setDividerColor(final int color) {
 		DrawableCompat.setTint(dividerDrawable, color);
 	}
