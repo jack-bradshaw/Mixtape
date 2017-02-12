@@ -55,8 +55,6 @@ public class AlbumsActivity extends AppCompatActivity {
 
 	private Mp3AlbumDataSource dataSource;
 
-	private RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource> presenter;
-
 	private LruCache<LibraryItem, CharSequence> titleCache;
 
 	private LruCache<LibraryItem, CharSequence> subtitleCache;
@@ -151,20 +149,21 @@ public class AlbumsActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(subtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(artworkCache, defaults);
 
-		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
-				(titleBinder, subtitleBinder, artworkBinder) {
-			@Override
-			public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-					final LibraryItem libraryItem, final MenuItem menuItem) {
-				handleContextualMenuClick(libraryItem, menuItem);
-			}
+		final RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource> presenter = new
+				RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
+						(titleBinder, subtitleBinder, artworkBinder) {
+					@Override
+					public void onContextualMenuItemSelected(final BodyContract.View bodyView,
+							final LibraryItem libraryItem, final MenuItem menuItem) {
+						handleContextualMenuClick(libraryItem, menuItem);
+					}
 
-			@Override
-			public void onLibraryItemSelected(final BodyContract.View bodyView,
-					final LibraryItem item) {
-				handleItemClick(item);
-			}
-		};
+					@Override
+					public void onLibraryItemSelected(final BodyContract.View bodyView,
+							final LibraryItem item) {
+						handleItemClick(item);
+					}
+				};
 
 		presenter.setView(body);
 		presenter.setDataSource(dataSource);
