@@ -157,7 +157,7 @@ public class DirectBodyPresenter<
 
 	@Override
 	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
-		
+
 	}
 
 	@Override
@@ -225,5 +225,15 @@ public class DirectBodyPresenter<
 		if (view != null) {
 			view.setPresenter(this);
 		}
+	}
+
+	public interface LibraryItemSelectedListener<
+			D extends LibraryItem,
+			S extends ListDataSource<D>,
+			V extends BodyContract.View> {
+		public void onLibraryItemSelected(DirectBodyPresenter<D, S, V> presenter, final D item);
+
+		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter, final D
+				libraryItem, final MenuItem menuItem);
 	}
 }
