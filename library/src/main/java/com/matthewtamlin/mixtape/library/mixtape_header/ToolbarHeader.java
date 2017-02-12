@@ -229,7 +229,10 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	 */
 	public void setToolbar(final Toolbar toolbar) {
 		toolbarContainer.removeAllViews();
-		toolbarContainer.addView(toolbar);
+
+		if (toolbar != null) {
+			toolbarContainer.addView(toolbar);
+		}
 	}
 
 	/**
