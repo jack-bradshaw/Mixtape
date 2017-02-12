@@ -96,6 +96,16 @@ public class PlaylistActivity extends AppCompatActivity {
 		setupBodyPresenter();
 	}
 
+	private void setupDataSources() {
+		bodyDataSource = new Mp3SongDataSource(getResources());
+
+		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
+				R.raw.header_artwork);
+		headerDataSource = new HeaderDataSource("All Songs",
+				"Various artists",
+				new BitmapDrawable(getResources(), headerArtwork));
+	}
+
 	private void setupCaches() {
 		// Titles and subtitles are small enough to stay cached, so use a very high max size
 		bodyTitleCache = new LruCache<>(10000);
@@ -113,6 +123,40 @@ public class PlaylistActivity extends AppCompatActivity {
 		headerTitleCache = new LruCache<>(2);
 		headerSubtitleCache = new LruCache<>(2);
 		headerArtworkCache = new LruCache<>(2);
+	}
+
+	private void precacheText() {
+		bodyDataSource.loadData(true, new BaseDataSource.DataLoadedListener<List<Mp3Song>>() {
+			@Override
+			public void onDataLoaded(final BaseDataSource<List<Mp3Song>> source,
+					final List<Mp3Song> data) {
+				Executors.newSingleThreadExecutor().execute(new Runnable() {
+					@Override
+					public void run() {
+						final Executor cacheExecutor = Executors.newCachedThreadPool();
+
+						for (final Mp3Song song : data) {
+							cacheExecutor.execute(new Runnable() {
+								@Override
+								public void run() {
+									try {
+										bodyTitleCache.put(song, song.getTitle());
+										bodySubtitleCache.put(song, song.getSubtitle());
+									} catch (final LibraryReadException e) {
+										Timber.w("A library item could not be pre-cached.", e);
+									}
+								}
+							});
+						}
+					}
+				});
+			}
+
+			@Override
+			public void onLoadDataFailed(final BaseDataSource<List<Mp3Song>> source) {
+				// Do nothing
+			}
+		});
 	}
 
 	private void setupHeaderView() {
@@ -136,16 +180,6 @@ public class PlaylistActivity extends AppCompatActivity {
 		rootView.setBody(body);
 		rootView.setHeader(header);
 		rootView.showHeaderAtStartOnly();
-	}
-
-	private void setupDataSources() {
-		bodyDataSource = new Mp3SongDataSource(getResources());
-
-		final Bitmap headerArtwork = BitmapFactory.decodeResource(getResources(),
-				R.raw.header_artwork);
-		headerDataSource = new HeaderDataSource("All Songs",
-				"Various artists",
-				new BitmapDrawable(getResources(), headerArtwork));
 	}
 
 	private void setupHeaderPresenter() {
@@ -195,40 +229,6 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		bodyPresenter.setView(body);
 		bodyPresenter.setDataSource(bodyDataSource);
-	}
-
-	private void precacheText() {
-		bodyDataSource.loadData(true, new BaseDataSource.DataLoadedListener<List<Mp3Song>>() {
-			@Override
-			public void onDataLoaded(final BaseDataSource<List<Mp3Song>> source,
-					final List<Mp3Song> data) {
-				Executors.newSingleThreadExecutor().execute(new Runnable() {
-					@Override
-					public void run() {
-						final Executor cacheExecutor = Executors.newCachedThreadPool();
-
-						for (final Mp3Song song : data) {
-							cacheExecutor.execute(new Runnable() {
-								@Override
-								public void run() {
-									try {
-										bodyTitleCache.put(song, song.getTitle());
-										bodySubtitleCache.put(song, song.getSubtitle());
-									} catch (final LibraryReadException e) {
-										Timber.w("A library item could not be pre-cached.", e);
-									}
-								}
-							});
-						}
-					}
-				});
-			}
-
-			@Override
-			public void onLoadDataFailed(final BaseDataSource<List<Mp3Song>> source) {
-				// Do nothing
-			}
-		});
 	}
 
 	private void handleHeaderExtraButtonClicked(final int index) {
