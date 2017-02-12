@@ -62,7 +62,6 @@
 			android:textSize="14sp"/>
 	</RelativeLayout>
 
-	<!-->TODO add content description<-->
 	<ImageButton
 		android:id="@+id/listIBodyItem_menu"
 		style="?android:borderlessButtonStyle"
