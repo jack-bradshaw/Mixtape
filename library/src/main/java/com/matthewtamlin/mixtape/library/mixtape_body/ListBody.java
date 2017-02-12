@@ -88,12 +88,28 @@ public class ListBody extends RecyclerViewBody {
 	 */
 	private HorizontalDividerDecoration horizontalDividerDecoration;
 
+	/**
+	 * The color to use when displaying the item titles in the UI, as an ARGB hex code. The default
+	 * value is black.
+	 */
 	private int titleTextColor = 0xFF000000;
 
-	private int subtitleTextColor =  0xFF808080;
+	/**
+	 * The color to use when displaying the item subtitles in the UI, as an ARGB hex code. The
+	 * default value is light grey.
+	 */
+	private int subtitleTextColor = 0xFF808080;
 
+	/**
+	 * The color to use for the overflow menu buttons, as an ARGB hex code. The default color is
+	 * black.
+	 */
 	private int overflowButtonColor = 0xFF000000;
 
+	/**
+	 * The color to use for the dividers between list items, as an ARGB hex code. The default
+	 * color is light grey.
+	 */
 	private int dividerColor = 0xFF808080;
 
 	/**
@@ -178,6 +194,13 @@ public class ListBody extends RecyclerViewBody {
 		return showArtwork;
 	}
 
+	/**
+	 * Sets the color to use for the dividers in-between the list items. The visibility of the
+	 * dividers is not changed by calling this method
+	 *
+	 * @param color
+	 * 		the color to use, as an ARGB hex code
+	 */
 	public void setDividerColor(final int color) {
 		horizontalDividerDecoration.setDividerColor(color);
 
