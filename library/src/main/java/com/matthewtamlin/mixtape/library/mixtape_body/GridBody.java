@@ -54,22 +54,6 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  */
 public class GridBody extends RecyclerViewBody {
 	/**
-	 * Bundle key for saving and restoring the superclass state.
-	 */
-	private static final String STATE_KEY_SUPER = "GridBody.super";
-
-	/**
-	 * Bundle key for saving and restoring the numberOfColumns member variable.
-	 */
-	private static final String STATE_KEY_NUMBER_OF_COLUMNS = "GridBody.numberOfColumns";
-
-	/**
-	 * The default value to use for the number of columns. The default is 2 since this displays well
-	 * on the average sized phone screen.
-	 */
-	private static final int DEFAULT_NUMBER_OF_COLUMNS = 2;
-
-	/**
 	 * The number of columns to display.
 	 */
 	private int numberOfColumns;
