@@ -76,6 +76,10 @@ public class AlbumsActivity extends AppCompatActivity {
 		setupPresenter();
 	}
 
+	private void setupDataSource() {
+		dataSource = new Mp3AlbumDataSource(getResources());
+	}
+
 	private void setupCaches() {
 		// Titles and subtitles are small enough to stay cached, so use a very high max size
 		titleCache = new LruCache<>(10000);
@@ -88,52 +92,6 @@ public class AlbumsActivity extends AppCompatActivity {
 				return ((BitmapDrawable) value).getBitmap().getByteCount();
 			}
 		};
-	}
-
-	private void setupView() {
-		setContentView(R.layout.example_layout);
-
-		body = new GridBody(this);
-		body.setContextualMenuResource(R.menu.album_menu);
-
-		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
-		rootView.setBody(body);
-	}
-
-	private void setupDataSource() {
-		dataSource = new Mp3AlbumDataSource(getResources());
-	}
-
-	private void setupPresenter() {
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
-				.default_artwork);
-
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
-				"Unknown title",
-				"Unknown subtitle",
-				new BitmapDrawable(getResources(), defaultArtwork));
-
-		final TitleBinder titleBinder = new TitleBinder(titleCache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(subtitleCache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(artworkCache, defaults);
-
-		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
-				(titleBinder, subtitleBinder, artworkBinder) {
-			@Override
-			public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-					final LibraryItem libraryItem, final MenuItem menuItem) {
-				handleContextualMenuClick(libraryItem, menuItem);
-			}
-
-			@Override
-			public void onLibraryItemSelected(final BodyContract.View bodyView,
-					final LibraryItem item) {
-				handleItemClick(item);
-			}
-		};
-
-		presenter.setView(body);
-		presenter.setDataSource(dataSource);
 	}
 
 	private void precacheText() {
@@ -168,6 +126,48 @@ public class AlbumsActivity extends AppCompatActivity {
 				// Do nothing
 			}
 		});
+	}
+
+	private void setupView() {
+		setContentView(R.layout.example_layout);
+
+		body = new GridBody(this);
+		body.setContextualMenuResource(R.menu.album_menu);
+
+		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
+		rootView.setBody(body);
+	}
+
+	private void setupPresenter() {
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
+				"Unknown title",
+				"Unknown subtitle",
+				new BitmapDrawable(getResources(), defaultArtwork));
+
+		final TitleBinder titleBinder = new TitleBinder(titleCache, defaults);
+		final SubtitleBinder subtitleBinder = new SubtitleBinder(subtitleCache, defaults);
+		final ArtworkBinder artworkBinder = new ArtworkBinder(artworkCache, defaults);
+
+		presenter = new RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource>
+				(titleBinder, subtitleBinder, artworkBinder) {
+			@Override
+			public void onContextualMenuItemSelected(final BodyContract.View bodyView,
+					final LibraryItem libraryItem, final MenuItem menuItem) {
+				handleContextualMenuClick(libraryItem, menuItem);
+			}
+
+			@Override
+			public void onLibraryItemSelected(final BodyContract.View bodyView,
+					final LibraryItem item) {
+				handleItemClick(item);
+			}
+		};
+
+		presenter.setView(body);
+		presenter.setDataSource(dataSource);
 	}
 
 	private void handleContextualMenuClick(final LibraryItem item, final MenuItem menuItem) {
