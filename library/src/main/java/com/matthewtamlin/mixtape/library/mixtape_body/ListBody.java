@@ -18,6 +18,7 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -107,12 +108,7 @@ public class ListBody extends RecyclerViewBody {
 	 */
 	private int overflowButtonColor = 0xFF000000;
 
-	/**
-	 * The color to use for the dividers between list items, as an ARGB hex code. The default
-	 * color is light grey.
-	 */
-	private int dividerColor = 0xFF808080;
-
+	
 	/**
 	 * Constructs a new ListBody.
 	 *
@@ -309,7 +305,7 @@ public class ListBody extends RecyclerViewBody {
 		final int decorationInsets = dpToPx(getContext(), DECORATION_PADDING_DP);
 		horizontalDividerDecoration = new HorizontalDividerDecoration(getContext(),
 				decorationInsets, decorationInsets);
-		horizontalDividerDecoration.setDividerColor(dividerColor);
+		horizontalDividerDecoration.setDividerColor(Color.BLACK);
 
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
