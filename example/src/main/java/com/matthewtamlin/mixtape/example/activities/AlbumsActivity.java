@@ -171,7 +171,7 @@ public class AlbumsActivity extends AppCompatActivity {
 					public void onContextualMenuItemSelected(
 							final DirectBodyPresenter<Mp3Album, Mp3AlbumDataSource, RecyclerViewBody> presenter,
 							final Mp3Album libraryItem, final MenuItem menuItem) {
-
+						handleContextualMenuClick(libraryItem, menuItem);
 					}
 				});
 
