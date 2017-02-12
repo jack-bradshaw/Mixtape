@@ -88,6 +88,14 @@ public class ListBody extends RecyclerViewBody {
 	 */
 	private HorizontalDividerDecoration horizontalDividerDecoration;
 
+	private int titleTextColor = 0xFF000000;
+
+	private int subtitleTextColor =  0xFF808080;
+
+	private int overflowButtonColor = 0xFF000000;
+
+	private int dividerColor = 0xFF808080;
+
 	/**
 	 * Constructs a new ListBody.
 	 *
@@ -170,6 +178,19 @@ public class ListBody extends RecyclerViewBody {
 		return showArtwork;
 	}
 
+	public void setDividerColor(final int color) {
+		horizontalDividerDecoration.setDividerColor(color);
+
+		// Make sure the UI updates
+		getRecyclerView().removeItemDecoration(horizontalDividerDecoration);
+
+		if (showDividers) {
+			getRecyclerView().addItemDecoration(horizontalDividerDecoration);
+		}
+
+		getRecyclerView().invalidateItemDecorations();
+	}
+
 	@Override
 	protected BodyViewHolder supplyNewBodyViewHolder(final ViewGroup parent) {
 		final View listItem = LayoutInflater.from(getContext()).inflate(R.layout
@@ -220,6 +241,30 @@ public class ListBody extends RecyclerViewBody {
 		}
 	}
 
+	@Override
+	public void setTitleTextColor(final int color) {
+		titleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setSubtitleTextColor(final int color) {
+		subtitleTextColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
+	@Override
+	public void setOverflowMenuButtonColor(final int color) {
+		this.overflowButtonColor = color;
+
+		// Ensures the UI updates
+		notifyItemsChanged();
+	}
+
 	/**
 	 * Processes the attributes supplied at construction.
 	 *
@@ -236,6 +281,7 @@ public class ListBody extends RecyclerViewBody {
 		final int decorationInsets = dpToPx(getContext(), DECORATION_PADDING_DP);
 		horizontalDividerDecoration = new HorizontalDividerDecoration(getContext(),
 				decorationInsets, decorationInsets);
+		horizontalDividerDecoration.setDividerColor(dividerColor);
 
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.ListBody, defStyleAttr, defStyleRes);
