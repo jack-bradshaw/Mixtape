@@ -161,7 +161,8 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
-		headerPresenter = new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
+		final ToolbarHeaderPresenter<HeaderDataSource> headerPresenter =
+				new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
 
 		headerPresenter.setView(header);
 		headerPresenter.setDataSource(headerDataSource);
