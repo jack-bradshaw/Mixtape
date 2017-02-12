@@ -137,11 +137,79 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public RecyclerViewBody(final Context context, 
+	public RecyclerViewBody(final Context context,
 			final AttributeSet attrs,
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
+	}
+
+	@Override
+	public void setPresenter(final BodyContract.Presenter presenter) {
+		this.presenter = presenter;
+	}
+
+	@Override
+	public List<? extends LibraryItem> getItems() {
+		return data;
+	}
+
+	@Override
+	public void setItems(final List<? extends LibraryItem> items) {
+		data = items == null ? new ArrayList<LibraryItem>() : items;
+		adapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public int getContextualMenuResource() {
+		return contextualMenuResourceId;
+	}
+
+	@Override
+	public void setContextualMenuResource(final int contextualMenuResourceId) {
+		// The resource is not used until a contextual menu button is clicked, so just save it
+		this.contextualMenuResourceId = contextualMenuResourceId;
+	}
+
+	@Override
+	public void showItem(final int index) {
+		recyclerView.smoothScrollToPosition(index);
+	}
+
+	@Override
+	public void notifyItemsChanged() {
+		adapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void notifyItemAdded(final int index) {
+		adapter.notifyItemInserted(index);
+	}
+
+	@Override
+	public void notifyItemRemoved(final int index) {
+		adapter.notifyItemRemoved(index);
+	}
+
+	@Override
+	public void notifyItemModified(final int index) {
+		adapter.notifyItemChanged(index);
+	}
+
+	@Override
+	public void notifyItemMoved(final int initialIndex, final int finalIndex) {
+		adapter.notifyItemMoved(initialIndex, finalIndex);
+	}
+
+	@Override
+	public void showLoadingIndicator(final boolean show) {
+		recyclerView.setVisibility(show ? INVISIBLE : VISIBLE);
+		loadingIndicator.setVisibility(show ? VISIBLE : GONE);
+	}
+
+	@Override
+	public boolean loadingIndicatorIsShown() {
+		return (loadingIndicator.getVisibility() == VISIBLE);
 	}
 
 	/**
@@ -224,74 +292,6 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	public abstract void setSubtitleTextColor(final int color);
 
 	public abstract void setOverflowMenuButtonColor(final int color);
-
-	@Override
-	public void setPresenter(final BodyContract.Presenter presenter) {
-		this.presenter = presenter;
-	}
-
-	@Override
-	public List<? extends LibraryItem> getItems() {
-		return data;
-	}
-
-	@Override
-	public void setItems(final List<? extends LibraryItem> items) {
-		data = items == null ? new ArrayList<LibraryItem>() : items;
-		adapter.notifyDataSetChanged();
-	}
-
-	@Override
-	public int getContextualMenuResource() {
-		return contextualMenuResourceId;
-	}
-
-	@Override
-	public void setContextualMenuResource(final int contextualMenuResourceId) {
-		// The resource is not used until a contextual menu button is clicked, so just save it
-		this.contextualMenuResourceId = contextualMenuResourceId;
-	}
-
-	@Override
-	public void showItem(final int index) {
-		recyclerView.smoothScrollToPosition(index);
-	}
-
-	@Override
-	public void notifyItemsChanged() {
-		adapter.notifyDataSetChanged();
-	}
-
-	@Override
-	public void notifyItemAdded(final int index) {
-		adapter.notifyItemInserted(index);
-	}
-
-	@Override
-	public void notifyItemRemoved(final int index) {
-		adapter.notifyItemRemoved(index);
-	}
-
-	@Override
-	public void notifyItemModified(final int index) {
-		adapter.notifyItemChanged(index);
-	}
-
-	@Override
-	public void notifyItemMoved(final int initialIndex, final int finalIndex) {
-		adapter.notifyItemMoved(initialIndex, finalIndex);
-	}
-
-	@Override
-	public void showLoadingIndicator(final boolean show) {
-		recyclerView.setVisibility(show ? INVISIBLE : VISIBLE);
-		loadingIndicator.setVisibility(show ? VISIBLE : GONE);
-	}
-
-	@Override
-	public boolean loadingIndicatorIsShown() {
-		return (loadingIndicator.getVisibility() == VISIBLE);
-	}
 
 	/**
 	 * Registers a top reached listener to this RecyclerViewBody. If the supplied listener is null
