@@ -19,6 +19,7 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -66,8 +67,7 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	 */
 	HorizontalDividerDecoration(final Context context,
 			final int leftInsetPx,
-			final int rightInsetPx,
-			final int dividerColor) {
+			final int rightInsetPx) {
 		checkNotNull(context, "context cannot be null.");
 
 		this.leftInsetPx = checkGreaterThanOrEqualTo(leftInsetPx, 0);
@@ -78,7 +78,7 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 		dividerDrawable = a.getDrawable(0);
 		a.recycle();
 
-		DrawableCompat.setTint(dividerDrawable, dividerColor);
+		DrawableCompat.setTint(dividerDrawable, 0xFF808080);
 	}
 
 	@Override
@@ -108,5 +108,9 @@ public class HorizontalDividerDecoration extends RecyclerView.ItemDecoration {
 	public void getItemOffsets(final Rect outRect, final View view, final RecyclerView parent,
 			final RecyclerView.State state) {
 		outRect.set(0, 0, 0, dividerDrawable.getIntrinsicHeight());
+	}
+
+	public void setDividerColor(final int color) {
+		DrawableCompat.setTint(dividerDrawable, color);
 	}
 }
