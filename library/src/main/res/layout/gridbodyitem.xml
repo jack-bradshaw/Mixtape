@@ -77,7 +77,6 @@
 					android:textSize="12sp"/>
 			</RelativeLayout>
 
-			<!-->TODO add content description<-->
 			<ImageButton
 				android:id="@+id/gridBodyItem_menu"
 				style="?android:borderlessButtonStyle"
