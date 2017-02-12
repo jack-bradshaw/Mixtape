@@ -40,6 +40,7 @@ import timber.log.Timber;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
+//TODO fix javadoc
 /**
  * An implementation of the HeaderContract.View interface which displays a toolbar in addition to
  * the LibraryItem. The toolbar can be used to display actions specific to the item in context. This
