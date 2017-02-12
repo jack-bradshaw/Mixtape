@@ -16,8 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_body;
 
-import android.view.MenuItem;
-
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
@@ -29,10 +27,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import java.util.List;
 
 /**
- * A DirectBodyPresenter which can be used with a RecyclerViewBody. Although this class is not
- * abstract, the user interaction handling methods do nothing. To handle user interactions, override
- * {@link #onLibraryItemSelected(BodyContract.View, LibraryItem)} and {@link
- * #onContextualMenuItemSelected (BodyContract.View, LibraryItem, MenuItem)}.
+ * A DirectBodyPresenter which can be used with a RecyclerViewBody.
  *
  * @param <D>
  * 		the type of data to present
@@ -118,17 +113,6 @@ public class RecyclerViewBodyPresenter<
 		artworkDataBinder.getCache().remove(modified);
 
 		super.onItemModified(source, modified, index);
-	}
-
-	@Override
-	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
-		// Default implementation does nothing
-	}
-
-	@Override
-	public void onContextualMenuItemSelected(final BodyContract.View bodyView, final LibraryItem
-			libraryItem, final MenuItem menuItem) {
-		// Default implementation does nothing
 	}
 
 	/**
