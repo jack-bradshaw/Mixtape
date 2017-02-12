@@ -18,8 +18,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -223,8 +221,7 @@ public class GridBody extends RecyclerViewBody {
 		final TypedArray attributes = getContext().obtainStyledAttributes(attrs,
 				R.styleable.GridBody, defStyleAttr, defStyleRes);
 
-		setNumberOfColumns(attributes.getInt(R.styleable.GridBody_numberOfColumns,
-				DEFAULT_NUMBER_OF_COLUMNS));
+		setNumberOfColumns(attributes.getInt(R.styleable.GridBody_numberOfColumns, 2));
 
 		attributes.recycle();
 	}
