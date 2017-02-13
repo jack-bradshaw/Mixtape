@@ -171,7 +171,12 @@ public class TestArtworkBinder {
 	@Test
 	public void testBind_dataCached_matchingDimensions() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		cache.cacheTitle(libraryItem, false);
+		cache.put(libraryItem, artwork);
+
+		when(artwork.getIntrinsicWidth()).thenReturn(100);
+		when(artwork.getIntrinsicHeight()).thenReturn(100);
+		when(imageView.getWidth()).thenReturn(100);
+		when(imageView.getHeight()).thenReturn(100);
 
 		binder.bind(imageView, libraryItem);
 
