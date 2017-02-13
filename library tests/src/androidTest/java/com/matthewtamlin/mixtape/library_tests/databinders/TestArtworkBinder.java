@@ -186,7 +186,7 @@ public class TestArtworkBinder {
 		verify(imageView).setImageDrawable(artwork); // Called once to clear and once to set
 	}
 
-	\/**
+	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
 	 * correctly when the cache does not contain the artwork of the data passed to the {@code data}
 	 * argument. The test will only pass if the artwork is bound to the view.
