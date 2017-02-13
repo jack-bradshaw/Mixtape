@@ -157,7 +157,7 @@ public class TestTitleBinder {
 	@Test
 	public void testBind_dataCached() {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
-		cache.cacheTitle(libraryItem, false);
+		cache.put(libraryItem, title);
 
 		binder.bind(textView, libraryItem);
 
