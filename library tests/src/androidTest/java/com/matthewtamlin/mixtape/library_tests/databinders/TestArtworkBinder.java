@@ -164,7 +164,7 @@ public class TestArtworkBinder {
 
 		binder.bind(imageView, null);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
 		verify(imageView, atLeastOnce()).setImageDrawable(null);
 		verify(imageView, never()).setImageDrawable(artwork);
 		verify(imageView, never()).setImageDrawable(defaultArtwork);
@@ -183,7 +183,7 @@ public class TestArtworkBinder {
 
 		binder.bind(imageView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
 		verify(imageView).setImageDrawable(cachedArtwork); // Called once to clear and once to set
 	}
 
@@ -199,7 +199,7 @@ public class TestArtworkBinder {
 
 		binder.bind(imageView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
 		verify(imageView).setImageDrawable(artwork);
 	}
 
@@ -218,7 +218,7 @@ public class TestArtworkBinder {
 
 		binder.bind(imageView, inaccessibleItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
 		verify(imageView).setImageDrawable(defaultArtwork);
 	}
 
@@ -226,7 +226,7 @@ public class TestArtworkBinder {
 	 * Suspends execution of the current thread. The duration is defined by the {@code
 	 * PAUSE_DURATION} constant.
 	 */
-	private void pause() {
+	private void waitForAsyncEventsToFinish() {
 		try {
 			Thread.sleep(PAUSE_DURATION);
 		} catch (InterruptedException e) {
