@@ -46,8 +46,6 @@ public class TestArtworkBinder {
 	 */
 	private static final int PAUSE_DURATION = 500;
 
-	private static final int FADE_IN_DURATION_MS = 200;
-
 	/**
 	 * The image to use as the artwork.
 	 */
