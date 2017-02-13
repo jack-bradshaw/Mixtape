@@ -20,7 +20,6 @@ import android.support.test.runner.AndroidJUnit4;
 import android.util.LruCache;
 import android.widget.TextView;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
@@ -95,8 +94,8 @@ public class TestTitleBinder {
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * TitleBinder#TitleBinder(LibraryItemCache, DisplayableDefaults)} is null. The test will only
-	 * pass if an IllegalArgumentException is thrown.
+	 * TitleBinder#TitleBinder(LruCache, DisplayableDefaults)} is null. The test will only pass if
+	 * an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullCache() {
@@ -105,8 +104,8 @@ public class TestTitleBinder {
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code defaults} argument of
-	 * {@link TitleBinder#TitleBinder(LibraryItemCache, DisplayableDefaults)} is null. The test will
-	 * only pass if an IllegalArgumentException is thrown.
+	 * {@link TitleBinder#TitleBinder(LruCache, DisplayableDefaults)} is null. The test will only
+	 * pass if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullDefaults() {
@@ -114,9 +113,8 @@ public class TestTitleBinder {
 	}
 
 	/**
-	 * Test to verify that the {@link TitleBinder#TitleBinder(LibraryItemCache,
-	 * DisplayableDefaults)} constructor functions correctly when the provided with valid
-	 * arguments.
+	 * Test to verify that the {@link TitleBinder#TitleBinder(LruCache, DisplayableDefaults)}
+	 * constructor functions correctly when the provided with valid arguments.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
