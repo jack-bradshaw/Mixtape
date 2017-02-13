@@ -16,32 +16,21 @@
 
 package com.matthewtamlin.mixtape.library_tests.databinders;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.LruCache;
 import android.widget.ImageView;
 
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
-import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.test.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -105,7 +94,7 @@ public class TestArtworkBinder {
 
 		displayableDefaults = mock(DisplayableDefaults.class);
 		when(displayableDefaults.getArtwork()).thenReturn(defaultArtwork);
-		
+
 		imageView = mock(ImageView.class);
 	}
 
