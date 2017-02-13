@@ -178,7 +178,7 @@ public class TestTitleBinder {
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(TITLE);
+		verify(textView).setText(title);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class TestTitleBinder {
 		binder.bind(textView, inaccessibleItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(DEFAULT_TITLE);
+		verify(textView).setText(defaultTitle);
 	}
 
 	/**
