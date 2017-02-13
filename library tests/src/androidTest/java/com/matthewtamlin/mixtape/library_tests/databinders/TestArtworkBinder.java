@@ -23,9 +23,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.LruCache;
 import android.widget.ImageView;
 
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -80,7 +80,7 @@ public class TestArtworkBinder {
 	/**
 	 * A cache for use in testing.
 	 */
-	private LruLibraryItemCache cache;
+	private LruCache<LibraryItem, Drawable> cache;
 
 	/**
 	 * Defaults for use in testing.
@@ -107,7 +107,7 @@ public class TestArtworkBinder {
 				is(notNullValue()));
 
 		libraryItem = new NormalLibraryItem(res, null, null, R.raw.image1);
-		cache = new LruLibraryItemCache(1, 1, 1000000); // Should be more than enough for the test
+		cache = new LruCache<>(10);
 		displayableDefaults = new ImmutableDisplayableDefaults(null, null, defaultArtwork);
 		imageView = mock(ImageView.class);
 	}
