@@ -99,7 +99,10 @@ public class TestTitleBinder {
 		when(libraryItem.getTitle()).thenReturn(title);
 
 		cache = new LruCache<>(10);
-		displayableDefaults = new ImmutableDisplayableDefaults(DEFAULT_TITLE, null, null);
+
+		displayableDefaults = mock(DisplayableDefaults.class);
+		when(displayableDefaults.getTitle()).thenReturn(defaultTitle);
+		
 		textView = mock(TextView.class);
 	}
 
