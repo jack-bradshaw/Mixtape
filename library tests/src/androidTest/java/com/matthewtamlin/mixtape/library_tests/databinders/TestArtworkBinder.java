@@ -42,10 +42,12 @@ import org.junit.runner.RunWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class TestArtworkBinder {
@@ -93,12 +95,12 @@ public class TestArtworkBinder {
 	 */
 	@Before
 	public void setup() throws LibraryReadException {
-		final Resources res = InstrumentationRegistry.getTargetContext().getResources();
-
 		artwork = mock(Drawable.class);
 		defaultArtwork = mock(Drawable.class);
 
-		libraryItem = new NormalLibraryItem(res, null, null, R.raw.image1);
+		libraryItem = mock(LibraryItem.class);
+		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(artwork);
+		
 		cache = new LruCache<>(10);
 		displayableDefaults = new ImmutableDisplayableDefaults(null, null, defaultArtwork);
 		imageView = mock(ImageView.class);
