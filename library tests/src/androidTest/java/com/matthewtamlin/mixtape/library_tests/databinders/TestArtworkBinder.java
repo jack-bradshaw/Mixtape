@@ -26,13 +26,16 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -184,7 +187,10 @@ public class TestArtworkBinder {
 		binder.bind(imageView, libraryItem);
 
 		waitForAsyncEventsToFinish();
+
 		verify(imageView).setImageDrawable(cachedArtwork);
+		assertThat("Artwork was removed from the cache.", cache.get(libraryItem),
+				is(cachedArtwork));
 	}
 
 	/**
@@ -201,6 +207,7 @@ public class TestArtworkBinder {
 
 		waitForAsyncEventsToFinish();
 		verify(imageView).setImageDrawable(artwork);
+		assertThat("Artwork was not added to the cache.", cache.get(libraryItem), is(artwork));
 	}
 
 	/**
@@ -220,6 +227,7 @@ public class TestArtworkBinder {
 
 		waitForAsyncEventsToFinish();
 		verify(imageView).setImageDrawable(defaultArtwork);
+		assertThat("Something was added to the cache.", cache.get(libraryItem), is(nullValue()));
 	}
 
 	/**
