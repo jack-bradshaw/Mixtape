@@ -96,8 +96,8 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)} is null. The test will only pass if
-	 * an IllegalArgumentException is thrown.
+	 * SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)} is null. The test will only
+	 * pass if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullCache() {
@@ -106,8 +106,8 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code defaults} argument of
-	 * {@link SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)} is null. The test will only
-	 * pass if an IllegalArgumentException is thrown.
+	 * {@link SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)} is null. The test will
+	 * only pass if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullDefaults() {
@@ -116,7 +116,9 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the {@link SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)}
-	 * constructor functions correctly when the provided with valid arguments.
+	 * constructor functions correctly when the provided with valid arguments. The test will only
+	 * pass if the construction succeeds and the getters return the valued supplied to the
+	 * constructor.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
