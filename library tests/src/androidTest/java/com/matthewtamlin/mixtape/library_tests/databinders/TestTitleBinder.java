@@ -145,8 +145,8 @@ public class TestTitleBinder {
 
 		pause(); // Allow time for async processing to complete
 		verify(textView, atLeastOnce()).setText(null);
-		verify(textView, never()).setText(TITLE);
-		verify(textView, never()).setText(DEFAULT_TITLE);
+		verify(textView, never()).setText(title);
+		verify(textView, never()).setText(defaultTitle);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class TestTitleBinder {
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(TITLE); // Called once to clear and once to set
+		verify(textView).setText(title); // Called once to clear and once to set
 	}
 
 	/**
