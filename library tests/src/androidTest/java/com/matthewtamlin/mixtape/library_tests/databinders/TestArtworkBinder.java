@@ -47,6 +47,8 @@ public class TestArtworkBinder {
 	 */
 	private static final int PAUSE_DURATION = 500;
 
+	private static final int ARTWORK_DIMENSION = 100;
+
 	private static final int FADE_IN_DURATION_MS = 200;
 
 	/**
@@ -87,7 +89,12 @@ public class TestArtworkBinder {
 	@Before
 	public void setup() throws LibraryReadException {
 		artwork = mock(Drawable.class);
+		when(artwork.getIntrinsicWidth()).thenReturn(ARTWORK_DIMENSION);
+		when(artwork.getIntrinsicHeight()).thenReturn(ARTWORK_DIMENSION);
+
 		defaultArtwork = mock(Drawable.class);
+		when(defaultArtwork.getIntrinsicWidth()).thenReturn(ARTWORK_DIMENSION);
+		when(defaultArtwork.getIntrinsicHeight()).thenReturn(ARTWORK_DIMENSION);
 
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(artwork);
@@ -173,18 +180,13 @@ public class TestArtworkBinder {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		cache.put(libraryItem, artwork);
 
-		when(artwork.getIntrinsicWidth()).thenReturn(100);
-		when(artwork.getIntrinsicHeight()).thenReturn(100);
-		when(imageView.getWidth()).thenReturn(100);
-		when(imageView.getHeight()).thenReturn(100);
-
 		binder.bind(imageView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
 		verify(imageView).setImageDrawable(artwork); // Called once to clear and once to set
 	}
 
-	/**
+	\/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
 	 * correctly when the cache does not contain the artwork of the data passed to the {@code data}
 	 * argument. The test will only pass if the artwork is bound to the view.
