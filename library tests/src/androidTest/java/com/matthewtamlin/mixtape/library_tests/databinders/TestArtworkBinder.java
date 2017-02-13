@@ -100,9 +100,12 @@ public class TestArtworkBinder {
 
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(artwork);
-		
+
 		cache = new LruCache<>(10);
-		displayableDefaults = new ImmutableDisplayableDefaults(null, null, defaultArtwork);
+
+		displayableDefaults = mock(DisplayableDefaults.class);
+		when(displayableDefaults.getArtwork()).thenReturn(defaultArtwork);
+		
 		imageView = mock(ImageView.class);
 	}
 
