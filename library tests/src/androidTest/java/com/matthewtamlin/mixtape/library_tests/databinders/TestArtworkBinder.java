@@ -184,7 +184,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, libraryItem);
 
 		waitForAsyncEventsToFinish();
-		verify(imageView).setImageDrawable(cachedArtwork); // Called once to clear and once to set
+		verify(imageView).setImageDrawable(cachedArtwork);
 	}
 
 	/**
