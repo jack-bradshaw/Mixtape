@@ -173,7 +173,7 @@ public class TestTitleBinder {
 	@Test
 	public void testBind_dataAccessibleButNotCached() {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
-		cache.removeTitle(libraryItem); // In case it was somehow cached previously
+		cache.remove(libraryItem); // In case it was somehow cached previously
 
 		binder.bind(textView, libraryItem);
 
