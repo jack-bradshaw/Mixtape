@@ -119,6 +119,14 @@ public class TestArtworkBinder {
 	}
 
 	/**
+	 * Test to verify that the {@link ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)}
+	 * constructor functions correctly when provided with valid arguments.
+	 */
+	public void testConstructor_validArgs() {
+		new ArtworkBinder(cache, displayableDefaults);
+	}
+
+	/**
 	 * Test to verify that the correct exception is thrown when the {@code view} argument of {@link
 	 * ArtworkBinder#bind(ImageView, LibraryItem)} is null. The test will only pass if an
 	 * IllegalArgumentException is thrown.
