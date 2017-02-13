@@ -209,9 +209,11 @@ public class TestArtworkBinder {
 	 * artwork is bound to the view.
 	 */
 	@Test
-	public void testBind_dataNotCached_dataInaccessible () {
+	public void testBind_dataNotCached_dataInaccessible () throws LibraryReadException {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		final LibraryItem inaccessibleItem = new InaccessibleLibraryItem();
+
+		final LibraryItem inaccessibleItem = mock(LibraryItem.class);
+		when(inaccessibleItem.getTitle()).thenThrow(new LibraryReadException());
 
 		binder.bind(imageView, inaccessibleItem);
 
