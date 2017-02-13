@@ -100,8 +100,8 @@ public class TestArtworkBinder {
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * ArtworkBinder#bind(ImageView, LibraryItem)} is null. The test will only pass if an
-	 * IllegalArgumentException is thrown.
+	 * ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)} is null. The test will only pass
+	 * if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullCache() {
@@ -109,9 +109,9 @@ public class TestArtworkBinder {
 	}
 
 	/**
-	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * ArtworkBinder#bind(ImageView, LibraryItem)} is null. The test will only pass if an
-	 * IllegalArgumentException is thrown.
+	 * Test to verify that the correct exception is thrown when the {@code defaults} argument of
+	 * {@link ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)} is null. The test will
+	 * only pass if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullDefaults() {
