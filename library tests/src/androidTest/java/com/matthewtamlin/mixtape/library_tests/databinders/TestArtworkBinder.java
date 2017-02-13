@@ -57,11 +57,6 @@ public class TestArtworkBinder {
 	private static final int FADE_IN_DURATION_MS = 200;
 
 	/**
-	 * The resource ID for an image to use as the artwork and the default artwork.
-	 */
-	private static final int ARTWORK_RES_ID = R.raw.image1;
-
-	/**
 	 * The image to use as the artwork.
 	 */
 	private Drawable artwork;
@@ -100,11 +95,8 @@ public class TestArtworkBinder {
 	public void setup() throws LibraryReadException {
 		final Resources res = InstrumentationRegistry.getTargetContext().getResources();
 
-		artwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
-		defaultArtwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
-		assertThat("Precondition failed, artwork is null.", artwork, is(notNullValue()));
-		assertThat("Precondition failed, default artwork is null.", defaultArtwork,
-				is(notNullValue()));
+		artwork = mock(Drawable.class);
+		defaultArtwork = mock(Drawable.class);
 
 		libraryItem = new NormalLibraryItem(res, null, null, R.raw.image1);
 		cache = new LruCache<>(10);
