@@ -46,8 +46,6 @@ public class TestArtworkBinder {
 	 */
 	private static final int PAUSE_DURATION = 500;
 
-	private static final int ARTWORK_DIMENSION = 100;
-
 	private static final int FADE_IN_DURATION_MS = 200;
 
 	/**
@@ -88,12 +86,12 @@ public class TestArtworkBinder {
 	@Before
 	public void setup() throws LibraryReadException {
 		artwork = mock(Drawable.class);
-		when(artwork.getIntrinsicWidth()).thenReturn(ARTWORK_DIMENSION);
-		when(artwork.getIntrinsicHeight()).thenReturn(ARTWORK_DIMENSION);
+		when(artwork.getIntrinsicWidth()).thenReturn(100);
+		when(artwork.getIntrinsicHeight()).thenReturn(100);
 
 		defaultArtwork = mock(Drawable.class);
-		when(defaultArtwork.getIntrinsicWidth()).thenReturn(ARTWORK_DIMENSION);
-		when(defaultArtwork.getIntrinsicHeight()).thenReturn(ARTWORK_DIMENSION);
+		when(defaultArtwork.getIntrinsicWidth()).thenReturn(100);
+		when(defaultArtwork.getIntrinsicHeight()).thenReturn(100);
 
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(artwork);
