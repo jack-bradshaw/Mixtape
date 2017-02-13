@@ -238,7 +238,7 @@ public class TestArtworkBinder {
 		try {
 			Thread.sleep(PAUSE_DURATION);
 		} catch (InterruptedException e) {
-			throw new RuntimeException("wait interrupted, test aborted");
+			throw new RuntimeException("Wait interrupted, test aborted.");
 		}
 	}
 }
