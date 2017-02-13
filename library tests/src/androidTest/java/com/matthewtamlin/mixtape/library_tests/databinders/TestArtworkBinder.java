@@ -56,6 +56,8 @@ public class TestArtworkBinder {
 	 */
 	private Drawable defaultArtwork;
 
+	private Drawable cachedArtwork;
+
 	/**
 	 * A read-only LibraryItem for use in testing, which uses {@code artwork} for the artwork and
 	 * null for the other metadata.
@@ -90,6 +92,10 @@ public class TestArtworkBinder {
 		defaultArtwork = mock(Drawable.class);
 		when(defaultArtwork.getIntrinsicWidth()).thenReturn(100);
 		when(defaultArtwork.getIntrinsicHeight()).thenReturn(100);
+
+		cachedArtwork = mock(Drawable.class);
+		when(cachedArtwork.getIntrinsicWidth()).thenReturn(100);
+		when(cachedArtwork.getIntrinsicHeight()).thenReturn(100);
 
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(artwork);
@@ -173,12 +179,12 @@ public class TestArtworkBinder {
 	@Test
 	public void testBind_dataCached() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		cache.put(libraryItem, artwork);
+		cache.put(libraryItem, cachedArtwork);
 
 		binder.bind(imageView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(imageView).setImageDrawable(artwork); // Called once to clear and once to set
+		verify(imageView).setImageDrawable(cachedArtwork); // Called once to clear and once to set
 	}
 
 	/**
