@@ -163,10 +163,11 @@ public class TestArtworkBinder {
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
 	 * correctly when the cache already contains the artwork of the data passed to the {@code data}
-	 * argument. The test will only pass if the artwork is bound to the view.
+	 * argument, and the dimensions of the cached data match the dimensions of the image view. The
+	 * test will only pass if the artwork is bound to the view from the cache.
 	 */
 	@Test
-	public void testBind_dataCached() {
+	public void testBind_dataCached_matchingDimensions() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		cache.cacheTitle(libraryItem, false);
 
