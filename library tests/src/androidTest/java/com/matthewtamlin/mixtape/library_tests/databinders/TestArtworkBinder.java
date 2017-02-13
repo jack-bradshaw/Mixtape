@@ -192,7 +192,7 @@ public class TestArtworkBinder {
 	@Test
 	public void testBind_dataAccessibleButNotCached() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		cache.removeTitle(libraryItem); // In case it was somehow cached previously
+		cache.remove(libraryItem); // In case it was somehow cached previously
 
 		binder.bind(imageView, libraryItem);
 
