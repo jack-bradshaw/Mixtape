@@ -49,11 +49,6 @@ import static org.mockito.Mockito.verify;
 @RunWith(AndroidJUnit4.class)
 public class TestTitleBinder {
 	/**
-	 * The resource ID for an image to use as the artwork and the default artwork.
-	 */
-	private static final int ARTWORK_RES_ID = R.raw.image1;
-
-	/**
 	 * The length of time to pause for when waiting for background tasks to finish.
 	 */
 	private static final int PAUSE_DURATION = 500;
@@ -95,12 +90,6 @@ public class TestTitleBinder {
 	 */
 	@Before
 	public void setup() throws LibraryReadException {
-		final Resources res = InstrumentationRegistry.getTargetContext().getResources();
-
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(res, ARTWORK_RES_ID);
-		assertThat("Precondition failed, default artwork is null.", defaultArtwork,
-				is(notNullValue()));
-
 		libraryItem = new NormalLibraryItem(res, TITLE, null, -1);
 		cache = new LruLibraryItemCache(1000000, 1, 1); // Should be more than enough for the test
 		displayableDefaults = new ImmutableDisplayableDefaults(DEFAULT_TITLE, null, null);
