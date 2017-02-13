@@ -155,7 +155,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, null);
 
 		pause(); // Allow time for async processing to complete
-		verify(imageView, atLeastOnce()).setImageBitmap(null);
+		verify(imageView, atLeastOnce()).setImageDrawable(null);
 		verify(imageView, never()).setImageDrawable(artwork);
 		verify(imageView, never()).setImageDrawable(defaultArtwork);
 	}
