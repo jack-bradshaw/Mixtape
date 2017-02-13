@@ -45,34 +45,32 @@ public class TestTitleBinder {
 	private static final int PAUSE_DURATION = 500;
 
 	/**
-	 * The title to use for the test LibraryItem.
+	 * A mock title.
 	 */
 	private CharSequence title;
 
 	/**
-	 * The default title to use in the test DisplayableDefaults.
+	 * A mock default title.
 	 */
 	private CharSequence defaultTitle;
 
 	/**
-	 * A read-only LibraryItem for use in testing, which uses {@code TITLE} for the title and null
-	 * for the other metadata.
+	 * A mock LibraryItem which returns a title but no subtitle or artwork.
 	 */
 	private LibraryItem libraryItem;
 
 	/**
-	 * A cache for use in testing.
+	 * A cache for use in testing. This object is functional and is not a mock.
 	 */
 	private LruCache<LibraryItem, CharSequence> cache;
 
 	/**
-	 * Defaults for use in testing.
+	 * A mock DisplayableDefaults object which returns a default title, but no subtitle or artwork.
 	 */
 	private DisplayableDefaults displayableDefaults;
 
 	/**
-	 * A TextView for use in testing. This view should be mocked so that method invocations can be
-	 * recorded and reviewed.
+	 * A mock TextView which data can be bound to.
 	 */
 	private TextView textView;
 
@@ -91,7 +89,7 @@ public class TestTitleBinder {
 
 		displayableDefaults = mock(DisplayableDefaults.class);
 		when(displayableDefaults.getTitle()).thenReturn(defaultTitle);
-		
+
 		textView = mock(TextView.class);
 	}
 
