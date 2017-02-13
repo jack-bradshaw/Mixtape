@@ -31,6 +31,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -124,7 +126,10 @@ public class TestArtworkBinder {
 	 * if the construction call passes, and the getters return the values supplied at constructor.
 	 */
 	public void testConstructor_validArgs() {
-		new ArtworkBinder(cache, displayableDefaults);
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
+
+		assertThat("Incorrect cache.", binder.getCache(), is(cache));
+		assertThat("Incorrect defaults.", binder.getDefaults(), is(displayableDefaults));
 	}
 
 	/**
