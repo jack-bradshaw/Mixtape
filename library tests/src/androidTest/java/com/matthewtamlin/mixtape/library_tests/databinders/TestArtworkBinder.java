@@ -25,7 +25,6 @@ import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
-import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -209,7 +208,7 @@ public class TestArtworkBinder {
 	 * artwork is bound to the view.
 	 */
 	@Test
-	public void testBind_dataNotCached_dataInaccessible () throws LibraryReadException {
+	public void testBind_dataNotCached_dataInaccessible() throws LibraryReadException {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 
 		final LibraryItem inaccessibleItem = mock(LibraryItem.class);
