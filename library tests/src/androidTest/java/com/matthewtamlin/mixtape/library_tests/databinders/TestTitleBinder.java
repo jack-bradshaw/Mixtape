@@ -118,7 +118,7 @@ public class TestTitleBinder {
 	 */
 	@Test
 	public void testConstructor_validArgs() {
-		new TitleBinder(cache, displayableDefaults); // Shouldn't throw exception
+		new TitleBinder(cache, displayableDefaults);
 	}
 
 	/**
