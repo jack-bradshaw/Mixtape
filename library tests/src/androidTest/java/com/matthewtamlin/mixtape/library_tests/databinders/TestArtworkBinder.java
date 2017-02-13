@@ -176,7 +176,7 @@ public class TestArtworkBinder {
 	 * test will only pass if the artwork is bound to the view from the cache.
 	 */
 	@Test
-	public void testBind_dataCached_matchingDimensions() {
+	public void testBind_dataCached() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 		cache.put(libraryItem, artwork);
 
