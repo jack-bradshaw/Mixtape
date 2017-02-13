@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.LruCache;
 import android.widget.TextView;
 
 import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
@@ -72,7 +73,7 @@ public class TestTitleBinder {
 	/**
 	 * A cache for use in testing.
 	 */
-	private LruLibraryItemCache cache;
+	private LruCache<LibraryItem, CharSequence> cache;
 
 	/**
 	 * Defaults for use in testing.
