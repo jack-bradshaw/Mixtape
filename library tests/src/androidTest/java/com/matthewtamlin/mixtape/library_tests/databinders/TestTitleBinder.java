@@ -30,6 +30,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -118,7 +120,11 @@ public class TestTitleBinder {
 	 */
 	@Test
 	public void testConstructor_validArgs() {
-		new TitleBinder(cache, displayableDefaults);
+		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
+
+		assertThat("Incorrect cache.", binder.getCache(), is(cache));
+		assertThat("Incorrect defaults.", binder.getDefaults(), is(displayableDefaults));
+
 	}
 
 	/**
