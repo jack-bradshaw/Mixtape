@@ -16,78 +16,60 @@
 
 package com.matthewtamlin.mixtape.library_tests.databinders;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.LruCache;
 import android.widget.TextView;
 
-
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
-import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.test.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class TestSubtitleBinder {
-	/**
-	 * The resource ID for an image to use as the artwork and the default artwork.
-	 */
-	private static final int ARTWORK_RES_ID = R.raw.image1;
-
 	/**
 	 * The length of time to pause for when waiting for background tasks to finish.
 	 */
 	private static final int PAUSE_DURATION = 500;
 
 	/**
-	 * The subtitle to use for the test LibraryItem.
+	 * A mock subtitle.
 	 */
-	private static final String SUBTITLE = "a subtitle";
+	private CharSequence subtitle;
 
 	/**
-	 * The default subtitle to use in the test DisplayableDefaults.
+	 * A mock default subtitle.
 	 */
-	private static final String DEFAULT_SUBTITLE = "a default subtitle";
+	private CharSequence defaultSubtitle;
 
 	/**
-	 * A read-only LibraryItem for use in testing, which uses {@code SUBTITLE} for the subtitle and
-	 * null for the other metadata.
+	 * A mock LibraryItem which returns a subtitle but no title or artwork.
 	 */
 	private LibraryItem libraryItem;
 
 	/**
-	 * A cache for use in testing.
+	 * A cache for use in testing. This object is functional and is not a mock.
 	 */
-	private LruLibraryItemCache cache;
+	private LruCache<LibraryItem, CharSequence> cache;
 
 	/**
-	 * Defaults for use in testing.
+	 * A mock DisplayableDefaults object which returns a default subtitle, but no title or artwork.
 	 */
 	private DisplayableDefaults displayableDefaults;
 
 	/**
-	 * A TextView for use in testing. This view should be mocked so that method invocations can be
-	 * recorded and reviewed.
+	 * A mock TextView which data can be bound to.
 	 */
 	private TextView textView;
 
@@ -96,22 +78,24 @@ public class TestSubtitleBinder {
 	 */
 	@Before
 	public void setup() throws LibraryReadException {
-		final Resources res = InstrumentationRegistry.getTargetContext().getResources();
+		subtitle = mock(CharSequence.class);
+		defaultSubtitle = mock(CharSequence.class);
 
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(res, ARTWORK_RES_ID);
-		assertThat("Precondition failed, default artwork is null.", defaultArtwork,
-				is(notNullValue()));
+		libraryItem = mock(LibraryItem.class);
+		when(libraryItem.getSubtitle()).thenReturn(subtitle);
 
-		libraryItem = new NormalLibraryItem(res, null, SUBTITLE, -1);
-		cache = new LruLibraryItemCache(1, 1000000, 1); // Should be more than enough for the test
-		displayableDefaults = new ImmutableDisplayableDefaults(null, DEFAULT_SUBTITLE, null);
+		cache = new LruCache<>(10);
+
+		displayableDefaults = mock(DisplayableDefaults.class);
+		when(displayableDefaults.getSubtitle()).thenReturn(defaultSubtitle);
+
 		textView = mock(TextView.class);
 	}
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * SubtitleBinder#SubtitleBinder(LibraryItemCache, DisplayableDefaults)} is null. The test will
-	 * only pass if an IllegalArgumentException is thrown.
+	 * SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)} is null. The test will only pass if
+	 * an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullCache() {
@@ -120,8 +104,8 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code defaults} argument of
-	 * {@link SubtitleBinder#SubtitleBinder(LibraryItemCache, DisplayableDefaults)} is null. The
-	 * test will only pass if an IllegalArgumentException is thrown.
+	 * {@link SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)} is null. The test will only
+	 * pass if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullDefaults() {
@@ -129,13 +113,12 @@ public class TestSubtitleBinder {
 	}
 
 	/**
-	 * Test to verify that the {@link SubtitleBinder#SubtitleBinder(LibraryItemCache,
-	 * DisplayableDefaults)} constructor functions correctly when the provided with valid
-	 * arguments.
+	 * Test to verify that the {@link SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)}
+	 * constructor functions correctly when the provided with valid arguments.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
-		new SubtitleBinder(cache, displayableDefaults); // Shouldn't throw exception
+		new SubtitleBinder(cache, displayableDefaults);
 	}
 
 	/**
@@ -162,8 +145,8 @@ public class TestSubtitleBinder {
 
 		pause(); // Allow time for async processing to complete
 		verify(textView, atLeastOnce()).setText(null);
-		verify(textView, never()).setText(SUBTITLE);
-		verify(textView, never()).setText(DEFAULT_SUBTITLE);
+		verify(textView, never()).setText(subtitle);
+		verify(textView, never()).setText(defaultSubtitle);
 	}
 
 	/**
@@ -174,12 +157,12 @@ public class TestSubtitleBinder {
 	@Test
 	public void testBind_dataCached() {
 		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
-		cache.cacheSubtitle(libraryItem, false);
+		cache.put(libraryItem, subtitle);
 
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(SUBTITLE); // Called once to clear and once to set
+		verify(textView).setText(subtitle); // Called once to clear and once to set
 	}
 
 	/**
@@ -190,12 +173,12 @@ public class TestSubtitleBinder {
 	@Test
 	public void testBind_dataAccessibleButNotCached() {
 		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
-		cache.removeSubtitle(libraryItem); // In case it was somehow cached previously
+		cache.remove(libraryItem); // In case it was somehow cached previously
 
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(SUBTITLE);
+		verify(textView).setText(subtitle);
 	}
 
 	/**
@@ -212,7 +195,7 @@ public class TestSubtitleBinder {
 		binder.bind(textView, inaccessibleItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(DEFAULT_SUBTITLE);
+		verify(textView).setText(defaultSubtitle);
 	}
 
 	/**
