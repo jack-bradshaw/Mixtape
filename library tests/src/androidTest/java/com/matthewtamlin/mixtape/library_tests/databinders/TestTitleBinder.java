@@ -98,7 +98,7 @@ public class TestTitleBinder {
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getTitle()).thenReturn(title);
 
-		cache = new LruLibraryItemCache(1000000, 1, 1); // Should be more than enough for the test
+		cache = new LruCache<>(10);
 		displayableDefaults = new ImmutableDisplayableDefaults(DEFAULT_TITLE, null, null);
 		textView = mock(TextView.class);
 	}
