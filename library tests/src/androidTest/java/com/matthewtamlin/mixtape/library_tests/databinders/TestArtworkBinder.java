@@ -98,6 +98,8 @@ public class TestArtworkBinder {
 		when(displayableDefaults.getArtwork()).thenReturn(defaultArtwork);
 
 		imageView = mock(ImageView.class);
+		when(imageView.getWidth()).thenReturn(0);
+		when(imageView.getHeight()).thenReturn(0);
 	}
 
 	/**
