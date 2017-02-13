@@ -57,12 +57,12 @@ public class TestTitleBinder {
 	/**
 	 * The title to use for the test LibraryItem.
 	 */
-	private static final String TITLE = "a title";
+	private CharSequence title;
 
 	/**
 	 * The default title to use in the test DisplayableDefaults.
 	 */
-	private static final String DEFAULT_TITLE = "a default title";
+	private CharSequence defaultTitle;
 
 	/**
 	 * A read-only LibraryItem for use in testing, which uses {@code TITLE} for the title and null
@@ -91,6 +91,10 @@ public class TestTitleBinder {
 	 */
 	@Before
 	public void setup() throws LibraryReadException {
+		title = mock(CharSequence.class);
+		defaultTitle = mock(CharSequence.class);
+
+
 		libraryItem = new NormalLibraryItem(res, TITLE, null, -1);
 		cache = new LruLibraryItemCache(1000000, 1, 1); // Should be more than enough for the test
 		displayableDefaults = new ImmutableDisplayableDefaults(DEFAULT_TITLE, null, null);
