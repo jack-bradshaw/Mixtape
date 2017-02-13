@@ -46,6 +46,7 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 public class TestTitleBinder {
@@ -94,8 +95,9 @@ public class TestTitleBinder {
 		title = mock(CharSequence.class);
 		defaultTitle = mock(CharSequence.class);
 
+		libraryItem = mock(LibraryItem.class);
+		when(libraryItem.getTitle()).thenReturn(title);
 
-		libraryItem = new NormalLibraryItem(res, TITLE, null, -1);
 		cache = new LruLibraryItemCache(1000000, 1, 1); // Should be more than enough for the test
 		displayableDefaults = new ImmutableDisplayableDefaults(DEFAULT_TITLE, null, null);
 		textView = mock(TextView.class);
