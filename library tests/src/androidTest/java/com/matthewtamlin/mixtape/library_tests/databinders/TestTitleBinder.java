@@ -188,7 +188,7 @@ public class TestTitleBinder {
 	 * to the view.
 	 */
 	@Test
-	public void testBind_dataAccessibleButNotCached() {
+	public void testBind_dataNotCached_dataAccessible() {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
 		cache.remove(libraryItem); // In case it was somehow cached previously
 
@@ -207,7 +207,7 @@ public class TestTitleBinder {
 	 * title is bound to the view.
 	 */
 	@Test
-	public void testBind_dataInaccessibleAndNotCached() {
+	public void testBind_dataNotCached_dataInaccessible() {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
 		final LibraryItem inaccessibleItem = new InaccessibleLibraryItem();
 
