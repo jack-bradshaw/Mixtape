@@ -168,7 +168,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, null);
 
 		waitForAsyncEventsToFinish();
-		
+
 		verify(imageView, atLeastOnce()).setImageDrawable(null);
 		verify(imageView, never()).setImageDrawable(artwork);
 		verify(imageView, never()).setImageDrawable(defaultArtwork);
@@ -202,7 +202,6 @@ public class TestArtworkBinder {
 	@Test
 	public void testBind_dataNotCached_dataAccessible() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		cache.remove(libraryItem); // In case it was somehow cached previously
 
 		binder.bind(imageView, libraryItem);
 
