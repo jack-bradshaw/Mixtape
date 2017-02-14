@@ -160,7 +160,7 @@ public class TestSubtitleBinder {
 		binder.bind(textView, null);
 
 		waitForAsyncEventsToFinish();
-		
+
 		verify(textView, atLeastOnce()).setText(null);
 		verify(textView, never()).setText(subtitle);
 		verify(textView, never()).setText(defaultSubtitle);
@@ -180,7 +180,7 @@ public class TestSubtitleBinder {
 
 		waitForAsyncEventsToFinish();
 
-		verify(textView).setText(cachedSubtitle); // Called once to clear and once to set
+		verify(textView).setText(cachedSubtitle);
 		assertThat("Subtitle was removed from the cache.", cache.get(libraryItem),
 				is(cachedSubtitle));
 	}
