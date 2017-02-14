@@ -168,6 +168,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, null);
 
 		waitForAsyncEventsToFinish();
+		
 		verify(imageView, atLeastOnce()).setImageDrawable(null);
 		verify(imageView, never()).setImageDrawable(artwork);
 		verify(imageView, never()).setImageDrawable(defaultArtwork);
