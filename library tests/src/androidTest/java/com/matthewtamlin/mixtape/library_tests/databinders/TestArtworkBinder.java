@@ -192,7 +192,7 @@ public class TestArtworkBinder {
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
 	 * correctly when the cache does not contain artwork for the bound LibraryItem, and the
-	 * LibraryItem provides access to artwork. The test will only pass if the cached artwork is
+	 * LibraryItem provides access to artwork. The test will only pass if the item's artwork is
 	 * bound to the view.
 	 */
 	@Test
@@ -210,8 +210,8 @@ public class TestArtworkBinder {
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
 	 * correctly when the cache does not contain artwork for the bound LibraryItem, and the
-	 * LibraryItem fails to provide access to artwork. The test will only pass if the cached artwork
-	 * is bound to the view.
+	 * LibraryItem fails to provide access to artwork. The test will only pass if the default
+	 * artwork is bound to the view.
 	 */
 	@Test
 	public void testBind_dataNotCached_dataInaccessible() throws LibraryReadException {
