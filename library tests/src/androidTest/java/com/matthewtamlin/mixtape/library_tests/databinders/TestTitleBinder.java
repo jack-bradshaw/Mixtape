@@ -156,7 +156,8 @@ public class TestTitleBinder {
 
 		binder.bind(textView, null);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+
 		verify(textView, atLeastOnce()).setText(null);
 		verify(textView, never()).setText(title);
 		verify(textView, never()).setText(defaultTitle);
@@ -174,7 +175,8 @@ public class TestTitleBinder {
 
 		binder.bind(textView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+
 		verify(textView).setText(cachedTitle); // Called once to clear and once to set
 		assertThat("Title was removed from the cache.", cache.get(libraryItem), is(cachedTitle));
 	}
@@ -192,7 +194,8 @@ public class TestTitleBinder {
 
 		binder.bind(textView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+
 		verify(textView).setText(title);
 		assertThat("Title was not added to the cache.", cache.get(libraryItem), is(title));
 	}
@@ -210,7 +213,8 @@ public class TestTitleBinder {
 
 		binder.bind(textView, inaccessibleItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+
 		verify(textView).setText(defaultTitle);
 
 	}
@@ -219,7 +223,7 @@ public class TestTitleBinder {
 	 * Suspends execution of the current thread. The duration is defined by the {@code
 	 * PAUSE_DURATION} constant.
 	 */
-	private void pause() {
+	private void waitForAsyncEventsToFinish() {
 		try {
 			Thread.sleep(PAUSE_DURATION);
 		} catch (InterruptedException e) {
