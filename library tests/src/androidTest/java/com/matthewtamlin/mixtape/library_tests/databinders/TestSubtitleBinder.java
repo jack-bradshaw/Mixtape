@@ -17,7 +17,6 @@
 package com.matthewtamlin.mixtape.library_tests.databinders;
 
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v7.widget.CardView;
 import android.util.LruCache;
 import android.widget.TextView;
 
@@ -160,7 +159,8 @@ public class TestSubtitleBinder {
 
 		binder.bind(textView, null);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+		
 		verify(textView, atLeastOnce()).setText(null);
 		verify(textView, never()).setText(subtitle);
 		verify(textView, never()).setText(defaultSubtitle);
@@ -178,7 +178,7 @@ public class TestSubtitleBinder {
 
 		binder.bind(textView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
 
 		verify(textView).setText(cachedSubtitle); // Called once to clear and once to set
 		assertThat("Subtitle was removed from the cache.", cache.get(libraryItem),
@@ -198,8 +198,8 @@ public class TestSubtitleBinder {
 
 		binder.bind(textView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
-		
+		waitForAsyncEventsToFinish();
+
 		verify(textView).setText(subtitle);
 		assertThat("Subtitle was not added to the cache.", cache.get(libraryItem), is(subtitle));
 	}
@@ -217,7 +217,7 @@ public class TestSubtitleBinder {
 
 		binder.bind(textView, inaccessibleItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
 
 		verify(textView).setText(defaultSubtitle);
 		assertThat("Something was added to the cache.", cache.get(libraryItem), is(nullValue()));
@@ -227,7 +227,7 @@ public class TestSubtitleBinder {
 	 * Suspends execution of the current thread. The duration is defined by the {@code
 	 * PAUSE_DURATION} constant.
 	 */
-	private void pause() {
+	private void waitForAsyncEventsToFinish() {
 		try {
 			Thread.sleep(PAUSE_DURATION);
 		} catch (InterruptedException e) {
