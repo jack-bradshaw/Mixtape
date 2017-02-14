@@ -17,6 +17,7 @@
 package com.matthewtamlin.mixtape.library_tests.databinders;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.CardView;
 import android.util.LruCache;
 import android.widget.TextView;
 
@@ -59,6 +60,11 @@ public class TestSubtitleBinder {
 	private CharSequence defaultSubtitle;
 
 	/**
+	 * A mock subtitle. This should be inserted into the cache directly.
+	 */
+	private CharSequence cachedSubtitle;
+
+	/**
 	 * A mock LibraryItem which returns a subtitle but no title or artwork.
 	 */
 	private LibraryItem libraryItem;
@@ -85,6 +91,7 @@ public class TestSubtitleBinder {
 	public void setup() throws LibraryReadException {
 		subtitle = mock(CharSequence.class);
 		defaultSubtitle = mock(CharSequence.class);
+		cachedSubtitle = mock(CharSequence.class);
 
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getSubtitle()).thenReturn(subtitle);
@@ -166,12 +173,12 @@ public class TestSubtitleBinder {
 	@Test
 	public void testBind_dataCached() {
 		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
-		cache.put(libraryItem, subtitle);
+		cache.put(libraryItem, cachedSubtitle);
 
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(subtitle); // Called once to clear and once to set
+		verify(textView).setText(cachedSubtitle); // Called once to clear and once to set
 	}
 
 	/**
