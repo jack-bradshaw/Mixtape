@@ -177,7 +177,7 @@ public class TestSubtitleBinder {
 	 * argument. The test will only pass if the subtitle is bound to the view.
 	 */
 	@Test
-	public void testBind_dataAccessibleButNotCached() {
+	public void testBind_dataNotCached_dataAccessible() {
 		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
 		cache.remove(libraryItem); // In case it was somehow cached previously
 
@@ -194,7 +194,7 @@ public class TestSubtitleBinder {
 	 * subtitle is bound to the view.
 	 */
 	@Test
-	public void testBind_dataInaccessibleAndNotCached() {
+	public void testBind_dataNotCached_dataInaccessible() {
 		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
 		final LibraryItem inaccessibleItem = new InaccessibleLibraryItem();
 
