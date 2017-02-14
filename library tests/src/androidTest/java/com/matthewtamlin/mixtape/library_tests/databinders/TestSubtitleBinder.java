@@ -160,8 +160,8 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the {@link SubtitleBinder#bind(TextView, LibraryItem)} method functions
-	 * correctly when the cache already contains the subtitle of the data passed to the {@code data}
-	 * argument. The test will only pass if the subtitle is bound to the view.
+	 * correctly when the cache already contains a subtitle for the bound LibraryItem. The test will
+	 * only pass if the cached subtitle is bound to the view.
 	 */
 	@Test
 	public void testBind_dataCached() {
@@ -176,8 +176,9 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the {@link SubtitleBinder#bind(TextView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the subtitle of the data passed to the {@code data}
-	 * argument. The test will only pass if the subtitle is bound to the view.
+	 * correctly when the cache does not contain a subtitle for the bound LibraryItem, and the
+	 * LibraryItem provides access to a subtitle. The test will only pass if the item's subtitle is
+	 * bound to the view.
 	 */
 	@Test
 	public void testBind_dataNotCached_dataAccessible() {
@@ -192,8 +193,8 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the {@link SubtitleBinder#bind(TextView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the subtitle of the data passed to the {@code data}
-	 * argument, and the data cannot be directly accessed. The test will only pass if the default
+	 * correctly when the cache does not contain a subtitle for the bound LibraryItem, and the
+	 * LibraryItem fails to provide access to a subtitle. The test will only pass if the default
 	 * subtitle is bound to the view.
 	 */
 	@Test
