@@ -158,8 +158,8 @@ public class TestTitleBinder {
 
 	/**
 	 * Test to verify that the {@link TitleBinder#bind(TextView, LibraryItem)} method functions
-	 * correctly when the cache already contains the title of the data passed to the {@code data}
-	 * argument. The test will only pass if the title is bound to the view.
+	 * correctly when the cache already contains a title for the bound LibraryItem. The test will
+	 * only pass if the cached title is bound to the view.
 	 */
 	@Test
 	public void testBind_dataCached() {
@@ -174,8 +174,9 @@ public class TestTitleBinder {
 
 	/**
 	 * Test to verify that the {@link TitleBinder#bind(TextView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the title of the data passed to the {@code data}
-	 * argument. The test will only pass if the title is bound to the view.
+	 * correctly when the cache does not contain a title for the bound LibraryItem, and the
+	 * LibraryItem provides access to a title. The test will only pass if the item's title is bound
+	 * to the view.
 	 */
 	@Test
 	public void testBind_dataAccessibleButNotCached() {
@@ -190,8 +191,8 @@ public class TestTitleBinder {
 
 	/**
 	 * Test to verify that the {@link TitleBinder#bind(TextView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the title of the data passed to the {@code data}
-	 * argument, and the data cannot be directly accessed. The test will only pass if the default
+	 * correctly when the cache does not contain a title for the bound LibraryItem, and the
+	 * LibraryItem fails to provide access to a title. The test will only pass if the default
 	 * title is bound to the view.
 	 */
 	@Test
