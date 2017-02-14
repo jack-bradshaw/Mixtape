@@ -48,36 +48,37 @@ public class TestArtworkBinder {
 	private static final int PAUSE_DURATION = 500;
 
 	/**
-	 * The image to use as the artwork.
+	 * A mock artwork item.
 	 */
 	private Drawable artwork;
 
 	/**
-	 * The image to use as the default artwork.
+	 * A mock default artwork item. This should be returned by the defaults.
 	 */
 	private Drawable defaultArtwork;
 
+	/**
+	 * A mock artwork item. This should be inserted into the cache directly.
+	 */
 	private Drawable cachedArtwork;
 
 	/**
-	 * A read-only LibraryItem for use in testing, which uses {@code artwork} for the artwork and
-	 * null for the other metadata.
+	 * A mock LibraryItem which returns artwork but no title or subtitle.
 	 */
 	private LibraryItem libraryItem;
 
 	/**
-	 * A cache for use in testing.
+	 * A actual cache for use in testing, not a mock.
 	 */
 	private LruCache<LibraryItem, Drawable> cache;
 
 	/**
-	 * Defaults for use in testing.
+	 * A mock DisplayableDefaults object which returns default artwork but no title or subtitle.
 	 */
 	private DisplayableDefaults displayableDefaults;
 
 	/**
-	 * An ImageView for use in testing. This view should be mocked so that method invocations can be
-	 * recorded and reviewed.
+	 * A mock ImageView which data can be bound to.
 	 */
 	private ImageView imageView;
 
@@ -132,7 +133,7 @@ public class TestArtworkBinder {
 	/**
 	 * Test to verify that the {@link ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)}
 	 * constructor functions correctly when provided with valid arguments. The test will only pass
-	 * if the construction call passes, and the getters return the values supplied at constructor.
+	 * if the construction call passes, and the getters return the values supplied at construction.
 	 */
 	public void testConstructor_validArgs() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
@@ -171,9 +172,8 @@ public class TestArtworkBinder {
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
-	 * correctly when the cache already contains the artwork of the data passed to the {@code data}
-	 * argument, and the dimensions of the cached data match the dimensions of the image view. The
-	 * test will only pass if the artwork is bound to the view from the cache.
+	 * correctly when the cache already contains artwork for the bound LibraryItem. The test will
+	 * only pass if the cached artwork is bound to the view.
 	 */
 	@Test
 	public void testBind_dataCached() {
@@ -191,8 +191,9 @@ public class TestArtworkBinder {
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the artwork of the data passed to the {@code data}
-	 * argument. The test will only pass if the artwork is bound to the view.
+	 * correctly when the cache does not contain artwork for the bound LibraryItem, and the
+	 * LibraryItem provides access to artwork. The test will only pass if the cached artwork is
+	 * bound to the view.
 	 */
 	@Test
 	public void testBind_dataNotCached_dataAccessible() {
@@ -208,9 +209,9 @@ public class TestArtworkBinder {
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the artwork of the data passed to the {@code data}
-	 * argument, and the data cannot be directly accessed. The test will only pass if the default
-	 * artwork is bound to the view.
+	 * correctly when the cache does not contain artwork for the bound LibraryItem, and the
+	 * LibraryItem fails to provide access to artwork. The test will only pass if the cached artwork
+	 * is bound to the view.
 	 */
 	@Test
 	public void testBind_dataNotCached_dataInaccessible() throws LibraryReadException {
