@@ -227,7 +227,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, inaccessibleItem);
 
 		waitForAsyncEventsToFinish();
-		
+
 		verify(imageView).setImageDrawable(defaultArtwork);
 		assertThat("Something was added to the cache.", cache.get(libraryItem), is(nullValue()));
 	}
