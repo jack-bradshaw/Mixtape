@@ -239,7 +239,7 @@ public class TestArtworkBinder {
 	private void waitForAsyncEventsToFinish() {
 		try {
 			Thread.sleep(PAUSE_DURATION);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			throw new RuntimeException("Wait interrupted, test aborted.");
 		}
 	}
