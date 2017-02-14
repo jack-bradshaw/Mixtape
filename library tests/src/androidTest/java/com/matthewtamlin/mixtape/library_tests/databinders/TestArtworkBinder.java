@@ -206,6 +206,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, libraryItem);
 
 		waitForAsyncEventsToFinish();
+
 		verify(imageView).setImageDrawable(artwork);
 		assertThat("Artwork was not added to the cache.", cache.get(libraryItem), is(artwork));
 	}
@@ -226,6 +227,7 @@ public class TestArtworkBinder {
 		binder.bind(imageView, inaccessibleItem);
 
 		waitForAsyncEventsToFinish();
+		
 		verify(imageView).setImageDrawable(defaultArtwork);
 		assertThat("Something was added to the cache.", cache.get(libraryItem), is(nullValue()));
 	}
