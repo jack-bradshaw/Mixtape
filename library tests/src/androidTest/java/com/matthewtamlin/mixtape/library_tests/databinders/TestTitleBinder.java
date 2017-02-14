@@ -176,6 +176,7 @@ public class TestTitleBinder {
 
 		pause(); // Allow time for async processing to complete
 		verify(textView).setText(cachedTitle); // Called once to clear and once to set
+		assertThat("Title was removed from the cache.", cache.get(libraryItem), is(cachedTitle));
 	}
 
 	/**
@@ -193,6 +194,7 @@ public class TestTitleBinder {
 
 		pause(); // Allow time for async processing to complete
 		verify(textView).setText(title);
+		assertThat("Title was not added to the cache.", cache.get(libraryItem), is(title));
 	}
 
 	/**
@@ -210,6 +212,7 @@ public class TestTitleBinder {
 
 		pause(); // Allow time for async processing to complete
 		verify(textView).setText(defaultTitle);
+
 	}
 
 	/**
