@@ -177,7 +177,7 @@ public class TestTitleBinder {
 
 		waitForAsyncEventsToFinish();
 
-		verify(textView).setText(cachedTitle); // Called once to clear and once to set
+		verify(textView).setText(cachedTitle);
 		assertThat("Title was removed from the cache.", cache.get(libraryItem), is(cachedTitle));
 	}
 
