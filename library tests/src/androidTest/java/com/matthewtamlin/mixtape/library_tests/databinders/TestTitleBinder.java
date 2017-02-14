@@ -56,6 +56,11 @@ public class TestTitleBinder {
 	private CharSequence defaultTitle;
 
 	/**
+	 * A mock title. This should be inserted into the cache directly.
+	 */
+	private CharSequence cachedTitle;
+
+	/**
 	 * A mock LibraryItem which returns a title but no subtitle or artwork.
 	 */
 	private LibraryItem libraryItem;
@@ -82,6 +87,7 @@ public class TestTitleBinder {
 	public void setup() throws LibraryReadException {
 		title = mock(CharSequence.class);
 		defaultTitle = mock(CharSequence.class);
+		cachedTitle = mock(CharSequence.class);
 
 		libraryItem = mock(LibraryItem.class);
 		when(libraryItem.getTitle()).thenReturn(title);
@@ -164,12 +170,12 @@ public class TestTitleBinder {
 	@Test
 	public void testBind_dataCached() {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
-		cache.put(libraryItem, title);
+		cache.put(libraryItem, cachedTitle);
 
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
-		verify(textView).setText(title); // Called once to clear and once to set
+		verify(textView).setText(cachedTitle); // Called once to clear and once to set
 	}
 
 	/**
