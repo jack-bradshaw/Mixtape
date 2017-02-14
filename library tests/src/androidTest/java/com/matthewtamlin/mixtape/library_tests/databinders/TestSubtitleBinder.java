@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
@@ -178,7 +179,10 @@ public class TestSubtitleBinder {
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
+
 		verify(textView).setText(cachedSubtitle); // Called once to clear and once to set
+		assertThat("Subtitle was removed from the cache.", cache.get(libraryItem),
+				is(cachedSubtitle));
 	}
 
 	/**
@@ -195,7 +199,9 @@ public class TestSubtitleBinder {
 		binder.bind(textView, libraryItem);
 
 		pause(); // Allow time for async processing to complete
+		
 		verify(textView).setText(subtitle);
+		assertThat("Subtitle was not added to the cache.", cache.get(libraryItem), is(subtitle));
 	}
 
 	/**
@@ -212,7 +218,9 @@ public class TestSubtitleBinder {
 		binder.bind(textView, inaccessibleItem);
 
 		pause(); // Allow time for async processing to complete
+
 		verify(textView).setText(defaultSubtitle);
+		assertThat("Something was added to the cache.", cache.get(libraryItem), is(nullValue()));
 	}
 
 	/**
