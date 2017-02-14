@@ -40,6 +40,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Tests for the {@link ArtworkBinder} class.
+ */
 @RunWith(AndroidJUnit4.class)
 public class TestArtworkBinder {
 	/**
