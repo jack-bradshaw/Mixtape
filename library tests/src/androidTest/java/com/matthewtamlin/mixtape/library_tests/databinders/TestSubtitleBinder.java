@@ -38,6 +38,9 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit tests for the {@link SubtitleBinder} class.
+ */
 @RunWith(AndroidJUnit4.class)
 public class TestSubtitleBinder {
 	/**
