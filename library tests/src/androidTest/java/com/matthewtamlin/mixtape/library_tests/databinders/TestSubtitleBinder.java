@@ -230,7 +230,7 @@ public class TestSubtitleBinder {
 	private void waitForAsyncEventsToFinish() {
 		try {
 			Thread.sleep(PAUSE_DURATION);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			throw new RuntimeException("wait interrupted, test aborted");
 		}
 	}
