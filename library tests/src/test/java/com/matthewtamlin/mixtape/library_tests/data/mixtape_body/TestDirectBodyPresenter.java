@@ -554,11 +554,6 @@ public class TestDirectBodyPresenter {
 	}
 
 	@Test
-	public void testOnLibraryItemSelected_nullCallbacksSupplied() {
-
-	}
-
-	@Test
 	public void testOnLibraryItemSelected_validCallbacks() {
 
 	}
@@ -567,11 +562,6 @@ public class TestDirectBodyPresenter {
 	public void testOnContextualMenuItemSelected_noCallbacks() {
 		presenter.onContextualMenuItemSelected(mock(View.class), mock(LibraryItem.class),
 				mock(MenuItem.class));
-	}
-
-	@Test
-	public void testOnContextualMenuItemSelected_nullCallbacksSupplied() {
-
 	}
 
 	@Test
