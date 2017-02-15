@@ -33,6 +33,7 @@ import java.util.List;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -412,7 +413,7 @@ public class TestDirectBodyPresenter {
 		dataSource.setData(newData);
 		presenter.onDataReplaced(dataSource, originalData, newData);
 
-		verify(view).setItems(newData);
+		verify(view, atLeastOnce()).setItems(newData);
 	}
 
 	/**
