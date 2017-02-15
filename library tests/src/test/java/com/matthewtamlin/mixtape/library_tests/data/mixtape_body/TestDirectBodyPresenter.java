@@ -584,6 +584,10 @@ class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
 	@Override
 	public void loadData(final boolean forceRefresh,
 			final DataLoadedListener<List<LibraryItem>> callback) {
-		callback.onDataLoaded(this, data);
+		if (data == null) {
+			callback.onLoadDataFailed(this);
+		} else {
+			callback.onDataLoaded(this, data);
+		}
 	}
 }
