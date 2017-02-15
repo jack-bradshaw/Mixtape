@@ -550,11 +550,21 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).showLoadingIndicator(true);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
+	 * a library item selected callback and there are no registered callback listeners. The test
+	 * will only pass if all methods exit normally.
+	 */
 	@Test
 	public void testOnLibraryItemSelected_noCallbacks() {
 		presenter.onLibraryItemSelected(mock(View.class), mock(LibraryItem.class));
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
+	 * a library item selected callback and there are registered callback listeners. The test will
+	 * only pass if the callback is propagated to all listeners.
+	 */
 	@Test
 	public void testOnLibraryItemSelected_validCallbacks() {
 		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener1
@@ -573,12 +583,22 @@ public class TestDirectBodyPresenter {
 		verify(listener2).onLibraryItemSelected(presenter, selectedItem);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
+	 * a contextual menu item selected callback and there are no registered callback listeners. The
+	 * test will only pass if all methods exit normally.
+	 */
 	@Test
 	public void testOnContextualMenuItemSelected_noCallbacks() {
 		presenter.onContextualMenuItemSelected(mock(View.class), mock(LibraryItem.class),
 				mock(MenuItem.class));
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
+	 * a contextual menu item selected callback and there are registered callback listeners. The
+	 * test will only pass if the callback is propagated to all listeners.
+	 */
 	@Test
 	public void testOnContextualMenuItemSelected_validCallbacks() {
 		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
