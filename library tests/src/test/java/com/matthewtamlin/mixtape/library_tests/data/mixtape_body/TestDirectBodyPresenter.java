@@ -262,7 +262,11 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataModified_withoutView() {
-		presenterWithDataSourceOnly.onDataModified(dataSource, mock(List.class));
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onDataModified(dataSource, data);
 	}
 
 	/**
