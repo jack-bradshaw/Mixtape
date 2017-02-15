@@ -28,6 +28,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -199,11 +201,18 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataLoaded_withView() {
-		final List<LibraryItem> items = mock(List.class);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
 
-		presenterWithDataSourceAndView.onDataLoaded(dataSource, items);
+		final View view = mock(View.class);
+		presenter.setView(view);
 
-		verify(view).setItems(any(List.class));
+		verify(view, times(1)).setItems(data);
+
+		presenter.onDataLoaded(dataSource, data);
+
+		verify(view, times(2)).setItems(data);
 	}
 
 	/**
