@@ -34,6 +34,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;
@@ -101,7 +102,7 @@ public class TestDirectBodyPresenter {
 
 		verify(dataSource1).loadData(anyBoolean(), presenter);
 
-		presenter.setDataSource(dataSource2);
+		presenter.setDataSource(null);
 
 		verify(dataSource2).unregisterItemAddedListener(presenter);
 		verify(dataSource2).unregisterDataModifiedListener(presenter);
