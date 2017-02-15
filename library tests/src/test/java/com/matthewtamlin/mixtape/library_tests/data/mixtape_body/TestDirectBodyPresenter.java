@@ -384,12 +384,18 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnDataRemoved_withView() {
-		final LibraryItem addedItem = mock(LibraryItem.class);
-		final int removedIndex = 1;
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
 
-		presenterWithDataSourceAndView.onDataRemoved(dataSource, addedItem, removedIndex);
+		final View view = mock(View.class);
+		presenter.setView(view);
 
-		verify(view).notifyItemRemoved(removedIndex);
+		verify(view, never()).notifyItemRemoved(anyInt());
+
+		presenter.onDataAdded(dataSource, mock(LibraryItem.class), 1);
+
+		verify(view, never()).notifyItemRemoved(1);
 	}
 
 	/**
@@ -400,7 +406,11 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataReplaced_withoutView() {
-		presenterWithDataSourceOnly.onDataReplaced(dataSource, mock(List.class), mock(List.class));
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onDataReplaced(dataSource, mock(List.class), mock(List.class));
 	}
 
 	/**
