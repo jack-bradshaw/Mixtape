@@ -21,7 +21,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
+import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 
@@ -29,15 +29,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for subclasses of the DirectBodyPresenter class.
@@ -107,6 +109,41 @@ public class TestDirectBodyPresenter {
 		verify(dataSource2).unregisterLongOperationListener(presenter);
 	}
 
+	@Test
+	public void testSetDataSource_withView() {
+		final ArrayList<LibraryItem> data1 = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource1 = new ListDataSourceHelper<LibraryItem>() {
+			@Override
+			public void loadData(final boolean forceRefresh,
+					final DataLoadedListener<List<LibraryItem>> callback) {
+				callback.onDataLoaded(this, data1);
+			}
+		};
+
+		final ArrayList<LibraryItem> data2 = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource2 = new ListDataSourceHelper<LibraryItem>() {
+			@Override
+			public void loadData(final boolean forceRefresh,
+					final DataLoadedListener<List<LibraryItem>> callback) {
+				callback.onDataLoaded(this, data2);
+			}
+		};
+
+		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
+				DirectBodyPresenter<>();
+
+		final View view = mock(View.class);
+		presenter.setView(view);
+
+		presenter.setDataSource(dataSource1);
+		verify(view).setItems(data1);
+
+		presenter.setDataSource(dataSource2);
+		verify(view).setItems(data2);
+
+		presenter.setDataSource(dataSource2);
+		verify(view).setItems(null);
+	}
 
 
 	/**
