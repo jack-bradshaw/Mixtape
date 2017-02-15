@@ -182,7 +182,7 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 					if (loadedTitle != null) {
 						cache.put(data, loadedTitle);
 					}
-					
+
 					return loadedTitle;
 				} catch (final LibraryReadException e) {
 					return defaults.getTitle();
