@@ -349,12 +349,18 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnDataAdded_withView() {
-		final LibraryItem addedItem = mock(LibraryItem.class);
-		final int addedIndex = 1;
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
 
-		presenterWithDataSourceAndView.onDataAdded(dataSource, addedItem, addedIndex);
+		final View view = mock(View.class);
+		presenter.setView(view);
 
-		verify(view).notifyItemAdded(addedIndex);
+		verify(view, never()).notifyItemAdded(anyInt());
+
+		presenter.onDataAdded(dataSource, mock(LibraryItem.class), 1);
+
+		verify(view, never()).notifyItemAdded(1);
 	}
 
 	/**
