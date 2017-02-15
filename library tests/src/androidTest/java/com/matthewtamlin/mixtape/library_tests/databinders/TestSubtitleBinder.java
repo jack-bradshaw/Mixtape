@@ -127,7 +127,7 @@ public class TestSubtitleBinder {
 	/**
 	 * Test to verify that the {@link SubtitleBinder#SubtitleBinder(LruCache, DisplayableDefaults)}
 	 * constructor functions correctly when provided with valid arguments. The test will only pass
-	 * if the construction call passes, and the getters return the values supplied at construction.
+	 * if the getters returns the values passed to the constructor.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
