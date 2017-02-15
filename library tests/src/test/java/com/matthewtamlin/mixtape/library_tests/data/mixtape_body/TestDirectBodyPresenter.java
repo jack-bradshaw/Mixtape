@@ -527,9 +527,19 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnLongOperationFinished_withView() {
-		presenterWithDataSourceAndView.onLongOperationFinished(dataSource);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		final View view = mock(View.class);
+		presenter.setView(view);
+
+		verify(view, never()).showLoadingIndicator(false);
+
+		presenter.onLongOperationFinished(dataSource);
 
 		verify(view).showLoadingIndicator(false);
+		verify(view, never()).showLoadingIndicator(true);
 	}
 
 	private SettableListDataSource createNewDataSource(final List<LibraryItem> items) {
