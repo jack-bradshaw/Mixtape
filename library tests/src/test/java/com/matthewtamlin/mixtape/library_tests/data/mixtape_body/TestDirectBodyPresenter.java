@@ -24,6 +24,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
+import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -555,7 +556,20 @@ public class TestDirectBodyPresenter {
 
 	@Test
 	public void testOnLibraryItemSelected_validCallbacks() {
+		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener1
+				= mock(LibraryItemSelectedListener.class);
+		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener2
+				= mock(LibraryItemSelectedListener.class);
 
+		presenter.registerListener(listener1);
+		presenter.registerListener(listener2);
+		presenter.registerListener((LibraryItemSelectedListener) null);
+
+		final LibraryItem selectedItem = mock(LibraryItem.class);
+		presenter.onLibraryItemSelected(mock(View.class), selectedItem);
+
+		verify(listener1).onLibraryItemSelected(presenter, selectedItem);
+		verify(listener2).onLibraryItemSelected(presenter, selectedItem);
 	}
 
 	@Test
@@ -585,8 +599,8 @@ public class TestDirectBodyPresenter {
 
 /**
  * A ListDataSource where the data can be set. If the data is null when the {@link
- * #loadData(boolean, DataLoadedListener)} method is called, then the data load failed callback
- * is delivered. Otherwise, the data loaded callback is delivered.
+ * #loadData(boolean, DataLoadedListener)} method is called, then the data load failed callback is
+ * delivered. Otherwise, the data loaded callback is delivered.
  */
 class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
 	/**
