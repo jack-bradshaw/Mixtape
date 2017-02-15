@@ -345,7 +345,7 @@ public class TestDirectBodyPresenter {
 
 		presenter.onDataAdded(dataSource, mock(LibraryItem.class), 1);
 
-		verify(view, never()).notifyItemAdded(1);
+		verify(view, times(1)).notifyItemAdded(1);
 	}
 
 	/**
