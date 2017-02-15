@@ -57,7 +57,7 @@ public class TestDirectBodyPresenter {
 	 * data source from all callbacks.
 	 */
 	@Test
-	public void testSetDataSource() {
+	public void testSetDataSource_withoutView() {
 		final ListDataSource<LibraryItem> dataSource1 = mock(ListDataSource.class);
 		final ListDataSource<LibraryItem> dataSource2 = mock(ListDataSource.class);
 
@@ -106,6 +106,8 @@ public class TestDirectBodyPresenter {
 		verify(dataSource2).unregisterItemModifiedListener(presenter);
 		verify(dataSource2).unregisterLongOperationListener(presenter);
 	}
+
+
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#onDataLoaded(BaseDataSource, List)} method
