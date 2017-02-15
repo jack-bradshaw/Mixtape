@@ -16,8 +16,6 @@
 
 package com.matthewtamlin.mixtape.library_tests.data.mixtape_body;
 
-import android.support.test.runner.AndroidJUnit4;
-
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -25,23 +23,16 @@ import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 
-import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.data;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -55,6 +46,7 @@ import static org.mockito.Mockito.verify;
 public class TestDirectBodyPresenter {
 	private DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter;
 
+	@Before
 	public void setup() {
 		presenter = new DirectBodyPresenter<>();
 	}
@@ -184,7 +176,6 @@ public class TestDirectBodyPresenter {
 	 * method exits normally.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataLoaded_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -199,7 +190,6 @@ public class TestDirectBodyPresenter {
 	 * is passed to the view.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataLoaded_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -221,7 +211,6 @@ public class TestDirectBodyPresenter {
 	 * method exits normally.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnLoadDataFailed_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -236,7 +225,6 @@ public class TestDirectBodyPresenter {
 	 * updated to show no items.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnLoadDataFailed_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -258,7 +246,6 @@ public class TestDirectBodyPresenter {
 	 * if the method exits normally.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataModified_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -273,7 +260,6 @@ public class TestDirectBodyPresenter {
 	 * is notified of the event.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataModified_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -400,7 +386,6 @@ public class TestDirectBodyPresenter {
 	 * pass if the method exits normally.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataReplaced_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
@@ -415,7 +400,6 @@ public class TestDirectBodyPresenter {
 	 * the view is updated with the new data.
 	 */
 	@Test
-	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataReplaced_withView() {
 		final List<LibraryItem> originalData = new ArrayList<>();
 		final SettableListDataSource dataSource = createNewDataSource(originalData);
