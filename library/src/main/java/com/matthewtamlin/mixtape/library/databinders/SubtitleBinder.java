@@ -178,7 +178,11 @@ public class SubtitleBinder implements DataBinder<LibraryItem, TextView> {
 			} else {
 				try {
 					final CharSequence loadedSubtitle = data.getSubtitle();
-					cache.put(data, loadedSubtitle);
+
+					if (loadedSubtitle != null) {
+						cache.put(data, loadedSubtitle);
+					}
+					
 					return loadedSubtitle;
 				} catch (final LibraryReadException e) {
 					return defaults.getSubtitle();
