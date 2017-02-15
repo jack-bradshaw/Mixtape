@@ -16,6 +16,8 @@
 
 package com.matthewtamlin.mixtape.library_tests.data.mixtape_body;
 
+import android.view.MenuItem;
+
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -563,7 +565,8 @@ public class TestDirectBodyPresenter {
 
 	@Test
 	public void testOnContextualMenuItemSelected_noCallbacks() {
-
+		presenter.onContextualMenuItemSelected(mock(View.class), mock(LibraryItem.class),
+				mock(MenuItem.class));
 	}
 
 	@Test
