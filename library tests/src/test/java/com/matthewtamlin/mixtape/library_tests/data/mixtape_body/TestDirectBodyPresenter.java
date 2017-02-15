@@ -571,10 +571,15 @@ public class TestDirectBodyPresenter {
 				= mock(LibraryItemSelectedListener.class);
 		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener2
 				= mock(LibraryItemSelectedListener.class);
+		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener3
+				= mock(LibraryItemSelectedListener.class);
 
 		presenter.registerListener(listener1);
 		presenter.registerListener(listener2);
 		presenter.registerListener((LibraryItemSelectedListener) null);
+
+		presenter.registerListener(listener3);
+		presenter.unregisterListener(listener3);
 
 		final LibraryItem selectedItem = mock(LibraryItem.class);
 		presenter.onLibraryItemSelected(mock(View.class), selectedItem);
@@ -605,10 +610,15 @@ public class TestDirectBodyPresenter {
 				listener1 = mock(ContextualMenuItemSelectedListener.class);
 		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
 				listener2 = mock(ContextualMenuItemSelectedListener.class);
+		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
+				listener3 = mock(ContextualMenuItemSelectedListener.class);
 
 		presenter.registerListener(listener1);
 		presenter.registerListener(listener2);
 		presenter.registerListener((LibraryItemSelectedListener) null);
+
+		presenter.registerListener(listener3);
+		presenter.unregisterListener(listener3);
 
 		final LibraryItem selectedItem = mock(LibraryItem.class);
 		final MenuItem menuItem = mock(MenuItem.class);
