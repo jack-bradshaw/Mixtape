@@ -34,13 +34,10 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for subclasses of the DirectBodyPresenter class.
@@ -179,7 +176,7 @@ public class TestDirectBodyPresenter {
 
 		final View view1 = mock(View.class);
 		final View view2 = mock(View.class);
-		
+
 		presenter.setView(view1);
 
 		verify(view1).setPresenter(presenter);
@@ -442,5 +439,15 @@ public class TestDirectBodyPresenter {
 		presenterWithDataSourceAndView.onLongOperationFinished(dataSource);
 
 		verify(view).showLoadingIndicator(false);
+	}
+
+	private ListDataSource<LibraryItem> createNewDataSource(final List<LibraryItem> items) {
+		return new ListDataSourceHelper<LibraryItem>() {
+			@Override
+			public void loadData(final boolean forceRefresh,
+					final DataLoadedListener<List<LibraryItem>> callback) {
+				callback.onDataLoaded(this, items);
+			}
+		};
 	}
 }
