@@ -67,42 +67,9 @@ public class TestDirectBodyPresenter {
 	 */
 	@Before
 	public void setup() {
-		dataSource = createMockDataSource();
-		view = createMockView();
-
-		presenterWithDataSourceOnly = createPresenter();
-		presenterWithDataSourceOnly.setDataSource(dataSource);
-		presenterWithDataSourceOnly.setView(null);
-
-		presenterWithViewOnly = createPresenter();
-		presenterWithViewOnly.setDataSource(null);
-		presenterWithViewOnly.setView(view);
-
-		presenterWithDataSourceAndView = createPresenter();
-		presenterWithDataSourceAndView.setDataSource(dataSource);
-		presenterWithDataSourceAndView.setView(view);
-
-		assertThat("Precondition failed. presenterWithDataSourceOnly is null",
-				presenterWithDataSourceOnly, is(notNullValue()));
-		assertThat("Precondition failed. presenterWithDataSourceOnly has no data source",
-				presenterWithDataSourceOnly.getDataSource(), is(dataSource));
-		assertThat("Precondition failed. presenterWithDataSourceOnly has a view",
-				presenterWithDataSourceOnly.getView(), is(nullValue()));
-
-		assertThat("Precondition failed. presenterWithViewOnly is null", presenterWithViewOnly,
-				is(notNullValue()));
-		assertThat("Precondition failed. presenterWithViewOnly has a data source",
-				presenterWithViewOnly.getDataSource(), is(nullValue()));
-		assertThat("Precondition failed. presenterWithViewOnly has no view",
-				presenterWithViewOnly.getView(), is(view));
-
-		assertThat("Precondition failed. presenterWithDataSourceAndView is null",
-				presenterWithDataSourceAndView,
-				is(notNullValue()));
-		assertThat("Precondition failed. presenterWithDataSourceAndView has no data source",
-				presenterWithDataSourceAndView.getDataSource(), is(dataSource));
-		assertThat("Precondition failed. presenterWithDataSourceAndView has no view",
-				presenterWithDataSourceAndView.getView(), is(view));
+		// noinspection unchecked - This is ok for mocks
+		dataSource = mock(ListDataSource.class);
+		view = mock(BodyContract.View.class);
 	}
 
 	/**
