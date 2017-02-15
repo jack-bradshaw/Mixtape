@@ -122,7 +122,7 @@ public class TestDirectBodyPresenter {
 		verify(view).setItems(data1);
 
 		presenter.setDataSource(dataSource2);
-		verify(view).setItems(data2);
+		verify(view, atLeastOnce()).setItems(data2);
 
 		presenter.setDataSource(dataSource2);
 		verify(view).setItems(null);
