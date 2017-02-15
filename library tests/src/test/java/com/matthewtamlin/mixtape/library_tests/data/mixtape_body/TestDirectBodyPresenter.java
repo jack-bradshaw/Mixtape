@@ -421,9 +421,16 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataReplaced_withView() {
-		final List newData = mock(List.class);
+		final List<LibraryItem> originalData = new ArrayList<>();
+		final SettableListDataSource dataSource = createNewDataSource(originalData);
+		presenter.setDataSource(dataSource);
 
-		presenterWithDataSourceAndView.onDataReplaced(dataSource, mock(List.class), newData);
+		final View view = mock(View.class);
+		presenter.setView(view);
+
+		final ArrayList<LibraryItem> newData = new ArrayList<>();
+		dataSource.setData(newData);
+		presenter.onDataReplaced(dataSource, originalData, newData);
 
 		verify(view).setItems(newData);
 	}
