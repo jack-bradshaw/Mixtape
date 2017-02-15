@@ -491,9 +491,19 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnLongOperationStarted_withView() {
-		presenterWithDataSourceAndView.onLongOperationStarted(dataSource);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		final View view = mock(View.class);
+		presenter.setView(view);
+
+		verify(view, never()).showLoadingIndicator(true);
+
+		presenter.onLongOperationStarted(dataSource);
 
 		verify(view).showLoadingIndicator(true);
+		verify(view, never()).showLoadingIndicator(false);
 	}
 
 	/**
