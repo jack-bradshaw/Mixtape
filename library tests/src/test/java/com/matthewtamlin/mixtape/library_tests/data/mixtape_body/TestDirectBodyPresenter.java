@@ -33,6 +33,7 @@ import java.util.List;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -73,7 +74,7 @@ public class TestDirectBodyPresenter {
 		verify(dataSource1).registerItemModifiedListener(presenter);
 		verify(dataSource1).registerLongOperationListener(presenter);
 
-		verify(dataSource1).loadData(anyBoolean(), presenter);
+		verify(dataSource1).loadData(anyBoolean(), eq(presenter));
 
 		presenter.setDataSource(dataSource2);
 
