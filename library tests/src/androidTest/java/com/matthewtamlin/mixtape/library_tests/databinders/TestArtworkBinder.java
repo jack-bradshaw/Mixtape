@@ -135,8 +135,9 @@ public class TestArtworkBinder {
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)}
-	 * constructor functions correctly when provided with valid arguments. The test will only pass
-	 * if the construction call passes, and the getters return the values supplied at construction.
+	 * constructor functions correctly when provided with valid arguments. The test will only
+	 * pass if
+	 * the getters returns the values passed to the constructor.
 	 */
 	public void testConstructor_validArgs() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
