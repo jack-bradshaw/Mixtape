@@ -259,7 +259,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 					if (loadedArtwork != null) {
 						cache.put(data, loadedArtwork);
 					}
-					
+
 					return loadedArtwork;
 				} catch (final LibraryReadException e) {
 					return defaults.getArtwork();
