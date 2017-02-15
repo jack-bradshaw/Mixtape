@@ -223,7 +223,11 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnLoadDataFailed_withoutView() {
-		presenterWithDataSourceOnly.onLoadDataFailed(dataSource);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onLoadDataFailed(dataSource);
 	}
 
 	/**
