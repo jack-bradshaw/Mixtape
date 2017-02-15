@@ -21,6 +21,7 @@ import android.util.LruCache;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
+import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
@@ -33,6 +34,7 @@ import java.util.Iterator;
  * performance, and asynchronous processing is only used if data is not already cached. In case an
  * item fails to return a title, a default must be supplied.
  */
+@Tested(testMethod = "automated")
 public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 	/**
 	 * All bind tasks currently in progress. Each task is mapped to the target TextView.
