@@ -546,6 +546,36 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).showLoadingIndicator(true);
 	}
 
+	@Test
+	public void testOnLibraryItemSelected_noCallbacks() {
+
+	}
+
+	@Test
+	public void testOnLibraryItemSelected_nullCallbacksSupplied() {
+
+	}
+
+	@Test
+	public void testOnLibraryItemSelected_validCallbacks() {
+
+	}
+
+	@Test
+	public void testOnContextualMenuItemSelected_noCallbacks() {
+
+	}
+
+	@Test
+	public void testOnContextualMenuItemSelected_nullCallbacksSupplied() {
+
+	}
+
+	@Test
+	public void testOnContextualMenuItemSelected_validCallbacks() {
+
+	}
+
 	/**
 	 * Created a new SettableListDataSource with the supplied items as the data.
 	 *
@@ -563,7 +593,7 @@ public class TestDirectBodyPresenter {
 /**
  * A ListDataSource where the data can be set. If the data is null when the {@link
  * #loadData(boolean, DataLoadedListener)} method is called, then the data load failed callback
- * is delivered. Otherwise, the data loaded callback is delivered.	
+ * is delivered. Otherwise, the data loaded callback is delivered.
  */
 class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
 	/**
