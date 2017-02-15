@@ -513,7 +513,11 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnLongOperationFinished_withoutView() {
-		presenterWithDataSourceOnly.onLongOperationFinished(dataSource);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onLongOperationFinished(dataSource);
 	}
 
 	/**
