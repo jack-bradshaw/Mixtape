@@ -18,12 +18,11 @@ package com.matthewtamlin.mixtape.library_tests.data.mixtape_body;
 
 import android.support.test.runner.AndroidJUnit4;
 
-
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
-import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,12 +31,12 @@ import org.mockito.ArgumentCaptor;
 
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -50,33 +49,16 @@ import static org.mockito.Mockito.verify;
  * 		the type of view controlled by the presenter under test
  */
 @RunWith(AndroidJUnit4.class)
-public abstract class TestDirectBodyPresenter<
-		S extends ListDataSource<LibraryItem>,
-		V extends BodyContract.View> {
+public class TestDirectBodyPresenter {
 	/**
 	 * A data source for use in testing, supplied by the subclass.
 	 */
-	private S dataSource;
+	private ListDataSource<LibraryItem> dataSource;
 
 	/**
 	 * A view for use in testing, supplied by the subclass.
 	 */
-	private V view;
-
-	/**
-	 * A presenter which has a data source but no view, supplied by the subclass then customised.
-	 */
-	private DirectBodyPresenter<LibraryItem, S, V> presenterWithDataSourceOnly;
-
-	/**
-	 * A presenter which has a view but no data source, supplied by the subclass then customised.
-	 */
-	private DirectBodyPresenter<LibraryItem, S, V> presenterWithViewOnly;
-
-	/**
-	 * A presenter which has a view and a data source, supplied by the subclass then customised.
-	 */
-	private DirectBodyPresenter<LibraryItem, S, V> presenterWithDataSourceAndView;
+	private BodyContract.View view;
 
 	/**
 	 * Initialises the testing variables and checks that all preconditions pass. Subclasses should
@@ -122,21 +104,6 @@ public abstract class TestDirectBodyPresenter<
 		assertThat("Precondition failed. presenterWithDataSourceAndView has no view",
 				presenterWithDataSourceAndView.getView(), is(view));
 	}
-
-	/**
-	 * @return a new mock data source, not null
-	 */
-	protected abstract S createMockDataSource();
-
-	/**
-	 * @return a new mock view, not null
-	 */
-	protected abstract V createMockView();
-
-	/**
-	 * @return a new presenter, not null
-	 */
-	protected abstract DirectBodyPresenter<LibraryItem, S, V> createPresenter();
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
