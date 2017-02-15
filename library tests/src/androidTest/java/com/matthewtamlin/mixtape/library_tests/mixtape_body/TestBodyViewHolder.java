@@ -62,6 +62,9 @@ public class TestBodyViewHolder {
 	 */
 	private View menuButton;
 
+	/**
+	 * Initialises the testing objects and assigns them to member variables.
+	 */
 	@Before
 	public void setup() {
 		rootView = mock(View.class);
@@ -69,5 +72,95 @@ public class TestBodyViewHolder {
 		subtitleView = mock(TextView.class);
 		artworkView = mock(ImageView.class);
 		menuButton = mock(View.class);
+	}
+
+	/**
+	 * Test to verify that the correct exception is thrown when the {@code rootView} argument of
+	 * {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView, ImageView, View)} is null. The
+	 * test will only pass if an IllegalArgumentException is thrown.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor_nullRootView() {
+		new BodyViewHolder(null,
+				titleView,
+				subtitleView,
+				artworkView,
+				menuButton);
+	}
+
+	/**
+	 * Test to verify that the correct exception is thrown when the {@code titleHolder} argument of
+	 * {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView, ImageView, View)} is null. The
+	 * test will only pass if an IllegalArgumentException is thrown.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor_nullTitleView() {
+		new BodyViewHolder(rootView,
+				null,
+				subtitleView,
+				artworkView,
+				menuButton);
+	}
+
+	/**
+	 * Test to verify that the correct exception is thrown when the {@code subtitleHolder} argument
+	 * of {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView, ImageView, View)} is null.
+	 * The test will only pass if an IllegalArgumentException is thrown.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor_nullSubitleView() {
+		new BodyViewHolder(rootView,
+				titleView,
+				null,
+				artworkView,
+				menuButton);
+	}
+
+	/**
+	 * Test to verify that the correct exception is thrown when the {@code artworkHolder} argument
+	 * of {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView, ImageView, View)} is null.
+	 * The test will only pass if an IllegalArgumentException is thrown.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor_nullArtworkView() {
+		new BodyViewHolder(rootView,
+				titleView,
+				subtitleView,
+				null,
+				menuButton);
+	}
+
+	/**
+	 * Test to verify that the correct exception is thrown when the {@code contextualMenuButton}
+	 * argument of {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView, ImageView, View)}
+	 * is null. The test will only pass if an IllegalArgumentException is thrown.
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testConstructor_nullMenuButton() {
+		new BodyViewHolder(rootView,
+				titleView,
+				subtitleView,
+				artworkView,
+				null);
+	}
+
+	/**
+	 * Test to verify that the {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView,
+	 * ImageView, View)} constructor functions correctly when provided with valid arguments. The
+	 * test will only pass if the getters returns the values passed to the constructor.
+	 */
+	@Test
+	public void testConstructor_validArgs() {
+		final BodyViewHolder holder = new BodyViewHolder(rootView,
+				titleView,
+				subtitleView,
+				artworkView,
+				menuButton);
+
+		assertThat(holder.getRootView(), is(rootView));
+		assertThat(holder.getTitleTextView(), is(titleView));
+		assertThat(holder.getSubtitleTextView(), is(subtitleView));
+		assertThat(holder.getArtworkImageView(), is(artworkView));
+		assertThat(holder.getContextualMenuButton(), is(menuButton));
 	}
 }
