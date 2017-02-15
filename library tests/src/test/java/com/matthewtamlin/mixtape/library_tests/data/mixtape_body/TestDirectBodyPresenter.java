@@ -94,7 +94,7 @@ public class TestDirectBodyPresenter {
 		verify(dataSource2).registerItemModifiedListener(presenter);
 		verify(dataSource2).registerLongOperationListener(presenter);
 
-		verify(dataSource1).loadData(anyBoolean(), presenter);
+		verify(dataSource1).loadData(anyBoolean(), eq(presenter));
 
 		presenter.setDataSource(null);
 
