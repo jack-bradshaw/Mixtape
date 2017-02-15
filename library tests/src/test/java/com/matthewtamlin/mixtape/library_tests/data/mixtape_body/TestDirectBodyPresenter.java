@@ -561,7 +561,9 @@ public class TestDirectBodyPresenter {
 }
 
 /**
- * A ListDataSource where the data can be set.
+ * A ListDataSource where the data can be set. If the data is null when the {@link
+ * #loadData(boolean, DataLoadedListener)} method is called, then the data load failed callback
+ * is delivered. Otherwise, the data loaded callback is delivered.	
  */
 class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
 	/**
