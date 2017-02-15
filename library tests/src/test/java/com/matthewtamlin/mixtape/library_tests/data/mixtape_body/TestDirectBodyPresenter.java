@@ -370,7 +370,11 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnDataRemoved_withoutView() {
-		presenterWithDataSourceOnly.onDataRemoved(dataSource, mock(LibraryItem.class), 1);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onDataRemoved(dataSource, mock(LibraryItem.class), 0);
 	}
 
 	/**
