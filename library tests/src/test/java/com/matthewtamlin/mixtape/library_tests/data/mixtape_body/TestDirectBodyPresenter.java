@@ -51,28 +51,6 @@ import static org.mockito.Mockito.verify;
 @RunWith(AndroidJUnit4.class)
 public class TestDirectBodyPresenter {
 	/**
-	 * A data source for use in testing, supplied by the subclass.
-	 */
-	private ListDataSource<LibraryItem> dataSource;
-
-	/**
-	 * A view for use in testing, supplied by the subclass.
-	 */
-	private BodyContract.View view;
-
-	/**
-	 * Initialises the testing variables and checks that all preconditions pass. Subclasses should
-	 * always call the superclass implementation, however this class will call on the abstract
-	 * methods so they must be ready first.
-	 */
-	@Before
-	public void setup() {
-		// noinspection unchecked - This is ok for mocks
-		dataSource = mock(ListDataSource.class);
-		view = mock(BodyContract.View.class);
-	}
-
-	/**
 	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
 	 * functions correctly when the presenter already has a data source. The test will only pass if
 	 * the method registers the new data source for all relevant callbacks, and unregisters the old
