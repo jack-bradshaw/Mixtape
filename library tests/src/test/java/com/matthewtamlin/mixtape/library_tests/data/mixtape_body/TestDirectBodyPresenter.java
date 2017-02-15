@@ -38,7 +38,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -238,12 +240,18 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnLoadDataFailed_withView() {
-		presenterWithDataSourceAndView.onLoadDataFailed(dataSource);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
 
-		final ArgumentCaptor<List> captor = ArgumentCaptor.forClass(List.class);
-		verify(view).setItems(captor.capture());
+		final View view = mock(View.class);
+		presenter.setView(view);
 
-		assertThat("view items were not updated", captor.getValue().size(), is(0));
+		verify(view, never()).setItems(null);
+
+		presenter.onLoadDataFailed(dataSource);
+
+		verify(view, times(1)).setItems(null);
 	}
 
 	/**
