@@ -167,9 +167,6 @@ public class TestDirectBodyPresenter {
 
 	@Test
 	public void testSetView_withDataSource() {
-		final View view1 = mock(View.class);
-		final View view2 = mock(View.class);
-
 		final ArrayList<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = new ListDataSourceHelper<LibraryItem>() {
 			@Override
@@ -180,6 +177,9 @@ public class TestDirectBodyPresenter {
 		};
 		presenter.setDataSource(dataSource);
 
+		final View view1 = mock(View.class);
+		final View view2 = mock(View.class);
+		
 		presenter.setView(view1);
 
 		verify(view1).setPresenter(presenter);
