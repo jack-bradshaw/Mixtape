@@ -116,22 +116,10 @@ public class TestDirectBodyPresenter {
 		presenter.setView(view);
 
 		final ArrayList<LibraryItem> data1 = new ArrayList<>();
-		final ListDataSource<LibraryItem> dataSource1 = new ListDataSourceHelper<LibraryItem>() {
-			@Override
-			public void loadData(final boolean forceRefresh,
-					final DataLoadedListener<List<LibraryItem>> callback) {
-				callback.onDataLoaded(this, data1);
-			}
-		};
+		final ListDataSource<LibraryItem> dataSource1 = createNewDataSource(data1);
 
 		final ArrayList<LibraryItem> data2 = new ArrayList<>();
-		final ListDataSource<LibraryItem> dataSource2 = new ListDataSourceHelper<LibraryItem>() {
-			@Override
-			public void loadData(final boolean forceRefresh,
-					final DataLoadedListener<List<LibraryItem>> callback) {
-				callback.onDataLoaded(this, data2);
-			}
-		};
+		final ListDataSource<LibraryItem> dataSource2 = createNewDataSource(data2);
 
 		presenter.setDataSource(dataSource1);
 		verify(view).setItems(data1);
@@ -165,13 +153,7 @@ public class TestDirectBodyPresenter {
 	@Test
 	public void testSetView_withDataSource() {
 		final ArrayList<LibraryItem> data = new ArrayList<>();
-		final ListDataSource<LibraryItem> dataSource = new ListDataSourceHelper<LibraryItem>() {
-			@Override
-			public void loadData(final boolean forceRefresh,
-					final DataLoadedListener<List<LibraryItem>> callback) {
-				callback.onDataLoaded(this, data);
-			}
-		};
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
 		final View view1 = mock(View.class);
