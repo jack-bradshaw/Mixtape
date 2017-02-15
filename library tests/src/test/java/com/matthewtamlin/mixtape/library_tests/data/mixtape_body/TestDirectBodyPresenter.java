@@ -56,7 +56,7 @@ public class TestDirectBodyPresenter {
 	 * data source from all callbacks.
 	 */
 	@Test
-	public void testSetDataSource_withDataSource() {
+	public void testSetDataSource() {
 		final ListDataSource<LibraryItem> dataSource1 = mock(ListDataSource.class);
 		final ListDataSource<LibraryItem> dataSource2 = mock(ListDataSource.class);
 
