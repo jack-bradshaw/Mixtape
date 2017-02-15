@@ -123,7 +123,7 @@ public class TestTitleBinder {
 	/**
 	 * Test to verify that the {@link TitleBinder#TitleBinder(LruCache, DisplayableDefaults)}
 	 * constructor functions correctly when provided with valid arguments. The test will only pass
-	 * if the construction call passes, and the getters return the values supplied at construction.
+	 * if the getters returns the values passed to the constructor.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
@@ -203,8 +203,8 @@ public class TestTitleBinder {
 	/**
 	 * Test to verify that the {@link TitleBinder#bind(TextView, LibraryItem)} method functions
 	 * correctly when the cache does not contain a title for the bound LibraryItem, and the
-	 * LibraryItem fails to provide access to a title. The test will only pass if the default
-	 * title is bound to the view.
+	 * LibraryItem fails to provide access to a title. The test will only pass if the default title
+	 * is bound to the view.
 	 */
 	@Test
 	public void testBind_dataNotCached_dataInaccessible() {
