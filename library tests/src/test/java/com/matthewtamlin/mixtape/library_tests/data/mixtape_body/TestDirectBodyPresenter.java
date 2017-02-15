@@ -456,12 +456,18 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnListItemModified_withView() {
-		final int modifiedIndex = 1;
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
 
-		presenterWithDataSourceAndView
-				.onItemModified(dataSource, mock(LibraryItem.class), modifiedIndex);
+		final View view = mock(View.class);
+		presenter.setView(view);
 
-		verify(view).notifyItemModified(modifiedIndex);
+		verify(view, never()).notifyItemModified(anyInt());
+
+		presenter.onItemModified(dataSource, mock(LibraryItem.class), 1);
+
+		verify(view, never()).notifyItemModified(1);
 	}
 
 	/**
