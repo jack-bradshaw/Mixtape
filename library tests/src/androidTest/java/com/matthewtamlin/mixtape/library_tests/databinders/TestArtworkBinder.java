@@ -16,37 +16,33 @@
 
 package com.matthewtamlin.mixtape.library_tests.databinders;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.LruCache;
 import android.widget.ImageView;
 
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
-import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
-import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
-import com.matthewtamlin.mixtape.library_tests.test.R;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+/**
+ * Tests for the {@link ArtworkBinder} class.
+ */
 @RunWith(AndroidJUnit4.class)
 public class TestArtworkBinder {
 	/**
@@ -54,42 +50,38 @@ public class TestArtworkBinder {
 	 */
 	private static final int PAUSE_DURATION = 500;
 
-	private static final int FADE_IN_DURATION_MS = 200;
-
 	/**
-	 * The resource ID for an image to use as the artwork and the default artwork.
-	 */
-	private static final int ARTWORK_RES_ID = R.raw.image1;
-
-	/**
-	 * The image to use as the artwork.
+	 * A mock artwork item.
 	 */
 	private Drawable artwork;
 
 	/**
-	 * The image to use as the default artwork.
+	 * A mock default artwork item. This should be returned by the defaults.
 	 */
 	private Drawable defaultArtwork;
 
 	/**
-	 * A read-only LibraryItem for use in testing, which uses {@code artwork} for the artwork and
-	 * null for the other metadata.
+	 * A mock artwork item. This should be inserted into the cache directly.
+	 */
+	private Drawable cachedArtwork;
+
+	/**
+	 * A mock LibraryItem which returns artwork but no title or subtitle.
 	 */
 	private LibraryItem libraryItem;
 
 	/**
-	 * A cache for use in testing.
+	 * A actual cache for use in testing, not a mock.
 	 */
-	private LruLibraryItemCache cache;
+	private LruCache<LibraryItem, Drawable> cache;
 
 	/**
-	 * Defaults for use in testing.
+	 * A mock DisplayableDefaults object which returns default artwork but no title or subtitle.
 	 */
 	private DisplayableDefaults displayableDefaults;
 
 	/**
-	 * An ImageView for use in testing. This view should be mocked so that method invocations can be
-	 * recorded and reviewed.
+	 * A mock ImageView which data can be bound to.
 	 */
 	private ImageView imageView;
 
@@ -98,24 +90,33 @@ public class TestArtworkBinder {
 	 */
 	@Before
 	public void setup() throws LibraryReadException {
-		final Resources res = InstrumentationRegistry.getTargetContext().getResources();
+		artwork = mock(Drawable.class);
+		when(artwork.getIntrinsicWidth()).thenReturn(100);
+		when(artwork.getIntrinsicHeight()).thenReturn(100);
 
-		artwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
-		defaultArtwork = new BitmapDrawable(res, BitmapFactory.decodeResource(res, ARTWORK_RES_ID));
-		assertThat("Precondition failed, artwork is null.", artwork, is(notNullValue()));
-		assertThat("Precondition failed, default artwork is null.", defaultArtwork,
-				is(notNullValue()));
+		defaultArtwork = mock(Drawable.class);
+		when(defaultArtwork.getIntrinsicWidth()).thenReturn(100);
+		when(defaultArtwork.getIntrinsicHeight()).thenReturn(100);
 
-		libraryItem = new NormalLibraryItem(res, null, null, R.raw.image1);
-		cache = new LruLibraryItemCache(1, 1, 1000000); // Should be more than enough for the test
-		displayableDefaults = new ImmutableDisplayableDefaults(null, null, defaultArtwork);
+		cachedArtwork = mock(Drawable.class);
+		when(cachedArtwork.getIntrinsicWidth()).thenReturn(100);
+		when(cachedArtwork.getIntrinsicHeight()).thenReturn(100);
+
+		libraryItem = mock(LibraryItem.class);
+		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(artwork);
+
+		cache = new LruCache<>(10);
+
+		displayableDefaults = mock(DisplayableDefaults.class);
+		when(displayableDefaults.getArtwork()).thenReturn(defaultArtwork);
+
 		imageView = mock(ImageView.class);
 	}
 
 	/**
 	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * ArtworkBinder#bind(ImageView, LibraryItem)} is null. The test will only pass if an
-	 * IllegalArgumentException is thrown.
+	 * ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)} is null. The test will only pass
+	 * if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullCache() {
@@ -123,13 +124,25 @@ public class TestArtworkBinder {
 	}
 
 	/**
-	 * Test to verify that the correct exception is thrown when the {@code cache} argument of {@link
-	 * ArtworkBinder#bind(ImageView, LibraryItem)} is null. The test will only pass if an
-	 * IllegalArgumentException is thrown.
+	 * Test to verify that the correct exception is thrown when the {@code defaults} argument of
+	 * {@link ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)} is null. The test will
+	 * only pass if an IllegalArgumentException is thrown.
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor_invalidArgs_nullDefaults() {
 		new ArtworkBinder(cache, null);
+	}
+
+	/**
+	 * Test to verify that the {@link ArtworkBinder#ArtworkBinder(LruCache, DisplayableDefaults)}
+	 * constructor functions correctly when provided with valid arguments. The test will only pass
+	 * if the getters return the values passed to the constructor.
+	 */
+	public void testConstructor_validArgs() {
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
+
+		assertThat("Incorrect cache.", binder.getCache(), is(cache));
+		assertThat("Incorrect defaults.", binder.getDefaults(), is(displayableDefaults));
 	}
 
 	/**
@@ -154,70 +167,80 @@ public class TestArtworkBinder {
 
 		binder.bind(imageView, null);
 
-		pause(); // Allow time for async processing to complete
-		verify(imageView, atLeastOnce()).setImageBitmap(null);
+		waitForAsyncEventsToFinish();
+
+		verify(imageView, atLeastOnce()).setImageDrawable(null);
 		verify(imageView, never()).setImageDrawable(artwork);
 		verify(imageView, never()).setImageDrawable(defaultArtwork);
 	}
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
-	 * correctly when the cache already contains the artwork of the data passed to the {@code data}
-	 * argument. The test will only pass if the artwork is bound to the view.
+	 * correctly when the cache already contains artwork for the bound LibraryItem. The test will
+	 * only pass if the cached artwork is bound to the view.
 	 */
 	@Test
 	public void testBind_dataCached() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		cache.cacheTitle(libraryItem, false);
+		cache.put(libraryItem, cachedArtwork);
 
 		binder.bind(imageView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
-		verify(imageView).setImageDrawable(artwork); // Called once to clear and once to set
+		waitForAsyncEventsToFinish();
+
+		verify(imageView).setImageDrawable(cachedArtwork);
+		assertThat("Artwork was removed from the cache.", cache.get(libraryItem),
+				is(cachedArtwork));
 	}
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the artwork of the data passed to the {@code data}
-	 * argument. The test will only pass if the artwork is bound to the view.
+	 * correctly when the cache does not contain artwork for the bound LibraryItem, and the
+	 * LibraryItem provides access to artwork. The test will only pass if the item's artwork is
+	 * bound to the view.
 	 */
 	@Test
-	public void testBind_dataAccessibleButNotCached() {
+	public void testBind_dataNotCached_dataAccessible() {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		cache.removeTitle(libraryItem); // In case it was somehow cached previously
 
 		binder.bind(imageView, libraryItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+
 		verify(imageView).setImageDrawable(artwork);
+		assertThat("Artwork was not added to the cache.", cache.get(libraryItem), is(artwork));
 	}
 
 	/**
 	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
-	 * correctly when the cache does not contain the artwork of the data passed to the {@code data}
-	 * argument, and the data cannot be directly accessed. The test will only pass if the default
+	 * correctly when the cache does not contain artwork for the bound LibraryItem, and the
+	 * LibraryItem fails to provide access to artwork. The test will only pass if the default
 	 * artwork is bound to the view.
 	 */
 	@Test
-	public void testBind_dataInaccessibleAndNotCached() {
+	public void testBind_dataNotCached_dataInaccessible() throws LibraryReadException {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
-		final LibraryItem inaccessibleItem = new InaccessibleLibraryItem();
+
+		final LibraryItem inaccessibleItem = mock(LibraryItem.class);
+		when(inaccessibleItem.getTitle()).thenThrow(new LibraryReadException());
 
 		binder.bind(imageView, inaccessibleItem);
 
-		pause(); // Allow time for async processing to complete
+		waitForAsyncEventsToFinish();
+
 		verify(imageView).setImageDrawable(defaultArtwork);
+		assertThat("Something was added to the cache.", cache.get(libraryItem), is(nullValue()));
 	}
 
 	/**
 	 * Suspends execution of the current thread. The duration is defined by the {@code
 	 * PAUSE_DURATION} constant.
 	 */
-	private void pause() {
+	private void waitForAsyncEventsToFinish() {
 		try {
 			Thread.sleep(PAUSE_DURATION);
-		} catch (InterruptedException e) {
-			throw new RuntimeException("wait interrupted, test aborted");
+		} catch (final InterruptedException e) {
+			throw new RuntimeException("Wait interrupted, test aborted.");
 		}
 	}
 }

@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.util.LruCache;
 import android.widget.ImageView;
 
+import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
@@ -38,6 +39,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * future performance, and asynchronous processing is only used if data is not already cached. By
  * default a fade-in effect is used when artwork is bound, but this can be disabled if desired.
  */
+@Tested(testMethod = "automated")
 public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 	/**
 	 * A record of all bind tasks currently in progress. Each task is mapped to the target

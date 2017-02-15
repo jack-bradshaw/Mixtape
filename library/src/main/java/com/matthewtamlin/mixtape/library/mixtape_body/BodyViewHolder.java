@@ -22,11 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
+import com.matthewtamlin.java_utilities.testing.Tested;
 
 /**
  * A ViewHolder for use in a RecyclerViewBody. The view holder contains a root view, views for
  * displaying a LibraryItem metadata, and a view which can be clicked to display a contextual menu.
  */
+@Tested(testMethod = "automated")
 public class BodyViewHolder extends RecyclerView.ViewHolder {
 	/**
 	 * The root view.
