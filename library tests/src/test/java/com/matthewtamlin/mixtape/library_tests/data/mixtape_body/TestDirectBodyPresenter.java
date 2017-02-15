@@ -186,7 +186,6 @@ public class TestDirectBodyPresenter {
 	public void testOnDataLoaded_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
-
 		presenter.setDataSource(dataSource);
 
 		presenter.onDataLoaded(dataSource, data);
