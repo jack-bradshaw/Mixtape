@@ -442,7 +442,11 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnListItemModified_withoutView() {
-		presenterWithDataSourceOnly.onItemModified(dataSource, mock(LibraryItem.class), 1);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onItemModified(dataSource, mock(LibraryItem.class), 1);
 	}
 
 	/**
