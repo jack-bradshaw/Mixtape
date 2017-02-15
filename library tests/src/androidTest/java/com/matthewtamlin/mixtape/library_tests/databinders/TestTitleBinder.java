@@ -123,7 +123,7 @@ public class TestTitleBinder {
 	/**
 	 * Test to verify that the {@link TitleBinder#TitleBinder(LruCache, DisplayableDefaults)}
 	 * constructor functions correctly when provided with valid arguments. The test will only pass
-	 * if the getters returns the values passed to the constructor.
+	 * if the getters return the values passed to the constructor.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
