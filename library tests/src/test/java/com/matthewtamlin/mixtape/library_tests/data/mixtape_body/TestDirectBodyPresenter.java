@@ -32,6 +32,7 @@ import org.mockito.ArgumentCaptor;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.R.attr.data;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
@@ -183,7 +184,12 @@ public class TestDirectBodyPresenter {
 	@Test
 	@SuppressWarnings("unchecked") // This is fine since it's a mock
 	public void testOnDataLoaded_withoutView() {
-		presenterWithDataSourceOnly.onDataLoaded(dataSource, mock(List.class));
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+
+		presenter.setDataSource(dataSource);
+
+		presenter.onDataLoaded(dataSource, data);
 	}
 
 	/**
