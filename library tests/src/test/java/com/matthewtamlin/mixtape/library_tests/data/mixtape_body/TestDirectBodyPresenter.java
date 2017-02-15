@@ -264,6 +264,11 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).setItems(null);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data modified callback and there is no view. The test will only pass if all
+	 * methods exit normally.
+	 */
 	@Test
 	public void testOnDataModified_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -273,6 +278,11 @@ public class TestDirectBodyPresenter {
 		presenter.onDataModified(dataSource, data);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data modified callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
+	 */
 	@Test
 	public void testOnDataModified_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -289,6 +299,11 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemsChanged();
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data moved callback and there is no view. The test will only pass if all methods
+	 * exit normally.
+	 */
 	@Test
 	public void testOnDataMoved_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -298,6 +313,11 @@ public class TestDirectBodyPresenter {
 		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data moved callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
+	 */
 	@Test
 	public void testOnDataMoved_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -314,6 +334,11 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemMoved(1, 2);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data added callback and there is no view. The test will only pass if all methods
+	 * exit normally.
+	 */
 	@Test
 	public void testOnDataAdded_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -323,6 +348,11 @@ public class TestDirectBodyPresenter {
 		presenter.onDataAdded(dataSource, mock(LibraryItem.class), 0);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data added callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
+	 */
 	@Test
 	public void testOnDataAdded_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -339,6 +369,11 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemAdded(1);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data removed callback and there is no view. The test will only pass if all methods
+	 * exit normally.
+	 */
 	@Test
 	public void testOnDataRemoved_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -348,6 +383,11 @@ public class TestDirectBodyPresenter {
 		presenter.onDataRemoved(dataSource, mock(LibraryItem.class), 0);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data removed callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
+	 */
 	@Test
 	public void testOnDataRemoved_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -364,6 +404,11 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).notifyItemRemoved(1);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data replaced callback and there is no view. The test will only pass if all
+	 * methods exit normally.
+	 */
 	@Test
 	public void testOnDataReplaced_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -373,6 +418,11 @@ public class TestDirectBodyPresenter {
 		presenter.onDataReplaced(dataSource, mock(List.class), mock(List.class));
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data replaced callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
+	 */
 	@Test
 	public void testOnDataReplaced_withView() {
 		final List<LibraryItem> originalData = new ArrayList<>();
@@ -389,6 +439,11 @@ public class TestDirectBodyPresenter {
 		verify(view, atLeastOnce()).setItems(newData);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a list item modified callback and there is no view. The test will only pass if all
+	 * methods exit normally.
+	 */
 	@Test
 	public void testOnListItemModified_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -398,7 +453,11 @@ public class TestDirectBodyPresenter {
 		presenter.onItemModified(dataSource, mock(LibraryItem.class), 1);
 	}
 
-
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a list item modified callback and there is a view. The test will only pass if the
+	 * view is notified of the event.
+	 */
 	@Test
 	public void testOnListItemModified_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -415,6 +474,11 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemModified(1);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a long operation started callback and there is no view. The test will only pass if
+	 * all methods exit normally.
+	 */
 	@Test
 	public void testOnLongOperationStarted_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -424,6 +488,11 @@ public class TestDirectBodyPresenter {
 		presenter.onLongOperationStarted(dataSource);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a long operation started callback and there is a view. The test will only pass if
+	 * the loading indicator is shown.
+	 */
 	@Test
 	public void testOnLongOperationStarted_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -441,6 +510,11 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).showLoadingIndicator(false);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a long operation finished callback and there is no view. The test will only pass if
+	 * all methods exit normally.
+	 */
 	@Test
 	public void testOnLongOperationFinished_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -450,6 +524,11 @@ public class TestDirectBodyPresenter {
 		presenter.onLongOperationFinished(dataSource);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a long operation finished callback and there is a view. The test will only pass if
+	 * the loading indicator is hidden.
+	 */
 	@Test
 	public void testOnLongOperationFinished_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -467,6 +546,13 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).showLoadingIndicator(true);
 	}
 
+	/**
+	 * Created a new SettableListDataSource with the supplied items as the data.
+	 *
+	 * @param items
+	 * 		the data returned by the source
+	 * @return the new data source
+	 */
 	private SettableListDataSource createNewDataSource(final List<LibraryItem> items) {
 		final SettableListDataSource dataSource = new SettableListDataSource();
 		dataSource.setData(items);
@@ -474,9 +560,23 @@ public class TestDirectBodyPresenter {
 	}
 }
 
+/**
+ * A ListDataSource where the data can be set.
+ */
 class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
+	/**
+	 * The current data.
+	 */
 	private List<LibraryItem> data;
 
+	/**
+	 * Sets the data to return when {@link #loadData(boolean, DataLoadedListener)} is called.
+	 * Calling this method does not trigger {@link DataReplacedListener#onDataReplaced(BaseDataSource,
+	 * Object, Object)} callbacks.
+	 *
+	 * @param data
+	 * 		the new data
+	 */
 	public void setData(final List<LibraryItem> data) {
 		this.data = data;
 	}
