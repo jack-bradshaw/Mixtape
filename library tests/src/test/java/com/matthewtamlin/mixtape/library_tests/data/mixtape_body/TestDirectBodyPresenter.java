@@ -35,6 +35,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -73,6 +74,8 @@ public class TestDirectBodyPresenter {
 		verify(dataSource1).registerItemModifiedListener(presenter);
 		verify(dataSource1).registerLongOperationListener(presenter);
 
+		verify(dataSource1).loadData(anyBoolean(), presenter);
+
 		presenter.setDataSource(dataSource2);
 
 		verify(dataSource1).unregisterItemAddedListener(presenter);
@@ -90,6 +93,8 @@ public class TestDirectBodyPresenter {
 		verify(dataSource2).registerDataReplacedListener(presenter);
 		verify(dataSource2).registerItemModifiedListener(presenter);
 		verify(dataSource2).registerLongOperationListener(presenter);
+
+		verify(dataSource1).loadData(anyBoolean(), presenter);
 
 		presenter.setDataSource(dataSource2);
 
