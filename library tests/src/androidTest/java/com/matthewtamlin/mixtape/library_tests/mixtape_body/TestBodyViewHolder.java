@@ -17,10 +17,19 @@
 package com.matthewtamlin.mixtape.library_tests.mixtape_body;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyViewHolder;
 
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 
 /**
  * Unit tests for the {@link BodyViewHolder} class.
@@ -28,5 +37,37 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("ResourceType") // Using mock Views so don't need to use actual resource IDs
 @RunWith(AndroidJUnit4.class)
 public class TestBodyViewHolder {
-	
+	/**
+	 * A mock view to use as the root view.
+	 */
+	private View rootView;
+
+	/**
+	 * A mock view to use as the title holder.
+	 */
+	private TextView titleView;
+
+	/**
+	 * A mock view to use as the subtitle holder.
+	 */
+	private TextView subtitleView;
+
+	/**
+	 * A mock view to use as the artwork holder.
+	 */
+	private ImageView artworkView;
+
+	/**
+	 * A mock view to use as the contextual menu button.
+	 */
+	private View menuButton;
+
+	@Before
+	public void setup() {
+		rootView = mock(View.class);
+		titleView = mock(TextView.class);
+		subtitleView = mock(TextView.class);
+		artworkView = mock(ImageView.class);
+		menuButton = mock(View.class);
+	}
 }
