@@ -22,9 +22,9 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -34,8 +34,6 @@ import java.util.List;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -48,6 +46,7 @@ import static org.mockito.Mockito.verify;
  * @param <V>
  * 		the type of view controlled by the presenter under test
  */
+@SuppressWarnings("unchecked") // Warning shown by mocks, but this is ok
 @RunWith(AndroidJUnit4.class)
 public class TestDirectBodyPresenter {
 	/**
@@ -58,29 +57,53 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testSetDataSource_withDataSource() {
-		final S newDataSource = createMockDataSource();
+		final ListDataSource<LibraryItem> dataSource1 = mock(ListDataSource.class);
+		final ListDataSource<LibraryItem> dataSource2 = mock(ListDataSource.class);
 
-		presenterWithDataSourceOnly.setDataSource(newDataSource);
+		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
+				DirectBodyPresenter<>();
 
-		verify(dataSource).unregisterItemAddedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterDataModifiedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterItemMovedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterItemRemovedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterDataReplacedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterItemModifiedListener(presenterWithDataSourceOnly);
-		verify(dataSource).unregisterLongOperationListener(presenterWithDataSourceOnly);
+		presenter.setDataSource(dataSource1);
 
-		verify(newDataSource).registerItemAddedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerDataModifiedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerItemMovedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerItemRemovedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerDataReplacedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerItemModifiedListener(presenterWithDataSourceOnly);
-		verify(newDataSource).registerLongOperationListener(presenterWithDataSourceOnly);
+		verify(dataSource1).registerItemAddedListener(presenter);
+		verify(dataSource1).registerDataModifiedListener(presenter);
+		verify(dataSource1).registerItemMovedListener(presenter);
+		verify(dataSource1).registerItemRemovedListener(presenter);
+		verify(dataSource1).registerDataReplacedListener(presenter);
+		verify(dataSource1).registerItemModifiedListener(presenter);
+		verify(dataSource1).registerLongOperationListener(presenter);
+
+		presenter.setDataSource(dataSource2);
+
+		verify(dataSource1).unregisterItemAddedListener(presenter);
+		verify(dataSource1).unregisterDataModifiedListener(presenter);
+		verify(dataSource1).unregisterItemMovedListener(presenter);
+		verify(dataSource1).unregisterItemRemovedListener(presenter);
+		verify(dataSource1).unregisterDataReplacedListener(presenter);
+		verify(dataSource1).unregisterItemModifiedListener(presenter);
+		verify(dataSource1).unregisterLongOperationListener(presenter);
+
+		verify(dataSource2).registerItemAddedListener(presenter);
+		verify(dataSource2).registerDataModifiedListener(presenter);
+		verify(dataSource2).registerItemMovedListener(presenter);
+		verify(dataSource2).registerItemRemovedListener(presenter);
+		verify(dataSource2).registerDataReplacedListener(presenter);
+		verify(dataSource2).registerItemModifiedListener(presenter);
+		verify(dataSource2).registerLongOperationListener(presenter);
+
+		presenter.setDataSource(dataSource2);
+
+		verify(dataSource2).unregisterItemAddedListener(presenter);
+		verify(dataSource2).unregisterDataModifiedListener(presenter);
+		verify(dataSource2).unregisterItemMovedListener(presenter);
+		verify(dataSource2).unregisterItemRemovedListener(presenter);
+		verify(dataSource2).unregisterDataReplacedListener(presenter);
+		verify(dataSource2).unregisterItemModifiedListener(presenter);
+		verify(dataSource2).unregisterLongOperationListener(presenter);
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setView(BodyContract.View)} method
+	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method
 	 * functions correctly when the presenter does not already have a view. The test will only pass
 	 * if the method registers the presenter as the new view's presenter.
 	 */
@@ -94,7 +117,7 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setView(BodyContract.View)} method
+	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method
 	 * functions correctly when the presenter already has a view. The test will only pass if the
 	 * presenter is registered with the new view and unregistered with the old view.
 	 */
