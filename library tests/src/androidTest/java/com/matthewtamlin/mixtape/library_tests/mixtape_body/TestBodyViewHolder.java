@@ -147,7 +147,7 @@ public class TestBodyViewHolder {
 	/**
 	 * Test to verify that the {@link BodyViewHolder#BodyViewHolder(View, TextView, TextView,
 	 * ImageView, View)} constructor functions correctly when provided with valid arguments. The
-	 * test will only pass if the getters returns the values passed to the constructor.
+	 * test will only pass if the getters return the values passed to the constructor.
 	 */
 	@Test
 	public void testConstructor_validArgs() {
