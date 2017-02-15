@@ -548,7 +548,7 @@ public class TestDirectBodyPresenter {
 
 	@Test
 	public void testOnLibraryItemSelected_noCallbacks() {
-
+		presenter.onLibraryItemSelected(mock(View.class), mock(LibraryItem.class));
 	}
 
 	@Test
