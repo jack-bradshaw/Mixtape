@@ -298,7 +298,11 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnDataMoved_withoutView() {
-		presenterWithDataSourceOnly.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
 	}
 
 	/**
