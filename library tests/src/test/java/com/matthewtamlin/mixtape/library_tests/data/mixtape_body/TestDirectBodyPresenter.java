@@ -497,14 +497,10 @@ public class TestDirectBodyPresenter {
 		verify(view).showLoadingIndicator(false);
 	}
 
-	private ListDataSource<LibraryItem> createNewDataSource(final List<LibraryItem> items) {
-		return new ListDataSourceHelper<LibraryItem>() {
-			@Override
-			public void loadData(final boolean forceRefresh,
-					final DataLoadedListener<List<LibraryItem>> callback) {
-				callback.onDataLoaded(this, items);
-			}
-		};
+	private SettableListDataSource createNewDataSource(final List<LibraryItem> items) {
+		final SettableListDataSource dataSource = new SettableListDataSource();
+		dataSource.setData(items);
+		return dataSource;
 	}
 }
 
