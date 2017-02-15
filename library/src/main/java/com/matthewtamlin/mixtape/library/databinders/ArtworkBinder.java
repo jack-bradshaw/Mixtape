@@ -255,16 +255,11 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 			if (cachedArtwork == null) {
 				try {
 					final Drawable loadedArtwork = data.getArtwork(imageWidth, imageHeight);
-					cache.put(data, loadedArtwork);
-					return loadedArtwork;
-				} catch (final LibraryReadException e) {
-					return defaults.getArtwork();
-				}
-			} else if (cachedArtwork.getIntrinsicWidth() < imageWidth ||
-					cachedArtwork.getIntrinsicHeight() < imageHeight) {
-				try {
-					final Drawable loadedArtwork = data.getArtwork(imageWidth, imageHeight);
-					cache.put(data, loadedArtwork);
+
+					if (loadedArtwork != null) {
+						cache.put(data, loadedArtwork);
+					}
+
 					return loadedArtwork;
 				} catch (final LibraryReadException e) {
 					return defaults.getArtwork();

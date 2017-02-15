@@ -178,7 +178,11 @@ public class TitleBinder implements DataBinder<LibraryItem, TextView> {
 			} else {
 				try {
 					final CharSequence loadedTitle = data.getTitle();
-					cache.put(data, loadedTitle);
+
+					if (loadedTitle != null) {
+						cache.put(data, loadedTitle);
+					}
+
 					return loadedTitle;
 				} catch (final LibraryReadException e) {
 					return defaults.getTitle();

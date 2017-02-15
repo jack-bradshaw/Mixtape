@@ -167,7 +167,7 @@ public class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V exte
 	}
 
 	/**
-	 * A read-only LibraryItem which has a null title, subtitle and artwork.
+	 * A LibraryItem which has a null title, subtitle and artwork.
 	 */
 	private static class EmptyItem implements LibraryItem {
 		@Override
