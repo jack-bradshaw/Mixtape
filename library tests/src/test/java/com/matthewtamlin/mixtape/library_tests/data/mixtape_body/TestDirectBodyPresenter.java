@@ -108,35 +108,6 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method
-	 * functions correctly when the presenter does not already have a view. The test will only pass
-	 * if the method registers the presenter as the new view's presenter.
-	 */
-	@Test
-	public void testSetView_withoutView() {
-		final V newView = createMockView();
-
-		presenterWithDataSourceOnly.setView(newView);
-
-		verify(newView).setPresenter(presenterWithDataSourceOnly);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method
-	 * functions correctly when the presenter already has a view. The test will only pass if the
-	 * presenter is registered with the new view and unregistered with the old view.
-	 */
-	@Test
-	public void testSetView_withView() {
-		final V newView = createMockView();
-
-		presenterWithViewOnly.setView(newView);
-
-		verify(view).setPresenter(null);
-		verify(newView).setPresenter(presenterWithViewOnly);
-	}
-
-	/**
 	 * Test to verify that the {@link DirectBodyPresenter#onDataLoaded(BaseDataSource, List)} method
 	 * functions correctly when the presenter does not have a view. The test will only pass if the
 	 * method exits normally.
