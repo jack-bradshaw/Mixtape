@@ -507,3 +507,17 @@ public class TestDirectBodyPresenter {
 		};
 	}
 }
+
+class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
+	private List<LibraryItem> data;
+
+	public void setData(final List<LibraryItem> data) {
+		this.data = data;
+	}
+
+	@Override
+	public void loadData(final boolean forceRefresh,
+			final DataLoadedListener<List<LibraryItem>> callback) {
+		callback.onDataLoaded(this, data);
+	}
+}
