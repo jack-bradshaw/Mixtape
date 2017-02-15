@@ -25,6 +25,7 @@ import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -38,6 +39,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -312,13 +314,18 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnDataMoved_withView() {
-		final int startIndex = 1;
-		final int finalIndex = 2;
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
 
-		presenterWithDataSourceAndView
-				.onDataMoved(dataSource, mock(LibraryItem.class), startIndex, finalIndex);
+		final View view = mock(View.class);
+		presenter.setView(view);
 
-		verify(view).notifyItemMoved(1, 2);
+		verify(view, never()).notifyItemMoved(anyInt(), anyInt());
+
+		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
+
+		verify(view, never()).notifyItemMoved(1, 2);
 	}
 
 	/**
