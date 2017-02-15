@@ -41,13 +41,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
- * Unit tests for subclasses of the DirectBodyPresenter class.
+ * Unit tests for the {@link DirectBodyPresenter} class.
  */
 @SuppressWarnings("unchecked") // Warning shown by mocks, but this is ok
 @RunWith(JUnit4.class)
 public class TestDirectBodyPresenter {
+	/**
+	 * The presenter under test.
+	 */
 	private DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter;
 
+	/**
+	 * Initialises the testing objects and assigns them to member variables.
+	 */
 	@Before
 	public void setup() {
 		presenter = new DirectBodyPresenter<>();
@@ -55,9 +61,9 @@ public class TestDirectBodyPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
-	 * functions correctly when the presenter already has a data source. The test will only pass if
-	 * the method registers the new data source for all relevant callbacks, and unregisters the old
-	 * data source from all callbacks.
+	 * functions correctly when the presenter does not have a view. The test will only pass if the
+	 * presenter is registered and unregisters for callbacks, and if the correct calls are made to
+	 * load data.
 	 */
 	@Test
 	public void testSetDataSource_withoutView() {
@@ -107,6 +113,11 @@ public class TestDirectBodyPresenter {
 		verify(dataSource2).unregisterLongOperationListener(presenter);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
+	 * functions correctly when the presenter has a view. The test will only pass if the view is
+	 * updated with the new data when the data source is changed.
+	 */
 	@Test
 	public void testSetDataSource_withView() {
 		final View view = mock(View.class);
@@ -124,10 +135,15 @@ public class TestDirectBodyPresenter {
 		presenter.setDataSource(dataSource2);
 		verify(view, atLeastOnce()).setItems(data2);
 
-		presenter.setDataSource(dataSource2);
+		presenter.setDataSource(null);
 		verify(view).setItems(null);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method functions correctly
+	 * when the presenter does not have a data source. The test will only pass if the presenter
+	 * registers/unregisters itself with the views.
+	 */
 	@Test
 	public void testSetView_withoutDataSource() {
 		final View view1 = mock(View.class);
@@ -147,6 +163,11 @@ public class TestDirectBodyPresenter {
 		verify(view2).setPresenter(null);
 	}
 
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method functions correctly
+	 * when the presenter has a data source. The test will only pass if the presenter
+	 * registers/unregisters itself with the views and loads data into the views.
+	 */
 	@Test
 	public void testSetView_withDataSource() {
 		final ArrayList<LibraryItem> data = new ArrayList<>();
@@ -174,9 +195,9 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataLoaded(BaseDataSource, List)} method
-	 * functions correctly when the presenter does not have a view. The test will only pass if the
-	 * method exits normally.
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data loaded callback and there is no view. The test will only pass if all methods
+	 * exit normally.
 	 */
 	@Test
 	public void testOnDataLoaded_withoutView() {
@@ -188,9 +209,9 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataLoaded(BaseDataSource, List)} method
-	 * functions correctly when the presenter has a view. The test will only pass if the loaded data
-	 * is passed to the view.
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data loaded callback and there is a view. The test will only pass if the data in
+	 * the view is updated.
 	 */
 	@Test
 	public void testOnDataLoaded_withView() {
@@ -209,9 +230,9 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onLoadDataFailed(BaseDataSource)} method
-	 * functions correctly when the presenter does not have a view. The test will only pass if the
-	 * method exits normally.
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data load failed callback and there is no view. The test will only pass if all
+	 * methods exit normally.
 	 */
 	@Test
 	public void testOnLoadDataFailed_withoutView() {
@@ -223,9 +244,9 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onLoadDataFailed(BaseDataSource)} method
-	 * functions correctly when the presenter has a view. The test will only pass if the view is
-	 * updated to show no items.
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data load failed callback and there is a view. The test will only pass if the view
+	 * is updated to display no data.
 	 */
 	@Test
 	public void testOnLoadDataFailed_withView() {
@@ -243,11 +264,6 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).setItems(null);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataModified(BaseDataSource, List)}
-	 * method functions correctly when the presenter does not have a view. The test will only pass
-	 * if the method exits normally.
-	 */
 	@Test
 	public void testOnDataModified_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -257,11 +273,6 @@ public class TestDirectBodyPresenter {
 		presenter.onDataModified(dataSource, data);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataModified(BaseDataSource, List)}
-	 * method functions properly when the presenter has a view. The test will only pass if the view
-	 * is notified of the event.
-	 */
 	@Test
 	public void testOnDataModified_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -278,11 +289,6 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemsChanged();
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataMoved(ListDataSource, LibraryItem,
-	 * int, int)} method functions correctly when the presenter does not have a view. The test will
-	 * only pass if the method exits normally.
-	 */
 	@Test
 	public void testOnDataMoved_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -292,11 +298,6 @@ public class TestDirectBodyPresenter {
 		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataMoved(ListDataSource, LibraryItem,
-	 * int, int)} method functions properly when the presenter has a view. The test will only pass
-	 * if the view is notified of the event.
-	 */
 	@Test
 	public void testOnDataMoved_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -313,11 +314,6 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemMoved(1, 2);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataAdded(ListDataSource, LibraryItem,
-	 * int)} method functions correctly when the presenter does not have a view. The test will only
-	 * pass if the method exits normally.
-	 */
 	@Test
 	public void testOnDataAdded_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -327,11 +323,6 @@ public class TestDirectBodyPresenter {
 		presenter.onDataAdded(dataSource, mock(LibraryItem.class), 0);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataAdded(ListDataSource, LibraryItem,
-	 * int)} method functions properly when the presenter has a view. The test will only pass if the
-	 * view is notified of the event.
-	 */
 	@Test
 	public void testOnDataAdded_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -348,11 +339,6 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemAdded(1);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataRemoved(ListDataSource, LibraryItem,
-	 * int)} method functions correctly when the presenter does not have a view. The test will only
-	 * pass if the method exits normally.
-	 */
 	@Test
 	public void testOnDataRemoved_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -362,11 +348,6 @@ public class TestDirectBodyPresenter {
 		presenter.onDataRemoved(dataSource, mock(LibraryItem.class), 0);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataRemoved(ListDataSource, LibraryItem,
-	 * int)} method functions properly when the presenter has a view. The test will only pass if the
-	 * view is notified of the event.
-	 */
 	@Test
 	public void testOnDataRemoved_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -383,11 +364,6 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).notifyItemRemoved(1);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataReplaced(BaseDataSource, List,
-	 * List)} method functions correctly when the presenter does not have a view. The test will only
-	 * pass if the method exits normally.
-	 */
 	@Test
 	public void testOnDataReplaced_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -397,11 +373,6 @@ public class TestDirectBodyPresenter {
 		presenter.onDataReplaced(dataSource, mock(List.class), mock(List.class));
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onDataReplaced(BaseDataSource, List,
-	 * List)} method functions properly when the presenter has a view. The test will only pass if
-	 * the view is updated with the new data.
-	 */
 	@Test
 	public void testOnDataReplaced_withView() {
 		final List<LibraryItem> originalData = new ArrayList<>();
@@ -418,11 +389,6 @@ public class TestDirectBodyPresenter {
 		verify(view, atLeastOnce()).setItems(newData);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onItemModified(ListDataSource,
-	 * LibraryItem, int)} method functions correctly when the presenter does not have a view. The
-	 * test will only pass if the method exits normally.
-	 */
 	@Test
 	public void testOnListItemModified_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -432,11 +398,7 @@ public class TestDirectBodyPresenter {
 		presenter.onItemModified(dataSource, mock(LibraryItem.class), 1);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onItemModified(ListDataSource,
-	 * LibraryItem, int)} method functions properly when the presenter has a view. The test will
-	 * only pass if the view is notified of the event.
-	 */
+
 	@Test
 	public void testOnListItemModified_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -453,11 +415,6 @@ public class TestDirectBodyPresenter {
 		verify(view, times(1)).notifyItemModified(1);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onLongOperationStarted(BaseDataSource)}
-	 * method functions correctly when the presenter does not have a view. The test will only pass
-	 * if the method exits normally.
-	 */
 	@Test
 	public void testOnLongOperationStarted_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -467,11 +424,6 @@ public class TestDirectBodyPresenter {
 		presenter.onLongOperationStarted(dataSource);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onLongOperationStarted(BaseDataSource)}
-	 * method functions properly when the presenter has a view. The test will only pass if the view
-	 * is notified of the event.
-	 */
 	@Test
 	public void testOnLongOperationStarted_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -489,11 +441,6 @@ public class TestDirectBodyPresenter {
 		verify(view, never()).showLoadingIndicator(false);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onLongOperationFinished(BaseDataSource)}
-	 * method functions correctly when the presenter does not have a view. The test will only pass
-	 * if the method exits normally.
-	 */
 	@Test
 	public void testOnLongOperationFinished_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
@@ -503,11 +450,6 @@ public class TestDirectBodyPresenter {
 		presenter.onLongOperationFinished(dataSource);
 	}
 
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#onLongOperationFinished(BaseDataSource)}
-	 * method functions properly when the presenter has a view. The test will only pass if the view
-	 * is notified of the event.
-	 */
 	@Test
 	public void testOnLongOperationFinished_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
