@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.mixtape.library_tests.data;
+package com.matthewtamlin.mixtape.library_tests.data.data;
 
 import android.graphics.drawable.Drawable;
 
