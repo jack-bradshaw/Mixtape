@@ -28,6 +28,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
@@ -50,7 +51,7 @@ import static org.mockito.Mockito.verify;
  * Unit tests for subclasses of the DirectBodyPresenter class.
  */
 @SuppressWarnings("unchecked") // Warning shown by mocks, but this is ok
-@RunWith(AndroidJUnit4.class)
+@RunWith(JUnit4.class)
 public class TestDirectBodyPresenter {
 	private DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter;
 
