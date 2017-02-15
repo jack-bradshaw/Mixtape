@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.mixtape.library_tests.mixtape_body;
+package com.matthewtamlin.mixtape.library_tests.data.mixtape_body;
 
 import android.support.test.runner.AndroidJUnit4;
 
