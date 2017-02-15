@@ -18,9 +18,12 @@ package com.matthewtamlin.mixtape.library.data;
 
 import android.graphics.drawable.Drawable;
 
+import com.matthewtamlin.java_utilities.testing.Tested;
+
 /**
  * An immutable implementation of the DisplayableDefaults interface.
  */
+@Tested(testMethod = "automated")
 public final class ImmutableDisplayableDefaults implements DisplayableDefaults {
 	/**
 	 * The default title.
