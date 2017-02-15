@@ -167,6 +167,40 @@ public class TestDirectBodyPresenter {
 		verify(view2).setPresenter(null);
 	}
 
+	@Test
+	public void testSetView_withDataSource() {
+		final View view1 = mock(View.class);
+		final View view2 = mock(View.class);
+
+		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
+				DirectBodyPresenter<>();
+
+		final ArrayList<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = new ListDataSourceHelper<LibraryItem>() {
+			@Override
+			public void loadData(final boolean forceRefresh,
+					final DataLoadedListener<List<LibraryItem>> callback) {
+				callback.onDataLoaded(this, data);
+			}
+		};
+		presenter.setDataSource(dataSource);
+
+		presenter.setView(view1);
+
+		verify(view1).setPresenter(presenter);
+		verify(view1).setItems(null);
+
+		presenter.setView(view2);
+
+		verify(view1).setPresenter(null);
+		verify(view2).setPresenter(presenter);
+		verify(view2).setItems(data);
+
+		presenter.setView(null);
+
+		verify(view2).setPresenter(null);
+	}
+
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#onDataLoaded(BaseDataSource, List)} method
 	 * functions correctly when the presenter does not have a view. The test will only pass if the
