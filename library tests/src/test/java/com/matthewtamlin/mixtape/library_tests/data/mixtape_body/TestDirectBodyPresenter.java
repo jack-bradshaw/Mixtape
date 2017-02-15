@@ -145,6 +145,27 @@ public class TestDirectBodyPresenter {
 		verify(view).setItems(null);
 	}
 
+	@Test
+	public void testSetView_withoutDataSource() {
+		final View view1 = mock(View.class);
+		final View view2 = mock(View.class);
+
+		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
+				DirectBodyPresenter<>();
+
+		presenter.setView(view1);
+
+		verify(view1).setPresenter(presenter);
+
+		presenter.setView(view2);
+
+		verify(view1).setPresenter(null);
+		verify(view2).setPresenter(presenter);
+
+		presenter.setView(null);
+
+		verify(view2).setPresenter(null);
+	}
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#onDataLoaded(BaseDataSource, List)} method
