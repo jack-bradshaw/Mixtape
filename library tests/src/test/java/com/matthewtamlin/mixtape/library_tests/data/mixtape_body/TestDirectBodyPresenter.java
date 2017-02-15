@@ -48,11 +48,6 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for subclasses of the DirectBodyPresenter class.
- *
- * @param <S>
- * 		the type of data source used by the presenter under test
- * @param <V>
- * 		the type of view controlled by the presenter under test
  */
 @SuppressWarnings("unchecked") // Warning shown by mocks, but this is ok
 @RunWith(AndroidJUnit4.class)
