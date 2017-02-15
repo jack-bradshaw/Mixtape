@@ -24,6 +24,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
+import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.ContextualMenuItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 
 import org.junit.Before;
@@ -580,7 +581,21 @@ public class TestDirectBodyPresenter {
 
 	@Test
 	public void testOnContextualMenuItemSelected_validCallbacks() {
+		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
+				listener1 = mock(ContextualMenuItemSelectedListener.class);
+		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
+				listener2 = mock(ContextualMenuItemSelectedListener.class);
 
+		presenter.registerListener(listener1);
+		presenter.registerListener(listener2);
+		presenter.registerListener((LibraryItemSelectedListener) null);
+
+		final LibraryItem selectedItem = mock(LibraryItem.class);
+		final MenuItem menuItem = mock(MenuItem.class);
+		presenter.onContextualMenuItemSelected(mock(View.class), selectedItem, menuItem);
+
+		verify(listener1).onContextualMenuItemSelected(presenter, selectedItem, menuItem);
+		verify(listener2).onContextualMenuItemSelected(presenter, selectedItem, menuItem);
 	}
 
 	/**
