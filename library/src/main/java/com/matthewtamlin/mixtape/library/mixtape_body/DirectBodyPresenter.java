@@ -67,6 +67,8 @@ public class DirectBodyPresenter<
 
 		if (dataSource != null) {
 			dataSource.loadData(false, this);
+		} else if (view != null) {
+			view.setItems(null);
 		}
 	}
 
