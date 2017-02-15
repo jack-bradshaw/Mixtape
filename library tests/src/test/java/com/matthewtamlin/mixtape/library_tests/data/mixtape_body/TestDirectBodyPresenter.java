@@ -310,7 +310,7 @@ public class TestDirectBodyPresenter {
 
 		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
 
-		verify(view, never()).notifyItemMoved(1, 2);
+		verify(view, times(1)).notifyItemMoved(1, 2);
 	}
 
 	/**
