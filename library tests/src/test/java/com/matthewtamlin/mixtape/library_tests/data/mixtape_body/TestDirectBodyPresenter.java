@@ -74,26 +74,6 @@ public class TestDirectBodyPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
-	 * functions correctly when the presenter does not already have a data source. The test will
-	 * only pass if the method registers for all relevant callbacks from the new data source.
-	 */
-	@Test
-	public void testSetDataSource_withoutDataSource() {
-		final S newDataSource = createMockDataSource();
-
-		presenterWithViewOnly.setDataSource(newDataSource);
-
-		verify(newDataSource).registerItemAddedListener(presenterWithViewOnly);
-		verify(newDataSource).registerDataModifiedListener(presenterWithViewOnly);
-		verify(newDataSource).registerItemMovedListener(presenterWithViewOnly);
-		verify(newDataSource).registerItemRemovedListener(presenterWithViewOnly);
-		verify(newDataSource).registerDataReplacedListener(presenterWithViewOnly);
-		verify(newDataSource).registerItemModifiedListener(presenterWithViewOnly);
-		verify(newDataSource).registerLongOperationListener(presenterWithViewOnly);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
 	 * functions correctly when the presenter already has a data source. The test will only pass if
 	 * the method registers the new data source for all relevant callbacks, and unregisters the old
 	 * data source from all callbacks.
