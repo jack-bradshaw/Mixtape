@@ -52,6 +52,12 @@ import static org.mockito.Mockito.when;
 @SuppressWarnings("unchecked") // Warning shown by mocks, but this is ok
 @RunWith(AndroidJUnit4.class)
 public class TestDirectBodyPresenter {
+	private DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter;
+
+	public void setup() {
+		presenter = new DirectBodyPresenter<>();
+	}
+
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter#setDataSource(ListDataSource)} method
 	 * functions correctly when the presenter already has a data source. The test will only pass if
@@ -62,9 +68,6 @@ public class TestDirectBodyPresenter {
 	public void testSetDataSource_withoutView() {
 		final ListDataSource<LibraryItem> dataSource1 = mock(ListDataSource.class);
 		final ListDataSource<LibraryItem> dataSource2 = mock(ListDataSource.class);
-
-		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
-				DirectBodyPresenter<>();
 
 		presenter.setDataSource(dataSource1);
 
@@ -129,9 +132,6 @@ public class TestDirectBodyPresenter {
 			}
 		};
 
-		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
-				DirectBodyPresenter<>();
-
 		final View view = mock(View.class);
 		presenter.setView(view);
 
@@ -149,9 +149,6 @@ public class TestDirectBodyPresenter {
 	public void testSetView_withoutDataSource() {
 		final View view1 = mock(View.class);
 		final View view2 = mock(View.class);
-
-		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
-				DirectBodyPresenter<>();
 
 		presenter.setView(view1);
 
@@ -171,9 +168,6 @@ public class TestDirectBodyPresenter {
 	public void testSetView_withDataSource() {
 		final View view1 = mock(View.class);
 		final View view2 = mock(View.class);
-
-		final DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter = new
-				DirectBodyPresenter<>();
 
 		final ArrayList<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = new ListDataSourceHelper<LibraryItem>() {
