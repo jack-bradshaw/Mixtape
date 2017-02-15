@@ -450,7 +450,7 @@ public class TestDirectBodyPresenter {
 
 		presenter.onItemModified(dataSource, mock(LibraryItem.class), 1);
 
-		verify(view, never()).notifyItemModified(1);
+		verify(view, times(1)).notifyItemModified(1);
 	}
 
 	/**
