@@ -164,24 +164,4 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 			view.setPresenter(this);
 		}
 	}
-
-	/**
-	 * A LibraryItem which has a null title, subtitle and artwork.
-	 */
-	private static class EmptyItem implements LibraryItem {
-		@Override
-		public CharSequence getTitle() throws LibraryReadException {
-			return null;
-		}
-
-		@Override
-		public CharSequence getSubtitle() throws LibraryReadException {
-			return null;
-		}
-
-		@Override
-		public Drawable getArtwork(final int width, final int height) throws LibraryReadException {
-			return null;
-		}
-	}
 }
