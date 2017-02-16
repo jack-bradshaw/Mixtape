@@ -21,8 +21,6 @@ import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-
 /**
  * The MVP contract for a view which presents a single LibraryItem to the user.
  */
@@ -45,6 +43,11 @@ public interface HeaderContract {
 		 * @return the item currently being displayed, may be null
 		 */
 		LibraryItem getItem();
+
+		/**
+		 * Notifies the view of a change to the title, subtitle or artwork of the current item.
+		 */
+		void notifyItemChanged();
 	}
 
 	/**
