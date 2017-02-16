@@ -171,10 +171,12 @@ public abstract class MixtapeBodyViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				items.add(0, new NormalLibraryItem(getResources(),
+				final LibraryItem newItem = new NormalLibraryItem(getResources(),
 						"Title " + items.size(),
 						"Subtitle " + items.size(),
-						ARTWORK_RES_ID));
+						ARTWORK_RES_ID);
+
+				items.add(0, newItem);
 				getTestView().notifyItemAdded(0);
 			}
 		});
