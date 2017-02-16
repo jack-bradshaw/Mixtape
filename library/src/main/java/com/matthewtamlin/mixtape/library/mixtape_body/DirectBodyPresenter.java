@@ -18,6 +18,7 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 
 import android.view.MenuItem;
 
+import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -38,6 +39,7 @@ import java.util.Set;
  * @param <V>
  * 		the type of view to present to
  */
+@Tested(testMethod = "automated")
 public class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
