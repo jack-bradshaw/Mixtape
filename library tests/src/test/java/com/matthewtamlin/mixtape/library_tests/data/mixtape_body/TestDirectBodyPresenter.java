@@ -284,7 +284,7 @@ public class TestDirectBodyPresenter {
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
 	 * delivers a data replaced callback and there is a view. The test will only pass if the view is
-	 * notified of the event.
+	 * updated to display the new data.
 	 */
 	@Test
 	public void testOnDataReplaced_withView() {
