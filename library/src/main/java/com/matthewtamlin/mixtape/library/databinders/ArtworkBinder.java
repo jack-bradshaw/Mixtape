@@ -21,7 +21,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.util.LruCache;
+import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
