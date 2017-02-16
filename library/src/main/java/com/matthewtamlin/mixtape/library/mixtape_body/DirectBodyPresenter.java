@@ -95,9 +95,8 @@ public class DirectBodyPresenter<
 		return view;
 	}
 
-	//TODO finalise
 	@Override
-	public void onDataLoaded(BaseDataSource<List<D>> source, List<D> data) {
+	public void onDataLoaded(final BaseDataSource<List<D>> source, final List<D> data) {
 		if (view != null) {
 			view.setItems(data);
 		}
