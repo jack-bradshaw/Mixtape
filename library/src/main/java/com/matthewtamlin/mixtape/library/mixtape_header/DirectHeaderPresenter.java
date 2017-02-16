@@ -31,8 +31,8 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
  * @param <V>
  * 		the type of view
  */
-public class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V extends
-		HeaderContract.View> implements HeaderContract.Presenter<S, V> {
+public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSource<D>,
+		V extends HeaderContract.View> implements HeaderContract.Presenter<D, S, V> {
 	/**
 	 * The data source supplying the LibraryItems.
 	 */
@@ -70,6 +70,8 @@ public class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V exte
 		}
 	}
 
+
+
 	@Override
 	public final V getView() {
 		return view;
@@ -90,27 +92,26 @@ public class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V exte
 	}
 
 	@Override
-	public void onDataModified(final BaseDataSource<LibraryItem> source, final LibraryItem data) {
+	public void onDataModified(final BaseDataSource<D> source, final D data) {
 		if (view != null) {
 			view.setItem(data == null ? new EmptyItem() : data);
 		}
 	}
 
 	@Override
-	public void onDataReplaced(final BaseDataSource<LibraryItem> source, final LibraryItem oldData,
-			LibraryItem newData) {
+	public void onDataReplaced(final BaseDataSource<D> source, final D oldData, D newData) {
 		if (view != null) {
 			view.setItem(newData == null ? new EmptyItem() : newData);
 		}
 	}
 
 	@Override
-	public void onLongOperationStarted(BaseDataSource<LibraryItem> source) {
+	public void onLongOperationStarted(BaseDataSource<D> source) {
 		// Do nothing since the view doesn't have a loading indicator
 	}
 
 	@Override
-	public void onLongOperationFinished(BaseDataSource<LibraryItem> source) {
+	public void onLongOperationFinished(BaseDataSource<D> source) {
 		// Do nothing since the view doesn't have a loading indicator
 	}
 
