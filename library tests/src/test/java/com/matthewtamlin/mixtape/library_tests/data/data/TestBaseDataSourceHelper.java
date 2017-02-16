@@ -28,8 +28,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.mockito.Matchers.notNull;
+import static org.hamcrest.core.IsNot.not;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -51,7 +52,7 @@ public class TestBaseDataSourceHelper {
 	@Before
 	public void setup() {
 		dataSource = createNewDataSource();
-		assertThat("createNewDataSource must not return null,", dataSource, is(notNull()));
+		assertThat("createNewDataSource must not return null,", dataSource, is(not(nullValue())));
 	}
 
 	/**
@@ -61,8 +62,8 @@ public class TestBaseDataSourceHelper {
 	 */
 	@Test
 	public void testRegisterDataReplacedListener() {
-		final DataReplacedListener<LibraryItem> listener1 = mock(DataReplacedListener.class);
-		final DataReplacedListener<LibraryItem> listener2 = mock(DataReplacedListener.class);
+		final DataReplacedListener listener1 = mock(DataReplacedListener.class);
+		final DataReplacedListener listener2 = mock(DataReplacedListener.class);
 
 		dataSource.registerDataReplacedListener(listener1);
 		dataSource.registerDataReplacedListener(listener2);
@@ -81,8 +82,8 @@ public class TestBaseDataSourceHelper {
 	 */
 	@Test
 	public void testUnregisterDataReplacedListener() {
-		final DataReplacedListener<LibraryItem> listener1 = mock(DataReplacedListener.class);
-		final DataReplacedListener<LibraryItem> listener2 = mock(DataReplacedListener.class);
+		final DataReplacedListener listener1 = mock(DataReplacedListener.class);
+		final DataReplacedListener listener2 = mock(DataReplacedListener.class);
 
 		dataSource.registerDataReplacedListener(listener1);
 		dataSource.registerDataReplacedListener(listener2);
@@ -102,8 +103,8 @@ public class TestBaseDataSourceHelper {
 	 */
 	@Test
 	public void testRegisterDataModifiedListener() {
-		final DataModifiedListener<LibraryItem> listener1 = mock(DataModifiedListener.class);
-		final DataModifiedListener<LibraryItem> listener2 = mock(DataModifiedListener.class);
+		final DataModifiedListener listener1 = mock(DataModifiedListener.class);
+		final DataModifiedListener listener2 = mock(DataModifiedListener.class);
 
 		dataSource.registerDataModifiedListener(listener1);
 		dataSource.registerDataModifiedListener(listener2);
@@ -122,8 +123,8 @@ public class TestBaseDataSourceHelper {
 	 */
 	@Test
 	public void testUnregisterDataModifiedListener() {
-		final DataModifiedListener<LibraryItem> listener1 = mock(DataModifiedListener.class);
-		final DataModifiedListener<LibraryItem> listener2 = mock(DataModifiedListener.class);
+		final DataModifiedListener listener1 = mock(DataModifiedListener.class);
+		final DataModifiedListener listener2 = mock(DataModifiedListener.class);
 
 		dataSource.registerDataModifiedListener(listener1);
 		dataSource.registerDataModifiedListener(listener2);
@@ -180,7 +181,7 @@ public class TestBaseDataSourceHelper {
 	/**
 	 * @return a new BaseDataSourceHelper, not null
 	 */
-	public BaseDataSourceHelper<LibraryItem> createNewDataSource() {
+	public BaseDataSourceHelper createNewDataSource() {
 		return new BaseDataSourceHelper<LibraryItem>() {
 			@Override
 			public void loadData(final boolean forceRefresh,
