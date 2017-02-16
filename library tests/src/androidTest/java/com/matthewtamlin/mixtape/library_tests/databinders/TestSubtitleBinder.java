@@ -17,7 +17,7 @@
 package com.matthewtamlin.mixtape.library_tests.databinders;
 
 import android.support.test.runner.AndroidJUnit4;
-import android.util.LruCache;
+import android.support.v4.util.LruCache;
 import android.widget.TextView;
 
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
