@@ -70,8 +70,6 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 		}
 	}
 
-
-
 	@Override
 	public final V getView() {
 		return view;
@@ -80,14 +78,14 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 	@Override
 	public void onDataLoaded(final BaseDataSource source, final LibraryItem data) {
 		if (view != null) {
-			view.setItem(data == null ? new EmptyItem() : data);
+			view.setItem(data);
 		}
 	}
 
 	@Override
 	public void onLoadDataFailed(final BaseDataSource source) {
 		if (view != null) {
-			view.setItem(new EmptyItem());
+			view.setItem(null);
 		}
 	}
 
