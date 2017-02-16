@@ -43,14 +43,8 @@ import static org.mockito.Mockito.verify;
 
 /**
  * Unit tests for subclasses of the DirectBodyPresenter class.
- *
- * @param <S>
- * 		the type of data source used by the presenter under test
- * @param <V>
- * 		the type of view controlled by the presenter under test
  */
 @RunWith(AndroidJUnit4.class)
-public abstract class TestDirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V extends
-		HeaderContract.View> {
+public abstract class TestDirectHeaderPresenter {
 
 }
