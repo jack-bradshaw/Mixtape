@@ -28,6 +28,7 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.View;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;
@@ -41,7 +42,7 @@ import static org.mockito.Mockito.verify;
  * Unit tests for the {@link DirectHeaderPresenter} class.
  */
 @SuppressWarnings("unchecked") // Warning caused by mocks, but it isn't a problem
-@RunWith(AndroidJUnit4.class)
+@RunWith(JUnit4.class)
 public class TestDirectHeaderPresenter {
 	/**
 	 * The presenter under test.
