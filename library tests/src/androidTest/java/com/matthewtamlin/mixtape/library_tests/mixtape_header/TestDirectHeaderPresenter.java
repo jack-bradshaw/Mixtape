@@ -42,7 +42,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 /**
- * Unit tests for subclasses of the DirectBodyPresenter class.
+ * Unit tests for the {@link DirectHeaderPresenter} class.
  */
 @RunWith(AndroidJUnit4.class)
 public class TestDirectHeaderPresenter {
