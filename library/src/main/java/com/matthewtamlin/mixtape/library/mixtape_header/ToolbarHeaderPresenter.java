@@ -31,8 +31,8 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
  * @param <S>
  * 		the type of data source to present from
  */
-public class ToolbarHeaderPresenter<S extends BaseDataSource<LibraryItem>>
-		extends DirectHeaderPresenter<S, ToolbarHeader> {
+public class ToolbarHeaderPresenter<D extends LibraryItem, S extends BaseDataSource<D>>
+		extends DirectHeaderPresenter<D, S, ToolbarHeader> {
 	/**
 	 * Binds title data to the view.
 	 */
@@ -89,7 +89,7 @@ public class ToolbarHeaderPresenter<S extends BaseDataSource<LibraryItem>>
 	}
 
 	@Override
-	public void onDataModified(final BaseDataSource<LibraryItem> source, final LibraryItem data) {
+	public void onDataModified(final BaseDataSource<D> source, final D data) {
 		titleDataBinder.getCache().remove(data);
 		subtitleDataBinder.getCache().remove(data);
 		artworkDataBinder.getCache().remove(data);
