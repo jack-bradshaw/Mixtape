@@ -45,6 +45,6 @@ import static org.mockito.Mockito.verify;
  * Unit tests for subclasses of the DirectBodyPresenter class.
  */
 @RunWith(AndroidJUnit4.class)
-public abstract class TestDirectHeaderPresenter {
+public class TestDirectHeaderPresenter {
 
 }
