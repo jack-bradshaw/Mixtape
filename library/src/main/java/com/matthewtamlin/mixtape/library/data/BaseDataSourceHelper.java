@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.data;
 
+import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 
 import java.util.HashSet;
@@ -28,6 +29,7 @@ import java.util.Set;
  * @param <D>
  * 		the type of data supplied by the source
  */
+@Tested(testMethod = "automated")
 public abstract class BaseDataSourceHelper<D> implements BaseDataSource<D> {
 	/**
 	 * All data replaced listeners which are currently registered. This set must never contain
