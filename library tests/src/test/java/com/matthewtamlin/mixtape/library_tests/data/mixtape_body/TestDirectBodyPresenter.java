@@ -641,37 +641,3 @@ public class TestDirectBodyPresenter {
 	}
 }
 
-/**
- * A ListDataSource where the data can be set. Whenever {@link #loadData(boolean,
- * DataLoadedListener)} is called, the current data determines which callback is delivered. If the
- * data is not-null then the data loaded callback is delivered, and if the data is null then the
- * data load failed callback is delivered.
- */
-class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
-	/**
-	 * The current data.
-	 */
-	private List<LibraryItem> data;
-
-	/**
-	 * Sets the data to return when {@link #loadData(boolean, DataLoadedListener)} is called.
-	 * Calling this method does not trigger {@link DataReplacedListener#onDataReplaced(BaseDataSource,
-	 * Object, Object)} callbacks.
-	 *
-	 * @param data
-	 * 		the new data
-	 */
-	public void setData(final List<LibraryItem> data) {
-		this.data = data;
-	}
-
-	@Override
-	public void loadData(final boolean forceRefresh,
-			final DataLoadedListener<List<LibraryItem>> callback) {
-		if (data == null) {
-			callback.onLoadDataFailed(this);
-		} else {
-			callback.onDataLoaded(this, data);
-		}
-	}
-}

@@ -21,15 +21,16 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
@@ -45,10 +46,19 @@ import java.util.Random;
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHarness {
-	/**
-	 * The cache to use when binding data to the test view.
-	 */
-	private final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 10000);
+	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, Drawable> artworkCache =
+			new LruCache<LibraryItem, Drawable>(1000000) {
+				@Override
+				protected int sizeOf(final LibraryItem key, final Drawable value) {
+					// All LibraryItems use BitmapDrawable for the artwork
+					final Bitmap artworkBitmap = ((BitmapDrawable) value).getBitmap();
+					return artworkBitmap.getByteCount();
+				}
+			};
 
 	/**
 	 * The defaults to use when binding data to the test view.
@@ -59,7 +69,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 	 * The artwork fade duration to use when transitioning artwork in the test view, measured in
 	 * milliseconds.
 	 */
-	private int fadeDurationMs = 0;
+	private int fadeDurationMs;
 
 	@Override
 	public abstract RecyclerViewBody getTestView();
@@ -83,7 +93,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 
 	/**
 	 * Creates a button which changes the colour of the loading indicator in the test view when
-	 * clicked. The new colour is randomly selected from all available colours.
+	 * clicked. The new colour is randomly generated.
 	 *
 	 * @return the button, not null
 	 */
@@ -117,7 +127,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setTitleDataBinder(new TitleBinder(cache, defaults));
+				getTestView().setTitleDataBinder(new TitleBinder(titleCache, defaults));
 			}
 		});
 
@@ -137,7 +147,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
+				getTestView().setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
 			}
 		});
 
@@ -157,7 +167,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 			}
 		});
 

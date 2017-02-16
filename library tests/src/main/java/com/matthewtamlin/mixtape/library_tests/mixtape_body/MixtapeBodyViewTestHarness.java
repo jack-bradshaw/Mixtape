@@ -57,6 +57,7 @@ public abstract class MixtapeBodyViewTestHarness extends
 		getControlsContainer().addView(createSetItemsButton());
 		getControlsContainer().addView(createSetContextualMenuResourceButton());
 		getControlsContainer().addView(createGoToTopButton());
+		getControlsContainer().addView(createGoToEndButton());
 		getControlsContainer().addView(createAddItemButton());
 		getControlsContainer().addView(createRemoveItemButton());
 		getControlsContainer().addView(createMoveItemButton());
@@ -137,6 +138,27 @@ public abstract class MixtapeBodyViewTestHarness extends
 	}
 
 	/**
+	 * Creates a button which navigates to the end of the view when clicked.
+	 *
+	 * @return the button, not null
+	 */
+	private Button createGoToEndButton() {
+		final Button b = new Button(this);
+		b.setText("Go to end");
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				final int endIndex = getTestView().getItems().size() - 1;
+				getTestView().showItem(endIndex);
+			}
+		});
+
+		return b;
+	}
+
+	/**
 	 * Creates a button which adds an item to the test view when clicked.
 	 *
 	 * @return the button, not null
@@ -149,10 +171,12 @@ public abstract class MixtapeBodyViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				items.add(0, new NormalLibraryItem(getResources(),
+				final LibraryItem newItem = new NormalLibraryItem(getResources(),
 						"Title " + items.size(),
 						"Subtitle " + items.size(),
-						ARTWORK_RES_ID));
+						ARTWORK_RES_ID);
+
+				items.add(0, newItem);
 				getTestView().notifyItemAdded(0);
 			}
 		});
