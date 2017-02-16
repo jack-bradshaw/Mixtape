@@ -39,6 +39,7 @@ import java.util.Set;
  * @param <V>
  * 		the type of view to present to
  */
+//TODO check formatting
 @Tested(testMethod = "automated")
 public class DirectBodyPresenter<
 		D extends LibraryItem,
@@ -95,6 +96,7 @@ public class DirectBodyPresenter<
 		return view;
 	}
 
+	//TODO finalise
 	@Override
 	public void onDataLoaded(BaseDataSource<List<D>> source, List<D> data) {
 		if (view != null) {
