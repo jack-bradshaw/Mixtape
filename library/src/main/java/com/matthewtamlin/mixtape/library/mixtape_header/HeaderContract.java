@@ -21,6 +21,8 @@ import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 /**
  * The MVP contract for a view which presents a single LibraryItem to the user.
  */
@@ -50,6 +52,10 @@ public interface HeaderContract {
 	 * business logic needed to update the data and drive the view. Must always be subscribed to
 	 * callback events from the data source and the view (if possible).
 	 */
-	public interface Presenter<S extends BaseDataSource<LibraryItem>, V extends View> extends
-			BasePresenter<S, V>, BaseDataSource.FullListener<LibraryItem> {}
+	public interface Presenter<
+			D extends LibraryItem,
+			S extends BaseDataSource<D>,
+			V extends View>
+			extends
+			BasePresenter<S, V>, BaseDataSource.FullListener<D> {}
 }
