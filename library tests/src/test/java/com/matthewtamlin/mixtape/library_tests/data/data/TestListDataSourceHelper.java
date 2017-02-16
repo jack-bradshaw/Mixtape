@@ -19,7 +19,7 @@ package com.matthewtamlin.mixtape.library_tests.data.data;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource.ItemAddedListener;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource.ItemMovedListener;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource.ItemRemovedListener;
-import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource.ListItemModifiedListener;
+import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource.ItemModifiedListener;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.ListDataSourceHelper;
 
@@ -140,14 +140,14 @@ public class TestListDataSourceHelper extends TestBaseDataSourceHelper {
 	}
 
 	/**
-	 * Test to verify that the {@link ListDataSourceHelper#registerItemModifiedListener(ListItemModifiedListener)}
+	 * Test to verify that the {@link ListDataSourceHelper#registerItemModifiedListener(ItemModifiedListener)}
 	 * method functions correctly. The test will only pass if the non-null listeners are registered
 	 * and the null listener is ignored.
 	 */
 	@Test
 	public void testRegisterItemModifiedListener() {
-		final ListItemModifiedListener listener1 = mock(ListItemModifiedListener.class);
-		final ListItemModifiedListener listener2 = mock(ListItemModifiedListener.class);
+		final ItemModifiedListener listener1 = mock(ItemModifiedListener.class);
+		final ItemModifiedListener listener2 = mock(ItemModifiedListener.class);
 
 		dataSource.registerItemModifiedListener(listener1);
 		dataSource.registerItemModifiedListener(listener2);
@@ -160,14 +160,14 @@ public class TestListDataSourceHelper extends TestBaseDataSourceHelper {
 	}
 
 	/**
-	 * Test to verify that the {@link ListDataSourceHelper#unregisterItemModifiedListener(ListItemModifiedListener)}
+	 * Test to verify that the {@link ListDataSourceHelper#unregisterItemModifiedListener(ItemModifiedListener)}
 	 * method functions correctly. The test will only pass if only specific listeners are
 	 * unregistered.
 	 */
 	@Test
 	public void testUnregisterItemModifiedListener() {
-		final ListItemModifiedListener listener1 = mock(ListItemModifiedListener.class);
-		final ListItemModifiedListener listener2 = mock(ListItemModifiedListener.class);
+		final ItemModifiedListener listener1 = mock(ItemModifiedListener.class);
+		final ItemModifiedListener listener2 = mock(ItemModifiedListener.class);
 
 		dataSource.registerItemModifiedListener(listener1);
 		dataSource.registerItemModifiedListener(listener2);
@@ -201,7 +201,7 @@ public class TestListDataSourceHelper extends TestBaseDataSourceHelper {
 	}
 
 	/**
-	 * Test to verify that the {@link ListDataSourceHelper#unregisterItemModifiedListener(ListItemModifiedListener)}
+	 * Test to verify that the {@link ListDataSourceHelper#unregisterItemModifiedListener(ItemModifiedListener)}
 	 * method functions correctly. The test will only pass if only specific listeners are
 	 * unregistered.
 	 */
