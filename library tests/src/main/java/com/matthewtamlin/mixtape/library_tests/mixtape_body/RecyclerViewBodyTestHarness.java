@@ -75,7 +75,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 	public abstract RecyclerViewBody getTestView();
 
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final @Nullable Bundle savedInstanceState) {d
 		super.onCreate(savedInstanceState);
 
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
@@ -93,7 +93,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 
 	/**
 	 * Creates a button which changes the colour of the loading indicator in the test view when
-	 * clicked. The new colour is randomly selected from all available colours.
+	 * clicked. The new colour is randomly generated.
 	 *
 	 * @return the button, not null
 	 */
