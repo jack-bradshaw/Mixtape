@@ -17,7 +17,7 @@
 package com.matthewtamlin.mixtape.library.databinders;
 
 import android.os.AsyncTask;
-import android.util.LruCache;
+import android.support.v4.util.LruCache;
 import android.widget.TextView;
 
 import com.matthewtamlin.java_utilities.checkers.NullChecker;
