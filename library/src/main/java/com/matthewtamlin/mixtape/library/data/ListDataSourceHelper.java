@@ -16,6 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.data;
 
+import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 
 import java.util.HashSet;
@@ -29,6 +30,7 @@ import java.util.Set;
  * @param <D>
  * 		the type of objects contained within the list
  */
+@Tested(testMethod = "automated")
 public abstract class ListDataSourceHelper<D> extends BaseDataSourceHelper<List<D>> implements
 		ListDataSource<D> {
 	/**

@@ -18,9 +18,12 @@ package com.matthewtamlin.mixtape.library.data;
 
 import android.graphics.drawable.Drawable;
 
+import com.matthewtamlin.java_utilities.testing.Tested;
+
 /**
  * An implementation of the DisplayableDefaults interface which exposes setters for the values.
  */
+@Tested(testMethod = "automated")
 public class PojoDisplayableDefaults implements DisplayableDefaults {
 	private CharSequence title;
 
