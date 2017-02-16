@@ -184,7 +184,7 @@ public class PlaylistActivity extends AppCompatActivity {
 				new BitmapDrawable(getResources(), defaultArtwork));
 
 		header.setTitleDataBinder(new TitleBinder(headerTitleCache, defaults));
-		header.setSubtitleDataBinder(new SubtitleBinder(headerSubtitleCache, defaults);
+		header.setSubtitleDataBinder(new SubtitleBinder(headerSubtitleCache, defaults));
 		header.setArtworkDataBinder(new ArtworkBinder(headerArtworkCache, defaults));
 	}
 
