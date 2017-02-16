@@ -77,11 +77,11 @@ public class TestDirectBodyPresenter {
 		presenter.setDataSource(dataSource1);
 
 		verify(dataSource1).registerDataReplacedListener(presenter);
-		verify(dataSource1).registerItemModifiedListener(presenter);
+		verify(dataSource1).registerDataModifiedListener(presenter);
 		verify(dataSource1).registerLongOperationListener(presenter);
 		verify(dataSource1).registerItemAddedListener(presenter);
 		verify(dataSource1).registerItemRemovedListener(presenter);
-		verify(dataSource1).registerDataModifiedListener(presenter);
+		verify(dataSource1).registerItemModifiedListener(presenter);
 		verify(dataSource1).registerItemMovedListener(presenter);
 
 		verify(dataSource1).loadData(anyBoolean(), eq(presenter));
@@ -89,19 +89,19 @@ public class TestDirectBodyPresenter {
 		presenter.setDataSource(dataSource2);
 
 		verify(dataSource1).unregisterDataReplacedListener(presenter);
-		verify(dataSource1).unregisterItemModifiedListener(presenter);
+		verify(dataSource1).unregisterDataModifiedListener(presenter);
 		verify(dataSource1).unregisterLongOperationListener(presenter);
 		verify(dataSource1).unregisterItemAddedListener(presenter);
 		verify(dataSource1).unregisterItemRemovedListener(presenter);
-		verify(dataSource1).unregisterDataModifiedListener(presenter);
+		verify(dataSource1).unregisterItemModifiedListener(presenter);
 		verify(dataSource1).unregisterItemMovedListener(presenter);
 
 		verify(dataSource2).registerDataReplacedListener(presenter);
-		verify(dataSource2).registerItemModifiedListener(presenter);
+		verify(dataSource2).registerDataModifiedListener(presenter);
 		verify(dataSource2).registerLongOperationListener(presenter);
 		verify(dataSource2).registerItemAddedListener(presenter);
 		verify(dataSource2).registerItemRemovedListener(presenter);
-		verify(dataSource2).registerDataModifiedListener(presenter);
+		verify(dataSource2).registerItemModifiedListener(presenter);
 		verify(dataSource2).registerItemMovedListener(presenter);
 
 		verify(dataSource1).loadData(anyBoolean(), eq(presenter));
@@ -109,11 +109,11 @@ public class TestDirectBodyPresenter {
 		presenter.setDataSource(null);
 
 		verify(dataSource2).unregisterDataReplacedListener(presenter);
-		verify(dataSource2).unregisterItemModifiedListener(presenter);
+		verify(dataSource2).unregisterDataModifiedListener(presenter);
 		verify(dataSource2).unregisterLongOperationListener(presenter);
 		verify(dataSource2).unregisterItemAddedListener(presenter);
 		verify(dataSource2).unregisterItemRemovedListener(presenter);
-		verify(dataSource2).unregisterDataModifiedListener(presenter);
+		verify(dataSource2).unregisterItemModifiedListener(presenter);
 		verify(dataSource2).unregisterItemMovedListener(presenter);
 	}
 
