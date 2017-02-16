@@ -189,7 +189,6 @@ public class TestDirectBodyPresenter {
 		presenter.setView(view2);
 
 		verify(view1).setPresenter(null);
-
 		verify(view2).setPresenter(presenter);
 		verify(view2).setItems(data);
 
