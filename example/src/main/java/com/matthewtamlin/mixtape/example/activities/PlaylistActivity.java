@@ -71,7 +71,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private Mp3SongDataSource bodyDataSource;
 
-	private ToolbarHeaderPresenter<HeaderDataSource> headerPresenter;
+	private ToolbarHeaderPresenter<LibraryItem, HeaderDataSource> headerPresenter;
 
 	private LruCache<LibraryItem, CharSequence> bodyTitleCache;
 
@@ -206,7 +206,7 @@ public class PlaylistActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
 
-		final ToolbarHeaderPresenter<HeaderDataSource> headerPresenter =
+		final ToolbarHeaderPresenter<LibraryItem, HeaderDataSource> headerPresenter =
 				new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
 
 		headerPresenter.setView(header);
