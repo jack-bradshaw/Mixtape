@@ -70,8 +70,6 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 		}
 	}
 
-
-
 	@Override
 	public final V getView() {
 		return view;
@@ -80,28 +78,28 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 	@Override
 	public void onDataLoaded(final BaseDataSource source, final LibraryItem data) {
 		if (view != null) {
-			view.setItem(data == null ? new EmptyItem() : data);
+			view.setItem(data);
 		}
 	}
 
 	@Override
 	public void onLoadDataFailed(final BaseDataSource source) {
 		if (view != null) {
-			view.setItem(new EmptyItem());
+			view.setItem(null);
 		}
 	}
 
 	@Override
 	public void onDataModified(final BaseDataSource<D> source, final D data) {
 		if (view != null) {
-			view.setItem(data == null ? new EmptyItem() : data);
+			view.notifyItemChanged();
 		}
 	}
 
 	@Override
 	public void onDataReplaced(final BaseDataSource<D> source, final D oldData, final D newData) {
 		if (view != null) {
-			view.setItem(newData == null ? new EmptyItem() : newData);
+			view.setItem(newData);
 		}
 	}
 
@@ -164,26 +162,6 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 	protected void setSelfAsViewPresenter(final V view) {
 		if (view != null) {
 			view.setPresenter(this);
-		}
-	}
-
-	/**
-	 * A LibraryItem which has a null title, subtitle and artwork.
-	 */
-	private static class EmptyItem implements LibraryItem {
-		@Override
-		public CharSequence getTitle() throws LibraryReadException {
-			return null;
-		}
-
-		@Override
-		public CharSequence getSubtitle() throws LibraryReadException {
-			return null;
-		}
-
-		@Override
-		public Drawable getArtwork(final int width, final int height) throws LibraryReadException {
-			return null;
 		}
 	}
 }

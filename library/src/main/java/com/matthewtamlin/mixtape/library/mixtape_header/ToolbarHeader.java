@@ -219,6 +219,13 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 		return data;
 	}
 
+	@Override
+	public void notifyItemChanged() {
+		updateTitle();
+		updateSubtitle();
+		updateArtwork();
+	}
+
 	/**
 	 * Sets the toolbar to display. This method will fail if the supplied toolbar if already
 	 * attached to a view group.
