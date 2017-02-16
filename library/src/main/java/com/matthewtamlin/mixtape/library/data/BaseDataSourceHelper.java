@@ -45,7 +45,7 @@ public abstract class BaseDataSourceHelper<D> implements BaseDataSource<D> {
 	 * All long operation listeners which are currently registered. This set must never contain
 	 * null.
 	 */
-	private final Set<LongOperationListener> longOperationListeners = new HashSet<>();
+	private final Set<LongOperationListener<D>> longOperationListeners = new HashSet<>();
 
 	@Override
 	public void registerDataReplacedListener(final DataReplacedListener<D> listener) {
@@ -72,14 +72,14 @@ public abstract class BaseDataSourceHelper<D> implements BaseDataSource<D> {
 	}
 
 	@Override
-	public void registerLongOperationListener(final LongOperationListener listener) {
+	public void registerLongOperationListener(final LongOperationListener<D> listener) {
 		if (listener != null) {
 			longOperationListeners.add(listener);
 		}
 	}
 
 	@Override
-	public void unregisterLongOperationListener(final LongOperationListener listener) {
+	public void unregisterLongOperationListener(final LongOperationListener<D> listener) {
 		longOperationListeners.remove(listener);
 	}
 
@@ -112,7 +112,7 @@ public abstract class BaseDataSourceHelper<D> implements BaseDataSource<D> {
 	 *
 	 * @return the long operation listeners
 	 */
-	public Set<LongOperationListener> getLongOperationListeners() {
+	public Set<LongOperationListener<D>> getLongOperationListeners() {
 		return longOperationListeners;
 	}
 }

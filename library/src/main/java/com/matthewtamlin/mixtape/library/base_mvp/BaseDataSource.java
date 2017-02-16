@@ -85,7 +85,7 @@ public interface BaseDataSource<D> {
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerLongOperationListener(LongOperationListener listener);
+	void registerLongOperationListener(LongOperationListener<D> listener);
 
 	/**
 	 * Unregisters a long operation listener from this data source. If the supplied listener is null
@@ -94,7 +94,7 @@ public interface BaseDataSource<D> {
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterLongOperationListener(LongOperationListener listener);
+	void unregisterLongOperationListener(LongOperationListener<D> listener);
 
 	/**
 	 * Callback to be invoked when data is loaded, either successfully or unsuccessfully.
@@ -166,8 +166,11 @@ public interface BaseDataSource<D> {
 	/**
 	 * Callbacks to be invoked when a BaseDataSource starts/finishes a potentially long running
 	 * operation which may result in data being changed.
+	 *
+	 * @param <I>
+	 * 		the type of data supplied by the source
 	 */
-	interface LongOperationListener {
+	interface LongOperationListener<I> {
 		/**
 		 * Invoked when a potentially long running operation is started. Unless the process is
 		 * terminated abruptly, this callback should eventually be followed by a call to {@link
@@ -176,7 +179,7 @@ public interface BaseDataSource<D> {
 		 * @param source
 		 * 		the source performing the operation, not null
 		 */
-		void onLongOperationStarted(BaseDataSource source);
+		void onLongOperationStarted(BaseDataSource<I> source);
 
 		/**
 		 * Invoked when a potentially long running operation finishes.
@@ -184,7 +187,7 @@ public interface BaseDataSource<D> {
 		 * @param source
 		 * 		the source performing the operation, not null
 		 */
-		void onLongOperationFinished(BaseDataSource source);
+		void onLongOperationFinished(BaseDataSource<I> source);
 	}
 
 	/**
@@ -194,5 +197,5 @@ public interface BaseDataSource<D> {
 	 * 		the type of data supplied by the data source
 	 */
 	interface FullListener<I> extends DataLoadedListener<I>, DataReplacedListener<I>,
-			DataModifiedListener<I>, LongOperationListener {}
+			DataModifiedListener<I>, LongOperationListener<I> {}
 }
