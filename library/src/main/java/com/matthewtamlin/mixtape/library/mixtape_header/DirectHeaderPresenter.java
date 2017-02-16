@@ -92,7 +92,7 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 	@Override
 	public void onDataModified(final BaseDataSource<D> source, final D data) {
 		if (view != null) {
-			view.setItem(data == null ? new EmptyItem() : data);
+			view.notifyItemChanged();
 		}
 	}
 
