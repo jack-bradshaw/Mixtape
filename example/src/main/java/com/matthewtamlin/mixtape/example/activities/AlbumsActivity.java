@@ -42,7 +42,6 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.Contex
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
-import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 
 import java.util.List;
@@ -137,6 +136,18 @@ public class AlbumsActivity extends AppCompatActivity {
 
 		rootView = (CoordinatedMixtapeContainer) findViewById(R.id.example_layout_coordinator);
 		rootView.setBody(body);
+
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults(
+				"Unknown title",
+				"Unknown subtitle",
+				new BitmapDrawable(getResources(), defaultArtwork));
+
+		body.setTitleDataBinder(new TitleBinder(titleCache, defaults));
+		body.setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
+		body.setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 	}
 
 	private void setupPresenter() {
@@ -152,8 +163,8 @@ public class AlbumsActivity extends AppCompatActivity {
 		final SubtitleBinder subtitleBinder = new SubtitleBinder(subtitleCache, defaults);
 		final ArtworkBinder artworkBinder = new ArtworkBinder(artworkCache, defaults);
 
-		final RecyclerViewBodyPresenter<Mp3Album, Mp3AlbumDataSource> presenter = new
-				RecyclerViewBodyPresenter<>(titleBinder, subtitleBinder, artworkBinder);
+		final DirectBodyPresenter<Mp3Album, Mp3AlbumDataSource, RecyclerViewBody> presenter = new
+				DirectBodyPresenter<>();
 
 		presenter.registerListener(
 				new LibraryItemSelectedListener<Mp3Album, Mp3AlbumDataSource, RecyclerViewBody>() {

@@ -29,8 +29,8 @@ import java.util.Set;
 
 /**
  * A simple implementation of the BodyContract.Presenter interface where the list returned by the
- * data source is directly reflected in the view. Listeners can be registered to handle user
- * input events.
+ * data source is directly reflected in the view. Listeners can be registered to handle user input
+ * events.
  *
  * @param <D>
  * 		the type of data to present
@@ -39,7 +39,6 @@ import java.util.Set;
  * @param <V>
  * 		the type of view to present to
  */
-//TODO check formatting
 @Tested(testMethod = "automated")
 public class DirectBodyPresenter<
 		D extends LibraryItem,
@@ -96,9 +95,8 @@ public class DirectBodyPresenter<
 		return view;
 	}
 
-	//TODO finalise
 	@Override
-	public void onDataLoaded(BaseDataSource<List<D>> source, List<D> data) {
+	public void onDataLoaded(final BaseDataSource<List<D>> source, final List<D> data) {
 		if (view != null) {
 			view.setItems(data);
 		}
@@ -155,8 +153,7 @@ public class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onItemModified(final ListDataSource<D> source, final D modified,
-			final int index) {
+	public void onItemModified(final ListDataSource<D> source, final D modified, final int index) {
 		if (view != null) {
 			view.notifyItemModified(index);
 		}
@@ -181,8 +178,7 @@ public class DirectBodyPresenter<
 
 	@Override
 	public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-			final LibraryItem libraryItem,
-			final MenuItem menuItem) {
+			final LibraryItem libraryItem, final MenuItem menuItem) {
 		for (final ContextualMenuItemSelectedListener<D, S, V> listener :
 				contextualMenuItemSelectedListeners) {
 			// Should be fine so long as there is no external interference with view's data
@@ -354,6 +350,6 @@ public class DirectBodyPresenter<
 		 * 		the selected menu item, not null
 		 */
 		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter,
-				final D	libraryItem, final MenuItem menuItem);
+				final D libraryItem, final MenuItem menuItem);
 	}
 }
