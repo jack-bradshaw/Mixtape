@@ -143,8 +143,8 @@ public class TestBaseDataSourceHelper {
 	 */
 	@Test
 	public void testRegisterLongOperationListener() {
-		final LongOperationListener listener1 = mock(LongOperationListener.class);
-		final LongOperationListener listener2 = mock(LongOperationListener.class);
+		final LongOperationListener<LibraryItem> listener1 = mock(LongOperationListener.class);
+		final LongOperationListener<LibraryItem> listener2 = mock(LongOperationListener.class);
 
 		dataSource.registerLongOperationListener(listener1);
 		dataSource.registerLongOperationListener(listener2);
@@ -163,8 +163,8 @@ public class TestBaseDataSourceHelper {
 	 */
 	@Test
 	public void testUnregisterLongOperationListener() {
-		final LongOperationListener listener1 = mock(LongOperationListener.class);
-		final LongOperationListener listener2 = mock(LongOperationListener.class);
+		final LongOperationListener<LibraryItem> listener1 = mock(LongOperationListener.class);
+		final LongOperationListener<LibraryItem> listener2 = mock(LongOperationListener.class);
 
 		dataSource.registerLongOperationListener(listener1);
 		dataSource.registerLongOperationListener(listener2);
