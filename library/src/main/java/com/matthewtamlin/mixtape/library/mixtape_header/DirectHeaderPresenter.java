@@ -16,11 +16,8 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import android.graphics.drawable.Drawable;
-
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
-import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 /**
  * A simple implementation of the HeaderContract.Presenter interface where the LibraryItem returned
@@ -51,6 +48,8 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 
 		if (dataSource != null) {
 			dataSource.loadData(true, this); // Register this class for callbacks
+		} else if (view != null) {
+			view.setItem(null);
 		}
 	}
 
