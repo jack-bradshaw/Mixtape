@@ -18,7 +18,7 @@ package com.matthewtamlin.mixtape.library_tests.databinders;
 
 import android.graphics.drawable.Drawable;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.LruCache;
+import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
