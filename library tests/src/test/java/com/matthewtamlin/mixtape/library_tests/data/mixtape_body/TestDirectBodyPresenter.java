@@ -486,7 +486,7 @@ public class TestDirectBodyPresenter {
 	 * methods exit normally.
 	 */
 	@Test
-	public void testOnListItemModified_withoutView() {
+	public void testOnItemModified_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
@@ -500,7 +500,7 @@ public class TestDirectBodyPresenter {
 	 * view is notified of the event.
 	 */
 	@Test
-	public void testOnListItemModified_withView() {
+	public void testOnItemModified_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
