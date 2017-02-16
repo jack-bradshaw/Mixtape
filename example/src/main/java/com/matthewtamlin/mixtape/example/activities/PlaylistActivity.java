@@ -31,8 +31,6 @@ import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.example.R;
 import com.matthewtamlin.mixtape.example.data.HeaderDataSource;
-import com.matthewtamlin.mixtape.example.data.Mp3Album;
-import com.matthewtamlin.mixtape.example.data.Mp3AlbumDataSource;
 import com.matthewtamlin.mixtape.example.data.Mp3Song;
 import com.matthewtamlin.mixtape.example.data.Mp3SongDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
@@ -43,7 +41,6 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.ContextualMenuItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
@@ -51,8 +48,8 @@ import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
-import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeaderPresenter;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -71,7 +68,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
 	private Mp3SongDataSource bodyDataSource;
 
-	private ToolbarHeaderPresenter<LibraryItem, HeaderDataSource> headerPresenter;
+	private DirectHeaderPresenter<LibraryItem, HeaderDataSource, ToolbarHeader> headerPresenter;
 
 	private LruCache<LibraryItem, CharSequence> bodyTitleCache;
 
@@ -178,8 +175,17 @@ public class PlaylistActivity extends AppCompatActivity {
 
 		header = new ToolbarHeader(this);
 		header.setToolbar(toolbar);
-
 		header.setBackgroundColor(Color.WHITE);
+
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Playlist",
+				"Unknown artists",
+				new BitmapDrawable(getResources(), defaultArtwork));
+
+		header.setTitleDataBinder(new TitleBinder(headerTitleCache, defaults));
+		header.setSubtitleDataBinder(new SubtitleBinder(headerSubtitleCache, defaults);
+		header.setArtworkDataBinder(new ArtworkBinder(headerArtworkCache, defaults));
 	}
 
 	private void setupBodyView() {
@@ -196,19 +202,7 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupHeaderPresenter() {
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
-				.default_artwork);
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Playlist",
-				"Unknown artists",
-				new BitmapDrawable(getResources(), defaultArtwork));
-
-		final TitleBinder titleBinder = new TitleBinder(headerTitleCache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(headerSubtitleCache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(headerArtworkCache, defaults);
-
-		final ToolbarHeaderPresenter<LibraryItem, HeaderDataSource> headerPresenter =
-				new ToolbarHeaderPresenter<>(titleBinder, subtitleBinder, artworkBinder);
-
+		headerPresenter = new DirectHeaderPresenter<>();
 		headerPresenter.setView(header);
 		headerPresenter.setDataSource(headerDataSource);
 	}
