@@ -22,13 +22,17 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource.LongOperationLi
 import com.matthewtamlin.mixtape.library.data.BaseDataSourceHelper;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
+import org.hamcrest.core.IsNot;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
+import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
 
@@ -51,7 +55,7 @@ public class TestBaseDataSourceHelper {
 	@Before
 	public void setup() {
 		dataSource = createNewDataSource();
-		assertThat("createNewDataSource must not return null,", dataSource, is(notNull()));
+		assertThat("createNewDataSource must not return null,", dataSource, is(not(nullValue())));
 	}
 
 	/**
