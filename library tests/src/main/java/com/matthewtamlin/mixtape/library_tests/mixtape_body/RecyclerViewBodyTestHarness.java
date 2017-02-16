@@ -75,7 +75,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 	public abstract RecyclerViewBody getTestView();
 
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {d
+	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
@@ -127,7 +127,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setTitleDataBinder(new TitleBinder(cache, defaults));
+				getTestView().setTitleDataBinder(new TitleBinder(titleCache, defaults));
 			}
 		});
 
@@ -147,7 +147,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
+				getTestView().setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
 			}
 		});
 
@@ -167,7 +167,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 			}
 		});
 
