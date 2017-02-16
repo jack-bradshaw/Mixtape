@@ -270,6 +270,41 @@ public class TestDirectBodyPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data replaced callback and there is no view. The test will only pass if all
+	 * methods exit normally.
+	 */
+	@Test
+	public void testOnDataReplaced_withoutView() {
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onDataReplaced(dataSource, mock(List.class), mock(List.class));
+	}
+
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a data replaced callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
+	 */
+	@Test
+	public void testOnDataReplaced_withView() {
+		final List<LibraryItem> originalData = new ArrayList<>();
+		final SettableListDataSource dataSource = createNewDataSource(originalData);
+		presenter.setDataSource(dataSource);
+
+		final View view = mock(View.class);
+		presenter.setView(view);
+
+		final ArrayList<LibraryItem> newData = new ArrayList<>();
+		dataSource.setData(newData);
+		presenter.onDataReplaced(dataSource, originalData, newData);
+
+		verify(view, atLeastOnce()).setItems(newData);
+	}
+
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
 	 * delivers a data modified callback and there is no view. The test will only pass if all
 	 * methods exit normally.
 	 */
@@ -305,25 +340,25 @@ public class TestDirectBodyPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a data moved callback and there is no view. The test will only pass if all methods
-	 * exit normally.
+	 * delivers a long operation started callback and there is no view. The test will only pass if
+	 * all methods exit normally.
 	 */
 	@Test
-	public void testOnDataMoved_withoutView() {
+	public void testOnLongOperationStarted_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
+		presenter.onLongOperationStarted(dataSource);
 	}
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a data moved callback and there is a view. The test will only pass if the view is
-	 * notified of the event.
+	 * delivers a long operation started callback and there is a view. The test will only pass if
+	 * the loading indicator is shown.
 	 */
 	@Test
-	public void testOnDataMoved_withView() {
+	public void testOnLongOperationStarted_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
@@ -331,11 +366,48 @@ public class TestDirectBodyPresenter {
 		final View view = mock(View.class);
 		presenter.setView(view);
 
-		verify(view, never()).notifyItemMoved(anyInt(), anyInt());
+		verify(view, never()).showLoadingIndicator(true);
 
-		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
+		presenter.onLongOperationStarted(dataSource);
 
-		verify(view, times(1)).notifyItemMoved(1, 2);
+		verify(view).showLoadingIndicator(true);
+		verify(view, never()).showLoadingIndicator(false);
+	}
+
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a long operation finished callback and there is no view. The test will only pass if
+	 * all methods exit normally.
+	 */
+	@Test
+	public void testOnLongOperationFinished_withoutView() {
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		presenter.onLongOperationFinished(dataSource);
+	}
+
+	/**
+	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
+	 * delivers a long operation finished callback and there is a view. The test will only pass if
+	 * the loading indicator is hidden.
+	 */
+	@Test
+	public void testOnLongOperationFinished_withView() {
+		final List<LibraryItem> data = new ArrayList<>();
+		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
+		presenter.setDataSource(dataSource);
+
+		final View view = mock(View.class);
+		presenter.setView(view);
+
+		verify(view, never()).showLoadingIndicator(false);
+
+		presenter.onLongOperationFinished(dataSource);
+
+		verify(view).showLoadingIndicator(false);
+		verify(view, never()).showLoadingIndicator(true);
 	}
 
 	/**
@@ -410,41 +482,6 @@ public class TestDirectBodyPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a data replaced callback and there is no view. The test will only pass if all
-	 * methods exit normally.
-	 */
-	@Test
-	public void testOnDataReplaced_withoutView() {
-		final List<LibraryItem> data = new ArrayList<>();
-		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
-		presenter.setDataSource(dataSource);
-
-		presenter.onDataReplaced(dataSource, mock(List.class), mock(List.class));
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a data replaced callback and there is a view. The test will only pass if the view is
-	 * notified of the event.
-	 */
-	@Test
-	public void testOnDataReplaced_withView() {
-		final List<LibraryItem> originalData = new ArrayList<>();
-		final SettableListDataSource dataSource = createNewDataSource(originalData);
-		presenter.setDataSource(dataSource);
-
-		final View view = mock(View.class);
-		presenter.setView(view);
-
-		final ArrayList<LibraryItem> newData = new ArrayList<>();
-		dataSource.setData(newData);
-		presenter.onDataReplaced(dataSource, originalData, newData);
-
-		verify(view, atLeastOnce()).setItems(newData);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
 	 * delivers a list item modified callback and there is no view. The test will only pass if all
 	 * methods exit normally.
 	 */
@@ -480,25 +517,25 @@ public class TestDirectBodyPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a long operation started callback and there is no view. The test will only pass if
-	 * all methods exit normally.
+	 * delivers a data moved callback and there is no view. The test will only pass if all methods
+	 * exit normally.
 	 */
 	@Test
-	public void testOnLongOperationStarted_withoutView() {
+	public void testOnDataMoved_withoutView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		presenter.onLongOperationStarted(dataSource);
+		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
 	}
 
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a long operation started callback and there is a view. The test will only pass if
-	 * the loading indicator is shown.
+	 * delivers a data moved callback and there is a view. The test will only pass if the view is
+	 * notified of the event.
 	 */
 	@Test
-	public void testOnLongOperationStarted_withView() {
+	public void testOnDataMoved_withView() {
 		final List<LibraryItem> data = new ArrayList<>();
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
@@ -506,48 +543,11 @@ public class TestDirectBodyPresenter {
 		final View view = mock(View.class);
 		presenter.setView(view);
 
-		verify(view, never()).showLoadingIndicator(true);
+		verify(view, never()).notifyItemMoved(anyInt(), anyInt());
 
-		presenter.onLongOperationStarted(dataSource);
+		presenter.onDataMoved(dataSource, mock(LibraryItem.class), 1, 2);
 
-		verify(view).showLoadingIndicator(true);
-		verify(view, never()).showLoadingIndicator(false);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a long operation finished callback and there is no view. The test will only pass if
-	 * all methods exit normally.
-	 */
-	@Test
-	public void testOnLongOperationFinished_withoutView() {
-		final List<LibraryItem> data = new ArrayList<>();
-		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
-		presenter.setDataSource(dataSource);
-
-		presenter.onLongOperationFinished(dataSource);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
-	 * delivers a long operation finished callback and there is a view. The test will only pass if
-	 * the loading indicator is hidden.
-	 */
-	@Test
-	public void testOnLongOperationFinished_withView() {
-		final List<LibraryItem> data = new ArrayList<>();
-		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
-		presenter.setDataSource(dataSource);
-
-		final View view = mock(View.class);
-		presenter.setView(view);
-
-		verify(view, never()).showLoadingIndicator(false);
-
-		presenter.onLongOperationFinished(dataSource);
-
-		verify(view).showLoadingIndicator(false);
-		verify(view, never()).showLoadingIndicator(true);
+		verify(view, times(1)).notifyItemMoved(1, 2);
 	}
 
 	/**
