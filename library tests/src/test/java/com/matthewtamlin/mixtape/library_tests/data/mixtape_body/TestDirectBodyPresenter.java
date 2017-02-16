@@ -47,7 +47,7 @@ import static org.mockito.Mockito.verify;
 /**
  * Unit tests for the {@link DirectBodyPresenter} class.
  */
-@SuppressWarnings("unchecked") // Warning shown by mocks, but this is ok
+@SuppressWarnings("unchecked") // Warning caused by mocks, but it isn't a problem
 @RunWith(JUnit4.class)
 public class TestDirectBodyPresenter {
 	/**
