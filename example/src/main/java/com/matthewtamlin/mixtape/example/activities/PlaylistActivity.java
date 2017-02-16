@@ -46,7 +46,6 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.Contex
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
-import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
@@ -191,6 +190,16 @@ public class PlaylistActivity extends AppCompatActivity {
 	private void setupBodyView() {
 		body = new ListBody(this);
 		body.setContextualMenuResource(R.menu.song_menu);
+
+		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
+				.default_artwork);
+		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Unknown title",
+				"Unknown artist",
+				new BitmapDrawable(getResources(), defaultArtwork));
+
+		body.setTitleDataBinder(new TitleBinder(bodyTitleCache, defaults));
+		body.setSubtitleDataBinder(new SubtitleBinder(bodySubtitleCache, defaults));
+		body.setArtworkDataBinder(new ArtworkBinder(bodyArtworkCache, defaults));
 	}
 
 	private void setupContainerView() {
@@ -208,18 +217,8 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupBodyPresenter() {
-		final Bitmap defaultArtwork = BitmapFactory.decodeResource(getResources(), R.raw
-				.default_artwork);
-		final DisplayableDefaults defaults = new ImmutableDisplayableDefaults("Unknown title",
-				"Unknown artist",
-				new BitmapDrawable(getResources(), defaultArtwork));
-
-		final TitleBinder titleBinder = new TitleBinder(bodyTitleCache, defaults);
-		final SubtitleBinder subtitleBinder = new SubtitleBinder(bodySubtitleCache, defaults);
-		final ArtworkBinder artworkBinder = new ArtworkBinder(bodyArtworkCache, defaults);
-
-		final RecyclerViewBodyPresenter<Mp3Song, Mp3SongDataSource> bodyPresenter = new
-				RecyclerViewBodyPresenter<>(titleBinder, subtitleBinder, artworkBinder);
+		final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerViewBody> bodyPresenter =
+				new DirectBodyPresenter<>();
 
 		bodyPresenter.registerListener(
 				new LibraryItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerViewBody>() {
