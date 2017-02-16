@@ -105,12 +105,12 @@ public class DirectHeaderPresenter<S extends BaseDataSource<LibraryItem>, V exte
 	}
 
 	@Override
-	public void onLongOperationStarted(BaseDataSource source) {
+	public void onLongOperationStarted(BaseDataSource<LibraryItem> source) {
 		// Do nothing since the view doesn't have a loading indicator
 	}
 
 	@Override
-	public void onLongOperationFinished(BaseDataSource source) {
+	public void onLongOperationFinished(BaseDataSource<LibraryItem> source) {
 		// Do nothing since the view doesn't have a loading indicator
 	}
 

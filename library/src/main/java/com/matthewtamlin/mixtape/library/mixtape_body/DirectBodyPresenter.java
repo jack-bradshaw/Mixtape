@@ -125,14 +125,14 @@ public class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onLongOperationStarted(final BaseDataSource source) {
+	public void onLongOperationStarted(final BaseDataSource<List<D>> source) {
 		if (view != null) {
 			view.showLoadingIndicator(true);
 		}
 	}
 
 	@Override
-	public void onLongOperationFinished(final BaseDataSource source) {
+	public void onLongOperationFinished(final BaseDataSource<List<D>> source) {
 		if (view != null) {
 			view.showLoadingIndicator(false);
 		}
