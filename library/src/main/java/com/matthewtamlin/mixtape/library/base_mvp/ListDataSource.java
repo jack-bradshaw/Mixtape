@@ -74,7 +74,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param listener
 	 * 		the listener to register
 	 */
-	void registerItemModifiedListener(ListItemModifiedListener<T> listener);
+	void registerItemModifiedListener(ItemModifiedListener<T> listener);
 
 	/**
 	 * Unregisters an item modified listener from this data source. If the supplied listener is null
@@ -83,7 +83,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	void unregisterItemModifiedListener(ListItemModifiedListener<T> listener);
+	void unregisterItemModifiedListener(ItemModifiedListener<T> listener);
 
 	/**
 	 * Registers an item moved listener to this data source. If the supplied listener is null or is
@@ -150,7 +150,7 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 	 * @param <I>
 	 * 		the type of objects contained within the list
 	 */
-	interface ListItemModifiedListener<I> {
+	interface ItemModifiedListener<I> {
 		/**
 		 * Invoked when an item in a ListDataSource is modified in a way which affects the item's
 		 * external representation.
@@ -198,6 +198,6 @@ public interface ListDataSource<T> extends BaseDataSource<List<T>> {
 			BaseDataSource.FullListener<List<I>>,
 			ItemAddedListener<I>,
 			ItemRemovedListener<I>,
-			ListItemModifiedListener<I>,
+			ItemModifiedListener<I>,
 			ItemMovedListener<I> {}
 }

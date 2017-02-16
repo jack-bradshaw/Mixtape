@@ -45,7 +45,7 @@ public abstract class ListDataSourceHelper<D> extends BaseDataSourceHelper<List<
 	 * All item modified listeners which are currently registered. This set must never contain
 	 * null.
 	 */
-	private final Set<ListItemModifiedListener<D>> itemModifiedListeners = new HashSet<>();
+	private final Set<ItemModifiedListener<D>> itemModifiedListeners = new HashSet<>();
 
 	/**
 	 * All item moved listeners which are currently registered. This set must never contain null.
@@ -77,14 +77,14 @@ public abstract class ListDataSourceHelper<D> extends BaseDataSourceHelper<List<
 	}
 
 	@Override
-	public void registerItemModifiedListener(final ListItemModifiedListener<D> listener) {
+	public void registerItemModifiedListener(final ItemModifiedListener<D> listener) {
 		if (listener != null) {
 			itemModifiedListeners.add(listener);
 		}
 	}
 
 	@Override
-	public void unregisterItemModifiedListener(final ListItemModifiedListener<D> listener) {
+	public void unregisterItemModifiedListener(final ItemModifiedListener<D> listener) {
 		itemModifiedListeners.remove(listener);
 	}
 
@@ -128,7 +128,7 @@ public abstract class ListDataSourceHelper<D> extends BaseDataSourceHelper<List<
 	 *
 	 * @return the listeners
 	 */
-	public Set<ListItemModifiedListener<D>> getItemModifiedListeners() {
+	public Set<ItemModifiedListener<D>> getItemModifiedListeners() {
 		return itemModifiedListeners;
 	}
 
