@@ -629,7 +629,7 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Created a new SettableListDataSource with the supplied items as the data.
+	 * Creates a new SettableListDataSource with the supplied items as the data.
 	 *
 	 * @param items
 	 * 		the data returned by the source
