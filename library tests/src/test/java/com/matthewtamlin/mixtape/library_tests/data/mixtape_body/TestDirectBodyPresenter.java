@@ -284,7 +284,7 @@ public class TestDirectBodyPresenter {
 	/**
 	 * Test to verify that the {@link DirectBodyPresenter} functions correctly when the data source
 	 * delivers a data replaced callback and there is a view. The test will only pass if the view is
-	 * notified of the event.
+	 * updated to display the new data.
 	 */
 	@Test
 	public void testOnDataReplaced_withView() {
@@ -642,9 +642,10 @@ public class TestDirectBodyPresenter {
 }
 
 /**
- * A ListDataSource where the data can be set. If the data is null when the {@link
- * #loadData(boolean, DataLoadedListener)} method is called, then the data load failed callback is
- * delivered. Otherwise, the data loaded callback is delivered.
+ * A ListDataSource where the data can be set. Whenever {@link #loadData(boolean,
+ * DataLoadedListener)} is called, the current data determines which callback is delivered. If the
+ * data is not-null then the data loaded callback is delivered, and if the data is null then the
+ * data load failed callback is delivered.
  */
 class SettableListDataSource extends ListDataSourceHelper<LibraryItem> {
 	/**
