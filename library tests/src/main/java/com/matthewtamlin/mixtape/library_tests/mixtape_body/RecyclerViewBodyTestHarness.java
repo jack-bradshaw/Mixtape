@@ -213,7 +213,7 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 
 				if (artworkBinder != null) {
 					final int currentDuration = artworkBinder.getFadeInDurationMs();
-					artworkBinder.setFadeInDurationMs(Math.max(currentDuration - 25, 0);
+					artworkBinder.setFadeInDurationMs(Math.max(currentDuration - 25, 0));
 				}
 			}
 		});
