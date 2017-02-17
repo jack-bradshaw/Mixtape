@@ -42,7 +42,8 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-
+		getControlsContainer().addView(createIncreaseColumnCountButton());
+		getControlsContainer().addView(createDecreaseColumnCountButton());
 	}
 
 	@Override
@@ -53,15 +54,7 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 
 		return testView;
 	}
-
-	/**
-	 * Creates the control buttons and adds them to the layout.
-	 */
-	private void createControlButtons() {
-		getControlsContainer().addView(createIncreaseColumnCountButton());
-		getControlsContainer().addView(createDecreaseColumnCountButton());
-	}
-
+	
 	/**
 	 * Creates a button which increases the number of columns in the test view when clicked.
 	 *
