@@ -20,15 +20,16 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
@@ -41,10 +42,19 @@ import com.matthewtamlin.mixtape.library_tests.R;
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
-	/**
-	 * The cache to use when binding data to the test view.
-	 */
-	private final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 10000);
+	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, Drawable> artworkCache =
+			new LruCache<LibraryItem, Drawable>(1000000) {
+				@Override
+				protected int sizeOf(final LibraryItem key, final Drawable value) {
+					// All LibraryItems use BitmapDrawable for the artwork
+					final Bitmap artworkBitmap = ((BitmapDrawable) value).getBitmap();
+					return artworkBitmap.getByteCount();
+				}
+			};
 
 	/**
 	 * The defaults to use when binding data to the test view.
