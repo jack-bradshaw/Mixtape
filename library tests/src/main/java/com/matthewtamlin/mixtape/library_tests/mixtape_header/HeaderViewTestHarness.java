@@ -17,8 +17,6 @@
 package com.matthewtamlin.mixtape.library_tests.mixtape_header;
 
 import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -119,6 +117,4 @@ public abstract class HeaderViewTestHarness extends
 
 		return b;
 	}
-
-
 }
