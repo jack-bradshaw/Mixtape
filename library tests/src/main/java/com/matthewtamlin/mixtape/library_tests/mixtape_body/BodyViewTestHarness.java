@@ -39,7 +39,7 @@ import java.util.Random;
  * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class MixtapeBodyViewTestHarness extends
+public abstract class BodyViewTestHarness extends
 		ControlsOverViewTestHarness<BodyContract.View> {
 	/**
 	 * The number of library items to display in the view.
