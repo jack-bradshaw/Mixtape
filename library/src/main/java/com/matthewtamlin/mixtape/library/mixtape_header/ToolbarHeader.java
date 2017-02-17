@@ -145,6 +145,13 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
+	 * @return the data binder used to bind titles to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, TextView> getTitleDataBinder() {
+		return titleDataBinder;
+	}
+
+	/**
 	 * Sets the DataBinder to use when binding titles, and updates the UI using the new DataBinder.
 	 * This method must be called on the UI thread.
 	 *
@@ -164,10 +171,10 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
-	 * @return the data binder used to bind titles to the UI, null if there is none
+	 * @return the data binder used to bind subtitles to the UI, null if there is none
 	 */
-	public DataBinder<LibraryItem, TextView> getTitleDataBinder() {
-		return titleDataBinder;
+	public DataBinder<LibraryItem, TextView> getSubtitleDataBinder() {
+		return subtitleDataBinder;
 	}
 
 	/**
@@ -190,10 +197,10 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
-	 * @return the data binder used to bind subtitles to the UI, null if there is none
+	 * @return the data binder used to bind artwork to the UI, null if there is none
 	 */
-	public DataBinder<LibraryItem, TextView> getSubtitleDataBinder() {
-		return subtitleDataBinder;
+	public DataBinder<LibraryItem, ImageView> getArtworkDataBinder() {
+		return artworkDataBinder;
 	}
 
 	/**
@@ -213,13 +220,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 			this.artworkDataBinder = artworkDataBinder;
 			updateArtwork();
 		}
-	}
-
-	/**
-	 * @return the data binder used to bind artwork to the UI, null if there is none
-	 */
-	public DataBinder<LibraryItem, ImageView> getArtworkDataBinder() {
-		return artworkDataBinder;
 	}
 
 	@Override
