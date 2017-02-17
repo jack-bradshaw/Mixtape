@@ -65,12 +65,6 @@ public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHar
 	 */
 	private DisplayableDefaults defaults;
 
-	/**
-	 * The artwork fade duration to use when transitioning artwork in the test view, measured in
-	 * milliseconds.
-	 */
-	private int fadeDurationMs;
-
 	@Override
 	public abstract RecyclerViewBody getTestView();
 
