@@ -150,24 +150,21 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	}
 
 	private Button createSetToolbarButton() {
-		 final Button b = new Button(this); 
-		b.setText("Set toolbar"); 
+		final Button b = new Button(this);
+		b.setText("Set toolbar");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				 final Toolbar toolbar = new Toolbar(ToolbarHeaderTestHarness.this);
-				 getMenuInflater().inflate(R.menu.header_toolbar, toolbar.getMenu());
-
+				final Toolbar toolbar = new Toolbar(ToolbarHeaderTestHarness.this);
+				getMenuInflater().inflate(R.menu.header_toolbar, toolbar.getMenu());
 				getTestView().setToolbar(toolbar);
 			}
 		});
 
-		return b; 
+		return b;
 	}
-
-	  
 
 	private Button createClearToolbarButton() {
 		 final Button b = new Button(this); 
