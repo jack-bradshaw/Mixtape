@@ -40,7 +40,7 @@ import com.matthewtamlin.mixtape.library_tests.R;
  * Test harness for testing the {@link SmallHeader} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public class SmallHeaderTestHarness extends HeaderContractViewTestHarness {
+public class SmallHeaderTestHarness extends HeaderViewTestHarness {
 	/**
 	 * The cache to use when binding data to the test view.
 	 */
