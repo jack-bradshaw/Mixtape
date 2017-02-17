@@ -24,8 +24,6 @@ import android.widget.Button;
 
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 
-import static android.support.v7.widget.AppCompatDrawableManager.get;
-
 
 /**
  * Test harness for testing the {@link GridBody} class.
@@ -54,7 +52,7 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 
 		return testView;
 	}
-	
+
 	/**
 	 * Creates a button which increases the number of columns in the test view when clicked.
 	 *
@@ -68,8 +66,8 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				final int currentNumberOfColumns = getTestView().getNumberOfColumns();
-				getTestView().setNumberOfColumns(currentNumberOfColumns + 1);
+				final int currentCount = getTestView().getNumberOfColumns();
+				getTestView().setNumberOfColumns(currentCount + 1);
 			}
 		});
 
@@ -89,11 +87,8 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				final int currentNumberOfColumns = getTestView().getNumberOfColumns();
-
-				if (currentNumberOfColumns > 1) {
-					getTestView().setNumberOfColumns(currentNumberOfColumns - 1);
-				}
+				final int currentCount = getTestView().getNumberOfColumns();
+				getTestView().setNumberOfColumns(Math.max(currentCount - 1, 1));
 			}
 		});
 
