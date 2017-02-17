@@ -102,7 +102,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setTitleDataBinder(new TitleBinder(cache, defaults));
+				getTestView().setTitleDataBinder(new TitleBinder(titleCache, defaults));
 			}
 		});
 
@@ -122,7 +122,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
+				getTestView().setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
 			}
 		});
 
@@ -142,7 +142,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 			}
 		});
 
