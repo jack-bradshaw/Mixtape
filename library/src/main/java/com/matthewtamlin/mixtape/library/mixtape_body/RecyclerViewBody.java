@@ -213,6 +213,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
+	 * @return the data binder used to bind titles to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, TextView> getTitleDataBinder() {
+		return titleDataBinder;
+	}
+
+	/**
 	 * Sets the DataBinder to use when binding titles. Changing the data binder results in a full
 	 * rebind of the recycler view. This method must be called on the UI thread.
 	 *
@@ -232,6 +239,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
+	 * @return the data binder used to bind subtitles to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, TextView> getSubtitleDataBinder() {
+		return subtitleDataBinder;
+	}
+
+	/**
 	 * Sets the DataBinder to use when binding subtitles. Changing the data binder results in a full
 	 * rebind of the recycler view. This method must be called on the UI thread.
 	 *
@@ -248,6 +262,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 			this.subtitleDataBinder = subtitleDataBinder;
 			recyclerView.getAdapter().notifyDataSetChanged(); // Ensures the new data binder is used
 		}
+	}
+
+	/**
+	 * @return the data binder used to bind artwork to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, ImageView> getArtworkDataBinder() {
+		return artworkDataBinder;
 	}
 
 	/**
