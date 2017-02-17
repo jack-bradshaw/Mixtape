@@ -18,6 +18,7 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
@@ -144,6 +145,13 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
+	 * @return the data binder used to bind titles to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, TextView> getTitleDataBinder() {
+		return titleDataBinder;
+	}
+
+	/**
 	 * Sets the DataBinder to use when binding titles, and updates the UI using the new DataBinder.
 	 * This method must be called on the UI thread.
 	 *
@@ -163,6 +171,13 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 	}
 
 	/**
+	 * @return the data binder used to bind subtitles to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, TextView> getSubtitleDataBinder() {
+		return subtitleDataBinder;
+	}
+
+	/**
 	 * Sets the DataBinder to use when binding subtitles, and updates the UI using the new
 	 * DataBinder. This method must be called on the UI thread.
 	 *
@@ -179,6 +194,13 @@ public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
 			this.subtitleDataBinder = subtitleDataBinder;
 			updateSubtitle();
 		}
+	}
+
+	/**
+	 * @return the data binder used to bind artwork to the UI, null if there is none
+	 */
+	public DataBinder<LibraryItem, ImageView> getArtworkDataBinder() {
+		return artworkDataBinder;
 	}
 
 	/**
