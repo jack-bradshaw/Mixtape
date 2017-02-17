@@ -45,7 +45,7 @@ import java.util.Random;
  * subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class RecyclerViewBodyTestHarness extends MixtapeBodyViewTestHarness {
+public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
 
 	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
