@@ -34,11 +34,12 @@ import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
 
 
 /**
- * Test harness for testing the {@link SmallHeader} class.
+ * Test harness for testing the {@link ToolbarHeader} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
@@ -70,7 +71,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	/**
 	 * The view under test.
 	 */
-	private SmallHeader smallHeader;
+	private ToolbarHeader testView;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,12 +87,12 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	}
 
 	@Override
-	public SmallHeader getTestView() {
-		if (smallHeader == null) {
-			smallHeader = new SmallHeader(this);
+	public ToolbarHeader getTestView() {
+		if (testView == null) {
+			testView = new ToolbarHeader(this);
 		}
 
-		return smallHeader;
+		return testView;
 	}
 
 	/**
