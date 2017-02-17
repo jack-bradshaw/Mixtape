@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.util.LruCache;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -146,5 +147,40 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		});
 
 		return b;
+	}
+
+	private Button createSetToolbarButton() {
+		 final Button b = new Button(this); 
+		b.setText("Set toolbar"); 
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				 final Toolbar toolbar = new Toolbar(ToolbarHeaderTestHarness.this);
+				 getMenuInflater().inflate(R.menu.header_toolbar, toolbar.getMenu());
+
+				getTestView().setToolbar(toolbar);
+			}
+		});
+
+		return b; 
+	}
+
+	  
+
+	private Button createClearToolbarButton() {
+		 final Button b = new Button(this); 
+		b.setText("Set toolbar"); 
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				getTestView().setToolbar(null);
+			}
+		});
+
+		return b; 
 	}
 }
