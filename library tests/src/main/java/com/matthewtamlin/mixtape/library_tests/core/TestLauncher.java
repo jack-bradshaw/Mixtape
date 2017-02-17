@@ -27,7 +27,7 @@ import android.widget.LinearLayout;
 import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.GridBodyTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.ListBodyTestHarness;
-import com.matthewtamlin.mixtape.library_tests.mixtape_header.SmallHeaderTestHarness;
+import com.matthewtamlin.mixtape.library_tests.mixtape_header.ToolbarHeaderTestHarness;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -91,19 +91,19 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which launches the SmallHeaderTestHarness test harness when clicked.
+	 * Creates a button which launches the ToolbarHeaderTestHarness test harness when clicked.
 	 *
 	 * @return the button
 	 */
 	private Button createLaunchTestSmallHeaderButton() {
 		final Button b = new Button(this);
-		b.setText("Launch SmallHeaderTestHarness activity");
+		b.setText("Launch ToolbarHeaderTestHarness activity");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				startActivity(new Intent(TestLauncher.this, SmallHeaderTestHarness.class));
+				startActivity(new Intent(TestLauncher.this, ToolbarHeaderTestHarness.class));
 			}
 		});
 

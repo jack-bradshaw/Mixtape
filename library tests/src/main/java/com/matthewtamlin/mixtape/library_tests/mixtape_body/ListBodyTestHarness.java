@@ -38,7 +38,9 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		createControlButtons();
+
+		getControlsContainer().addView(createToggleDividerVisibilityButton());
+		getControlsContainer().addView(createToggleArtworkVisibilityButton());
 	}
 
 	@Override
@@ -48,14 +50,6 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 		}
 
 		return testView;
-	}
-
-	/**
-	 * Creates the control buttons and adds them to the layout.
-	 */
-	private void createControlButtons() {
-		getControlsContainer().addView(createToggleDividerVisibilityButton());
-		getControlsContainer().addView(createToggleArtworkVisibilityButton());
 	}
 
 	/**

@@ -37,7 +37,7 @@ import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
  * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class HeaderContractViewTestHarness extends
+public abstract class HeaderViewTestHarness extends
 		ControlsBelowViewTestHarness<HeaderContract.View> {
 	/**
 	 * The view under test.
@@ -51,8 +51,6 @@ public abstract class HeaderContractViewTestHarness extends
 		getControlsContainer().addView(createSetItemNormalButton());
 		getControlsContainer().addView(createSetItemInaccessibleButton());
 		getControlsContainer().addView(createSetItemNullButton());
-		getControlsContainer().addView(createSetExtraButtonsButton());
-		getControlsContainer().addView(createSetContextualMenuResourceButton());
 	}
 
 
@@ -122,47 +120,5 @@ public abstract class HeaderContractViewTestHarness extends
 		return b;
 	}
 
-	/**
-	 * Creates a button which sets the extra buttons in the test view when clicked.
-	 *
-	 * @return the button, not null
-	 */
-	private Button createSetExtraButtonsButton() {
-		final Button b = new Button(this);
-		b.setText("Set extra buttons");
-		b.setAllCaps(false);
 
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				final Bitmap[] icons = new Bitmap[3];
-				icons[0] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_play);
-				icons[1] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_share);
-				icons[2] = BitmapFactory.decodeResource(getResources(), R.drawable.ic_shuffle);
-				testView.setExtraButtons(icons);
-			}
-		});
-
-		return b;
-	}
-
-	/**
-	 * Creates a button which sets the contextual menu resource in the test view when clicked.
-	 *
-	 * @return
-	 */
-	private Button createSetContextualMenuResourceButton() {
-		final Button b = new Button(this);
-		b.setText("Set menu resource");
-		b.setAllCaps(false);
-
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				testView.setOverflowMenuResource(R.menu.test_menu);
-			}
-		});
-
-		return b;
-	}
 }
