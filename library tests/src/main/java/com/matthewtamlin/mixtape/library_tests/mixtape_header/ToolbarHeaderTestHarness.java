@@ -63,12 +63,6 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	private DisplayableDefaults defaults;
 
 	/**
-	 * The artwork fade duration to use when transitioning artwork in the test view, measured in
-	 * milliseconds.
-	 */
-	private int fadeDurationMs = 0;
-
-	/**
 	 * The view under test.
 	 */
 	private ToolbarHeader testView;
