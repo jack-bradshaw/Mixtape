@@ -37,7 +37,7 @@ import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
  * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class HeaderContractViewTestHarness extends
+public abstract class HeaderViewTestHarness extends
 		ControlsBelowViewTestHarness<HeaderContract.View> {
 	/**
 	 * The view under test.
