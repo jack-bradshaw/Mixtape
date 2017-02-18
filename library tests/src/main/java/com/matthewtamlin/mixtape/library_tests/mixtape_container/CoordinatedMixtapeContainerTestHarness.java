@@ -48,7 +48,7 @@ import java.util.Random;
 
 
 /**
- * Test harness for testing the {@link CoordinatedMixtapeContainer} class.
+ * Test harness for the {@link CoordinatedMixtapeContainer} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class CoordinatedMixtapeContainerTestHarness extends
@@ -68,10 +68,19 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	 */
 	private DisplayableDefaults defaults;
 
+	/**
+	 * Size limited cache for storing titles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing subtitles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing artwork.
+	 */
 	private final LruCache<LibraryItem, Drawable> artworkCache =
 			new LruCache<LibraryItem, Drawable>(1000000) {
 				@Override
@@ -82,8 +91,14 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				}
 			};
 
+	/**
+	 * The item to display in the header.
+	 */
 	private LibraryItem headerItem;
 
+	/**
+	 * The items to display in the body.
+	 */
 	private List<LibraryItem> bodyItems;
 
 	@Override
@@ -112,6 +127,9 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		return testView;
 	}
 
+	/**
+	 * Creates the header item and the body items.
+	 */
 	private void createLibraryItems() {
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
 
@@ -124,6 +142,9 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		bodyItems = generateBodyItems();
 	}
 
+	/**
+	 * @return a list containing library items, some accessible and some not
+	 */
 	private List<LibraryItem> generateBodyItems() {
 		final List<LibraryItem> items = new ArrayList<>();
 
@@ -142,7 +163,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the header of the test view to a new {@link ToolbarHeader}.
+	 * Creates a button which can be clicked ot set the header of the test view to a new {@link
+	 * ToolbarHeader}.
 	 *
 	 * @return the button, not null
 	 */
@@ -170,7 +192,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to use no header.
+	 * Creates a button which can be clicked to clear the test view header.
 	 *
 	 * @return the button, not null
 	 */
@@ -190,7 +212,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the body of the test view to a new {@link GridBody}.
+	 * Creates a button which can be clicked to set the body of the test view to a new {@link
+	 * GridBody}.
 	 *
 	 * @return the button, not null
 	 */
@@ -217,7 +240,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the body of the test view to a new {@link ListBody}.
+	 * Creates a button which can be clicked to set the body of the test view to a new {@link
+	 * ListBody}.
 	 *
 	 * @return the button, not null
 	 */
@@ -244,7 +268,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to use no body.
+	 * Creates a button which can be clicked to clear the test view body.
 	 *
 	 * @return the button, not null
 	 */
@@ -264,7 +288,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to always show the header when clicked.
+	 * Creates a button which can be clicked to configure the test view to always show the header.
 	 *
 	 * @return the button, not null
 	 */
@@ -284,7 +308,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to always hide the header when clicked.
+	 * Creates a button which can be clicked to configure the test view to always hide the header.
 	 *
 	 * @return the button, not null
 	 */
@@ -304,8 +328,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to only show the header at the top of the view when
-	 * clicked.
+	 * Creates a button which can be clicked to configure the test view to only show the header at
+	 * when the top of the body is shown.
 	 *
 	 * @return the button, not null
 	 */
@@ -325,8 +349,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to only show the header on downwards scrolls when
-	 * clicked.
+	 * Creates a button which can be clicked to configure the test view to only show the header on
+	 * downwards body scroll events.
 	 *
 	 * @return the button, not null
 	 */
