@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
