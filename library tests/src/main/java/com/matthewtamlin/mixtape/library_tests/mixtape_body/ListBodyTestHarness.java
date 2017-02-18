@@ -53,8 +53,8 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which toggles the visibility of the horizontal dividers in the test view
-	 * when clicked.
+	 * Creates a button which can be pressed to toggle the visibility of the horizontal dividers in
+	 * the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -76,7 +76,8 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which toggles the visibility of the artwork in the test view when clicked.
+	 * Creates a button which can be pressed to toggle the visibility of the artwork in the test
+	 * view.
 	 *
 	 * @return the button, not null
 	 */
