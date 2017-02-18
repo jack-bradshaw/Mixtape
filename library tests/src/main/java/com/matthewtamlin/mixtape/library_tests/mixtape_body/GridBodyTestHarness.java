@@ -26,7 +26,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 
 
 /**
- * Test harness for testing the {@link GridBody} class.
+ * Test harness for the {@link GridBody} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
