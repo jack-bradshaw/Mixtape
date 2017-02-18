@@ -77,7 +77,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	private ToolbarHeader testView;
 
 	@Override
-	protected void onCreate(@Nullable final Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
