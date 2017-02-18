@@ -36,7 +36,7 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	private ListBody testView = null;
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
+	protected void onCreate(@Nullable final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createToggleDividerVisibilityButton());
