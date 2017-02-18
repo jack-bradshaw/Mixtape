@@ -288,7 +288,7 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 						// If the task has been cancelled, it must not modify the UI
 						if (!isCancelled()) {
 							imageView.setAlpha(0f);
-							//imageView.setImageDrawable(null); // Resets ensures image changes
+							imageView.setImageDrawable(null); // Resets ensures image changes
 							imageView.setImageDrawable(artwork);
 						}
 					}
