@@ -20,31 +20,42 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.LruCache;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
+import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
 
 
 /**
- * Test harness for testing the {@link SmallHeader} class.
+ * Test harness for testing the {@link ToolbarHeader} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
-	/**
-	 * The cache to use when binding data to the test view.
-	 */
-	private final LibraryItemCache cache = new LruLibraryItemCache(10000, 10000, 10000);
+	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, Drawable> artworkCache =
+			new LruCache<LibraryItem, Drawable>(1000000) {
+				@Override
+				protected int sizeOf(final LibraryItem key, final Drawable value) {
+					// All LibraryItems use BitmapDrawable for the artwork
+					final Bitmap artworkBitmap = ((BitmapDrawable) value).getBitmap();
+					return artworkBitmap.getByteCount();
+				}
+			};
 
 	/**
 	 * The defaults to use when binding data to the test view.
@@ -52,15 +63,9 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	private DisplayableDefaults defaults;
 
 	/**
-	 * The artwork fade duration to use when transitioning artwork in the test view, measured in
-	 * milliseconds.
-	 */
-	private int fadeDurationMs = 0;
-
-	/**
 	 * The view under test.
 	 */
-	private SmallHeader smallHeader;
+	private ToolbarHeader testView;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,15 +78,17 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		getControlsContainer().addView(createChangeTitleBinderButton());
 		getControlsContainer().addView(createChangeSubtitleBinderButton());
 		getControlsContainer().addView(createChangeArtworkBinderButton());
+		getControlsContainer().addView(createSetToolbarButton());
+		getControlsContainer().addView(createClearToolbarButton());
 	}
 
 	@Override
-	public SmallHeader getTestView() {
-		if (smallHeader == null) {
-			smallHeader = new SmallHeader(this);
+	public ToolbarHeader getTestView() {
+		if (testView == null) {
+			testView = new ToolbarHeader(this);
 		}
 
-		return smallHeader;
+		return testView;
 	}
 
 	/**
@@ -97,7 +104,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setTitleDataBinder(new TitleBinder(cache, defaults));
+				getTestView().setTitleDataBinder(new TitleBinder(titleCache, defaults));
 			}
 		});
 
@@ -117,7 +124,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
+				getTestView().setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
 			}
 		});
 
@@ -137,7 +144,39 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				getTestView().setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
+			}
+		});
+
+		return b;
+	}
+
+	private Button createSetToolbarButton() {
+		final Button b = new Button(this);
+		b.setText("Set toolbar");
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				final Toolbar toolbar = new Toolbar(ToolbarHeaderTestHarness.this);
+				getMenuInflater().inflate(R.menu.header_toolbar, toolbar.getMenu());
+				getTestView().setToolbar(toolbar);
+			}
+		});
+
+		return b;
+	}
+
+	private Button createClearToolbarButton() {
+		final Button b = new Button(this);
+		b.setText("Set toolbar");
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				getTestView().setToolbar(null);
 			}
 		});
 
