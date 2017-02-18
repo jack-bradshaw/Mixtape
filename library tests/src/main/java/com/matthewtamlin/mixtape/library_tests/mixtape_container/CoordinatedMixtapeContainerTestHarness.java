@@ -131,33 +131,24 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates the header item and the body items.
+	 * Creates the header and body items and assigns them to member variables.
 	 */
 	private void createLibraryItems() {
 		headerItem = new NormalLibraryItem(getResources(), "Header title", "Header subtitle",
 				R.raw.real_artwork);
 
-		bodyItems = generateBodyItems();
-	}
-
-	/**
-	 * @return a list containing library items, some accessible and some not
-	 */
-	private List<LibraryItem> generateBodyItems() {
-		final List<LibraryItem> items = new ArrayList<>();
+		bodyItems = new ArrayList<>();
 
 		for (int i = 0; i < NUMBER_OF_ITEMS; i++) {
 			if (new Random().nextBoolean()) {
-				items.add(new NormalLibraryItem(getResources(),
+				bodyItems.add(new NormalLibraryItem(getResources(),
 						"Title " + i,
 						"Subtitle " + i,
 						R.raw.real_artwork));
 			} else {
-				items.add(new InaccessibleLibraryItem());
+				bodyItems.add(new InaccessibleLibraryItem());
 			}
 		}
-
-		return items;
 	}
 
 	/**
