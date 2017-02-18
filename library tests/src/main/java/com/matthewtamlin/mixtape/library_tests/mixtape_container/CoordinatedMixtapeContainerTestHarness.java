@@ -52,7 +52,7 @@ import java.util.Random;
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class CoordinatedMixtapeContainerTestHarness extends
-		MixtapeContainerTestHarness<SmallHeader, RecyclerViewBody> {
+		MixtapeContainerViewTestHarness<SmallHeader, RecyclerViewBody> {
 	/**
 	 * The number of library items to display in the view.
 	 */
