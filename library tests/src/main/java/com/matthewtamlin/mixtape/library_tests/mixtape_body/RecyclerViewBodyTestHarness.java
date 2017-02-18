@@ -40,16 +40,24 @@ import com.matthewtamlin.mixtape.library_tests.R;
 import java.util.Random;
 
 /**
- * Test harness for testing subclasses of the {@link RecyclerViewBody} class. This class provides
- * control buttons for testing core functionality, however the view itself is supplied by the
- * subclass.
+ * Test harness for subclasses of the {@link RecyclerViewBody} class. This class provides control
+ * buttons for accessing core functionality, however the view itself is supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
+	/**
+	 * Size limited cache for storing titles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing subtitles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing artwork.
+	 */
 	private final LruCache<LibraryItem, Drawable> artworkCache =
 			new LruCache<LibraryItem, Drawable>(1000000) {
 				@Override
@@ -86,8 +94,8 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the colour of the loading indicator in the test view when
-	 * clicked. The new colour is randomly generated.
+	 * Creates a button which can be clicked to change the colour of the loading indicator in the
+	 * test view. The new colour is randomly generated.
 	 *
 	 * @return the button, not null
 	 */
@@ -109,7 +117,7 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the title binder of the test view when clicked.
+	 * Creates a button which can be clicked to change the title binder of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -129,7 +137,7 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the subtitle binder of the test view when clicked.
+	 * Creates a button which can be clicked to change the subtitle binder of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -149,7 +157,7 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the artwork binder of the test view when clicked.
+	 * Creates a button which can be clicked to change the artwork binder of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -169,7 +177,8 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which increases the artwork fade duration of the test view when clicked.
+	 * Creates a button which can be clicked to increase the artwork fade duration of
+	 * the test view. The duration is increased by 25 millisecond per click.
 	 *
 	 * @return the button, not null
 	 */
@@ -196,7 +205,8 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which decreases the artwork fade duration of the test view when clicked.
+	 * Creates a button which can be clicked to decrease the artwork fade duration of
+	 * the test view. The duration is decreased by 25 millisecond per click.
 	 *
 	 * @return the button, not null
 	 */
