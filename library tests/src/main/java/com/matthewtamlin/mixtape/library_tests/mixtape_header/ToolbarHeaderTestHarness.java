@@ -170,7 +170,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 
 	private Button createClearToolbarButton() {
 		final Button b = new Button(this);
-		b.setText("Set toolbar");
+		b.setText("Clear toolbar");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
