@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.mixtape.library_tests.mixtape_coordinator;
+package com.matthewtamlin.mixtape.library_tests.mixtape_container;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
