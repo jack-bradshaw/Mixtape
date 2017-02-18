@@ -70,7 +70,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to display the items in the test view.
+	 * Creates a button which can be clicked to display the items in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -103,7 +103,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to set the contextual menu resource of the test view.
+	 * Creates a button which can be clicked to set the contextual menu resource of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -123,7 +123,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to go to the top of the test view.
+	 * Creates a button which can be clicked to go to the top of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -143,7 +143,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to go to the end of the test view.
+	 * Creates a button which can be clicked to go to the end of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -164,7 +164,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to add an item to the test view.
+	 * Creates a button which can be clicked to add an item to the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -190,7 +190,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to remove the first item in the test view.
+	 * Creates a button which can be clicked to remove the first item in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -213,7 +213,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to swap the first two items in the test view.
+	 * Creates a button which can be clicked to swap the first two items in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -239,7 +239,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which can be pressed to toggle the visibility of the loading indicator in
+	 * Creates a button which can be clicked to toggle the visibility of the loading indicator in
 	 * the test view.
 	 *
 	 * @return the button, not null
