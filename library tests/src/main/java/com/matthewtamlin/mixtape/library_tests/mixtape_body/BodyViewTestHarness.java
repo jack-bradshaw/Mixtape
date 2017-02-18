@@ -56,7 +56,7 @@ public abstract class BodyViewTestHarness extends
 	private final List<LibraryItem> items = new ArrayList<>();
 
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createSetItemsButton());
