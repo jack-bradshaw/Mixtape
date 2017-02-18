@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.GridBodyTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.ListBodyTestHarness;
+import com.matthewtamlin.mixtape.library_tests.mixtape_container.CoordinatedMixtapeContainerTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_header.ToolbarHeaderTestHarness;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
@@ -124,7 +125,8 @@ public final class TestLauncher extends AppCompatActivity {
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				startActivity(new Intent(TestLauncher.this, CoordinatedMixtapeContainer.class));
+				startActivity(new Intent(TestLauncher.this,
+						CoordinatedMixtapeContainerTestHarness.class));
 			}
 		});
 
