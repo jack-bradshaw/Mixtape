@@ -46,7 +46,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.Contex
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
-import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 

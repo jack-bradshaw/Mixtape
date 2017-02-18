@@ -36,7 +36,7 @@ import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
-import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;

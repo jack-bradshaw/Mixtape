@@ -15,10 +15,10 @@
   ~ limitations under the License.
   -->
 
-<com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer
+<com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer
 	android:id="@+id/example_layout_coordinator"
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:padding="0dp">
-</com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer>
+</com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer>

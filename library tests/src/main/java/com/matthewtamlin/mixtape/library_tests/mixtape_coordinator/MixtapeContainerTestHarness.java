@@ -24,7 +24,7 @@ import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsOverViewTestHarness;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
-import com.matthewtamlin.mixtape.library.mixtape_coordinator.MixtapeContainerView;
+import com.matthewtamlin.mixtape.library.mixtape_container.MixtapeContainerView;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 
 
