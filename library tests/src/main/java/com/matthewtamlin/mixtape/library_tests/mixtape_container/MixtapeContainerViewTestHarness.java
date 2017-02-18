@@ -29,9 +29,9 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 
 
 /**
- * Test harness for testing implementations of the {@link MixtapeContainerView} interface. This
- * class provides control buttons for controlling core functionality, however the view itself is
- * supplied by the subclass.
+ * Test harness for implementations of the {@link MixtapeContainerView} interface. This class
+ * provides control buttons for accessing core functionality, however the view itself is supplied by
+ * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.View, B extends
@@ -45,8 +45,8 @@ public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.V
 	}
 
 	/**
-	 * Creates a button which sets the material elevation of the header in the test view when
-	 * clicked.
+	 * Creates a button which can be clicked to set the material elevation of the header in the test
+	 * view.
 	 *
 	 * @return the button, not null
 	 */
@@ -66,8 +66,8 @@ public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.V
 	}
 
 	/**
-	 * Creates a button which sets the material elevation of the body in the test view when
-	 * clicked.
+	 * Creates a button which can be clicked to set the material elevation of the body in the test
+	 * view.
 	 *
 	 * @return the button, not null
 	 */
