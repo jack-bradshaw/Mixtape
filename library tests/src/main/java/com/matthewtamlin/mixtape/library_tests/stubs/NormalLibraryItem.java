@@ -99,6 +99,6 @@ public final class NormalLibraryItem implements LibraryItem {
 
 	@Override
 	public String toString() {
-		return "Library item, title: " + title;
+		return "Library item (title: " + title + ")";
 	}
 }
