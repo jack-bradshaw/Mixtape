@@ -102,7 +102,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	private List<LibraryItem> bodyItems;
 
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		createLibraryItems();
