@@ -51,7 +51,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which can be pressed to launch the GridBodyTestHarness activity.
+	 * Creates a button which can be clicked to launch the GridBodyTestHarness activity.
 	 *
 	 * @return the button
 	 */
@@ -71,7 +71,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which can be pressed to launch the ListBodyTestHarness activity.
+	 * Creates a button which can be clicked to launch the ListBodyTestHarness activity.
 	 *
 	 * @return the button
 	 */
@@ -91,7 +91,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which can be pressed to launch the ToolbarHeaderTestHarness activity.
+	 * Creates a button which can be clicked to launch the ToolbarHeaderTestHarness activity.
 	 *
 	 * @return the button
 	 */
@@ -111,7 +111,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which can be pressed to launch the CoordinatedMixtapeContainerTestHarness
+	 * Creates a button which can be clicked to launch the CoordinatedMixtapeContainerTestHarness
 	 * activity.
 	 *
 	 * @return the button
