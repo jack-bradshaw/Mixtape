@@ -31,8 +31,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 @SuppressLint("SetTextI18n") // Not important during testing
 public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	/**
-	 * The view being tested in this test harness. The view is null initially and must be created
-	 * when needed.
+	 * The view under test.
 	 */
 	private GridBody testView = null;
 
