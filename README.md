@@ -4,4 +4,3 @@ Mixtape is an Android library which greatly simplifies the task of displaying me
 <img src="https://raw.githubusercontent.com/MatthewTamlin/Mixtape/master/artwork/songs_scroll.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/Mixtape/master/artwork/albums_scroll.gif" width="425"/>
 <img src="https://raw.githubusercontent.com/MatthewTamlin/Mixtape/master/artwork/songs_options.gif" width="425"/> <img src="https://raw.githubusercontent.com/MatthewTamlin/Mixtape/master/artwork/albums_options.gif" width="425"/>
 
-Although all the components of the library are functional, the documentation still needs work and the automated tests need to be expanded. Once these tasks are complete, the library will be released to jCentre.
