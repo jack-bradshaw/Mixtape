@@ -148,7 +148,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	 */
 	private Button createUseToolbarHeaderButton() {
 		final Button b = new Button(this);
-		b.setText("Use small header");
+		b.setText("Use toolbar header");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -176,7 +176,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	 */
 	private Button createUseNullHeaderButton() {
 		final Button b = new Button(this);
-		b.setText("Use no header");
+		b.setText("Remove header");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -250,7 +250,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	 */
 	private Button createUseNullBodyButton() {
 		final Button b = new Button(this);
-		b.setText("Use no body");
+		b.setText("Clear body");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
