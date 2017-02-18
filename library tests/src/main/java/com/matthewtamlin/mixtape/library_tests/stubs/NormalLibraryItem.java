@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library_tests.stubs;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
@@ -28,9 +27,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 
 /**
- * An implementation of the LibraryItem interface for use in testing. So long as the resource ID
- * supplied to the constructor corresponds to a Bitmap resource, library read exceptions will
- * never occur.
+ * An LibraryItem where the titles, subtitle and artwork are defined at instantiation.
  */
 public final class NormalLibraryItem implements LibraryItem {
 	/**
@@ -39,17 +36,17 @@ public final class NormalLibraryItem implements LibraryItem {
 	private Resources resources;
 
 	/**
-	 * The title of this item.
+	 * The title of this item, may be null.
 	 */
 	private CharSequence title;
 
 	/**
-	 * The subtitle of this item.
+	 * The subtitle of this item, may be null.
 	 */
 	private CharSequence subtitle;
 
 	/**
-	 * The artwork of this item.
+	 * The artwork of this item may be null.
 	 */
 	private int artworkId;
 
@@ -57,11 +54,11 @@ public final class NormalLibraryItem implements LibraryItem {
 	 * Constructs a new NormalLibraryItem.
 	 *
 	 * @param title
-	 * 		the title of this item
+	 * 		the title of this item, may be null
 	 * @param subtitle
-	 * 		the subtitle of this item
+	 * 		the subtitle of this item, may be null
 	 * @param artworkId
-	 * 		a resource ID which specifies the artwork of this item
+	 * 		a resource ID corresponding to a Bitmap to use as the artwork of this item
 	 */
 	public NormalLibraryItem(final Resources resources, final CharSequence title,
 			final CharSequence subtitle, final int artworkId) {
