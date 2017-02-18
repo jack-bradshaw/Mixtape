@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.mixtape.library_tests.mixtape_coordinator;
+package com.matthewtamlin.mixtape.library_tests.mixtape_container;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -30,11 +30,11 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 
 /**
  * Test harness for testing implementations of the {@link MixtapeContainerView} interface. This
- * class provides control buttons for testing core functionality, however the view itself is
+ * class provides control buttons for controlling core functionality, however the view itself is
  * supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class MixtapeContainerTestHarness<H extends HeaderContract.View, B extends
+public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.View, B extends
 		BodyContract.View> extends ControlsOverViewTestHarness<MixtapeContainerView<H, B>> {
 	@Override
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
