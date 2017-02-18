@@ -43,4 +43,4 @@ dependencies {
 	compile 'com.matthew-tamlin:java-utilities:1.3.3'
 }
 
-apply from 'buildRelease.gradle'
+apply from: 'buildRelease.gradle'
