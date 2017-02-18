@@ -38,7 +38,7 @@ import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 public abstract class HeaderViewTestHarness extends
 		ControlsBelowViewTestHarness<HeaderContract.View> {
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createSetItemNormalButton());
