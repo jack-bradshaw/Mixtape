@@ -30,7 +30,7 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 
 /**
  * Test harness for testing implementations of the {@link MixtapeContainerView} interface. This
- * class provides control buttons for testing core functionality, however the view itself is
+ * class provides control buttons for controlling core functionality, however the view itself is
  * supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
