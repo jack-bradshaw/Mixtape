@@ -24,5 +24,17 @@
 		android:label="Mixtape tests"
 		android:supportsRtl="true"
 		android:theme="@style/Theme.AppCompat.NoActionBar">
+
+		<activity android:name=".core.TestLauncher">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+		
+		<activity android:name=".mixtape_container.CoordinatedMixtapeContainerTestHarness"/>
+		<activity android:name=".mixtape_header.ToolbarHeaderTestHarness"/>
+		<activity android:name=".mixtape_body.GridBodyTestHarness"/>
+		<activity android:name=".mixtape_body.ListBodyTestHarness"/>
 	</application>
 </manifest>
