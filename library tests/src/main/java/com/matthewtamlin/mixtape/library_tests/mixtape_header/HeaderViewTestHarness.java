@@ -66,7 +66,7 @@ public abstract class HeaderViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				testView.setItem(new NormalLibraryItem(getResources(),
+				getTestView().setItem(new NormalLibraryItem(getResources(),
 						"Title",
 						"Subtitle",
 						R.raw.real_artwork));
@@ -90,7 +90,7 @@ public abstract class HeaderViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				testView.setItem(new InaccessibleLibraryItem());
+				getTestView().setItem(new InaccessibleLibraryItem());
 			}
 		});
 
@@ -111,7 +111,7 @@ public abstract class HeaderViewTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				testView.setItem(null);
+				getTestView().setItem(null);
 			}
 		});
 
