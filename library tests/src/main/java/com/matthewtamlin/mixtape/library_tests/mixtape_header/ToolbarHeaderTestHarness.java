@@ -78,6 +78,8 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		getControlsContainer().addView(createChangeTitleBinderButton());
 		getControlsContainer().addView(createChangeSubtitleBinderButton());
 		getControlsContainer().addView(createChangeArtworkBinderButton());
+		getControlsContainer().addView(createSetToolbarButton());
+		getControlsContainer().addView(createClearToolbarButton());
 	}
 
 	@Override
