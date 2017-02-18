@@ -18,14 +18,13 @@ package com.matthewtamlin.mixtape.library_tests.mixtape_body;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 
 /**
- * Test harness for testing the {@link ListBody} class.
+ * Test harness for the {@link ListBody} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
@@ -36,7 +35,7 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	private ListBody testView = null;
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createToggleDividerVisibilityButton());
@@ -53,8 +52,8 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which toggles the visibility of the horizontal dividers in the test view
-	 * when clicked.
+	 * Creates a button which can be clicked to toggle the visibility of the horizontal dividers in
+	 * the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -76,7 +75,8 @@ public class ListBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which toggles the visibility of the artwork in the test view when clicked.
+	 * Creates a button which can be clicked to toggle the visibility of the artwork in the test
+	 * view.
 	 *
 	 * @return the button, not null
 	 */

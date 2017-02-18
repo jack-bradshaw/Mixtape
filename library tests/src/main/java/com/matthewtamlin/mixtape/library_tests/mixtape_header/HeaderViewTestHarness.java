@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library_tests.mixtape_header;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
@@ -30,15 +29,15 @@ import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 
 
 /**
- * Test harness for testing implementations of the {@link HeaderContract.View} interface. This class
- * provides control buttons for testing core functionality, however the view itself is supplied by
+ * Test harness for implementations of the {@link HeaderContract.View} interface. This class
+ * provides control buttons for accessing core functionality, however the view itself is supplied by
  * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class HeaderViewTestHarness extends
 		ControlsBelowViewTestHarness<HeaderContract.View> {
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createSetItemNormalButton());
@@ -48,8 +47,7 @@ public abstract class HeaderViewTestHarness extends
 
 
 	/**
-	 * Creates a button which sets the item in the test view when clicked. The item will return
-	 * metadata when queried.
+	 * Creates a button which can be clicked to display a normal item in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -72,8 +70,7 @@ public abstract class HeaderViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the item in the test view when clicked. The item will throw
-	 * exceptions when queried.
+	 * Creates a button which can be clicked to display an inaccessible item in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -93,8 +90,7 @@ public abstract class HeaderViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the item in the test view when clicked. The item will return null
-	 * metadata when queried.
+	 * Creates a button which can be clicked to display nothing in the test view.
 	 *
 	 * @return the button, not null
 	 */

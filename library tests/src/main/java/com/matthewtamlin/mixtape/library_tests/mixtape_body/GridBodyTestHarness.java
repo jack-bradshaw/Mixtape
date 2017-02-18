@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library_tests.mixtape_body;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,18 +25,17 @@ import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 
 
 /**
- * Test harness for testing the {@link GridBody} class.
+ * Test harness for the {@link GridBody} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	/**
-	 * The view being tested in this test harness. The view is null initially and must be created
-	 * when needed.
+	 * The view under test.
 	 */
 	private GridBody testView = null;
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createIncreaseColumnCountButton());
@@ -54,7 +52,8 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which increases the number of columns in the test view when clicked.
+	 * Creates a button which can be clicked to increase the number of columns displayed in the test
+	 * view.
 	 *
 	 * @return the button, not null
 	 */
@@ -75,7 +74,8 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which decreases the number of columns in the test view when clicked.
+	 * Creates a button which can be clicked to decrease the number of columns displayed in the test
+	 * view.
 	 *
 	 * @return the button, not null
 	 */

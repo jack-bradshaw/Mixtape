@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +47,7 @@ import java.util.Random;
 
 
 /**
- * Test harness for testing the {@link CoordinatedMixtapeContainer} class.
+ * Test harness for the {@link CoordinatedMixtapeContainer} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class CoordinatedMixtapeContainerTestHarness extends
@@ -68,10 +67,19 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	 */
 	private DisplayableDefaults defaults;
 
+	/**
+	 * Size limited cache for storing titles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing subtitles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing artwork.
+	 */
 	private final LruCache<LibraryItem, Drawable> artworkCache =
 			new LruCache<LibraryItem, Drawable>(1000000) {
 				@Override
@@ -82,13 +90,24 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				}
 			};
 
+	/**
+	 * The item to display in the header.
+	 */
 	private LibraryItem headerItem;
 
+	/**
+	 * The items to display in the body.
+	 */
 	private List<LibraryItem> bodyItems;
 
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
+
+		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
+				new BitmapDrawable(getResources(), artwork));
 
 		createLibraryItems();
 
@@ -112,37 +131,30 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		return testView;
 	}
 
+	/**
+	 * Creates the header and body items and assigns them to member variables.
+	 */
 	private void createLibraryItems() {
-		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
-
-		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
-				new BitmapDrawable(getResources(), artwork));
-
 		headerItem = new NormalLibraryItem(getResources(), "Header title", "Header subtitle",
 				R.raw.real_artwork);
 
-		bodyItems = generateBodyItems();
-	}
-
-	private List<LibraryItem> generateBodyItems() {
-		final List<LibraryItem> items = new ArrayList<>();
+		bodyItems = new ArrayList<>();
 
 		for (int i = 0; i < NUMBER_OF_ITEMS; i++) {
 			if (new Random().nextBoolean()) {
-				items.add(new NormalLibraryItem(getResources(),
+				bodyItems.add(new NormalLibraryItem(getResources(),
 						"Title " + i,
 						"Subtitle " + i,
 						R.raw.real_artwork));
 			} else {
-				items.add(new InaccessibleLibraryItem());
+				bodyItems.add(new InaccessibleLibraryItem());
 			}
 		}
-
-		return items;
 	}
 
 	/**
-	 * Creates a button which sets the header of the test view to a new {@link ToolbarHeader}.
+	 * Creates a button which can be clicked ot set the header of the test view to a new {@link
+	 * ToolbarHeader}.
 	 *
 	 * @return the button, not null
 	 */
@@ -170,7 +182,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to use no header.
+	 * Creates a button which can be clicked to clear the test view header.
 	 *
 	 * @return the button, not null
 	 */
@@ -190,7 +202,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the body of the test view to a new {@link GridBody}.
+	 * Creates a button which can be clicked to set the body of the test view to a new {@link
+	 * GridBody}.
 	 *
 	 * @return the button, not null
 	 */
@@ -217,7 +230,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the body of the test view to a new {@link ListBody}.
+	 * Creates a button which can be clicked to set the body of the test view to a new {@link
+	 * ListBody}.
 	 *
 	 * @return the button, not null
 	 */
@@ -244,7 +258,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to use no body.
+	 * Creates a button which can be clicked to clear the test view body.
 	 *
 	 * @return the button, not null
 	 */
@@ -264,7 +278,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to always show the header when clicked.
+	 * Creates a button which can be clicked to configure the test view to always show the header.
 	 *
 	 * @return the button, not null
 	 */
@@ -284,7 +298,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to always hide the header when clicked.
+	 * Creates a button which can be clicked to configure the test view to always hide the header.
 	 *
 	 * @return the button, not null
 	 */
@@ -304,8 +318,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to only show the header at the top of the view when
-	 * clicked.
+	 * Creates a button which can be clicked to configure the test view to only show the header at
+	 * when the top of the body is shown.
 	 *
 	 * @return the button, not null
 	 */
@@ -325,8 +339,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the test view to only show the header on downwards scrolls when
-	 * clicked.
+	 * Creates a button which can be clicked to configure the test view to only show the header on
+	 * downwards body scroll events.
 	 *
 	 * @return the button, not null
 	 */

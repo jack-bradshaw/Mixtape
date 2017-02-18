@@ -22,7 +22,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.util.LruCache;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -39,14 +38,23 @@ import com.matthewtamlin.mixtape.library_tests.R;
 
 
 /**
- * Test harness for testing the {@link ToolbarHeader} class.
+ * Test harness for the {@link ToolbarHeader} class.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
+	/**
+	 * Size limited cache for storing titles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing subtitles.
+	 */
 	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
 
+	/**
+	 * Size limited cache for storing artwork.
+	 */
 	private final LruCache<LibraryItem, Drawable> artworkCache =
 			new LruCache<LibraryItem, Drawable>(1000000) {
 				@Override
@@ -68,7 +76,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	private ToolbarHeader testView;
 
 	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
@@ -92,7 +100,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the title binder of the test view when clicked.
+	 * Creates a button which can be clicked to change the title binder of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -112,7 +120,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the subtitle binder of the test view when clicked.
+	 * Creates a button which can be clicked to change the subtitle binder of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -132,7 +140,7 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which changes the artwork binder of the test view when clicked.
+	 * Creates a button which can be clicked to change the artwork binder of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -151,6 +159,11 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		return b;
 	}
 
+	/**
+	 * Creates a button which can be clicked to set the toolbar of the test view.
+	 *
+	 * @return the button, not null
+	 */
 	private Button createSetToolbarButton() {
 		final Button b = new Button(this);
 		b.setText("Set toolbar");
@@ -168,6 +181,11 @@ public class ToolbarHeaderTestHarness extends HeaderViewTestHarness {
 		return b;
 	}
 
+	/**
+	 * Creates a button which can be clicked to clear the toolbar of the test view.
+	 *
+	 * @return the button, not null
+	 */
 	private Button createClearToolbarButton() {
 		final Button b = new Button(this);
 		b.setText("Clear toolbar");

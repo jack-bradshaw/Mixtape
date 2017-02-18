@@ -18,7 +18,6 @@ package com.matthewtamlin.mixtape.library_tests.mixtape_body;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
@@ -34,24 +33,29 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Test harness for testing implementations of the {@link BodyContract.View} interface. This class
- * provides control buttons for testing core functionality, however the view itself is supplied by
- * the subclass.
+ * Test harness for subclasses of the {@link BodyContract.View} interface. This class provides
+ * buttons for accessing core functionality, however the view itself is supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class BodyViewTestHarness extends
 		ControlsOverViewTestHarness<BodyContract.View> {
 	/**
-	 * The number of library items to display in the view.
+	 * The number of items to display in the view.
 	 */
 	private static final int NUMBER_OF_ITEMS = 100;
 
+	/**
+	 * The ID of the resource to use for item artwork.
+	 */
 	private static final int ARTWORK_RES_ID = R.raw.real_artwork;
 
+	/**
+	 * The items displayed in the view.
+	 */
 	private final List<LibraryItem> items = new ArrayList<>();
 
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createSetItemsButton());
@@ -65,7 +69,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the items in the test view when clicked.
+	 * Creates a button which can be clicked to display the items in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -98,7 +102,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the contextual menu resource in the test view when clicked.
+	 * Creates a button which can be clicked to set the contextual menu resource of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -118,7 +122,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which navigates to the top of the test view when clicked.
+	 * Creates a button which can be clicked to go to the top of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -138,7 +142,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which navigates to the end of the view when clicked.
+	 * Creates a button which can be clicked to go to the end of the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -159,7 +163,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which adds an item to the test view when clicked.
+	 * Creates a button which can be clicked to add an item to the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -185,7 +189,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which removes an item from the test view when clicked.
+	 * Creates a button which can be clicked to remove the first item in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -208,7 +212,7 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which swaps the first two items in the test view when clicked.
+	 * Creates a button which can be clicked to swap the first two items in the test view.
 	 *
 	 * @return the button, not null
 	 */
@@ -234,8 +238,8 @@ public abstract class BodyViewTestHarness extends
 	}
 
 	/**
-	 * Creates a button which toggles the visibility of the loading indicator in the test view when
-	 * clicked.
+	 * Creates a button which can be clicked to toggle the visibility of the loading indicator in
+	 * the test view.
 	 *
 	 * @return the button, not null
 	 */

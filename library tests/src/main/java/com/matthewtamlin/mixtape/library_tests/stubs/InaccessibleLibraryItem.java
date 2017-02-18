@@ -22,8 +22,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
 /**
- * An implementation of the LibraryItem interface for use in testing. Every attempt to access the
- * metadata results in a LibraryReadException being thrown.
+ * A LibraryItem which always throws exceptions when its metadata is accessed.
  */
 public final class InaccessibleLibraryItem implements LibraryItem {
 	@Override

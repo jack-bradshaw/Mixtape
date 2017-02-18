@@ -17,10 +17,7 @@
 package com.matthewtamlin.mixtape.library_tests.data.mixtape_header;
 
 
-import android.support.test.runner.AndroidJUnit4;
-
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
-import com.matthewtamlin.mixtape.library.data.BaseDataSourceHelper;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.View;
