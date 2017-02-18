@@ -36,7 +36,7 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	private GridBody testView = null;
 
 	@Override
-	protected void onCreate(@Nullable final Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createIncreaseColumnCountButton());
