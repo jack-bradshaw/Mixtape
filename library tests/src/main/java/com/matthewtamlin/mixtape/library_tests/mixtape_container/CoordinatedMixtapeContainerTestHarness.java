@@ -20,8 +20,10 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 
@@ -69,10 +71,19 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	 */
 	private DisplayableDefaults defaults;
 
-	/**
-	 * The cache to use when binding data to the test view.
-	 */
-	private LibraryItemCache cache;
+	private final LruCache<LibraryItem, CharSequence> titleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, CharSequence> subtitleCache = new LruCache<>(1000);
+
+	private final LruCache<LibraryItem, Drawable> artworkCache =
+			new LruCache<LibraryItem, Drawable>(1000000) {
+				@Override
+				protected int sizeOf(final LibraryItem key, final Drawable value) {
+					// All LibraryItems use BitmapDrawable for the artwork
+					final Bitmap artworkBitmap = ((BitmapDrawable) value).getBitmap();
+					return artworkBitmap.getByteCount();
+				}
+			};
 
 	private LibraryItem headerItem;
 
@@ -85,8 +96,6 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
 		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
 				new BitmapDrawable(getResources(), artwork));
-
-		cache = new LruLibraryItemCache(10000, 10000, 10000);
 
 		headerItem = new NormalLibraryItem(getResources(), "Header title", "Header subtitle",
 				R.raw.real_artwork);
@@ -146,9 +155,9 @@ public class CoordinatedMixtapeContainerTestHarness extends
 						new ToolbarHeader(CoordinatedMixtapeContainerTestHarness.this);
 
 				header.setItem(headerItem);
-				header.setTitleDataBinder(new TitleBinder(cache, defaults));
-				header.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				header.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				header.setTitleDataBinder(new TitleBinder(titleCache, defaults));
+				header.setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
+				header.setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 
 				testView.setHeader(header);
 			}
@@ -193,9 +202,9 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				final GridBody body = new GridBody(CoordinatedMixtapeContainerTestHarness.this);
 
 				body.setItems(bodyItems);
-				body.setTitleDataBinder(new TitleBinder(cache, defaults));
-				body.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				body.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				body.setTitleDataBinder(new TitleBinder(titleCache, defaults));
+				body.setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
+				body.setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 
 				testView.setBody(body);
 			}
@@ -220,9 +229,9 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				final ListBody body = new ListBody(CoordinatedMixtapeContainerTestHarness.this);
 
 				body.setItems(bodyItems);
-				body.setTitleDataBinder(new TitleBinder(cache, defaults));
-				body.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				body.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				body.setTitleDataBinder(new TitleBinder(titleCache, defaults));
+				body.setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
+				body.setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
 
 				testView.setBody(body);
 			}
