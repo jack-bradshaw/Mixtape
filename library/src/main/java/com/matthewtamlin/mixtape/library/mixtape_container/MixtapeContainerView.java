@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.mixtape.library.mixtape_coordinator;
+package com.matthewtamlin.mixtape.library.mixtape_container;
 
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;

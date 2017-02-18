@@ -42,7 +42,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.Contex
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
-import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 
 import java.util.List;
 import java.util.concurrent.Executor;

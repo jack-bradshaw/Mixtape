@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.matthewtamlin.mixtape.library.mixtape_coordinator;
+package com.matthewtamlin.mixtape.library.mixtape_container;
 
 import android.content.Context;
 import android.support.design.widget.AppBarLayout;
@@ -33,9 +33,9 @@ import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLA
 import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.PERSISTENT_HEADER;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_AT_START;
-import static com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_SCROLL_TO_START;
+import static com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer.Constraint.PERSISTENT_HEADER;
+import static com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_AT_START;
+import static com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer.Constraint.SHOW_HEADER_ON_SCROLL_TO_START;
 
 /**
  * A MixtapeContainer which shows and hides the header based on body scroll events. There are four

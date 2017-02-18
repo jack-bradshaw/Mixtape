@@ -24,7 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.matthewtamlin.mixtape.library.mixtape_coordinator.CoordinatedMixtapeContainer;
+import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.GridBodyTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.ListBodyTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_header.ToolbarHeaderTestHarness;
