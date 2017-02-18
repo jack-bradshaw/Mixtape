@@ -29,6 +29,10 @@ android {
 
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 	}
+
+	lintOptions {
+		disable 'InvalidPackage'
+	}
 }
 
 dependencies {
