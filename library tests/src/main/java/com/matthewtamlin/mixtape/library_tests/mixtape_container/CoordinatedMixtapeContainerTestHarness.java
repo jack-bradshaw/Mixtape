@@ -90,13 +90,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
-		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
-				new BitmapDrawable(getResources(), artwork));
-
-		headerItem = new NormalLibraryItem(getResources(), "Header title", "Header subtitle",
-				R.raw.real_artwork);
-		bodyItems = generateBodyItems();
+		createLibraryItems();
 
 		getControlsContainer().addView(createUseToolbarHeaderButton());
 		getControlsContainer().addView(createUseNullHeaderButton());
@@ -116,6 +110,17 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		}
 
 		return testView;
+	}
+
+	private void createLibraryItems() {
+		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
+		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
+				new BitmapDrawable(getResources(), artwork));
+
+		headerItem = new NormalLibraryItem(getResources(), "Header title", "Header subtitle",
+				R.raw.real_artwork);
+
+		bodyItems = generateBodyItems();
 	}
 
 	private List<LibraryItem> generateBodyItems() {
