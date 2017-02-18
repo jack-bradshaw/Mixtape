@@ -53,7 +53,7 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which can be pressed to increase the number of columns displayed in the test
+	 * Creates a button which can be clicked to increase the number of columns displayed in the test
 	 * view.
 	 *
 	 * @return the button, not null
@@ -75,7 +75,7 @@ public class GridBodyTestHarness extends RecyclerViewBodyTestHarness {
 	}
 
 	/**
-	 * Creates a button which can be pressed to decrease the number of columns displayed in the test
+	 * Creates a button which can be clicked to decrease the number of columns displayed in the test
 	 * view.
 	 *
 	 * @return the button, not null
