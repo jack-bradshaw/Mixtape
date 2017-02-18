@@ -110,6 +110,8 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
 				new BitmapDrawable(getResources(), artwork));
 
+		createLibraryItems();
+
 		getControlsContainer().addView(createUseToolbarHeaderButton());
 		getControlsContainer().addView(createUseNullHeaderButton());
 		getControlsContainer().addView(createUseGridBodyButton());
