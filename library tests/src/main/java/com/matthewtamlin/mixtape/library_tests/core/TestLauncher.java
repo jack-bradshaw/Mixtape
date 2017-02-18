@@ -24,7 +24,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.GridBodyTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_body.ListBodyTestHarness;
 import com.matthewtamlin.mixtape.library_tests.mixtape_container.CoordinatedMixtapeContainerTestHarness;
@@ -52,7 +51,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which launches the GridBodyTestHarness test harness when clicked.
+	 * Creates a button which can be pressed to launch the GridBodyTestHarness activity.
 	 *
 	 * @return the button
 	 */
@@ -72,7 +71,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which launches the ListBodyTestHarness test harness when clicked.
+	 * Creates a button which can be pressed to launch the ListBodyTestHarness activity.
 	 *
 	 * @return the button
 	 */
@@ -92,7 +91,7 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which launches the ToolbarHeaderTestHarness test harness when clicked.
+	 * Creates a button which can be pressed to launch the ToolbarHeaderTestHarness activity.
 	 *
 	 * @return the button
 	 */
@@ -112,8 +111,8 @@ public final class TestLauncher extends AppCompatActivity {
 	}
 
 	/**
-	 * Creates a button which launches the CoordinatedMixtapeContainerTestHarness test harness when
-	 * clicked.
+	 * Creates a button which can be pressed to launch the CoordinatedMixtapeContainerTestHarness
+	 * activity.
 	 *
 	 * @return the button
 	 */
