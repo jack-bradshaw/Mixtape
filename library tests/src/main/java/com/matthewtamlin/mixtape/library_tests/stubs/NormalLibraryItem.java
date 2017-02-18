@@ -60,8 +60,10 @@ public final class NormalLibraryItem implements LibraryItem {
 	 * @param artworkId
 	 * 		a resource ID corresponding to a Bitmap to use as the artwork of this item
 	 */
-	public NormalLibraryItem(final Resources resources, final CharSequence title,
-			final CharSequence subtitle, final int artworkId) {
+	public NormalLibraryItem(final Resources resources,
+			final CharSequence title,
+			final CharSequence subtitle,
+			final int artworkId) {
 		this.resources = resources;
 		this.title = title;
 		this.subtitle = subtitle;
