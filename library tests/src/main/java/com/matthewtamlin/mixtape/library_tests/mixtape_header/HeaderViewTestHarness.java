@@ -37,11 +37,6 @@ import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class HeaderViewTestHarness extends
 		ControlsBelowViewTestHarness<HeaderContract.View> {
-	/**
-	 * The view under test.
-	 */
-	private HeaderContract.View testView;
-
 	@Override
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
