@@ -38,6 +38,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
+import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
 import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
@@ -52,7 +53,7 @@ import java.util.Random;
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class CoordinatedMixtapeContainerTestHarness extends
-		MixtapeContainerViewTestHarness<SmallHeader, RecyclerViewBody> {
+		MixtapeContainerViewTestHarness<ToolbarHeader, RecyclerViewBody> {
 	/**
 	 * The number of library items to display in the view.
 	 */
@@ -91,7 +92,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 				R.raw.real_artwork);
 		bodyItems = generateBodyItems();
 
-		getControlsContainer().addView(createUseSmallHeaderButton());
+		getControlsContainer().addView(createUseToolbarHeaderButton());
 		getControlsContainer().addView(createUseNullHeaderButton());
 		getControlsContainer().addView(createUseGridBodyButton());
 		getControlsContainer().addView(createUseListBodyButton());
@@ -129,11 +130,11 @@ public class CoordinatedMixtapeContainerTestHarness extends
 	}
 
 	/**
-	 * Creates a button which sets the header of the test view to a new {@link SmallHeader}.
+	 * Creates a button which sets the header of the test view to a new {@link ToolbarHeader}.
 	 *
 	 * @return the button, not null
 	 */
-	private Button createUseSmallHeaderButton() {
+	private Button createUseToolbarHeaderButton() {
 		final Button b = new Button(this);
 		b.setText("Use small header");
 		b.setAllCaps(false);
@@ -141,15 +142,15 @@ public class CoordinatedMixtapeContainerTestHarness extends
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				final SmallHeader smallHeader =
-						new SmallHeader(CoordinatedMixtapeContainerTestHarness.this);
+				final ToolbarHeader header =
+						new ToolbarHeader(CoordinatedMixtapeContainerTestHarness.this);
 
-				smallHeader.setItem(headerItem);
-				smallHeader.setTitleDataBinder(new TitleBinder(cache, defaults));
-				smallHeader.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
-				smallHeader.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
+				header.setItem(headerItem);
+				header.setTitleDataBinder(new TitleBinder(cache, defaults));
+				header.setSubtitleDataBinder(new SubtitleBinder(cache, defaults));
+				header.setArtworkDataBinder(new ArtworkBinder(cache, defaults));
 
-				testView.setHeader(smallHeader);
+				testView.setHeader(header);
 			}
 		});
 
