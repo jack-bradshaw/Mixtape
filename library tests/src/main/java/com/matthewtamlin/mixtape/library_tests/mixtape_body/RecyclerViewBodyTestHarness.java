@@ -176,8 +176,8 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which can be clicked to increase the artwork fade duration of
-	 * the test view. The duration is increased by 25 millisecond per click.
+	 * Creates a button which can be clicked to increase the artwork fade duration of the test view.
+	 * The duration is increased by 25 millisecond per click.
 	 *
 	 * @return the button, not null
 	 */
@@ -204,8 +204,8 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	}
 
 	/**
-	 * Creates a button which can be clicked to decrease the artwork fade duration of
-	 * the test view. The duration is decreased by 25 millisecond per click.
+	 * Creates a button which can be clicked to decrease the artwork fade duration of the test view.
+	 * The duration is decreased by 25 millisecond per click.
 	 *
 	 * @return the button, not null
 	 */
