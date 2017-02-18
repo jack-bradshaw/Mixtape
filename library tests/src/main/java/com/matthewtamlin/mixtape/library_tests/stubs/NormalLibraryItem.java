@@ -22,6 +22,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
+import com.matthewtamlin.android_utilities.library.helpers.BitmapEfficiencyHelper;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 
@@ -82,7 +83,8 @@ public final class NormalLibraryItem implements LibraryItem {
 
 	@Override
 	public Drawable getArtwork(int width, int height) throws LibraryReadException {
-		final Bitmap artwork = BitmapFactory.decodeResource(resources, artworkId);
+		final Bitmap artwork = BitmapEfficiencyHelper.decodeResource(resources, artworkId, width,
+				height);
 		return new BitmapDrawable(resources, artwork);
 	}
 
