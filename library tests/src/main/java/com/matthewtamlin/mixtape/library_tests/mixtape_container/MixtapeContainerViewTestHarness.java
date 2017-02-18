@@ -34,7 +34,7 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
  * supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class MixtapeContainerTestHarness<H extends HeaderContract.View, B extends
+public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.View, B extends
 		BodyContract.View> extends ControlsOverViewTestHarness<MixtapeContainerView<H, B>> {
 	@Override
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
