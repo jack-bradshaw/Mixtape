@@ -114,6 +114,7 @@ public class CoordinatedMixtapeContainerTestHarness extends
 
 	private void createLibraryItems() {
 		final Bitmap artwork = BitmapFactory.decodeResource(getResources(), R.raw.default_artwork);
+
 		defaults = new ImmutableDisplayableDefaults("Default title", "Default subtitle",
 				new BitmapDrawable(getResources(), artwork));
 
