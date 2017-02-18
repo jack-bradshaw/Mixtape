@@ -79,7 +79,7 @@ public final class NormalLibraryItem implements LibraryItem {
 	}
 
 	@Override
-	public Drawable getArtwork(int width, int height) throws LibraryReadException {
+	public Drawable getArtwork(final int width, final int height) throws LibraryReadException {
 		final Bitmap artwork = BitmapEfficiencyHelper.decodeResource(resources, artworkId, width,
 				height);
 		return new BitmapDrawable(resources, artwork);
