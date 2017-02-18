@@ -27,8 +27,6 @@ import android.support.v4.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 
-import com.matthewtamlin.mixtape.library.caching.LibraryItemCache;
-import com.matthewtamlin.mixtape.library.caching.LruLibraryItemCache;
 import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.ImmutableDisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
@@ -39,7 +37,6 @@ import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
 import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
-import com.matthewtamlin.mixtape.library.mixtape_header.SmallHeader;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
