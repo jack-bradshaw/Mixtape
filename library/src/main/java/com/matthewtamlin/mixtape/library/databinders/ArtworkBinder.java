@@ -292,12 +292,6 @@ public class ArtworkBinder implements DataBinder<LibraryItem, ImageView> {
 							imageView.setImageDrawable(artwork);
 						}
 					}
-
-					@Override
-					public void onAnimationCancel(final Animator animation) {
-						imageView.setAlpha(1f);
-						imageView.setImageDrawable(null);
-					}
 				});
 
 				// As the animation progresses, fade-in the artwork by changing the transparency
