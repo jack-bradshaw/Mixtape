@@ -37,7 +37,7 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.View, B extends
 		BodyContract.View> extends ControlsOverViewTestHarness<MixtapeContainerView<H, B>> {
 	@Override
-	protected void onCreate(final @Nullable Bundle savedInstanceState) {
+	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getControlsContainer().addView(createChangeHeaderElevationButton());
