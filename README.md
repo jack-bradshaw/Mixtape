@@ -13,7 +13,7 @@ The components of the library can be divided into two categories:
 - UI
 
 ### Data
-There are five interfaces in the data category:
+The data category contains classes/interfaces which define, manage and process the data to be displayed to the user. There are five interfaces in the data category:
 - `LibraryItem`
 - `DisplayableDefaults`
 - `DataBinder`
@@ -31,7 +31,7 @@ A BaseDataSource provides access to a single LibraryItem. The interface is minim
 A ListDataSource is simply a BaseDataSource which provides access to a List of items. The interface defines a few additional callbacks which notify listeners of changes to the list such as additions and removals. The interface can be directly implemented, or the `ListDataSourceHelper` class can be extended. This helper class handles callback registration, so that the subclass only needs to handle data operations.
 
 ### UI
-The UI category contains views for presenting library items to the user. The main classes in the UI category are:
+The UI category contains views for presenting library items to the user. The main components in the UI category are:
 - `HeaderView`
 - `BodyView`
 - `ContainerView`
