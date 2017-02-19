@@ -243,7 +243,7 @@ public class TestArtworkBinder {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 
 		final LibraryItem inaccessibleItem = mock(LibraryItem.class);
-		when(inaccessibleItem.getTitle()).thenThrow(new LibraryReadException());
+		when(inaccessibleItem.getArtwork(anyInt(), anyInt())).thenThrow(new LibraryReadException());
 
 		binder.bind(imageView, inaccessibleItem);
 
