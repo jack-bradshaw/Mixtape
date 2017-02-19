@@ -172,7 +172,6 @@ public class TestTitleBinder {
 	public void testBind_nullTitle() throws LibraryReadException {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
 
-		// Modify the library item so that the title is null
 		when(libraryItem.getTitle()).thenReturn(null);
 
 		binder.bind(textView, libraryItem);
