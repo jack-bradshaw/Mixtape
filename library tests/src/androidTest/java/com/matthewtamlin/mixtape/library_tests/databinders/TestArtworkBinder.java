@@ -25,6 +25,7 @@ import com.matthewtamlin.mixtape.library.data.DisplayableDefaults;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
+import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -166,6 +167,26 @@ public class TestArtworkBinder {
 		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
 
 		binder.bind(imageView, null);
+
+		waitForAsyncEventsToFinish();
+
+		verify(imageView, atLeastOnce()).setImageDrawable(null);
+		verify(imageView, never()).setImageDrawable(artwork);
+		verify(imageView, never()).setImageDrawable(defaultArtwork);
+	}
+
+	/**
+	 * Test to verify that the {@link ArtworkBinder#bind(ImageView, LibraryItem)} method functions
+	 * correctly when the {@code data} argument is not null, but it returns null artwork. The test
+	 * will only pass if null is bound to the view.
+	 */
+	@Test
+	public void testBind_nullArtwork() throws LibraryReadException {
+		final ArtworkBinder binder = new ArtworkBinder(cache, displayableDefaults);
+
+		when(libraryItem.getArtwork(anyInt(), anyInt())).thenReturn(null);
+
+		binder.bind(imageView, libraryItem);
 
 		waitForAsyncEventsToFinish();
 
