@@ -22,7 +22,7 @@ There are five interfaces in the data category:
 - `BaseDataSource`
 - `ListDataSource`
 
-The library is designed to display any media which can be represented as an implementation of the LibraryItem interface. A library item is a piece of media with a title, a subtitle and some artwork, but the exact meaning of each is left to the implementation. For example a film could define the film title as the title, the studio as the subtitle, and a promotional image as the artwork, whereas a song could define the track title as the title, the artist as the subtitle, and the album cover as the artwork.
+The library is designed to display any media which can be represented as a LibraryItem. A libraryItem is a piece of media with a title, a subtitle and some artwork, but the exact meaning of each is left to the implementation. For example a film could use the film title, the studio, and a promotional image, whereas a song could use the track title, the artist, and the album cover. The UI is agnostic to the kind of media, and just displays these three pieces of information.
 
 In some instances a LibraryItem will be unable to provide access to its data. The DisplayableDefaults interface allows defaults to be defined for this scenario. The interface can be directly implemented, or one of the provided implementations can be used. The `ImmutableDisplayableDefaults` class and the `PojoDisplayableDefaults` class cover the majority of use cases.
 
