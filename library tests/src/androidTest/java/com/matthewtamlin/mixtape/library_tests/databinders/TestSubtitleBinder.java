@@ -175,7 +175,6 @@ public class TestSubtitleBinder {
 	public void testBind_nullSubtitle() throws LibraryReadException {
 		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
 
-		// Modify the library item so that the subtitle is null
 		when(libraryItem.getSubtitle()).thenReturn(null);
 
 		binder.bind(textView, libraryItem);
