@@ -168,6 +168,26 @@ public class TestSubtitleBinder {
 
 	/**
 	 * Test to verify that the {@link SubtitleBinder#bind(TextView, LibraryItem)} method functions
+	 * correctly when the {@code data} argument is not null, but it returns a null subtitle. The
+	 * test will only pass if null is bound to the view.
+	 */
+	@Test
+	public void testBind_nullSubtitle() throws LibraryReadException {
+		final SubtitleBinder binder = new SubtitleBinder(cache, displayableDefaults);
+
+		when(libraryItem.getSubtitle()).thenReturn(null);
+
+		binder.bind(textView, libraryItem);
+
+		waitForAsyncEventsToFinish();
+
+		verify(textView, atLeastOnce()).setText(null);
+		verify(textView, never()).setText(subtitle);
+		verify(textView, never()).setText(defaultSubtitle);
+	}
+
+	/**
+	 * Test to verify that the {@link SubtitleBinder#bind(TextView, LibraryItem)} method functions
 	 * correctly when the cache already contains a subtitle for the bound LibraryItem. The test will
 	 * only pass if the cached subtitle is bound to the view.
 	 */
