@@ -163,6 +163,22 @@ public class TestTitleBinder {
 		verify(textView, never()).setText(defaultTitle);
 	}
 
+	@Test
+	public void testBind_nullTitle() throws LibraryReadException {
+		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
+
+		// Modify the library item so that the title is null
+		when(libraryItem.getTitle()).thenReturn(null);
+
+		binder.bind(textView, libraryItem);
+
+		waitForAsyncEventsToFinish();
+
+		verify(textView, atLeastOnce()).setText(null);
+		verify(textView, never()).setText(title);
+		verify(textView, never()).setText(defaultTitle);
+	}
+
 	/**
 	 * Test to verify that the {@link TitleBinder#bind(TextView, LibraryItem)} method functions
 	 * correctly when the cache already contains a title for the bound LibraryItem. The test will
