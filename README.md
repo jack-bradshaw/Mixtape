@@ -29,3 +29,9 @@ The actual binding of data to the UI is handled by implementations of the DataBi
 A BaseDataSource provides access to a single LibraryItem. The interface is minimal and only defines a few critical methods, which allows any existing database to be integrated with this library. The data source defines a few callbacks which notify listeners of important events such as changes to the data. The interface can be directly implemented, or the `BaseDataSourceHelper` class can be extended. This helper class handles callback registration, so that the subclass only needs to handle data operations.
 
 A ListDataSource is simply a BaseDataSource which provides access to a List of items. The interface defines a few additional callbacks which notify listeners of changes to the list such as additions and removals. The interface can be directly implemented, or the `ListDataSourceHelper` class can be extended. This helper class handles callback registration, so that the subclass only needs to handle data operations.
+
+### UI
+The UI category contains views for presenting library items to the user. The main classes in the UI category are:
+- `HeaderView`
+- `BodyView`
+- `ContainerView`
