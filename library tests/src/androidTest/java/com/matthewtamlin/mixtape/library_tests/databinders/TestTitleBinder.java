@@ -163,6 +163,11 @@ public class TestTitleBinder {
 		verify(textView, never()).setText(defaultTitle);
 	}
 
+	/**
+	 * Test to verify that the {@link TitleBinder#bind(TextView, LibraryItem)} method functions
+	 * correctly when the {@code data} argument is not null, but it returns a null title. The test
+	 * will only pass if null is bound to the view.
+	 */
 	@Test
 	public void testBind_nullTitle() throws LibraryReadException {
 		final TitleBinder binder = new TitleBinder(cache, displayableDefaults);
