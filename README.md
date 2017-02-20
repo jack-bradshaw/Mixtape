@@ -10,9 +10,7 @@ Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:mi
 ## Usage
 This section provides an understanding of the components of the library. For a quick start with the library, have a look at the [example](example/src/main/java/com/matthewtamlin/mixtape/example).
 
-The components of the library can be divided into two categories:
-- Data
-- UI
+The components of the library can be divided into two categories: Data and UI.
 
 ### Data
 The data category contains classes/interfaces which define, manage and process the data to be displayed to the user. There are five interfaces in the data category:
