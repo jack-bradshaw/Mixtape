@@ -42,4 +42,4 @@ The header and body contracts define views which present library items to the us
 - `ListBody`: Displays library items in a vertical list. This view is useful when titles and subtitles are lengthy.
 - `CoordinatedContainerView`: Hosts a header and a body, and provides multiple pre-defined configurations for coordinating the views.
 
-The header and body views are designed to be controlled by presenters in the MVP pattern. The `DirectHeaderPresenter` and `DirectBodyPresenter` implementations are provided for simplicity and meet most use cases, however the presenter interfaces can be directly implementated for greater control.
+The header and body views are designed to be controlled by presenters as per the MVP pattern. The `DirectHeaderPresenter` and `DirectBodyPresenter` implementations are provided for simplicity and meet most use cases, however the presenter interfaces can be directly implementated for greater control.
