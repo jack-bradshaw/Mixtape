@@ -43,3 +43,6 @@ The header and body contracts define views which present library items to the us
 - `CoordinatedContainerView`: Hosts a header and a body, and provides multiple configurations for coordinating the views.
 
 The header and body views are designed to be controlled by presenters as per the MVP pattern. The `DirectHeaderPresenter` and `DirectBodyPresenter` implementations are provided for simplicity and meet most use cases, however the presenter interfaces can be directly implementated for greater control. The [example code](example/src/main/java/com/matthewtamlin/mixtape/example) demonstrates how views and presenters should be used.
+
+## License
+This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
