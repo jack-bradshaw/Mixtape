@@ -31,7 +31,15 @@ A BaseDataSource provides access to a single LibraryItem. The interface is minim
 A ListDataSource is simply a BaseDataSource which provides access to a List of items. The interface defines a few additional callbacks which notify listeners of changes to the list such as additions and removals. The interface can be directly implemented, or the `ListDataSourceHelper` class can be extended. This helper class handles callback registration, so that the subclass only needs to handle data operations.
 
 ### UI
-The UI category contains views for presenting library items to the user. The main components in the UI category are:
-- `HeaderView`
-- `BodyView`
+The UI category contains views for presenting library items to the user. There are three main interfaces in the UI category:
+- `HeaderContract`
+- `BodyContract`
 - `ContainerView`
+
+The header and body contracts define views which present library items to the user. A header view prominently displays a single item to the user, and a body view displays multiple related items. A container view hosts a header view and a body view, and arranges them in some way. The provides implementations are:
+- `ToolbarHeader`: Displays an item along with a toolbar which provides contextual control.
+- `GridBody`: Displays library items in a grid of cards. This view highlights the artwork of each item.
+- `ListBody`: Displays library items in a vertical list. This view is useful when titles and subtitles are lengthy.
+- `CoordinatedContainerView`: Hosts a header and a body, and provides multiple pre-defined configurations for coordinating the views.
+
+The header and body views are designed to be controlled by presenters in the MVP pattern. The `DirectHeaderPresenter` and `DirectBodyPresenter` implementations are provided for simplicity and meet most use cases, however the presenter interfaces can be directly implementated for greater control.
