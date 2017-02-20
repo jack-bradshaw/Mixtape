@@ -8,7 +8,7 @@ Mixtape is an Android library which simplifies the task of displaying media to a
 Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:mixtape:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/Mixtape).
 
 ## Usage
-This section provides an understanding of the components of the library. For a quick start with the library, have a look at the [example](example/src/main/java/com/matthewtamlin/mixtape/example).
+This section provides an overview of the components in the library. For a practical demonstration of the components in use, have a look at the [example code](example/src/main/java/com/matthewtamlin/mixtape/example).
 
 The components of the library can be divided into two categories: Data and UI.
 
