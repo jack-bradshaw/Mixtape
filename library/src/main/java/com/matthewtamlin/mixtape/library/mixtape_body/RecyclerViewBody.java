@@ -57,6 +57,18 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	private final Set<TopReachedListener> topReachedListeners = new HashSet<>();
 
 	/**
+	 * All library item selected listeners which are currently registered for callbacks. This set
+	 * must never contain null.
+	 */
+	private final Set<LibraryItemSelectedListener> libraryItemSelectedListeners = new HashSet<>();
+
+	/**
+	 * All menu item selected listeners which are currently registered for callbacks. This set must
+	 * never contain null.
+	 */
+	private final Set<MenuItemSelectedListener> menuItemSelectedListeners = new HashSet<>();
+
+	/**
 	 * The items to display in the recycler view. This member variable must never be null.
 	 */
 	private List<? extends LibraryItem> data = new ArrayList<>();
@@ -199,6 +211,31 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	@Override
 	public boolean loadingIndicatorIsShown() {
 		return (loadingIndicator.getVisibility() == VISIBLE);
+	}
+
+	@Override
+	public void addLibraryItemSelectedListener(final LibraryItemSelectedListener listener) {
+		if (listener != null) {
+			libraryItemSelectedListeners.add(listener);
+		}
+	}
+
+	@Override
+	public void removeLibraryItemSelectedListener(final LibraryItemSelectedListener listener) {
+		libraryItemSelectedListeners.remove(listener);
+	}
+
+	@Override
+	public void addContextualMenuItemSelectedListener(final MenuItemSelectedListener listener) {
+		if (listener != null) {
+			menuItemSelectedListeners.add(listener);
+		}
+	}
+
+	@Override
+	public void removeContextualMenuItemSelectedListener(
+			final MenuItemSelectedListener listener) {
+		menuItemSelectedListeners.remove(listener);
 	}
 
 	/**
