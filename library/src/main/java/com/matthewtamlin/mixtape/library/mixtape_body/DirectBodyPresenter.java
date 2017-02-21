@@ -45,7 +45,7 @@ public class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
 		V extends BodyView>
-		implements BasePresenter<S, V> {
+		implements BasePresenter<S, V>, ListDataSource.FullListener<D> {
 	/**
 	 * The data source to present from.
 	 */
