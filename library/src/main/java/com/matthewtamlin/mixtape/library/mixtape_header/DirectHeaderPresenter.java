@@ -34,7 +34,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
  */
 @Tested(testMethod = "automated")
 public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSource<D>,
-		V extends HeaderView> implements BasePresenter<S, V> {
+		V extends HeaderView> implements BasePresenter<S, V>, BaseDataSource.FullListener<D> {
 	/**
 	 * The data source supplying the LibraryItems.
 	 */
