@@ -28,7 +28,6 @@ import android.widget.TextView;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.Presenter;
 
 import timber.log.Timber;
 
@@ -38,11 +37,6 @@ import timber.log.Timber;
  * view must be provided with DataBinders in order to function properly.
  */
 public class ToolbarHeader extends FrameLayout implements HeaderView {
-	/**
-	 * Contains supporting business logic and handles user interaction.
-	 */
-	private Presenter presenter;
-
 	/**
 	 * The item to display.
 	 */
@@ -219,11 +213,6 @@ public class ToolbarHeader extends FrameLayout implements HeaderView {
 			this.artworkDataBinder = artworkDataBinder;
 			updateArtwork();
 		}
-	}
-
-	@Override
-	public void setPresenter(final Presenter presenter) {
-		this.presenter = presenter;
 	}
 
 	@Override
