@@ -19,31 +19,25 @@ package com.matthewtamlin.mixtape.library.mixtape_header;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
- * The MVP contract for a view which presents a single LibraryItem to the user.
+ * A view which displays the title, subtitle and artwork of a single LibraryItem to the user, in a
+ * way which highlights the primary library item in the context.
  */
-public interface HeaderContract {
+public interface View {
 	/**
-	 * A view which displays the title, subtitle and artwork of a single LibraryItem to the user, in
-	 * a way which highlights the primary library item in the context.
+	 * Displays the title, subtitle and artwork of the provided item. Passing null clears the view.
+	 *
+	 * @param item
+	 * 		the item to display
 	 */
-	public interface View {
-		/**
-		 * Displays the title, subtitle and artwork of the provided item. Passing null clears the
-		 * view.
-		 *
-		 * @param item
-		 * 		the item to display
-		 */
-		void setItem(LibraryItem item);
+	void setItem(LibraryItem item);
 
-		/**
-		 * @return the item currently being displayed, may be null
-		 */
-		LibraryItem getItem();
+	/**
+	 * @return the item currently being displayed, may be null
+	 */
+	LibraryItem getItem();
 
-		/**
-		 * Notifies the view of a change to the title, subtitle or artwork of the current item.
-		 */
-		void notifyItemChanged();
-	}
+	/**
+	 * Notifies the view of a change to the title, subtitle or artwork of the current item.
+	 */
+	void notifyItemChanged();
 }
