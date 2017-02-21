@@ -45,7 +45,7 @@ public class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
 		V extends BodyView>
-		implements BasePresenter<S, V>, ListDataSource.FullListener<D> {
+		implements BasePresenter<S, V>, ListDataSource.FullListener<D>, BodyView.FullListener {
 	/**
 	 * The data source to present from.
 	 */
@@ -160,6 +160,17 @@ public class DirectBodyPresenter<
 		if (view != null) {
 			view.notifyItemMoved(initialIndex, finalIndex);
 		}
+	}
+
+	@Override
+	public void onLibraryItemSelected(final BodyView bodyView, final LibraryItem item) {
+		// Do nothing
+	}
+
+	@Override
+	public void onContextualMenuItemSelected(final BodyView bodyView, final LibraryItem libraryItem,
+			final MenuItem menuItem) {
+		// Do nothing
 	}
 
 	/**
