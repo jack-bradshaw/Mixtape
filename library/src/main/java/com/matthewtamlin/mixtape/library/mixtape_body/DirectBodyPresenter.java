@@ -217,7 +217,8 @@ public class DirectBodyPresenter<
 	 */
 	protected void removeViewPresenter(final V view) {
 		if (view != null) {
-			view.setPresenter(null);
+			view.removeLibraryItemSelectedListener(this);
+			view.removeContextualMenuItemSelectedListener(this);
 		}
 	}
 
@@ -229,7 +230,8 @@ public class DirectBodyPresenter<
 	 */
 	protected void setSelfAsViewPresenter(final V view) {
 		if (view != null) {
-			view.setPresenter(this);
+			view.addLibraryItemSelectedListener(this);
+			view.addContextualMenuItemSelectedListener(this);
 		}
 	}
 }
