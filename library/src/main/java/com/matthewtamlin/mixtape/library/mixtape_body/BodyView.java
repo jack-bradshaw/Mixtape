@@ -128,27 +128,32 @@ public interface BodyView {
 	boolean loadingIndicatorIsShown();
 
 	/**
-	 * Receives callbacks from a BodyContract.BodyView.
+	 * Callback to be invoked when a library item is selected in a BodyView.
 	 */
-	interface Listener {
+	public interface LibraryItemSelectedListener {
 		/**
-		 * Invoked when the user selects a LibraryItem in a BodyContract.BodyView.
+		 * Invoked when a LibraryItem is selected in a BodyView.
 		 *
 		 * @param bodyView
-		 * 		the BodyContract.BodyView hosting the selected LibraryItem item, not null
+		 * 		the BodyView hosting the selected LibraryItem item, not null
 		 * @param item
 		 * 		the selected LibraryItem, not null
 		 */
 		void onLibraryItemSelected(BodyView bodyView, LibraryItem item);
+	}
 
+	/**
+	 * Callback to be invoked when an item specific contextual menu option is selected in a
+	 * BodyView.
+	 */
+	interface ContextualMenuItemSelectedListener {
 		/**
-		 * Invoked when the user selects an option from an item specific contextual menu in a
-		 * BodyContract.BodyView.
+		 * Invoked when an item specific contextual menu option is selected in a BodyView.
 		 *
 		 * @param bodyView
-		 * 		the BodyContract.BodyView hosting the menu, not null
+		 * 		the BodyView hosting the menu, not null
 		 * @param libraryItem
-		 * 		the LibraryItem targeted by the contextual menu, not null
+		 * 		the LibraryItem the contextual menu is attached to, not null
 		 * @param menuItem
 		 * 		the selected menu option, not null
 		 */
