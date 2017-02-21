@@ -20,6 +20,7 @@ import android.view.View;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
+import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
@@ -33,7 +34,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
  */
 @Tested(testMethod = "automated")
 public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSource<D>,
-		V extends HeaderView> implements HeaderContract.Presenter<D, S, V> {
+		V extends HeaderView> implements BasePresenter<S, V> {
 	/**
 	 * The data source supplying the LibraryItems.
 	 */
