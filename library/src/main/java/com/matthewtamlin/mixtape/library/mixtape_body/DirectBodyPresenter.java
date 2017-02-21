@@ -24,9 +24,7 @@ import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A simple implementation of the BodyContract.Presenter interface where the list returned by the
@@ -76,7 +74,7 @@ public class DirectBodyPresenter<
 
 	@Override
 	public void setView(final V view) {
-		removeViewPresenter(this.view);
+		unregisterFromViewCallbacks(this.view);
 		this.view = view;
 		setSelfAsViewPresenter(this.view);
 
@@ -215,7 +213,7 @@ public class DirectBodyPresenter<
 	 * @param view
 	 * 		the view to modify, may be null
 	 */
-	protected void removeViewPresenter(final V view) {
+	protected void unregisterFromViewCallbacks(final V view) {
 		if (view != null) {
 			view.removeLibraryItemSelectedListener(this);
 			view.removeContextualMenuItemSelectedListener(this);
