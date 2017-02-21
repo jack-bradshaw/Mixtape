@@ -162,25 +162,4 @@ public interface BodyContract {
 					MenuItem menuItem);
 		}
 	}
-
-	/**
-	 * The intermediary between a ListDataSource and a BodyContract.View. The presenter contains the
-	 * business logic for updating the data source, processing data source callbacks, driving the
-	 * view, and processing view callbacks.
-	 *
-	 * @param <D>
-	 * 		the type of data to present
-	 * @param <S>
-	 * 		the type of data source to present from
-	 * @param <V>
-	 * 		the type of view to present to
-	 */
-	public interface Presenter<
-			D extends LibraryItem,
-			S extends ListDataSource<D>,
-			V extends View>
-			extends
-			BasePresenter<S, V>,
-			ListDataSource.FullListener<D>,
-			View.Listener {}
 }
