@@ -183,7 +183,7 @@ public interface BodyView {
 	 * Callback to be invoked when an item specific contextual menu option is selected in a
 	 * BodyView.
 	 */
-	interface MenuItemSelectedListener {
+	public interface MenuItemSelectedListener {
 		/**
 		 * Invoked when an item specific contextual menu option is selected in a BodyView.
 		 *
