@@ -16,7 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
 /**
@@ -27,7 +26,7 @@ public interface HeaderContract {
 	 * A view which displays the title, subtitle and artwork of a single LibraryItem to the user, in
 	 * a way which highlights the primary library item in the context.
 	 */
-	public interface View extends BaseView<Presenter> {
+	public interface View {
 		/**
 		 * Displays the title, subtitle and artwork of the provided item. Passing null clears the
 		 * view.
