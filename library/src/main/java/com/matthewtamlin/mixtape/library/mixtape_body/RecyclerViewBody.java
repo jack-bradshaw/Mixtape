@@ -487,9 +487,9 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 				holder.getRootView().setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(final View v) {
-						if (presenter != null) {
-							presenter.onLibraryItemSelected(RecyclerViewBody.this,
-									displayedDataItem);
+						for (final LibraryItemSelectedListener listener :
+								libraryItemSelectedListeners) {
+							listener.onLibraryItemSelected(RecyclerViewBody.this, displayedDataItem);
 						}
 					}
 				});
@@ -537,12 +537,11 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 		menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(final MenuItem menuItem) {
-				if (presenter != null) {
-					presenter.onContextualMenuItemSelected(RecyclerViewBody.this, item, menuItem);
-					return true; // handled
-				} else {
-					return false; // not handled
+				for (final MenuItemSelectedListener listener : menuItemSelectedListeners) {
+					listener.onContextualMenuItemSelected(RecyclerViewBody.this, item, menuItem);
 				}
+
+				return true;
 			}
 		});
 	}
