@@ -127,6 +127,15 @@ public interface BodyView {
 	 */
 	boolean loadingIndicatorIsShown();
 
+	public void addLibraryItemSelectedListener(LibraryItemSelectedListener listener);
+
+	public void removeLibraryItemSelectedListener(LibraryItemSelectedListener listener);
+
+	public void addContextualMenuItemSelectedListener(ContextualMenuItemSelectedListener listener);
+
+	public void removeContextualMenuItemSelectedListener(ContextualMenuItemSelectedListener
+			listener);
+
 	/**
 	 * Callback to be invoked when a library item is selected in a BodyView.
 	 */
