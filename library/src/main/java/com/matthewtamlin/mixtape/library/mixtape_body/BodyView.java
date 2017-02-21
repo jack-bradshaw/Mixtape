@@ -127,12 +127,40 @@ public interface BodyView {
 	 */
 	boolean loadingIndicatorIsShown();
 
+	/**
+	 * Registers the supplied listener for  library item selected callbacks. If the supplied
+	 * listener is null or is already registered, then the method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 */
 	public void addLibraryItemSelectedListener(LibraryItemSelectedListener listener);
 
+	/**
+	 * Unregisters the supplied listener from library item selected callbacks. If the supplied
+	 * listener is null or is not registered, then the method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 */
 	public void removeLibraryItemSelectedListener(LibraryItemSelectedListener listener);
 
+	/**
+	 * Registers the supplied listener for contextual menu item selected callbacks. If the supplied
+	 * listener is null or is already registered, then the method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 */
 	public void addContextualMenuItemSelectedListener(ContextualMenuItemSelectedListener listener);
 
+	/**
+	 * Unregisters the supplied listener from contextual menu item selected callbacks. If the
+	 * supplied listener is null or is not registered, then the method exits normally.
+	 *
+	 * @param listener
+	 * 		the listener to register
+	 */
 	public void removeContextualMenuItemSelectedListener(ContextualMenuItemSelectedListener
 			listener);
 
