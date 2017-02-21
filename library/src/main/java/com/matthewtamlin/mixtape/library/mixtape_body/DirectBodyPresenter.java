@@ -76,7 +76,7 @@ public class DirectBodyPresenter<
 	public void setView(final V view) {
 		unregisterFromViewCallbacks(this.view);
 		this.view = view;
-		setSelfAsViewPresenter(this.view);
+		registerForViewCallbacks(this.view);
 
 		if (dataSource != null) {
 			dataSource.loadData(false, this);
@@ -226,7 +226,7 @@ public class DirectBodyPresenter<
 	 * @param view
 	 * 		the view to modify, may be null
 	 */
-	protected void setSelfAsViewPresenter(final V view) {
+	protected void registerForViewCallbacks(final V view) {
 		if (view != null) {
 			view.addLibraryItemSelectedListener(this);
 			view.addContextualMenuItemSelectedListener(this);
