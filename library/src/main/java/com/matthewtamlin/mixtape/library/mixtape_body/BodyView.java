@@ -197,4 +197,9 @@ public interface BodyView {
 		void onContextualMenuItemSelected(BodyView bodyView, LibraryItem libraryItem,
 				MenuItem menuItem);
 	}
+
+	/**
+	 * Composition of all BodyView listeners
+	 */
+	public interface FullListener extends LibraryItemSelectedListener, MenuItemSelectedListener {}
 }
