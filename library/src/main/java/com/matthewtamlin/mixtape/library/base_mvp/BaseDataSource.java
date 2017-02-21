@@ -30,6 +30,7 @@ package com.matthewtamlin.mixtape.library.base_mvp;
  * 		the type of data supplied by the source
  */
 public interface BaseDataSource<D> {
+	//TODO check that interfaces declare everything public
 	/**
 	 * Asynchronously loads data from the source and notifies the supplied callback when finished.
 	 * If true is passed for the {@code forceRefresh} parameter, all cached data is discarded at the
