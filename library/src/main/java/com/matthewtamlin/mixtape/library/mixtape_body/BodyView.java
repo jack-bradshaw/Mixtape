@@ -152,7 +152,7 @@ public interface BodyView {
 	 * @param listener
 	 * 		the listener to register
 	 */
-	public void addContextualMenuItemSelectedListener(ContextualMenuItemSelectedListener listener);
+	public void addContextualMenuItemSelectedListener(MenuItemSelectedListener listener);
 
 	/**
 	 * Unregisters the supplied listener from contextual menu item selected callbacks. If the
@@ -161,7 +161,7 @@ public interface BodyView {
 	 * @param listener
 	 * 		the listener to register
 	 */
-	public void removeContextualMenuItemSelectedListener(ContextualMenuItemSelectedListener
+	public void removeContextualMenuItemSelectedListener(MenuItemSelectedListener
 			listener);
 
 	/**
@@ -183,7 +183,7 @@ public interface BodyView {
 	 * Callback to be invoked when an item specific contextual menu option is selected in a
 	 * BodyView.
 	 */
-	interface ContextualMenuItemSelectedListener {
+	interface MenuItemSelectedListener {
 		/**
 		 * Invoked when an item specific contextual menu option is selected in a BodyView.
 		 *
