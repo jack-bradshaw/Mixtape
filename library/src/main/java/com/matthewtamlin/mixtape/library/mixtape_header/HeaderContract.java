@@ -22,7 +22,7 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
  * A view which displays the title, subtitle and artwork of a single LibraryItem to the user, in a
  * way which highlights the primary library item in the context.
  */
-public interface View {
+public interface HeaderView {
 	/**
 	 * Displays the title, subtitle and artwork of the provided item. Passing null clears the view.
 	 *
