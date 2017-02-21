@@ -29,7 +29,7 @@ import java.util.List;
  * If the list of items is modified externally, then the view must be notified of the change.
  * Failure to do so may result in display errors, or even a complete failure of the view.
  */
-public interface View {
+public interface BodyView {
 	/**
 	 * Sets the items to display and updates the UI. The view must be notified of any external
 	 * changes to the supplied list. Supplying null is equivalent to supplying an empty list.
@@ -128,31 +128,31 @@ public interface View {
 	boolean loadingIndicatorIsShown();
 
 	/**
-	 * Receives callbacks from a BodyContract.View.
+	 * Receives callbacks from a BodyContract.BodyView.
 	 */
 	interface Listener {
 		/**
-		 * Invoked when the user selects a LibraryItem in a BodyContract.View.
+		 * Invoked when the user selects a LibraryItem in a BodyContract.BodyView.
 		 *
 		 * @param bodyView
-		 * 		the BodyContract.View hosting the selected LibraryItem item, not null
+		 * 		the BodyContract.BodyView hosting the selected LibraryItem item, not null
 		 * @param item
 		 * 		the selected LibraryItem, not null
 		 */
-		void onLibraryItemSelected(View bodyView, LibraryItem item);
+		void onLibraryItemSelected(BodyView bodyView, LibraryItem item);
 
 		/**
 		 * Invoked when the user selects an option from an item specific contextual menu in a
-		 * BodyContract.View.
+		 * BodyContract.BodyView.
 		 *
 		 * @param bodyView
-		 * 		the BodyContract.View hosting the menu, not null
+		 * 		the BodyContract.BodyView hosting the menu, not null
 		 * @param libraryItem
 		 * 		the LibraryItem targeted by the contextual menu, not null
 		 * @param menuItem
 		 * 		the selected menu option, not null
 		 */
-		void onContextualMenuItemSelected(View bodyView, LibraryItem libraryItem,
+		void onContextualMenuItemSelected(BodyView bodyView, LibraryItem libraryItem,
 				MenuItem menuItem);
 	}
 }
