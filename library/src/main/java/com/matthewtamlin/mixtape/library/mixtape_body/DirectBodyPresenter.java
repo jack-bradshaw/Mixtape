@@ -20,6 +20,7 @@ import android.view.MenuItem;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
+import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
@@ -43,8 +44,8 @@ import java.util.Set;
 public class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
-		V extends BodyContract.View>
-		implements BodyContract.Presenter<D, S, V> {
+		V extends BodyView>
+		implements BasePresenter<S, V> {
 	private final Set<LibraryItemSelectedListener<D, S, V>> libraryItemSelectedListeners =
 			new HashSet<>();
 
