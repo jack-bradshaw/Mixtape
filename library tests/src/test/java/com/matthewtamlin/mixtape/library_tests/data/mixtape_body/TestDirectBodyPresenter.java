@@ -20,10 +20,8 @@ import android.view.MenuItem;
 
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.View;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
-import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.ContextualMenuItemSelectedListener;
-import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +49,7 @@ public class TestDirectBodyPresenter {
 	/**
 	 * The presenter under test.
 	 */
-	private DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, View> presenter;
+	private DirectBodyPresenter<LibraryItem, ListDataSource<LibraryItem>, BodyView> presenter;
 
 	/**
 	 * Initialises the testing objects and assigns them to member variables.
@@ -122,7 +120,7 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testSetDataSource_withView() {
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		final ArrayList<LibraryItem> data1 = new ArrayList<>();
@@ -142,14 +140,14 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method functions correctly
-	 * when the presenter does not have a data source. The test will only pass if the presenter
-	 * registers/unregisters itself with the views.
+	 * Test to verify that the {@link DirectBodyPresenter#setView(BodyView)} method functions
+	 * correctly when the presenter does not have a data source. The test will only pass if the
+	 * presenter registers/unregisters itself with the views.
 	 */
 	@Test
 	public void testSetView_withoutDataSource() {
-		final View view1 = mock(View.class);
-		final View view2 = mock(View.class);
+		final BodyView view1 = mock(BodyView.class);
+		final BodyView view2 = mock(BodyView.class);
 
 		presenter.setView(view1);
 
@@ -166,8 +164,8 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter#setView(View)} method functions correctly
-	 * when the presenter has a data source. The test will only pass if the presenter
+	 * Test to verify that the {@link DirectBodyPresenter#setView(BodyView)} method functions
+	 * correctly when the presenter has a data source. The test will only pass if the presenter
 	 * registers/unregisters itself with the views and loads data into the views.
 	 */
 	@Test
@@ -176,8 +174,8 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view1 = mock(View.class);
-		final View view2 = mock(View.class);
+		final BodyView view1 = mock(BodyView.class);
+		final BodyView view2 = mock(BodyView.class);
 
 		presenter.setView(view1);
 
@@ -220,7 +218,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, times(1)).setItems(data);
@@ -255,7 +253,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).setItems(null);
@@ -290,7 +288,7 @@ public class TestDirectBodyPresenter {
 		final SettableListDataSource dataSource = createNewDataSource(originalData);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		final ArrayList<LibraryItem> newData = new ArrayList<>();
@@ -325,7 +323,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).notifyItemsChanged();
@@ -360,7 +358,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).showLoadingIndicator(true);
@@ -396,7 +394,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).showLoadingIndicator(false);
@@ -432,7 +430,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).notifyItemAdded(anyInt());
@@ -467,7 +465,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).notifyItemRemoved(anyInt());
@@ -502,7 +500,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).notifyItemModified(anyInt());
@@ -537,7 +535,7 @@ public class TestDirectBodyPresenter {
 		final ListDataSource<LibraryItem> dataSource = createNewDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final BodyView view = mock(BodyView.class);
 		presenter.setView(view);
 
 		verify(view, never()).notifyItemMoved(anyInt(), anyInt());
@@ -554,7 +552,7 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnLibraryItemSelected_noCallbacks() {
-		presenter.onLibraryItemSelected(mock(View.class), mock(LibraryItem.class));
+		presenter.onLibraryItemSelected(mock(BodyView.class), mock(LibraryItem.class));
 	}
 
 	/**
@@ -564,11 +562,11 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnLibraryItemSelected_validCallbacks() {
-		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener1
+		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView> listener1
 				= mock(LibraryItemSelectedListener.class);
-		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener2
+		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView> listener2
 				= mock(LibraryItemSelectedListener.class);
-		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View> listener3
+		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView> listener3
 				= mock(LibraryItemSelectedListener.class);
 
 		presenter.registerListener(listener1);
@@ -579,7 +577,7 @@ public class TestDirectBodyPresenter {
 		presenter.unregisterListener(listener3);
 
 		final LibraryItem selectedItem = mock(LibraryItem.class);
-		presenter.onLibraryItemSelected(mock(View.class), selectedItem);
+		presenter.onLibraryItemSelected(mock(BodyView.class), selectedItem);
 
 		verify(listener1).onLibraryItemSelected(presenter, selectedItem);
 		verify(listener2).onLibraryItemSelected(presenter, selectedItem);
@@ -592,7 +590,7 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnContextualMenuItemSelected_noCallbacks() {
-		presenter.onContextualMenuItemSelected(mock(View.class), mock(LibraryItem.class),
+		presenter.onContextualMenuItemSelected(mock(BodyView.class), mock(LibraryItem.class),
 				mock(MenuItem.class));
 	}
 
@@ -603,11 +601,11 @@ public class TestDirectBodyPresenter {
 	 */
 	@Test
 	public void testOnContextualMenuItemSelected_validCallbacks() {
-		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
+		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView>
 				listener1 = mock(ContextualMenuItemSelectedListener.class);
-		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
+		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView>
 				listener2 = mock(ContextualMenuItemSelectedListener.class);
-		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, View>
+		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView>
 				listener3 = mock(ContextualMenuItemSelectedListener.class);
 
 		presenter.registerListener(listener1);
@@ -619,7 +617,7 @@ public class TestDirectBodyPresenter {
 
 		final LibraryItem selectedItem = mock(LibraryItem.class);
 		final MenuItem menuItem = mock(MenuItem.class);
-		presenter.onContextualMenuItemSelected(mock(View.class), selectedItem, menuItem);
+		presenter.onContextualMenuItemSelected(mock(BodyView.class), selectedItem, menuItem);
 
 		verify(listener1).onContextualMenuItemSelected(presenter, selectedItem, menuItem);
 		verify(listener2).onContextualMenuItemSelected(presenter, selectedItem, menuItem);
