@@ -464,22 +464,22 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 
 			@Override
 			public void onBindViewHolder(final BodyViewHolder holder, final int position) {
-				final LibraryItem displayedDataItem = data.get(holder.getAdapterPosition());
+				final LibraryItem dataItem = data.get(holder.getAdapterPosition());
 
 				if (titleDataBinder != null) {
-					titleDataBinder.bind(holder.getTitleTextView(), displayedDataItem);
+					titleDataBinder.bind(holder.getTitleTextView(), dataItem);
 				} else {
 					Timber.w("No title data binder set, could not bind title.");
 				}
 
 				if (subtitleDataBinder != null) {
-					subtitleDataBinder.bind(holder.getSubtitleTextView(), displayedDataItem);
+					subtitleDataBinder.bind(holder.getSubtitleTextView(), dataItem);
 				} else {
 					Timber.w("No subtitle data binder set, could not bind subtitle.");
 				}
 
 				if (artworkDataBinder != null) {
-					artworkDataBinder.bind(holder.getArtworkImageView(), displayedDataItem);
+					artworkDataBinder.bind(holder.getArtworkImageView(), dataItem);
 				} else {
 					Timber.w("No artwork data binder set, could not bind artwork.");
 				}
@@ -489,7 +489,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 					public void onClick(final View v) {
 						for (final LibraryItemSelectedListener listener :
 								libraryItemSelectedListeners) {
-							listener.onLibraryItemSelected(RecyclerViewBody.this, displayedDataItem);
+							listener.onLibraryItemSelected(RecyclerViewBody.this, dataItem);
 						}
 					}
 				});
@@ -500,13 +500,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 					public void onClick(final View v) {
 						// If the resource hasn't been set, inflating the menu will fail
 						if (contextualMenuResourceId != -1) {
-							showMenu(overflowButton, displayedDataItem);
+							showMenu(overflowButton, dataItem);
 						}
 					}
 				});
 
 				// Allow further customisation by subclasses
-				onViewHolderBound(holder, displayedDataItem);
+				onViewHolderBound(holder, dataItem);
 			}
 
 			@Override
