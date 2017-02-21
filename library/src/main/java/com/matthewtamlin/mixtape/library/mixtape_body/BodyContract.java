@@ -18,8 +18,6 @@ package com.matthewtamlin.mixtape.library.mixtape_body;
 
 import android.view.MenuItem;
 
-import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
-import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
@@ -36,7 +34,7 @@ public interface BodyContract {
 	 * If the list of items is modified externally, then the view must be notified of the change.
 	 * Failure to do so may result in display errors, or even a complete failure of the view.
 	 */
-	public interface View extends BaseView<Presenter> {
+	public interface View {
 		/**
 		 * Sets the items to display and updates the UI. The view must be notified of any external
 		 * changes to the supplied list. Supplying null is equivalent to supplying an empty list.
