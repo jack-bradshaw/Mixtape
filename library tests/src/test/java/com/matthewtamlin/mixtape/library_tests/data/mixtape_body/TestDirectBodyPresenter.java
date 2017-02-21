@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyView.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 
 import org.junit.Before;
@@ -566,74 +567,6 @@ public class TestDirectBodyPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
-	 * a library item selected callback and there are registered callback listeners. The test will
-	 * only pass if the callback is propagated to all listeners.
-	 */
-	@Test
-	public void testOnLibraryItemSelected_validCallbacks() {
-		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView> listener1
-				= mock(LibraryItemSelectedListener.class);
-		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView> listener2
-				= mock(LibraryItemSelectedListener.class);
-		final LibraryItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView> listener3
-				= mock(LibraryItemSelectedListener.class);
-
-		presenter.registerListener(listener1);
-		presenter.registerListener(listener2);
-		presenter.registerListener((LibraryItemSelectedListener) null);
-
-		presenter.registerListener(listener3);
-		presenter.unregisterListener(listener3);
-
-		final LibraryItem selectedItem = mock(LibraryItem.class);
-		presenter.onLibraryItemSelected(mock(BodyView.class), selectedItem);
-
-		verify(listener1).onLibraryItemSelected(presenter, selectedItem);
-		verify(listener2).onLibraryItemSelected(presenter, selectedItem);
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
-	 * a contextual menu item selected callback and there are no registered callback listeners. The
-	 * test will only pass if all methods exit normally.
-	 */
-	@Test
-	public void testOnContextualMenuItemSelected_noCallbacks() {
-		presenter.onContextualMenuItemSelected(mock(BodyView.class), mock(LibraryItem.class),
-				mock(MenuItem.class));
-	}
-
-	/**
-	 * Test to verify that the {@link DirectBodyPresenter} function correctly when the view delivers
-	 * a contextual menu item selected callback and there are registered callback listeners. The
-	 * test will only pass if the callback is propagated to all listeners.
-	 */
-	@Test
-	public void testOnContextualMenuItemSelected_validCallbacks() {
-		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView>
-				listener1 = mock(ContextualMenuItemSelectedListener.class);
-		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView>
-				listener2 = mock(ContextualMenuItemSelectedListener.class);
-		final ContextualMenuItemSelectedListener<LibraryItem, ListDataSource<LibraryItem>, BodyView>
-				listener3 = mock(ContextualMenuItemSelectedListener.class);
-
-		presenter.registerListener(listener1);
-		presenter.registerListener(listener2);
-		presenter.registerListener((LibraryItemSelectedListener) null);
-
-		presenter.registerListener(listener3);
-		presenter.unregisterListener(listener3);
-
-		final LibraryItem selectedItem = mock(LibraryItem.class);
-		final MenuItem menuItem = mock(MenuItem.class);
-		presenter.onContextualMenuItemSelected(mock(BodyView.class), selectedItem, menuItem);
-
-		verify(listener1).onContextualMenuItemSelected(presenter, selectedItem, menuItem);
-		verify(listener2).onContextualMenuItemSelected(presenter, selectedItem, menuItem);
-	}
-
-	/**
 	 * Creates a new SettableListDataSource with the supplied items as the data.
 	 *
 	 * @param items
@@ -646,4 +579,3 @@ public class TestDirectBodyPresenter {
 		return dataSource;
 	}
 }
-
