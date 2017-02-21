@@ -16,8 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
-import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseView;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
@@ -49,16 +47,4 @@ public interface HeaderContract {
 		 */
 		void notifyItemChanged();
 	}
-
-	/**
-	 * Acts as the intermediary between a data source and a HeaderView.View, and contains the
-	 * business logic needed to update the data and drive the view. Must always be subscribed to
-	 * callback events from the data source and the view (if possible).
-	 */
-	public interface Presenter<
-			D extends LibraryItem,
-			S extends BaseDataSource<D>,
-			V extends View>
-			extends
-			BasePresenter<S, V>, BaseDataSource.FullListener<D> {}
 }
