@@ -37,7 +37,7 @@ import timber.log.Timber;
  * the LibraryItem. The toolbar can be used to display actions specific to the item in context. This
  * view must be provided with DataBinders in order to function properly.
  */
-public class ToolbarHeader extends FrameLayout implements HeaderContract.View {
+public class ToolbarHeader extends FrameLayout implements HeaderView {
 	/**
 	 * Contains supporting business logic and handles user interaction.
 	 */
