@@ -144,28 +144,4 @@ public class DirectHeaderPresenter<D extends LibraryItem, S extends BaseDataSour
 			dataSource.registerLongOperationListener(this);
 		}
 	}
-
-	/**
-	 * Removes the presenter of the supplied view.
-	 *
-	 * @param view
-	 * 		the view to modify, may be null
-	 */
-	protected void removeViewPresenter(final V view) {
-		if (view != null) {
-			view.setPresenter(null);
-		}
-	}
-
-	/**
-	 * Sets the supplied view to use this instance as its presenter.
-	 *
-	 * @param view
-	 * 		the view to modify, may be null
-	 */
-	protected void setSelfAsViewPresenter(final V view) {
-		if (view != null) {
-			view.setPresenter(this);
-		}
-	}
 }
