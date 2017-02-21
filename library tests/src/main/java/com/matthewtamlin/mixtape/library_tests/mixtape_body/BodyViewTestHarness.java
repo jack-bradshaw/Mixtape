@@ -23,7 +23,7 @@ import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsOverViewTestHarness;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
 import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
@@ -33,12 +33,11 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Test harness for subclasses of the {@link BodyContract.View} interface. This class provides
+ * Test harness for subclasses of the {@link BodyView} interface. This class provides
  * buttons for accessing core functionality, however the view itself is supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class BodyViewTestHarness extends
-		ControlsOverViewTestHarness<BodyContract.View> {
+public abstract class BodyViewTestHarness extends ControlsOverViewTestHarness<BodyView> {
 	/**
 	 * The number of items to display in the view.
 	 */
