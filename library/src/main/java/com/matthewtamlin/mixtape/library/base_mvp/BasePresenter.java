@@ -16,6 +16,8 @@
 
 package com.matthewtamlin.mixtape.library.base_mvp;
 
+import android.view.View;
+
 /**
  * The intermediary between a data source and a view. Contains the business logic for updating the
  * data source, processing data source callbacks, driving the view, and processing view callbacks.
