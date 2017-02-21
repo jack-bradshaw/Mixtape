@@ -36,7 +36,6 @@ import com.matthewtamlin.android_utilities.library.helpers.ThemeColorHelper;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.Presenter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -61,11 +60,6 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	 * The items to display in the recycler view. This member variable must never be null.
 	 */
 	private List<? extends LibraryItem> data = new ArrayList<>();
-
-	/**
-	 * Drives this view and receives user interaction callbacks.
-	 */
-	private Presenter presenter;
 
 	/**
 	 * The menu resource of the item specific contextual menus. Default is -1 as specified by
@@ -142,11 +136,6 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
-	}
-
-	@Override
-	public void setPresenter(final BodyContract.Presenter presenter) {
-		this.presenter = presenter;
 	}
 
 	@Override
