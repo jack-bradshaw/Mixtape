@@ -20,7 +20,7 @@ package com.matthewtamlin.mixtape.library.base_mvp;
  * The intermediary between a data source and a view. Contains the business logic for updating the
  * data source, processing data source callbacks, driving the view, and processing view callbacks.
  */
-public interface BasePresenter<S extends BaseDataSource, V extends BaseView> {
+public interface BasePresenter<S extends BaseDataSource, V extends View> {
 	/**
 	 * Sets the data source and registers this presenter for callbacks. Passing null removes any
 	 * existing data source without setting a new one.
