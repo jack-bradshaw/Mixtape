@@ -151,16 +151,20 @@ public class TestDirectBodyPresenter {
 
 		presenter.setView(view1);
 
-		verify(view1).setPresenter(presenter);
+		verify(view1).addLibraryItemSelectedListener(presenter);
+		verify(view1).addContextualMenuItemSelectedListener(presenter);
 
 		presenter.setView(view2);
 
-		verify(view1).setPresenter(null);
-		verify(view2).setPresenter(presenter);
+		verify(view1).removeLibraryItemSelectedListener(presenter);
+		verify(view1).removeContextualMenuItemSelectedListener(presenter);
+		verify(view2).addLibraryItemSelectedListener(presenter);
+		verify(view2).addContextualMenuItemSelectedListener(presenter);
 
 		presenter.setView(null);
 
-		verify(view2).setPresenter(null);
+		verify(view2).removeLibraryItemSelectedListener(presenter);
+		verify(view2).removeContextualMenuItemSelectedListener(presenter);
 	}
 
 	/**
@@ -179,18 +183,24 @@ public class TestDirectBodyPresenter {
 
 		presenter.setView(view1);
 
-		verify(view1).setPresenter(presenter);
+		verify(view1).addLibraryItemSelectedListener(presenter);
+		verify(view1).addContextualMenuItemSelectedListener(presenter);
 		verify(view1).setItems(data);
 
 		presenter.setView(view2);
 
-		verify(view1).setPresenter(null);
-		verify(view2).setPresenter(presenter);
+		verify(view1).removeLibraryItemSelectedListener(presenter);
+		verify(view1).removeContextualMenuItemSelectedListener(presenter);
+		verify(view1).setItems(null);
+		verify(view2).addLibraryItemSelectedListener(presenter);
+		verify(view2).addContextualMenuItemSelectedListener(presenter);
 		verify(view2).setItems(data);
 
 		presenter.setView(null);
 
-		verify(view2).setPresenter(null);
+		verify(view2).removeLibraryItemSelectedListener(presenter);
+		verify(view2).removeContextualMenuItemSelectedListener(presenter);
+		verify(view2).setItems(null);
 	}
 
 	/**
