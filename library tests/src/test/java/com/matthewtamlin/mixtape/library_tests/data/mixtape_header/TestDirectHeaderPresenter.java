@@ -20,7 +20,6 @@ package com.matthewtamlin.mixtape.library_tests.data.mixtape_header;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.View;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderView;
 
 import org.junit.Before;
@@ -121,8 +120,8 @@ public class TestDirectHeaderPresenter {
 
 	/**
 	 * Test to verify that the {@link DirectHeaderPresenter#setView(HeaderView)} method functions
-	 * correctly when the presenter does not have a data source. The test will only pass if the
-	 * presenter registers/unregisters itself with the views.
+	 * correctly when the presenter does not have a data source. The test will only pass if all
+	 * methods exit normally.
 	 */
 	@Test
 	public void testSetView_withoutDataSource() {
@@ -131,16 +130,9 @@ public class TestDirectHeaderPresenter {
 
 		presenter.setView(view1);
 
-		verify(view1).setPresenter(presenter);
-
 		presenter.setView(view2);
 
-		verify(view1).setPresenter(null);
-		verify(view2).setPresenter(presenter);
-
 		presenter.setView(null);
-
-		verify(view2).setPresenter(null);
 	}
 
 	/**
@@ -159,18 +151,16 @@ public class TestDirectHeaderPresenter {
 
 		presenter.setView(view1);
 
-		verify(view1).setPresenter(presenter);
 		verify(view1).setItem(data);
 
 		presenter.setView(view2);
 
-		verify(view1).setPresenter(null);
-		verify(view2).setPresenter(presenter);
+		verify(view1).setItem(null);
 		verify(view2).setItem(data);
 
 		presenter.setView(null);
 
-		verify(view2).setPresenter(null);
+		verify(view2).setItem(null);
 	}
 
 	/**
