@@ -16,11 +16,7 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_container;
 
-import android.view.View;
-
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderView;
 
 /**
