@@ -16,12 +16,9 @@
 
 package com.matthewtamlin.mixtape.library_tests.data.mixtape_body;
 
-import android.view.MenuItem;
-
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyView.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 
 import org.junit.Before;
