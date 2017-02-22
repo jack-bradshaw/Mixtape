@@ -128,8 +128,8 @@ public interface BodyView {
 	boolean loadingIndicatorIsShown();
 
 	/**
-	 * Registers the supplied listener for  library item selected callbacks. If the supplied
-	 * listener is null or is already registered, then the method exits normally.
+	 * Registers the supplied listener for library item selected callbacks. If the supplied listener
+	 * is null or is already registered, then the method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
