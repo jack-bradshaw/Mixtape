@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class TestHeaderView {
+public abstract class TestHeaderView {
 	@Test
 	public void testSetAndGetItem() {
 
