@@ -21,6 +21,7 @@ import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract.View;
+import com.matthewtamlin.mixtape.library.mixtape_header.HeaderView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +45,7 @@ public class TestDirectHeaderPresenter {
 	/**
 	 * The presenter under test.
 	 */
-	private DirectHeaderPresenter<LibraryItem, BaseDataSource<LibraryItem>, View> presenter;
+	private DirectHeaderPresenter<LibraryItem, BaseDataSource<LibraryItem>, HeaderView> presenter;
 
 	/**
 	 * Initialises the testing objects and assigns them to member variables.
@@ -99,7 +100,7 @@ public class TestDirectHeaderPresenter {
 	 */
 	@Test
 	public void testSetDataSource_withView() {
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		final LibraryItem data1 = mock(LibraryItem.class);
@@ -119,14 +120,14 @@ public class TestDirectHeaderPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectHeaderPresenter#setView(View)} method functions
+	 * Test to verify that the {@link DirectHeaderPresenter#setView(HeaderView)} method functions
 	 * correctly when the presenter does not have a data source. The test will only pass if the
 	 * presenter registers/unregisters itself with the views.
 	 */
 	@Test
 	public void testSetView_withoutDataSource() {
-		final View view1 = mock(View.class);
-		final View view2 = mock(View.class);
+		final HeaderView view1 = mock(HeaderView.class);
+		final HeaderView view2 = mock(HeaderView.class);
 
 		presenter.setView(view1);
 
@@ -143,7 +144,7 @@ public class TestDirectHeaderPresenter {
 	}
 
 	/**
-	 * Test to verify that the {@link DirectHeaderPresenter#setView(View)} method functions
+	 * Test to verify that the {@link DirectHeaderPresenter#setView(HeaderView)} method functions
 	 * correctly when the presenter has a data source. The test will only pass if the presenter
 	 * registers/unregisters itself with the views and loads data into the views.
 	 */
@@ -153,8 +154,8 @@ public class TestDirectHeaderPresenter {
 		final BaseDataSource<LibraryItem> dataSource = new SettableBaseDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view1 = mock(View.class);
-		final View view2 = mock(View.class);
+		final HeaderView view1 = mock(HeaderView.class);
+		final HeaderView view2 = mock(HeaderView.class);
 
 		presenter.setView(view1);
 
@@ -197,7 +198,7 @@ public class TestDirectHeaderPresenter {
 		final BaseDataSource<LibraryItem> dataSource = new SettableBaseDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		verify(view, times(1)).setItem(data);
@@ -232,7 +233,7 @@ public class TestDirectHeaderPresenter {
 		final BaseDataSource<LibraryItem> dataSource = new SettableBaseDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		verify(view, never()).setItem(null);
@@ -267,7 +268,7 @@ public class TestDirectHeaderPresenter {
 		final SettableBaseDataSource dataSource = new SettableBaseDataSource(originalData);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		final LibraryItem newData = mock(LibraryItem.class);
@@ -297,12 +298,12 @@ public class TestDirectHeaderPresenter {
 	 * view is notified of the event.
 	 */
 	@Test
-	public void testOnDataModified_withView() {
+	public void testOnDataModified_withHeaderView() {
 		final LibraryItem data = mock(LibraryItem.class);
 		final BaseDataSource<LibraryItem> dataSource = new SettableBaseDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		verify(view, never()).notifyItemChanged();
@@ -337,7 +338,7 @@ public class TestDirectHeaderPresenter {
 		final BaseDataSource<LibraryItem> dataSource = new SettableBaseDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		presenter.onLongOperationStarted(dataSource);
@@ -368,10 +369,9 @@ public class TestDirectHeaderPresenter {
 		final BaseDataSource<LibraryItem> dataSource = new SettableBaseDataSource(data);
 		presenter.setDataSource(dataSource);
 
-		final View view = mock(View.class);
+		final HeaderView view = mock(HeaderView.class);
 		presenter.setView(view);
 
 		presenter.onLongOperationFinished(dataSource);
 	}
 }
-
