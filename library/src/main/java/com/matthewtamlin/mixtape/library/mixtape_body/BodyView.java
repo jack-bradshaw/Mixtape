@@ -141,7 +141,7 @@ public interface BodyView {
 	 * listener is null or is not registered, then the method exits normally.
 	 *
 	 * @param listener
-	 * 		the listener to register
+	 * 		the listener to unregister
 	 */
 	public void removeLibraryItemSelectedListener(LibraryItemSelectedListener listener);
 
@@ -159,7 +159,7 @@ public interface BodyView {
 	 * supplied listener is null or is not registered, then the method exits normally.
 	 *
 	 * @param listener
-	 * 		the listener to register
+	 * 		the listener to unregister
 	 */
 	public void removeContextualMenuItemSelectedListener(MenuItemSelectedListener
 			listener);
