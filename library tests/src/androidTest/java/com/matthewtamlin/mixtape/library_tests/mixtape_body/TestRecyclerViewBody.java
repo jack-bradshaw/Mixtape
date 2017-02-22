@@ -50,6 +50,6 @@ public abstract class TestRecyclerViewBody {
 
 	@Test
 	public void testClearTopReachedListeners() {
-		
+
 	}
 }
