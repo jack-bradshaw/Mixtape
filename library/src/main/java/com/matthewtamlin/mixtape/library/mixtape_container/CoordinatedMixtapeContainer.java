@@ -272,7 +272,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				}
 
 				if (body != null) {
-					body.registerTopReachedListener(new RecyclerViewBody.TopReachedListener() {
+					body.addTopReachedListener(new RecyclerViewBody.TopReachedListener() {
 						@Override
 						public void onTopReached(final RecyclerViewBody recyclerViewBody) {
 							headerContainer.setExpanded(true);
