@@ -341,7 +341,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	 * @param listener
 	 * 		the listener to register
 	 */
-	public void registerTopReachedListener(final TopReachedListener listener) {
+	public void addTopReachedListener(final TopReachedListener listener) {
 		topReachedListeners.add(listener);
 	}
 
@@ -352,7 +352,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	public void unregisterTopReachedListener(final TopReachedListener listener) {
+	public void removeTopReachedListener(final TopReachedListener listener) {
 		topReachedListeners.remove(listener);
 	}
 
