@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public abstract class TestRecyclerViewBody {
+public abstract class TestRecyclerViewBody extends TestBodyView {
 	@Test
 	public void testSetAndGetTitleBinder() {
 
