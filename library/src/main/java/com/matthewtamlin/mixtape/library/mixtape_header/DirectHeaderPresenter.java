@@ -16,8 +16,6 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_header;
 
-import android.view.View;
-
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
 import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
