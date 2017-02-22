@@ -335,8 +335,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	}
 
 	/**
-	 * Registers a top reached listener to this RecyclerViewBody. If the supplied listener is null
-	 * or is already registered, this method exits normally.
+	 * Registers the supplied listener for top reached callbacks. If the supplied listener is null
+	 * or is already registered, then the method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
@@ -346,8 +346,8 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	}
 
 	/**
-	 * Unregisters a top reached listener from this RecyclerViewBody. If the supplied listener is
-	 * null or is not registered, this method exits normally.
+	 * Unregisters the supplied listener from top reached callbacks. If the supplied listener is
+	 * null or is not registered, then the method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
