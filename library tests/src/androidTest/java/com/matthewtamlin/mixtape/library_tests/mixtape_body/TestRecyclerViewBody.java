@@ -16,26 +16,50 @@
 
 package com.matthewtamlin.mixtape.library_tests.mixtape_body;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import android.support.test.espresso.ViewInteraction;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
+import com.matthewtamlin.mixtape.library.databinders.DataBinder;
+import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
+import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
+import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerBodyView;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 
 @RunWith(AndroidJUnit4.class)
 public abstract class TestRecyclerViewBody extends TestBodyView {
 	@Test
 	public void testSetAndGetTitleBinder() {
+		final TitleBinder binder = mock(TitleBinder.class);
 
+		getBodyViewDirect().setTitleDataBinder(binder);
+
+		assertThat(getBodyViewDirect().getTitleDataBinder(), is((DataBinder) binder));
 	}
 
 	@Test
 	public void testSetAndGetSubtitleBinder() {
+		final SubtitleBinder binder = mock(SubtitleBinder.class);
 
+		getBodyViewDirect().setSubtitleDataBinder(binder);
+
+		assertThat(getBodyViewDirect().getSubtitleDataBinder(), is((DataBinder) binder));
 	}
 
 	@Test
 	public void testSetAndGetArtworkBinder() {
+		final ArtworkBinder binder = mock(ArtworkBinder.class);
 
+		getBodyViewDirect().setArtworkDataBinder(binder);
+
+		assertThat(getBodyViewDirect().getArtworkDataBinder(), is((DataBinder) binder));
 	}
 
 	@Test
@@ -52,4 +76,9 @@ public abstract class TestRecyclerViewBody extends TestBodyView {
 	public void testClearTopReachedListeners() {
 
 	}
+
+	@Override
+	public abstract RecyclerBodyView getBodyViewDirect();
+
+	public abstract ViewInteraction getBodyViewEspresso();
 }
