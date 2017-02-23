@@ -63,6 +63,4 @@ public abstract class TestBodyView {
 	}
 
 	public abstract BodyView getBodyViewDirect();
-
-	public abstract ViewInteraction getBodyViewEspresso();
 }
