@@ -16,7 +16,6 @@
 
 package com.matthewtamlin.mixtape.library_tests.mixtape_body;
 
-import android.support.test.espresso.ViewInteraction;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
