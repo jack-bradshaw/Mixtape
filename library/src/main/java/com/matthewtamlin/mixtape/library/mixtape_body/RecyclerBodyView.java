@@ -50,7 +50,7 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * A RecyclerView backed partial-implementation of the BodyContract.View interface. This class binds
  * data to the UI using DataBinders, and delegates the appearance of the UI to subclasses.
  */
-public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
+public abstract class RecyclerBodyView extends FrameLayout implements BodyView {
 	/**
 	 * All top reached listeners which are currently registered. This set must never contain null.
 	 */
@@ -115,7 +115,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	 * @param context
 	 * 		the Context the body is attached to, not null
 	 */
-	public RecyclerViewBody(final Context context) {
+	public RecyclerBodyView(final Context context) {
 		super(context);
 		init();
 	}
@@ -128,7 +128,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 */
-	public RecyclerViewBody(final Context context, final AttributeSet attrs) {
+	public RecyclerBodyView(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
@@ -143,7 +143,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public RecyclerViewBody(final Context context,
+	public RecyclerBodyView(final Context context,
 			final AttributeSet attrs,
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
@@ -444,7 +444,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 
 					if (llm.findFirstCompletelyVisibleItemPosition() == 0) {
 						for (TopReachedListener listener : topReachedListeners) {
-							listener.onTopReached(RecyclerViewBody.this);
+							listener.onTopReached(RecyclerBodyView.this);
 						}
 					}
 				}
@@ -489,7 +489,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 					public void onClick(final View v) {
 						for (final LibraryItemSelectedListener listener :
 								libraryItemSelectedListeners) {
-							listener.onLibraryItemSelected(RecyclerViewBody.this, dataItem);
+							listener.onLibraryItemSelected(RecyclerBodyView.this, dataItem);
 						}
 					}
 				});
@@ -538,7 +538,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 			@Override
 			public boolean onMenuItemClick(final MenuItem menuItem) {
 				for (final MenuItemSelectedListener listener : menuItemSelectedListeners) {
-					listener.onContextualMenuItemSelected(RecyclerViewBody.this, item, menuItem);
+					listener.onContextualMenuItemSelected(RecyclerBodyView.this, item, menuItem);
 				}
 
 				return true;
@@ -553,9 +553,9 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyView {
 		/**
 		 * Invoked when a RecyclerViewBody is scrolled to the top.
 		 *
-		 * @param recyclerViewBody
+		 * @param recyclerBodyView
 		 * 		the RecyclerViewBody, not null
 		 */
-		void onTopReached(RecyclerViewBody recyclerViewBody);
+		void onTopReached(RecyclerBodyView recyclerBodyView);
 	}
 }
