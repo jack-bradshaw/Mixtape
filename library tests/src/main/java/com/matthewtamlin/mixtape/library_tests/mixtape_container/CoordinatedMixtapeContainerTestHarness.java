@@ -34,7 +34,7 @@ import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
-import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
+import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerBodyView;
 import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 import com.matthewtamlin.mixtape.library_tests.R;
@@ -51,7 +51,7 @@ import java.util.Random;
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public class CoordinatedMixtapeContainerTestHarness extends
-		MixtapeContainerViewTestHarness<ToolbarHeader, RecyclerViewBody> {
+		MixtapeContainerViewTestHarness<ToolbarHeader, RecyclerBodyView> {
 	/**
 	 * The number of library items to display in the view.
 	 */
