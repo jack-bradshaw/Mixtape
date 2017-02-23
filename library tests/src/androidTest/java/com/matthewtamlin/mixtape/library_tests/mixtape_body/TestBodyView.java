@@ -45,8 +45,7 @@ public abstract class TestBodyView {
 
 		getBodyViewDirect().setItems(items);
 
-		assertThat("Returned list has wrong size.", getBodyViewDirect().getItems().size(),
-				is(2));
+		assertThat("Returned list has wrong size.", getBodyViewDirect().getItems().size(), is(2));
 		assertThat("Returned list doesn't contain item 1.", getBodyViewDirect().getItems()
 				.contains(item1), is(true));
 		assertThat("Returned list doesn't contain item 1.", getBodyViewDirect().getItems()
