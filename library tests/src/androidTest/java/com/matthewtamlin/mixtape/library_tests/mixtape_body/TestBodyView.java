@@ -62,26 +62,6 @@ public abstract class TestBodyView {
 		assertThat("Returned wrong ID.", getBodyViewDirect().getContextualMenuResource(), is(id));
 	}
 
-	@Test
-	public void testAddLibraryItemSelectedListener() {
-		
-	}
-
-	@Test
-	public void testRemoveLibraryItemSelectedListener() {
-
-	}
-
-	@Test
-	public void testAddMenuItemSelectedListener() {
-
-	}
-
-	@Test
-	public void testRemoveMenuItemSelectedListener() {
-
-	}
-
 	public abstract BodyView getBodyViewDirect();
 
 	public abstract ViewInteraction getBodyViewEspresso();
