@@ -45,7 +45,7 @@ import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.ContextualMenuItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.ListBody;
-import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
+import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerBodyView;
 import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
 import com.matthewtamlin.mixtape.library.mixtape_header.DirectHeaderPresenter;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
@@ -217,24 +217,24 @@ public class PlaylistActivity extends AppCompatActivity {
 	}
 
 	private void setupBodyPresenter() {
-		final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerViewBody> bodyPresenter =
+		final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerBodyView> bodyPresenter =
 				new DirectBodyPresenter<>();
 
 		bodyPresenter.registerListener(
-				new LibraryItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerViewBody>() {
+				new LibraryItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerBodyView>() {
 					@Override
 					public void onLibraryItemSelected(
-							final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerViewBody>
+							final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerBodyView>
 									presenter,	final Mp3Song item) {
 						handleBodyItemClicked(item);
 					}
 				});
 
 		bodyPresenter.registerListener(
-				new ContextualMenuItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerViewBody>() {
+				new ContextualMenuItemSelectedListener<Mp3Song, Mp3SongDataSource, RecyclerBodyView>() {
 					@Override
 					public void onContextualMenuItemSelected(
-							final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerViewBody> presenter,
+							final DirectBodyPresenter<Mp3Song, Mp3SongDataSource, RecyclerBodyView> presenter,
 							final Mp3Song libraryItem, final MenuItem menuItem) {
 						handleBodyItemMenuItemClicked(libraryItem, menuItem);
 					}

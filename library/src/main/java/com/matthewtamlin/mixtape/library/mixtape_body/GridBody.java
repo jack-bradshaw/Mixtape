@@ -50,7 +50,7 @@ import static com.matthewtamlin.java_utilities.checkers.IntChecker.checkGreaterT
  * </pre><p>
  * This setup will pull data from the data source and display it in the view.
  */
-public class GridBody extends RecyclerViewBody {
+public class GridBody extends RecyclerBodyView {
 	/**
 	 * The number of columns to display.
 	 */

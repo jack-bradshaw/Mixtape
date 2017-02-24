@@ -33,13 +33,13 @@ import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
-import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
+import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerBodyView;
 import com.matthewtamlin.mixtape.library_tests.R;
 
 import java.util.Random;
 
 /**
- * Test harness for subclasses of the {@link RecyclerViewBody} class. This class provides control
+ * Test harness for subclasses of the {@link RecyclerBodyView} class. This class provides control
  * buttons for accessing core functionality, however the view itself is supplied by the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
@@ -73,7 +73,7 @@ public abstract class RecyclerViewBodyTestHarness extends BodyViewTestHarness {
 	private DisplayableDefaults defaults;
 
 	@Override
-	public abstract RecyclerViewBody getTestView();
+	public abstract RecyclerBodyView getTestView();
 
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {

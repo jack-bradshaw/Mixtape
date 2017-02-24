@@ -16,13 +16,13 @@
 
 package com.matthewtamlin.mixtape.library.mixtape_container;
 
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
+import com.matthewtamlin.mixtape.library.mixtape_header.HeaderView;
 
 /**
  * Coordinates the display of two views: a header and a body.
  */
-public interface MixtapeContainerView<H extends HeaderContract.View, B extends BodyContract.View> {
+public interface MixtapeContainerView<H extends HeaderView, B extends BodyView> {
 	/**
 	 * @return the header currently being displayed, null if there is none
 	 */

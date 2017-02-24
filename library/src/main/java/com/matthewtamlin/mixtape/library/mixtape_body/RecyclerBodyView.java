@@ -36,7 +36,6 @@ import com.matthewtamlin.android_utilities.library.helpers.ThemeColorHelper;
 import com.matthewtamlin.mixtape.library.R;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 import com.matthewtamlin.mixtape.library.databinders.DataBinder;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract.Presenter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -51,21 +50,28 @@ import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull
  * A RecyclerView backed partial-implementation of the BodyContract.View interface. This class binds
  * data to the UI using DataBinders, and delegates the appearance of the UI to subclasses.
  */
-public abstract class RecyclerViewBody extends FrameLayout implements BodyContract.View {
+public abstract class RecyclerBodyView extends FrameLayout implements BodyView {
 	/**
 	 * All top reached listeners which are currently registered. This set must never contain null.
 	 */
 	private final Set<TopReachedListener> topReachedListeners = new HashSet<>();
 
 	/**
+	 * All library item selected listeners which are currently registered for callbacks. This set
+	 * must never contain null.
+	 */
+	private final Set<LibraryItemSelectedListener> libraryItemSelectedListeners = new HashSet<>();
+
+	/**
+	 * All menu item selected listeners which are currently registered for callbacks. This set must
+	 * never contain null.
+	 */
+	private final Set<MenuItemSelectedListener> menuItemSelectedListeners = new HashSet<>();
+
+	/**
 	 * The items to display in the recycler view. This member variable must never be null.
 	 */
 	private List<? extends LibraryItem> data = new ArrayList<>();
-
-	/**
-	 * Drives this view and receives user interaction callbacks.
-	 */
-	private Presenter presenter;
 
 	/**
 	 * The menu resource of the item specific contextual menus. Default is -1 as specified by
@@ -109,7 +115,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param context
 	 * 		the Context the body is attached to, not null
 	 */
-	public RecyclerViewBody(final Context context) {
+	public RecyclerBodyView(final Context context) {
 		super(context);
 		init();
 	}
@@ -122,7 +128,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 */
-	public RecyclerViewBody(final Context context, final AttributeSet attrs) {
+	public RecyclerBodyView(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
@@ -137,16 +143,11 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public RecyclerViewBody(final Context context,
+	public RecyclerBodyView(final Context context,
 			final AttributeSet attrs,
 			final int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init();
-	}
-
-	@Override
-	public void setPresenter(final BodyContract.Presenter presenter) {
-		this.presenter = presenter;
 	}
 
 	@Override
@@ -210,6 +211,31 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	@Override
 	public boolean loadingIndicatorIsShown() {
 		return (loadingIndicator.getVisibility() == VISIBLE);
+	}
+
+	@Override
+	public void addLibraryItemSelectedListener(final LibraryItemSelectedListener listener) {
+		if (listener != null) {
+			libraryItemSelectedListeners.add(listener);
+		}
+	}
+
+	@Override
+	public void removeLibraryItemSelectedListener(final LibraryItemSelectedListener listener) {
+		libraryItemSelectedListeners.remove(listener);
+	}
+
+	@Override
+	public void addContextualMenuItemSelectedListener(final MenuItemSelectedListener listener) {
+		if (listener != null) {
+			menuItemSelectedListeners.add(listener);
+		}
+	}
+
+	@Override
+	public void removeContextualMenuItemSelectedListener(
+			final MenuItemSelectedListener listener) {
+		menuItemSelectedListeners.remove(listener);
 	}
 
 	/**
@@ -309,24 +335,24 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 	}
 
 	/**
-	 * Registers a top reached listener to this RecyclerViewBody. If the supplied listener is null
-	 * or is already registered, this method exits normally.
+	 * Registers the supplied listener for top reached callbacks. If the supplied listener is null
+	 * or is already registered, then the method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to register
 	 */
-	public void registerTopReachedListener(final TopReachedListener listener) {
+	public void addTopReachedListener(final TopReachedListener listener) {
 		topReachedListeners.add(listener);
 	}
 
 	/**
-	 * Unregisters a top reached listener from this RecyclerViewBody. If the supplied listener is
-	 * null or is not registered, this method exits normally.
+	 * Unregisters the supplied listener from top reached callbacks. If the supplied listener is
+	 * null or is not registered, then the method exits normally.
 	 *
 	 * @param listener
 	 * 		the listener to unregister
 	 */
-	public void unregisterTopReachedListener(final TopReachedListener listener) {
+	public void removeTopReachedListener(final TopReachedListener listener) {
 		topReachedListeners.remove(listener);
 	}
 
@@ -418,7 +444,7 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 					if (llm.findFirstCompletelyVisibleItemPosition() == 0) {
 						for (TopReachedListener listener : topReachedListeners) {
-							listener.onTopReached(RecyclerViewBody.this);
+							listener.onTopReached(RecyclerBodyView.this);
 						}
 					}
 				}
@@ -438,22 +464,22 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 
 			@Override
 			public void onBindViewHolder(final BodyViewHolder holder, final int position) {
-				final LibraryItem displayedDataItem = data.get(holder.getAdapterPosition());
+				final LibraryItem dataItem = data.get(holder.getAdapterPosition());
 
 				if (titleDataBinder != null) {
-					titleDataBinder.bind(holder.getTitleTextView(), displayedDataItem);
+					titleDataBinder.bind(holder.getTitleTextView(), dataItem);
 				} else {
 					Timber.w("No title data binder set, could not bind title.");
 				}
 
 				if (subtitleDataBinder != null) {
-					subtitleDataBinder.bind(holder.getSubtitleTextView(), displayedDataItem);
+					subtitleDataBinder.bind(holder.getSubtitleTextView(), dataItem);
 				} else {
 					Timber.w("No subtitle data binder set, could not bind subtitle.");
 				}
 
 				if (artworkDataBinder != null) {
-					artworkDataBinder.bind(holder.getArtworkImageView(), displayedDataItem);
+					artworkDataBinder.bind(holder.getArtworkImageView(), dataItem);
 				} else {
 					Timber.w("No artwork data binder set, could not bind artwork.");
 				}
@@ -461,9 +487,9 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 				holder.getRootView().setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(final View v) {
-						if (presenter != null) {
-							presenter.onLibraryItemSelected(RecyclerViewBody.this,
-									displayedDataItem);
+						for (final LibraryItemSelectedListener listener :
+								libraryItemSelectedListeners) {
+							listener.onLibraryItemSelected(RecyclerBodyView.this, dataItem);
 						}
 					}
 				});
@@ -474,13 +500,13 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 					public void onClick(final View v) {
 						// If the resource hasn't been set, inflating the menu will fail
 						if (contextualMenuResourceId != -1) {
-							showMenu(overflowButton, displayedDataItem);
+							showMenu(overflowButton, dataItem);
 						}
 					}
 				});
 
 				// Allow further customisation by subclasses
-				onViewHolderBound(holder, displayedDataItem);
+				onViewHolderBound(holder, dataItem);
 			}
 
 			@Override
@@ -511,12 +537,11 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 		menu.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(final MenuItem menuItem) {
-				if (presenter != null) {
-					presenter.onContextualMenuItemSelected(RecyclerViewBody.this, item, menuItem);
-					return true; // handled
-				} else {
-					return false; // not handled
+				for (final MenuItemSelectedListener listener : menuItemSelectedListeners) {
+					listener.onContextualMenuItemSelected(RecyclerBodyView.this, item, menuItem);
 				}
+
+				return true;
 			}
 		});
 	}
@@ -528,9 +553,9 @@ public abstract class RecyclerViewBody extends FrameLayout implements BodyContra
 		/**
 		 * Invoked when a RecyclerViewBody is scrolled to the top.
 		 *
-		 * @param recyclerViewBody
+		 * @param recyclerBodyView
 		 * 		the RecyclerViewBody, not null
 		 */
-		void onTopReached(RecyclerViewBody recyclerViewBody);
+		void onTopReached(RecyclerBodyView recyclerBodyView);
 	}
 }

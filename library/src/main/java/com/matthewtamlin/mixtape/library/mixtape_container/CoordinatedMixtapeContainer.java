@@ -25,7 +25,7 @@ import android.widget.FrameLayout;
 
 import com.matthewtamlin.android_utilities.library.helpers.DimensionHelper;
 import com.matthewtamlin.mixtape.library.R;
-import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerViewBody;
+import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerBodyView;
 import com.matthewtamlin.mixtape.library.mixtape_header.ToolbarHeader;
 
 import static android.support.design.widget.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS;
@@ -46,7 +46,7 @@ import static com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMix
  * the end.</li> </ul>
  */
 public class CoordinatedMixtapeContainer extends FrameLayout implements
-		MixtapeContainerView<ToolbarHeader, RecyclerViewBody> {
+		MixtapeContainerView<ToolbarHeader, RecyclerBodyView> {
 	/**
 	 * Performs the actual coordination.
 	 */
@@ -65,7 +65,7 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	/**
 	 * The body to display beneath the header.
 	 */
-	private RecyclerViewBody body;
+	private RecyclerBodyView body;
 
 	/**
 	 * The current elevation of the body.
@@ -138,12 +138,12 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 	}
 
 	@Override
-	public RecyclerViewBody getBody() {
+	public RecyclerBodyView getBody() {
 		return body;
 	}
 
 	@Override
-	public void setBody(final RecyclerViewBody body) {
+	public void setBody(final RecyclerBodyView body) {
 		coordinatorLayout.removeView(this.body);
 
 		if (body != null) {
@@ -272,9 +272,9 @@ public class CoordinatedMixtapeContainer extends FrameLayout implements
 				}
 
 				if (body != null) {
-					body.registerTopReachedListener(new RecyclerViewBody.TopReachedListener() {
+					body.addTopReachedListener(new RecyclerBodyView.TopReachedListener() {
 						@Override
-						public void onTopReached(final RecyclerViewBody recyclerViewBody) {
+						public void onTopReached(final RecyclerBodyView recyclerBodyView) {
 							headerContainer.setExpanded(true);
 						}
 					});

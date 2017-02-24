@@ -20,12 +20,11 @@ import android.view.MenuItem;
 
 import com.matthewtamlin.java_utilities.testing.Tested;
 import com.matthewtamlin.mixtape.library.base_mvp.BaseDataSource;
+import com.matthewtamlin.mixtape.library.base_mvp.BasePresenter;
 import com.matthewtamlin.mixtape.library.base_mvp.ListDataSource;
 import com.matthewtamlin.mixtape.library.data.LibraryItem;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A simple implementation of the BodyContract.Presenter interface where the list returned by the
@@ -43,14 +42,8 @@ import java.util.Set;
 public class DirectBodyPresenter<
 		D extends LibraryItem,
 		S extends ListDataSource<D>,
-		V extends BodyContract.View>
-		implements BodyContract.Presenter<D, S, V> {
-	private final Set<LibraryItemSelectedListener<D, S, V>> libraryItemSelectedListeners =
-			new HashSet<>();
-
-	private final Set<ContextualMenuItemSelectedListener<D, S, V>>
-			contextualMenuItemSelectedListeners = new HashSet<>();
-
+		V extends BodyView>
+		implements BasePresenter<S, V>, ListDataSource.FullListener<D>, BodyView.FullListener {
 	/**
 	 * The data source to present from.
 	 */
@@ -81,9 +74,9 @@ public class DirectBodyPresenter<
 
 	@Override
 	public void setView(final V view) {
-		removeViewPresenter(this.view);
+		unregisterFromViewCallbacks(this.view);
 		this.view = view;
-		setSelfAsViewPresenter(this.view);
+		registerForViewCallbacks(this.view);
 
 		if (dataSource != null) {
 			dataSource.loadData(false, this);
@@ -168,71 +161,14 @@ public class DirectBodyPresenter<
 	}
 
 	@Override
-	public void onLibraryItemSelected(final BodyContract.View bodyView, final LibraryItem item) {
-		for (final LibraryItemSelectedListener<D, S, V> listener : libraryItemSelectedListeners) {
-			// Should be fine so long as there is no external interference with the view's data
-			// noinspection unchecked
-			listener.onLibraryItemSelected(this, (D) item);
-		}
+	public void onLibraryItemSelected(final BodyView bodyView, final LibraryItem item) {
+		// Do nothing
 	}
 
 	@Override
-	public void onContextualMenuItemSelected(final BodyContract.View bodyView,
-			final LibraryItem libraryItem, final MenuItem menuItem) {
-		for (final ContextualMenuItemSelectedListener<D, S, V> listener :
-				contextualMenuItemSelectedListeners) {
-			// Should be fine so long as there is no external interference with view's data
-			// noinspection unchecked
-			listener.onContextualMenuItemSelected(this, (D) libraryItem, menuItem);
-		}
-	}
-
-	/**
-	 * Registers a library item selected listener to this presenter. If the supplied listener is
-	 * null or is already registered, this method exits normally.
-	 *
-	 * @param listener
-	 * 		the listener to register
-	 */
-	public void registerListener(final LibraryItemSelectedListener<D, S, V> listener) {
-		if (listener != null) {
-			libraryItemSelectedListeners.add(listener);
-		}
-	}
-
-	/**
-	 * Unregisters a library item selected listener from this data source. If the supplied listener
-	 * is null or is not registered, this method exits normally.
-	 *
-	 * @param listener
-	 * 		the listener to unregister
-	 */
-	public void unregisterListener(final LibraryItemSelectedListener<D, S, V> listener) {
-		libraryItemSelectedListeners.remove(listener);
-	}
-
-	/**
-	 * Registers a contextual menu item selected listener to this presenter. If the supplied
-	 * listener is null or is already registered, this method exits normally.
-	 *
-	 * @param listener
-	 * 		the listener to register
-	 */
-	public void registerListener(final ContextualMenuItemSelectedListener<D, S, V> listener) {
-		if (listener != null) {
-			contextualMenuItemSelectedListeners.add(listener);
-		}
-	}
-
-	/**
-	 * Unregisters a contextual menu item selected listener from this data source. If the supplied
-	 * listener is null or is not registered, this method exits normally.
-	 *
-	 * @param listener
-	 * 		the listener to unregister
-	 */
-	public void unregisterListener(final ContextualMenuItemSelectedListener<D, S, V> listener) {
-		contextualMenuItemSelectedListeners.remove(listener);
+	public void onContextualMenuItemSelected(final BodyView bodyView, final LibraryItem libraryItem,
+			final MenuItem menuItem) {
+		// Do nothing
 	}
 
 	/**
@@ -277,9 +213,10 @@ public class DirectBodyPresenter<
 	 * @param view
 	 * 		the view to modify, may be null
 	 */
-	protected void removeViewPresenter(final V view) {
+	protected void unregisterFromViewCallbacks(final V view) {
 		if (view != null) {
-			view.setPresenter(null);
+			view.removeLibraryItemSelectedListener(this);
+			view.removeContextualMenuItemSelectedListener(this);
 		}
 	}
 
@@ -289,67 +226,10 @@ public class DirectBodyPresenter<
 	 * @param view
 	 * 		the view to modify, may be null
 	 */
-	protected void setSelfAsViewPresenter(final V view) {
+	protected void registerForViewCallbacks(final V view) {
 		if (view != null) {
-			view.setPresenter(this);
+			view.addLibraryItemSelectedListener(this);
+			view.addContextualMenuItemSelectedListener(this);
 		}
-	}
-
-	/**
-	 * Callback to be invoked when a DirectBodyPresenter receives an item selection event from the
-	 * view it is presenting to.
-	 *
-	 * @param <D>
-	 * 		the type of data being presented
-	 * @param <S>
-	 * 		the type of data source being presented from
-	 * @param <V>
-	 * 		the type of view being presented to
-	 */
-	public interface LibraryItemSelectedListener<
-			D extends LibraryItem,
-			S extends ListDataSource<D>,
-			V extends BodyContract.View> {
-		/**
-		 * Invoked when a DirectBodyPresenter receives an item selection event from the view is is
-		 * presenting to.
-		 *
-		 * @param presenter
-		 * 		the presenter, not null
-		 * @param item
-		 * 		the selected item, not null
-		 */
-		public void onLibraryItemSelected(DirectBodyPresenter<D, S, V> presenter, final D item);
-	}
-
-	/**
-	 * Callback to be invoked when a DirectBodyPresenter receives a contextual menu item selection
-	 * event from the view it is presenting to.
-	 *
-	 * @param <D>
-	 * 		the type of data being presented
-	 * @param <S>
-	 * 		the type of data source being presented from
-	 * @param <V>
-	 * 		the type of view being presented to
-	 */
-	public interface ContextualMenuItemSelectedListener<
-			D extends LibraryItem,
-			S extends ListDataSource<D>,
-			V extends BodyContract.View> {
-
-		/**
-		 * Invoked when a DirectBodyPresenter receives a contextual menu item selection event from
-		 * the view it is presenting to
-		 *
-		 * @param presenter
-		 * 		the presenter, not null
-		 * @param libraryItem
-		 * 		the library item the contextual menu is attached to, not null
-		 * @param menuItem
-		 * 		the selected menu item, not null
-		 */
-		public void onContextualMenuItemSelected(DirectBodyPresenter<D, S, V> presenter,
-				final D libraryItem, final MenuItem menuItem);
 	}
 }
