@@ -22,10 +22,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsOverViewTestHarness;
-import com.matthewtamlin.mixtape.library.mixtape_body.BodyContract;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
 import com.matthewtamlin.mixtape.library.mixtape_container.MixtapeContainerView;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
-
+import com.matthewtamlin.mixtape.library.mixtape_header.HeaderView;
 
 /**
  * Test harness for implementations of the {@link MixtapeContainerView} interface. This class
@@ -33,8 +32,8 @@ import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
  * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
-public abstract class MixtapeContainerViewTestHarness<H extends HeaderContract.View, B extends
-		BodyContract.View> extends ControlsOverViewTestHarness<MixtapeContainerView<H, B>> {
+public abstract class MixtapeContainerViewTestHarness<H extends HeaderView, B extends BodyView>
+		extends ControlsOverViewTestHarness<MixtapeContainerView<H, B>> {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
