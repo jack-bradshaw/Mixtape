@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-
 /**
  * Test harness for the {@link CoordinatedMixtapeContainer} class.
  */

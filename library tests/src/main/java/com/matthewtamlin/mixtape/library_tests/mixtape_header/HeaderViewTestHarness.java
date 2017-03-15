@@ -22,20 +22,20 @@ import android.view.View;
 import android.widget.Button;
 
 import com.matthewtamlin.android_testing_tools.library.ControlsBelowViewTestHarness;
-import com.matthewtamlin.mixtape.library.mixtape_header.HeaderContract;
+import com.matthewtamlin.mixtape.library.mixtape_header.HeaderView;
 import com.matthewtamlin.mixtape.library_tests.R;
 import com.matthewtamlin.mixtape.library_tests.stubs.InaccessibleLibraryItem;
 import com.matthewtamlin.mixtape.library_tests.stubs.NormalLibraryItem;
 
 
 /**
- * Test harness for implementations of the {@link HeaderContract.View} interface. This class
- * provides control buttons for accessing core functionality, however the view itself is supplied by
+ * Test harness for implementations of the {@link HeaderView} interface. This class provides
+ * control buttons for accessing core functionality, however the view itself is supplied by
  * the subclass.
  */
 @SuppressLint("SetTextI18n") // Not important during testing
 public abstract class HeaderViewTestHarness extends
-		ControlsBelowViewTestHarness<HeaderContract.View> {
+		ControlsBelowViewTestHarness<HeaderView> {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
