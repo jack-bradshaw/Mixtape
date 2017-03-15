@@ -37,9 +37,8 @@ import com.matthewtamlin.mixtape.library.data.LibraryReadException;
 import com.matthewtamlin.mixtape.library.databinders.ArtworkBinder;
 import com.matthewtamlin.mixtape.library.databinders.SubtitleBinder;
 import com.matthewtamlin.mixtape.library.databinders.TitleBinder;
+import com.matthewtamlin.mixtape.library.mixtape_body.BodyView;
 import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter;
-import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.ContextualMenuItemSelectedListener;
-import com.matthewtamlin.mixtape.library.mixtape_body.DirectBodyPresenter.LibraryItemSelectedListener;
 import com.matthewtamlin.mixtape.library.mixtape_body.GridBody;
 import com.matthewtamlin.mixtape.library.mixtape_body.RecyclerBodyView;
 import com.matthewtamlin.mixtape.library.mixtape_container.CoordinatedMixtapeContainer;
@@ -148,6 +147,26 @@ public class AlbumsActivity extends AppCompatActivity {
 		body.setTitleDataBinder(new TitleBinder(titleCache, defaults));
 		body.setSubtitleDataBinder(new SubtitleBinder(subtitleCache, defaults));
 		body.setArtworkDataBinder(new ArtworkBinder(artworkCache, defaults));
+
+		body.addLibraryItemSelectedListener(
+				new BodyView.LibraryItemSelectedListener() {
+
+					@Override
+					public void onLibraryItemSelected(final BodyView bodyView,
+							final LibraryItem item) {
+						handleItemClick(item);
+					}
+				});
+
+		body.addContextualMenuItemSelectedListener(
+				new BodyView.MenuItemSelectedListener() {
+					@Override
+					public void onContextualMenuItemSelected(final BodyView bodyView,
+							final LibraryItem libraryItem,
+							final MenuItem menuItem) {
+						handleContextualMenuClick(libraryItem, menuItem);
+					}
+				});
 	}
 
 	private void setupPresenter() {
@@ -165,26 +184,6 @@ public class AlbumsActivity extends AppCompatActivity {
 
 		final DirectBodyPresenter<Mp3Album, Mp3AlbumDataSource, RecyclerBodyView> presenter = new
 				DirectBodyPresenter<>();
-
-		presenter.registerListener(
-				new LibraryItemSelectedListener<Mp3Album, Mp3AlbumDataSource, RecyclerBodyView>() {
-					@Override
-					public void onLibraryItemSelected(
-							final DirectBodyPresenter<Mp3Album, Mp3AlbumDataSource, RecyclerBodyView> presenter,
-							final Mp3Album item) {
-						handleItemClick(item);
-					}
-				});
-
-		presenter.registerListener(
-				new ContextualMenuItemSelectedListener<Mp3Album, Mp3AlbumDataSource, RecyclerBodyView>() {
-					@Override
-					public void onContextualMenuItemSelected(
-							final DirectBodyPresenter<Mp3Album, Mp3AlbumDataSource, RecyclerBodyView> presenter,
-							final Mp3Album libraryItem, final MenuItem menuItem) {
-						handleContextualMenuClick(libraryItem, menuItem);
-					}
-				});
 
 		presenter.setView(body);
 		presenter.setDataSource(dataSource);
