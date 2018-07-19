@@ -8,11 +8,11 @@ Mixtape is an Android library which simplifies the task of displaying media to a
 To use the library, add the following to your gradle build file:
 ```groovy
 repositories {
-	jcenter()
+  jcenter()
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:mixtape:1.0.0'
+  implementation 'com.matthew-tamlin:mixtape:1.0.0'
 }
 ```
 
